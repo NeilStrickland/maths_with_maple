@@ -1,0 +1,866 @@
+\documentclass{amsart}
+\usepackage{a4wide}
+\usepackage{verbatim}
+\usepackage{hyperref}
+
+\setlength{\topmargin}{-1cm}
+\setlength{\oddsidemargin}{-1cm}
+\setlength{\evensidemargin}{-1cm}
+\setlength{\textwidth}{18cm}
+\setlength{\textheight}{24.5cm}
+
+\include{notekeys}
+
+\newwrite\keyfile
+\immediate\openout\keyfile=notekeys.tex
+
+\newcommand{\seenote}[1]{\textbf{[#1]}}
+
+\begin{document}
+\begin{center}
+ {\Large Maths with Maple --- Maple reference}
+\end{center}
+\vspace{4ex}
+
+\newcounter{notecounter}
+\newcommand{\note}[1]{%
+ \stepcounter{notecounter}
+ \immediate\write\keyfile{\string\newcommand{\string\NOTE#1}{\arabic{section}.\arabic{notecounter}}}
+ \item[(\arabic{section}.\arabic{notecounter})]
+}
+
+\section{Generalities}
+\setcounter{notecounter}{0}
+
+\begin{itemize}
+ \note{help} For help, type \verb~?~ and press
+ ENTER.  (Alternatively, you can click where it says
+ ``Help'' at the top right of the Maple window.)  For help
+ on plotting (for example) you can type \verb~?plot~ or
+ \verb~help(plot);~ and press ENTER.  Alternatively, you can
+ click on ``Help'', then select ``Topic search'' or ``Full
+ text search'' from the resulting menu, then enter
+ ``plotting'' in the search box. 
+%
+ \note{problems} See Section~\ref{sec-problems}
+ for advice on some common problems. 
+% (I will update this section of the online
+%  version of these notes, as and when people report more
+%  problems to me.) 
+%
+ \note{semi} Commands must end with a semicolon
+ (or occasionally a colon).  If you see the message
+ ``Warning, premature end of input'', then you have probably
+ left out the semicolon. 
+%
+ \note{colon}
+ If you use a colon then Maple will carry out your command
+ but will not tell you the answer; this is sometimes useful
+ when calculating intermediate results that would take a lot
+ of space to print.  
+%
+ \note{percent} You can use the symbol \verb~%~
+ to refer to the last thing that Maple calculated, and
+ \verb~%%~ to refer to the one before that, and so on. 
+ Even if you use a colon to prevent Maple from displaying a
+ result, you can still use \verb~%~ to refer to that result. 
+%
+ \note{lasteval}
+ If you move around a worksheet inserting things in
+ different places, you should remember that \verb~%~ refers
+ to the \textbf{most recent} result, which may not be the
+ one that you see directly above the line where you are
+ typing.  
+%
+ \note{colonequals}
+ It is important to understand the difference between
+ \verb~=~ and \verb~:=~.  If we enter $x:=3;$, this tells
+ Maple that $x$ is definitely equal to $3$, so Maple will
+ replace $x$ by $3$ whenever it sees an $x$.  If instead we
+ enter $x=3$, we are mentioning the question of whether $x$
+ might be $3$, or temporarily considering the case when
+ $x=3$.  This has no effect in itself, until it is used in a
+ command like \verb~solve(x=3)~ or \verb~eval(x^2+5,x=3)~
+ or \verb~limit((x^2-9)/(x-3),x=3)~. 
+%
+ \note{funcdef}
+ If you want to define a function (say $f(x)=x^2+3$) it does
+ \emph{not} work to enter \verb~f(x):=x^2+3;~.  See
+ Section~\ref{sec-funcdef}. 
+%
+ \note{restart}
+  Enter \verb~restart;~ to restart Maple, removing any values
+  that you may have assigned to variables.  You should
+  generally do this at the beginning of each new exercise,
+  otherwise stray values left over from previous exercises
+  can cause trouble and confusion.  You can also restart by
+  clicking the button with a circulating arrow at the
+  right-hand end of the Maple toolbar. 
+%
+ \note{unassign}
+  If you just want to clear a single variable (say $x$) you
+  can enter \verb~unassign('x')~ instead.  Note the single
+  quote marks around the $x$. 
+\end{itemize}
+
+\section{Numerical approximation}
+\setcounter{notecounter}{0}
+
+\begin{itemize}
+ \note{evalf} To get an explicit numerical approximation for an
+  expression, use the \verb~evalf()~ function.  For example,
+  \verb~evalf(Pi)~ gives $3.141592654$, and
+  \verb~evalf(x/3)~ gives $0.3333333333 x$. 
+%
+ \note{evalfdigits} The \verb~evalf()~ function generally gives an
+  answer to $10$ significant figures.  If you want to
+  calculate $\pi^2/6$ to $50$ digits (for example), you can
+  enter \verb~evalf[50](Pi^2/6)~.  Similarly,
+  \verb~evalf[12](1/7)~ gives $1/7$ to 12 decimal places. 
+%
+ \note{digits} As an alternative, you can enter
+   \verb~Digits:=100;~ to tell Maple to use $100$ digits in
+   all calculations until further notice.  This approach is
+   usually a better choice, as it ensures that the extra
+   digits will be kept in subsequent calculations.  You may
+   assume that \verb~Digits:=100~ will give you exactly
+   $100$ significant figures, but the real truth is a little
+   more complicated than that. 
+\end{itemize}
+
+\section{Notation for variables}
+\setcounter{notecounter}{0}
+
+\begin{itemize}
+ \note{variables} Most variables will have single-letter
+  names, such as $x$ or $A$. 
+%
+  \note{case} Note that case is significant: Maple regards
+  $A$ as different from $a$, and $x$ as different from $X$. 
+  Similarly, $\sin(x)$ must be entered as \verb~sin(x)~ and
+  not \verb~Sin(x)~; this is a fairly common source of
+  trouble. 
+%
+  \note{longvars} It is perfectly permissible to use long
+  names for variables, such as \verb~eqns~ or \verb~sols~ or
+  \verb~SpeedOfLight~. 
+%
+  \note{reserved} However, you may not use words that
+  already have a special meaning in Maple.  In particular,
+  you cannot call a variable \verb~roots~ or \verb~name~,
+  for example. 
+%
+  \note{greek} Greek letters can be entered using
+  their english names.  For example, if you enter
+  \verb~theta+phi~ then Maple will print it as
+  $\theta+\phi$.  However, the constant
+  $\pi\simeq 3.14159$ must be entered as \verb~Pi~ (with a
+  capital P) not \verb~pi~ (see \NOTEbadpi). 
+%
+  \note{subscripts} Sometimes one uses subscripted
+  variables, such as $x_3$ or $a_{2,4}$ or
+  $\text{Solution}_5$.  These should be entered as
+  \verb~x[3]~ or \verb~a[2,4]~ or \verb~Solution[5]~. 
+\end{itemize}
+
+\section{Algebraic operations}
+\setcounter{notecounter}{0}
+
+\begin{itemize}
+ \note{star} Use a \verb~*~ for multiplication; for example,
+ $2xy$ should be entered as \verb~2*x*y~, and $(2x+1)\sin(3x)$
+ should be entered as \verb~(2*x+1)*sin(3*x)~. 
+%
+ \note{missingstar}
+ An error message saying ``Error, missing operator or `;`''
+ often indicates a missing \verb~*~.  Things like
+ \verb~2(x+y)~ (with a number followed by an open bracket)
+ are particularly dangerous; Maple will (for technical
+ reasons that make some sense in the right context) silently
+ convert \verb~2(x+y)~ to $2$ without any error message. 
+%
+ \note{twoletters}
+ Note also that Maple will treat \verb~xy~ as a two-letter
+ name for a single variable; if you want $x$ times $y$, you
+ must enter \verb~x*y~. 
+%
+ \note{timesbrackets}
+ Just as in standard mathematical notation, bracketing is
+ important.  To multiply $x+2$ by $x-2$, you must enter
+ \verb~(x+2)*(x-2)~, not \verb~x+2*x-2~.  
+%
+ \note{timesminus}
+ Additionally, if you want to multiply
+ by something that starts with a minus sign, you must
+ enclose it in brackets; for example, enter
+ \verb~(x+y)*(-u)~, not \verb~(x+y)*-u~. 
+%
+ \note{powers} Enter powers using the \verb~^~ character,
+ for example \verb~x^6~ for $x^6$. 
+%
+ \note{powerbrackets}
+ Just as in standard mathematical notation, bracketing is
+ important.  To raise $x+2$ to the power $n+5$, you must
+ enter \verb~(x+2)^(n+5)~, not \verb~x+2^n+5~.  To get the
+ cube root of $x$, enter \verb~x^(1/3)~, not
+ \verb~x^1/3~.  
+%
+ \note{powerminus}
+ Additionally, if you want to raise something to a power
+ that starts with a minus sign, you must enclose it in
+ brackets; for example, enter \verb~(x+y)^(-2)~, not
+ \verb~(x+y)^-2~. 
+%
+ \note{sqrt} The square root of $x$ can be entered as
+ \verb~sqrt(x)~ or \verb~x^(1/2)~.  Similarly,
+ $\sqrt{b^2-4ac}$ is \verb~sqrt(b^2-4*a*c)~.  For more
+ general roots you should use power notation, such as
+ \verb~(x+y)^(1/4)~ for the fourth root of $x+y$. 
+\end{itemize}
+
+\section{Algebraic manipulation}
+\setcounter{notecounter}{0}
+
+Suppose we have a complicated expression called $A$, which we want to
+simplify or otherwise manipulate. 
+\begin{itemize}
+ \note{subs} To substitute for some or all of the variables in
+  $A$, use the \verb~subs~ command.  For example, if $A$ is
+  $(a+b)^n$, you can change the $b$ to $1$ and the $n$ to
+  $p/q$ by entering \verb~subs(b=1,n=p/q,A)~, which gives
+  $(a+1)^{p/q}$.  The syntax \verb~subs({b=1,n=p/q},A)~
+  will also work. 
+%
+ \note{solvesubs}
+  Often the equations to be used in \verb~subs(...)~ will
+  come from the \verb~solve(...)~ command.  For example, to
+  find the value of $x^2+y^2$ at the point where $x+y=6$ and
+  $x-y=2$, enter \verb~sol:=solve({x+y=6,x-y=2},{x,y})~ and
+  then \verb~subs(sol,x^2+y^2)~. 
+%
+ \note{expand} Enter \verb~expand(A)~ to expand everything out.  For
+  example, enter \verb~expand((x+y)^3)~ to expand
+  $(x+y)^3$, giving $x^3+3x^2y+3xy^2+y^3$. 
+%
+ \note{simplify} To simplify $A$, try entering
+  \verb~simplify(A)~.  If this 
+  does not do what you want, you can try \verb~factor(A)~. 
+  If $A$ involves trigonometric functions, try
+  \verb~simplify(expand(convert(A,exp)))~. 
+%
+ \note{symbolic} If Maple is refusing to simplify $(a^4)^{1/4}$ to $a$ (for
+  example), you can try \verb~simplify(A,symbolic)~.  You should be
+  aware that the answer \textbf{may not be correct} in all cases,
+  because $(a^4)^{1/4}$ really is different from $a$ when
+  $a<0$.  Similarly, the simplification $\ln(e^x)=x$ is not
+  always valid when $x$ is a complex number, so
+  \verb~simplify(ln(exp(x)))~ just gives $\ln(e^x)$, but
+  \verb~simplify(ln(exp(x)),symbolic)~ gives $x$. 
+%
+ \note{testequal} If you suspect that $A$ is equal to some other expression (say
+  $B$) and want to check this, the best way is to enter
+  \verb~simplify(A-B)~ and see if you get zero. 
+%
+ \note{sort} If Maple writes an expression with the terms in an unnatural
+  order (eg $t^3+t^4+t^2+t$ instead of $t^4+t^3+t^2+t$) then use the
+  \verb~sort~ command to rearrange them. 
+%
+ \note{collect} To collect together all the terms in $A$ involving the same
+  power of $x$, enter \verb~collect(A,x)~.  For example, this converts
+  $1+ax+bx+cx^2+dx^2$ to $1+(a+b)x+(c+d)x^2$. 
+%
+ \note{coeff}
+  If you just want the
+  coefficient of $x^2$ then you can instead enter \verb~coeff(A,x,2)~
+  or \verb~coeff(A,x^2)~.  To get the constant term, you
+  must enter \verb~coeff(A,x,0)~ --- the syntax
+  \verb~coeff(A,x^0)~ will not work. 
+\end{itemize}
+
+\section{Constants}
+\setcounter{notecounter}{0}
+
+
+\begin{itemize}
+%
+ \note{pi} The constant $\pi\simeq 3.1415926536$ should be entered as
+  \verb~Pi~, with a capital P.  Maple will generally leave this as a
+  symbol; if you want the numerical value, you should use the
+  \verb~evalf()~ function. 
+%
+ \note{badpi}
+  If you enter \verb~pi~ with a small p, then Maple will accept it
+  without a syntax error and will print it as $\pi$, but will not
+  treat it as mathematically equivalent to \verb~Pi~.  If you have an
+  expression like $\sin(\pi)$ and Maple stubbornly refuses to convert
+  it to zero, then this may be the cause; you may have entered
+  \verb~pi~ instead of \verb~Pi~.  You can cure this by entering
+  \verb~pi:=Pi;~, which will tell Maple to treat \verb~pi~ the same
+  as \verb~Pi~. 
+%
+ \note{exp} The constant $e\simeq 2.718281828$ \textbf{cannot} (by default)
+  be entered as \verb~e~.  Instead, enter \verb~exp(1)~ for $e$, and
+  \verb~exp(x)~ for $e^x$.  If you want Maple to treat \verb~e~ as
+  meaning \verb~exp(1)~, you can enter \verb~e:=exp(1);~. 
+%
+ \note{imaginary} The square root of minus one can be
+  entered as \verb~I~ (not \verb~i~ or \verb~j~).  
+\end{itemize}
+
+\section{Solving}
+\setcounter{notecounter}{0}
+
+
+\begin{itemize}
+%
+ \note{solve} To solve the equation $x^2-5x+6=0$ (for example), enter
+  \verb~solve(x^2-5*x+6=0,{x})~.  Similarly, if you have
+  already defined a function $g$, you can enter
+  \verb~solve(g(t)=0,{t})~ to solve the equation $g(t)=0$. 
+%
+  \note{roots}
+   The above syntax, with curly brackets around
+   the \verb~x~, gives the answer in the form
+   $\{x=2\},\{x=3\}$.  If you prefer to have the answer in
+   the form $2,3$ (with no ``$x=$'') , you should instead enter
+   \verb~solve({x^2-5*x+6=0},x)~ (without curly brackets
+   around the \verb~x~). 
+%
+ \note{multisolve} To solve several equations in several variables, put the
+  equations in one set of curly brackets, and the variables in another
+  set.  For example, to solve $2x+3y=5$ and $3x+4y=7$ for $x$ and $y$,
+  enter 
+\begin{verbatim}
+ solve({2*x+3*y=5,3*x+4*y=7},{x,y});
+\end{verbatim}
+%
+ \note{nosols} If there are no solutions, Maple will just give you a new
+  prompt without printing any answer at all. 
+%
+ \note{envexplicit} If the answer involves the word
+  \verb~RootOf~, it may help to enter
+  \verb~_EnvExplicit:=true;~ and try again.  
+%
+ \note{allsolutions} If the problem involves trigonometric
+  functions, then there will typically be infinitely many
+  solutions, but Maple will only list a few of them.  To get
+  all solutions, enter \verb~_EnvAllSolutions:=true;~. 
+%
+ \note{fsolve} To get approximate numerical solutions, use \verb~fsolve~
+  instead of \verb~solve~.  This will generally only find one solution
+  (unless the equation to be solved is very simple).  
+%
+ \note{fsolveinitial}
+  To find more solutions, you must tell \verb~fsolve~ where
+  to start looking.  For example,
+  \verb~fsolve({sin(x)=0},{x=3})~ finds a root of $\sin(x)$
+  near $x=3$.  
+%
+ \note{froots} As with the \verb~solve()~ command, if you are
+  solving for a single variable, you can get the answer in
+  two different forms.  For example, \verb~fsolve({x^2=2},x)~
+  gives $-1.414213562, 1.414213562$, whereas
+  \verb~fsolve({x^2=2},{x})~ gives $\{x=-1.414213562\},
+  \{x=1.414213562\}$. 
+% 
+ \note{identity} Sometimes we need to solve problems like
+  this: find $a$ and $b$ such that $a(x-1)^2+b(x+1)^2=x$
+  \emph{for all x}.  To tell Maple that this is meant to be
+  an identity valid for all $x$, we use the syntax \\
+  \verb~solve(identity(a*(x-1)^2+b*(x+1)^2=x,x),{a,b})~. 
+  Similarly, to find $u$ such that $sin(t+u)=cos(t)$ for all
+  $t$, enter
+  \verb~solve(identity(sin(t+u)=cos(t),t),{u})~. 
+\end{itemize}
+
+\section{Standard functions}
+\setcounter{notecounter}{0}
+
+
+\begin{itemize}
+%
+ \note{standard} Most functions can be entered using their
+  usual names, for example \verb~sin(x)~ or \verb~ln(y)~. 
+%
+ \note{funcbrackets}
+  However, you must always use brackets: enter
+  \verb~tan(x)~ instead of \verb~tan x~, and \verb~sin(2*x)~
+  instead of \verb~sin 2x~. 
+%
+ \note{abs} The absolute value of $x$, traditionally written as
+  $|x|$, must be entered as \verb~abs(x)~. 
+%
+ \note{log} Both \verb~ln(x)~ and \verb~log(x)~ refer to the natural
+  logarithm (to base $e$) of $x$. 
+%
+ \note{logbase}
+  If you want to use the logarithm to base $10$ then you
+  should enter \verb~log[10](x)~.  In many cases 
+  you will actually need to enter \verb~simplify(log[10](x))~ to get
+  a useful answer.  Similarly, enter \verb~log[2](x)~ for
+  $\log_2(x)$ (the logarithm to base $2$) and so on. 
+%
+ \note{expx} The function $e^x$ should be entered as \verb~exp(x)~. 
+%
+ \note{hyp} The hyperbolic function $\sinh(x)=(e^x-e^{-x})/2$ can be
+  entered as \verb~sinh(x)~, and similarly for the functions
+  $\cosh(x)=(e^x+e^{-x})/2$ and $\tanh(x)=\sinh(x)/\cosh(x)$.  Maple
+  is not as good as it should be at dealing with these functions; it
+  often works better to write expressions explicitly in terms of $e^x$
+  instead. 
+%
+ \note{sinsquared} The traditional notation $\sin^2(x)$
+  refers to the square of $\sin(x)$, which could also be
+  written $(\sin(x))^2$ or $\sin(x)^2$.  In Maple we suggest
+  that you enter this as \verb~sin(x)^2~.  It will 
+  not work to enter \verb~sin^2(x)~.  Similar comments apply to
+  $\tan^2(x)$ and so on.  Note that $\sin(x^2)$ means something
+  different again: it is the sin of the square of $x$, not the square
+  of the sin. 
+%
+ \note{cosec} In traditional notation $1/\sin(x)$ is sometimes written as
+  $\text{csc}(x)$ or $\text{cosec}(x)$.  In Maple \verb~csc(x)~ will
+  work, but \verb~cosec(x)~ will not.  Of course, you can also just
+  enter \verb~1/sin(x)~. 
+%
+ \note{arctan} In traditional notation $\tan^{-1}(x)$ or $\arctan(x)$ refers
+  to the angle $\theta$ such that $\tan(\theta)=x$.  This is
+  completely different from the number $\tan(x)^{-1}=1/\tan(x)$.  In
+  Maple you should enter \verb~arctan(x)~ (\textbf{not}
+  \verb~tan^(-1)(x)~ or anything like that).  Similar comments apply
+  to $\arcsin(x)$, $\text{arctanh}(x)$ and so on. 
+%
+ \note{possqrt} When $x\geq 0$, the notation \verb~sqrt(x)~ means, by
+  definition, the positive square root of $x$.  (There is more to say
+  if $x$ is negative or complex, but we pass over that here.)  Thus,
+  for example, \verb~sqrt(9)~ is definitely $3$ and not $-3$.  
+\end{itemize}
+
+\section{Defining your own functions}\label{sec-funcdef}
+\setcounter{notecounter}{0}
+
+
+\begin{itemize}
+%
+ \note{arrow} If you want to define $f(x)=x^2$, enter
+   \verb~f := (x) -> x^2;~  Note that the arrow symbol is
+   typed as a dash (\verb~-~) followed by a greater-than
+   sign (\verb~>~), and is not related to the arrow keys
+   used to move your cursor.  
+%
+ \note{badfuncdef} It \textbf{does not} work very well to enter
+   \verb~f(x):=x^2;~ instead.  If you do this, then Maple
+   will convert $f(x)$ to $x^2$ (when the argument is just
+   the letter $x$) but it will not convert $f(y)$ to $y^2$,
+   or $f(3)$ to $9$. 
+%
+ \note{seriesdef}
+  Similarly, to define the sequence $a(n)=(-1)^n/n$, enter
+  \verb~a := (n) -> (-1)^n/n;~, not \verb~a(n):=(-1)^n/n;~. 
+%
+ \note{badderiv} It \textbf{does not} work to use notation like
+   \verb~f'(x)~ for the derivative of $f(x)$; see
+   Section~\ref{sec-diff} instead. 
+%
+ \note{multifunc}
+  You can define a function of several variables in a similar
+  way.  For example, to define $g(a,u,v)=u^a+v^a$, enter
+  \verb~g := (a,u,v)->u^a+v^a~. 
+%
+ \note{showfuncdef}
+  Suppose you define $g$ as above, and later on you want a
+  reminder of the definition.  You should enter
+  \verb~print(g)~, and Maple will print out out
+  $(a,u,v)\rightarrow u^a+v^a$.  For reasons that we will not
+  explore here, it does not work to enter \verb~g~ instead
+  of \verb~print(g)~. 
+\end{itemize}
+
+\section{Plotting}
+\setcounter{notecounter}{0}
+
+\begin{itemize}
+%
+ \note{basicplot} To plot the graph $y=x^3-x$ from $x=-2$ to $x=2$ (for
+  example), enter \verb~plot(x^3-x,x=-2..2);~.  Note that
+  there is no ``$y=$'' in the plot command.  Similarly, to
+  plot $t/(e^t-1)$ from $t=-1$ to $t=3$, enter
+  \verb~plot(t/(exp(t)-1),t=-1..3);~. 
+%
+ \note{vertrange} To make the vertical axis run from $0$ to $10$ (for
+  example), enter \verb~plot(x^3-x,x=-2..2,0..10);~.  Note
+  that you must enter \verb~0..10~, \textbf{not}
+  \verb~y=0..10~ here.  The horizontal range
+  (\verb~x=-2..2~) includes the name of the variable, but
+  the vertical range does not. 
+%
+ \note{scaling} To make the vertical scale the same as the horizontal
+  scale, add the option \verb~scaling=constrained~ (eg
+  \verb~plot(x^3-x,x=-2..2,scaling=constrained);~). 
+%
+ \note{plotpredef} If the function to be plotted is
+  complicated, it may be convenient to give the definition
+  as a separate command, for example
+  \verb~y:=t^2+t^3+t^5+t^7+t^11+t^13;~ and then
+  \verb~plot(y,t=0..1);~ rather than just\\
+  \verb~plot(t^2+t^3+t^5+t^7+t^11+t^13,t=0..1)~. 
+%
+ \note{twoplots} To plot the graph $y=x^3+x$ in the same picture, enter
+  \verb~plot([x^3-x,x^3+x],x=-2..2);~.  (Note that the outer
+  pair of brackets are round, and the inner pair are
+  square.  Note also the different placing of brackets
+  between here and \seenote{\NOTEparametric} below.)  Similarly,
+  to plot $\cos(t)$ and $\sin(t)$ 
+  together from $t=-3\pi$ to $t=3\pi$, enter
+  \verb~plot([sin(t),cos(t)],t=-3*Pi..3*Pi)~. 
+%
+ \note{discont} To find and skip over discontinuities, add the option
+  \verb~discont=true~; for example:
+\begin{verbatim}
+ plot(frac(x),x=-3..3,discont=true);
+\end{verbatim}
+%
+ \note{numpoints} To improve the accuracy of a graph, use the option
+  \verb~numpoints=1000~, for example\\
+  \verb~plot(x*sin(Pi/x),x=-1..1,numpoints=1000);~.  (The
+  number $1000$ should always give a good picture, but may
+  slow things down.  Any number greater than $50$ will
+  improve the default picture.)  
+%
+ \note{parametric} To plot the curve given parametrically by
+  $x=1/(1+t^2)$ and $y=\sin(t)$ from $t=-5$ to $t=5$, enter
+\begin{verbatim}
+ plot([1/(1+t^2),sin(t),t=-5..5]);
+\end{verbatim}
+  Similarly, to plot the curve $(x,y)=(\sin(t),\cos(2t))$
+  for $t=0$ to $2\pi$, enter
+  \verb~plot([sin(t),cos(2*t),t=0..2*Pi])~. 
+  The option \verb~scaling=constrained~ is often useful
+  in this kind of plot.   
+%
+ \note{parametricbrackets}
+  Note carefully the placing of the square brackets above.  If
+  you enter \verb~plot([1/(1+t^2),sin(t)],t=-5..5);~
+  instead, you get the graphs $y=1/(1+t^2)$ and $y=\sin(t)$
+  drawn together in the same picture, which is something
+  rather different. 
+%
+ \note{parametricrange}
+  In a parametric plot, if you want the $x$-axis to run from $-3$
+  to $3$ and  the $y$-axis from $-2$ to $2$, you should enter \\
+  \verb~plot([1/(1+t^2),sin(t),t=-5..5],view=[-3..3,-2..2]);~. 
+%
+ \note{implicitplot} To plot a curve given implicitly, say
+  by the equation $x+y+x^2y^2=1$, enter 
+\begin{verbatim}
+ plots[implicitplot](x+y+x^2*y^2=1,x=-3..3,y=-3..3);
+\end{verbatim}
+  Similarly, you can plot the circle $x^2+y^2=4$ like this:
+\begin{verbatim}
+ plots[implicitplot](x^2+y^2=4,x=-2..2,y=-2..2);
+\end{verbatim}
+  The option \verb~scaling=constrained~ is often useful
+  in this kind of plot. 
+%
+ \note{grid}
+  Implicit plots will rarely give a good picture unless you
+  tell Maple to start with a finer grid, which you can do like this:
+\begin{verbatim}
+ plots[implicitplot](x+y+x^2*y^2=1,x=-3..3,y=-3..3,grid=[200,200]);
+\end{verbatim}
+  The number 200 generally seems to work well, but you could
+  try a larger or smaller one. 
+%
+ \note{saveplot} To generate and save a plot for future use, enter
+  something like this: \\
+  \verb~MyPicture:=plot(x^2+x,x=2..4):~.  Note that this 
+  ends with a colon, to prevent Maple from printing out vast
+  lists of coordinates.  You can then display the picture by
+  entering \verb~MyPicture;~ (with a semicolon).  
+%
+ \note{display}
+  You can display two pictures together by entering \\
+  \verb~plots[display](MyPicture,MyOtherPicture);~ (for 
+  example).  This can also be done without saving the
+  pictures separately.  For example, you can plot $y=x^3$
+  together with $x^2+y^2=1$ like this:\\
+  \verb~plots[display](plot(x^3,x=-1..1),plots[implicitplot](x^2+y^2=1,x=-1..1,y=-1..1));~
+%
+ \note{listplot}
+  You can use \verb~plots[listplot](...)~ to plot a list of
+  points.  For example \verb~plots[listplot]([8,7,5,1])~
+  plots four points with $y$ coordinates $8$, $7$, $5$ and
+  $1$, and $x$ coordinates $1$, $2$, $3$ and $4$. 
+  Similarly, \\
+  \verb~plots[listplot]([9,9,9,9,9,9,9])~ plots
+  seven points, all at height $9$, at $x$-coordinates
+  $1,\dotsc,7$. 
+%
+ \note{listplotstyle}
+  By default, \verb~listplot~ draws a line joining the
+  specified points.  If you just want the points themselves,
+  use the option \verb~style=POINT~, for example 
+  \verb~plots[listplot]([8,7,5,1],style=POINT)~
+%
+ \note{listplotgen}
+  If you want, you can specify the $x$-coordinates as well,
+  rather than just taking them to be $1,2,3,\dotsc$.  For
+  example, \\
+  \verb~plots[listplot]([[1,1],[1,-1],[-1,1],[-1,-1]])~
+  plots the four points with coordinates $(1,1)$, $(1,-1)$,
+  $(-1,1)$ and $(-1,-1)$, which are the four corners of a
+  square. 
+%
+ \note{withplots}
+  If you enter \verb~with(plots):~, then Maple will let you
+  enter \verb~implicitplot(...)~ instead of
+  \verb~plots[implicitplot](...)~, \verb~listplot(...)~
+  instead of \verb~plots[listplot](...)~  and
+  \verb~display(...)~ instead of \verb~plots[display](...)~,
+  and so on.  The same applies to various other commands
+  that we have not yet discussed. 
+%
+ \note{reloadplots}
+  If you restart Maple for any reason, you will
+  have to enter \verb~with(plots):~ again afterwards. 
+\end{itemize}
+
+\section{Differentiation}\label{sec-diff}
+\setcounter{notecounter}{0}
+
+
+\begin{itemize}
+%
+ \note{diff} To differentiate $x+\sin(x)$ with respect to $x$ (for
+  example), enter \verb~diff(x+sin(x),x)~.  This is
+  equivalent to $\frac{d}{dx}(x+\sin(x))$ in traditional
+  notation.  Similarly, to differentiate $1/(1-t^2)$ with
+  respect to $t$ we enter \verb~diff(1/(1-t^2),t)~.  
+%
+ \note{diffvar} Note that it is necessary to specify the
+  variable with respect to which you want to differentiate. 
+  If you enter \verb~diff(x^2,x)~ you get $2x$, but if you
+  just enter \verb~diff(x^2)~, you get an error message. 
+%
+ \note{multidiff} To differentiate $y$ three times with respect to $x$
+  (for example), enter \verb~diff(y,x,x,x)~ or
+  \verb~diff(y,x$3)~.  This is equivalent to $d^3y/dx^3$ in
+  traditional notation.  Similarly, to find the second
+  derivative of $\sin(\theta)$ with respect to $\theta$ we
+  enter \verb~diff(sin(theta),theta$2)~. 
+%
+ \note{leibniz} In a different kind of traditional notation, you
+  could define $f(t)=t^3+4$ (for example), and then $f'(t)$
+  would mean the derivative $\frac{d}{dt}f(t)=3t^2$.  The
+  Maple equivalent would be to enter \verb~f:=(t)->t^3+4;~
+  for the definition, and \verb~D(f)(t)~ for the derivative. 
+  Note that \verb~D(f)(t)~ means exactly the same as
+  \verb~diff(f(t),t)~, but it is sometimes more convenient. 
+%
+ \note{implicitdiff} If $x$ and $y$ are related implicitly
+  by an equation (say $x+y+x^2y^2=1$) then you can find
+  $dy/dx$ in terms of $x$ and $y$ by implicit
+  differentiation, like this: 
+\begin{verbatim}
+ implicitdiff(x+y+x^2*y^2=1,y,x)
+\end{verbatim}
+%
+ \note{inertdiff} Sometimes you just want to mention the derivative
+  without actually working it out.  You can do this by
+  writing \verb~Diff~ instead of \verb~diff~.  For example,
+  if you enter \verb~Diff(x^3+4,x)~ then Maple will print
+  out $\frac{d}{dx}(x^3+4)$; if you then enter
+  \verb~value(%)~, Maple will convert this to $3x^2$. 
+  Similarly, \verb~Diff(t^10,t,t)~ prints as
+  $\frac{d^2}{dt^2}t^{10}$, whereas
+  \verb~value(Diff(t^10,t,t))~ or \verb~diff(t^10,t,t)~
+  gives $90 t^8$. 
+%
+ \note{taylor} To find the Taylor series of a function $f(x)$ near a
+  point $x=a$ to order $n$, enter
+  \verb~series(f(x),x=a,n)~.  Note that ``order $n$'' means
+  that the highest term allowed is a multiple of $x^{n-1}$,
+  and all terms $x^n$ and higher are discarded.  For
+  example, \verb~series(1/x,x=2,7)~ gives the Taylor series
+  for $1/x$ near $x=2$ including terms up to $(x-2)^6$. 
+%
+ \note{taylorconv}
+  The \verb~series~ command gives an answer including a term
+  like $O(x^7)$,  to indicate that there are
+   infinitely many more terms, starting with a multiple of
+   $x^{12}$.  Maple will not let us do very much with this
+   answer until we have converted it to an ordinary
+   polynomial (without the $O(x^7)$ term on the end).  To do
+   this, use the command \verb~convert(...,polynom)~. 
+\end{itemize}
+
+\section{Integration}\label{sec-int}
+\setcounter{notecounter}{0}
+
+
+\begin{itemize}
+%
+ \note{int} To calculate an indefinite integral like
+  $\int\tan(x)\,dx$, enter \verb~int(tan(x),x)~. 
+%
+ \note{intconst} Maple's answer will never include an arbitrary
+  constant '$+c$'.  In some contexts (particularly, solution
+  of differential equations) the constant makes a
+  difference and must be included.  In other contexts it
+  is irrelevant; Maple cannot help you to decide about
+  this. 
+%
+ \note{defint} To calculate a definite integral like
+  $\int_1^5t^3\,dt$, enter \verb~int(t^3,t=1..5)~. 
+  Similarly, to calculate $\int_0^2\sqrt{1+x}\,dx$, enter
+  \verb~int(sqrt(1+x),x=0..2)~. 
+%
+ \note{improper} It is also possible to have infinite limits.  For
+  example, $\int_{-\infty}^\infty (1+x^4)^{-1}dx$ can be 
+  entered as 
+\begin{verbatim}
+ int((1+x^4)^(-1),x=-infinity..infinity)
+\end{verbatim}
+%
+ \note{inertint} As with differentiation, it is sometimes useful to
+  mention an integral without evaluating it.  You can do
+  this by writing \verb~Int~ instead of \verb~int~.  For
+  example, if you enter \verb~Int(x^2,x)~ then Maple will
+  print it as $\int x^2\,dx$; if you then enter
+  \verb~value(%)~, then Maple will convert it to $x^3/3$. 
+\end{itemize}
+
+\section{Sequences and sums}
+\setcounter{notecounter}{0}
+
+
+\begin{itemize}
+%
+ \note{seq} To generate a sequence of terms, use the \verb~seq()~
+  command.  For example, the sequence $1/2,1/4,1/6,1/8,1/10$
+  is the sequence of terms $1/(2k)$ for $k=1,2,3,4,5$; it can
+  be generated by the command \verb~seq(1/(2*k),k=1..5)~. 
+%
+ \note{sum} To find the sum of a sequence of terms, use the
+  \verb~sum()~ command.  For example,
+  $\tfrac{1}{2}+\tfrac{1}{4}+\tfrac{1}{6}+\tfrac{1}{8}+\tfrac{1}{10}$  
+  is the sum of the terms $1/(2k)$ for $k$ from $1$ to $5$,
+  or in other words $\sum_{k=1}^51/(2k)$.  This can be
+  entered as \verb~sum(1/(2*k),k=1..5)~. 
+%
+ \note{add} Occasionally it works better to use the \verb~add()~
+  command instead of \verb~sum()~.  We will not explore the
+  difference here. 
+\end{itemize}
+
+\section{Some common problems}\label{sec-problems}
+\setcounter{notecounter}{0}
+
+
+\begin{itemize}
+%
+ \note{rememberstar} Remember \verb~*~'s for multiplication.  
+  \begin{itemize}
+   \item Remember especially that Maple converts
+    \verb~2(x+y)~ to $2$: you probably meant $2*(x+y)$
+    instead. 
+   \item Enter $xy$ as \verb~x*y~; Maple will print this as
+    $x\;y$, with a little space between the letters.  If you
+    see $xy$ with no space, that means that Maple is
+    referring to a single variable with the two-letter name
+    ``$xy$''.  You probably typed \verb~xy~ instead of
+    \verb~x*y~ by mistake. 
+   \item For the product of $b$ and $x+y$, enter
+    \verb~b*(x+y)~; Maple will print this as $b\;(x+y)$,
+    with the $b$ in italics and followed by a little space. 
+    If you see $\text{b}(x+y)$ (with an upright $b$ and no
+    space) then Maple is referring to the value of a
+    function called $b$ at $x+y$ (just as $\text{f}(x+y)$ is
+    the value of the function $f$ at $x+y$).  You probably
+    typed \verb~b(x+y)~ instead of \verb~b*(x+y)~, by
+    mistake. 
+  \end{itemize}
+%
+ \note{nostar} Remember not to use \verb~*~'s for application of
+  functions. Things like $\sin x$ in traditional notation
+  must be entered as \verb~sin(x)~, not \verb~sin*x~ or
+  \verb~sin x~. 
+%
+ \note{fracbrac} $\frac{a+b}{c+d}$ must be entered as
+  \verb~(a+b)/(c+d)~ (not \verb~a+b/c+d~), and
+   $\frac{a}{(u+v)(x+y)}$ must be entered as
+   \verb~a/((u+v)*(x+y))~ (not \verb~a/(u+v)*(x+y)~). 
+%
+ \note{expbrac} $a^{1/4}$ must be entered as \verb~a^(1/4)~, not
+         \verb~a^1/4~. 
+%
+ \note{shape} Always use round brackets (not square or curly
+         ones) for algebraic grouping.  Square brackets are
+         used for lists or for subscripts (e.g. $x_5$ is
+         \verb~x[5]~).  Curly brackets are used for sets. 
+%
+ \note{removedefs} Remember to remove definitions when you
+  have finished with 
+  them, by entering the \verb~restart;~ command.  If you
+  enter an expression like $(x+y)^5$ and Maple converts it
+  to something completely unrelated like
+  $(\sin(\theta)+e^{-u})^5$, the most likely reason is that
+  you previously defined \verb~x:=sin(theta);~ and
+  \verb~y:=exp(-u);~, and you forgot to remove these
+  definitions.  
+%
+ \note{badplotvar} 
+  If you give $x$ a value and then try to use it as a
+  plotting variable (e.g. by entering
+  \verb~plot(x^2,x=-1..1);~) you will get the cryptic message
+  ``Error, (in plot) invalid arguments''.  You should
+  restart (or just enter \verb~unassign('x');~) and try again. 
+%
+ \note{badexp} Remember the constant $e=2.71828\dots$ must be
+  entered as \verb~exp(1)~, and $e^x$ must be entered as
+  \verb~exp(x)~.  Maple will print this as $\textbf{e}^x$,
+  with a bold $e$.  If Maple is doing funny things with
+  exponentials, look at the $e$'s in your expression.  If
+  they are not bold, then you must have entered $e^x$ as
+  \verb~e^x~ instead of \verb~exp(x)~, by mistake.  You can
+  cure this by entering \verb~e:=exp(1);~. 
+%
+ \note{badpiagain} Remember that the constant
+  $\pi=3.14159\dots$ must be 
+  entered as \verb~Pi~, not \verb~pi~.  If Maple is doing
+  funny things like refusing to simplify $\sin(\pi)$ to $0$,
+  it may be that you entered \verb~pi~ instead of \verb~Pi~
+  by mistake.  You can cure this by entering \verb~pi:=Pi;~. 
+\end{itemize}
+
+\section{Why the Classic Worksheet?}\label{sec-classic}
+
+There are two different user interfaces to Maple: the ``Classic
+Worksheet'' interface (with the orange icon) and the ``Standard''
+interface (with the red icon).  We will use the Classic
+interface, for several reasons:
+
+\begin{itemize}
+ \item The syntax used by the Classic interface is similar to that used
+  in other contexts: programming languages such as Java or PHP,
+  spreadsheet systems such as Excel, mathematical software such as
+  Matlab, and so on.  It is therefore a good general skill to be
+  familiar with this syntax.  By contrast, the skills that you need for
+  the Standard interface are of little use for other systems.
+ \item With the Classic interface you type a sequence of characters
+  and they appear on the screen as you typed them.  This means that it
+  is easy for the lecturer to explain what you need to type, and how
+  to fix the most obvious problems.  The Standard interface involves
+  much more clicking with the mouse and typing cursor and tab keys
+  that are not directly visible on the screen.  This makes it much
+  harder to provide comprehensible written instructions.
+ \item The online tests also use the same syntax as the Classic
+  interface (and it is not possible to change that).
+ \item The Classic interface is much faster on less powerful computers.
+\end{itemize}
+
+You are free to experiment with the Standard interface if you wish to,
+but you should remember that some points in the exam will rely on
+knowledge of the Classic interface.
+
+\end{document}

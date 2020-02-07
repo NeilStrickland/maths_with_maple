@@ -1,0 +1,59 @@
+{VERSION 6 0 "IBM INTEL NT" "6.0" }
+{USTYLETAB {CSTYLE "Maple Input" -1 0 "Courier" 0 1 255 0 0 1 0 1 0 0 
+1 0 0 0 0 1 }{CSTYLE "2D Math" -1 2 "Times" 0 1 0 0 0 0 0 0 2 0 0 0 0 
+0 0 1 }{CSTYLE "2D Output" 2 20 "" 0 1 0 0 255 1 0 0 0 0 0 0 0 0 0 1 }
+{PSTYLE "Normal" -1 0 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 2 2 2 2 
+2 2 1 1 1 1 }1 1 0 0 0 0 1 0 1 0 2 2 0 1 }{PSTYLE "Heading 1" -1 3 1 
+{CSTYLE "" -1 -1 "Helvetica" 1 18 0 0 0 1 2 1 2 2 2 2 1 1 1 1 }1 1 0 
+0 8 4 3 0 3 0 2 2 0 1 }{PSTYLE "Maple Output" -1 11 1 {CSTYLE "" -1 
+-1 "Times" 1 12 0 0 0 1 2 2 2 2 2 2 1 1 1 1 }3 3 0 0 0 0 1 0 1 0 2 2 
+0 1 }}
+{SECT 0 {SECT 1 {PARA 3 "" 0 "" {TEXT -1 4 "The " }{MPLTEXT 1 0 6 "rat
+int" }{TEXT -1 9 " function" }}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 
+638 "myarctan := \n proc(y,x) \n  `if`(nargs = 1, arctan(y),evalf(Pi/2
+)-arctan(expand(x/y)));\n end:\nmyarctanh := (y) -> myln(1+y)/2 - myln
+(1-y)/2:\nmyln := \n proc(u)\n  local c,d,v;\n  d := degree(u,x);\n  c
+ := coeff(u,x,d);\n  v := expand(u/c);\n  if d = 1 then v := abs(v); f
+i;\n  ln(v);\n end:\n\nratint := \n proc(f,x)\n  local g;\n  g := int(
+f,x);\n  if has(g,\{RootOf,int\}) then \n    g := int(convert(evalf(f)
+,parfrac,x),x);\n  fi;\n  g := eval(\n        subs(ln=myln,arctan = my
+arctan,arctanh=myarctanh,\n             signum=1,abs=(x->x),\n        \+
+     g));\n  g := expand(g);\n  if (type(g,`+`)) then \n   g := remove
+((a)->type(a,constant),g);\n  fi;\n  g;\n end:" }}}}{SECT 1 {PARA 3 "
+" 0 "" {TEXT -1 26 "Various rational functions" }}{EXCHG {PARA 0 "> " 
+0 "" {MPLTEXT 1 0 41 "g[1] := (x) -> x^2 + x + 1 + 1/x + 1/x^2;" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 47 "g[2] := (x) -> 1/(x-1) + 1/(x^2-1) \+
++ 1/(x^3-1);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 49 "g[3] := (x) -> 1/(x
+-1)^2 + 1/(x-2)^3 + 1/(x-3)^4;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 47 "g
+[4] := (x) -> 1/(x+1) + 1/(x^2+1) + 1/(x^3+1);" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 41 "g[5] := (x) -> x/(x+1)*(x+2)/(x+3)*(x+4);" }}{PARA 0 
+"> " 0 "" {MPLTEXT 1 0 45 "g[6] := (x) -> x/(x+1)^2*(x+2)/(x+3)^2*(x+4
+);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 47 "g[7] := (x) -> (x^3+4*x^2+x+2
+)/(x-1)^2/(x+1)^3;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 29 "g[8] := (x) -
+> 1/(x^2+8*x+1);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 28 "g[9] := (x) -> \+
+(x^2+1)^(-5);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 30 "g[10] := (x) -> 1/
+(x^8+x^2+1);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>&%\"gG6#\"\"\"f*6#%\"
+xG6\"6$%)operatorG%&arrowGF+,,*$)9$\"\"#F'F'F2F'F'F'*&F'F'F2!\"\"F'*&F
+'F'*$F1F'F5F'F+F+F+" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>&%\"gG6#\"\"#f
+*6#%\"xG6\"6$%)operatorG%&arrowGF+,(*&\"\"\"F1,&9$F1F1!\"\"F4F1*&F1F1,
+&*$)F3F'F1F1F1F4F4F1*&F1F1,&*$)F3\"\"$F1F1F1F4F4F1F+F+F+" }}{PARA 11 "
+" 1 "" {XPPMATH 20 "6#>&%\"gG6#\"\"$f*6#%\"xG6\"6$%)operatorG%&arrowGF
++,(*&\"\"\"F1*$),&9$F1F1!\"\"\"\"#F1F6F1*&F1F1*$),&F5F1F7F6F'F1F6F1*&F
+1F1*$),&F5F1F'F6\"\"%F1F6F1F+F+F+" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>
+&%\"gG6#\"\"%f*6#%\"xG6\"6$%)operatorG%&arrowGF+,(*&\"\"\"F1,&F1F19$F1
+!\"\"F1*&F1F1,&*$)F3\"\"#F1F1F1F1F4F1*&F1F1,&*$)F3\"\"$F1F1F1F1F4F1F+F
++F+" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>&%\"gG6#\"\"&f*6#%\"xG6\"6$%)o
+peratorG%&arrowGF+*,9$\"\"\",&F1F1F0F1!\"\",&F0F1\"\"#F1F1,&F0F1\"\"$F
+1F3,&F0F1\"\"%F1F1F+F+F+" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>&%\"gG6#
+\"\"'f*6#%\"xG6\"6$%)operatorG%&arrowGF+*,9$\"\"\",&F1F1F0F1!\"#,&F0F1
+\"\"#F1F1,&F0F1\"\"$F1F3,&F0F1\"\"%F1F1F+F+F+" }}{PARA 11 "" 1 "" 
+{XPPMATH 20 "6#>&%\"gG6#\"\"(f*6#%\"xG6\"6$%)operatorG%&arrowGF+*(,**$
+)9$\"\"$\"\"\"F5*&\"\"%F5)F3\"\"#F5F5F3F5F9F5F5,&F3F5F5!\"\"!\"#,&F5F5
+F3F5!\"$F+F+F+" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>&%\"gG6#\"\")f*6#%
+\"xG6\"6$%)operatorG%&arrowGF+*&\"\"\"F0,(*$)9$\"\"#F0F0*&F'F0F4F0F0F0
+F0!\"\"F+F+F+" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>&%\"gG6#\"\"*f*6#%\"
+xG6\"6$%)operatorG%&arrowGF+*&\"\"\"F0*$),&*$)9$\"\"#F0F0F0F0\"\"&F0!
+\"\"F+F+F+" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>&%\"gG6#\"#5f*6#%\"xG6
+\"6$%)operatorG%&arrowGF+*&\"\"\"F0,(*$)9$\"\")F0F0*$)F4\"\"#F0F0F0F0!
+\"\"F+F+F+" }}}}}{MARK "0 0 0" 0 }{VIEWOPTS 1 1 0 1 1 1803 1 1 1 1 }
+{PAGENUMBERS 0 1 2 33 1 1 }

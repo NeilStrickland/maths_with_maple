@@ -1,0 +1,2044 @@
+\documentclass[a4paper,10pt]{amsbook}
+%\usepackage{a4wide}
+\usepackage{verbatim}
+\usepackage{hyperref}
+
+\setlength{\topmargin}{-1cm}
+\setlength{\oddsidemargin}{-1cm}
+\setlength{\evensidemargin}{-1cm}
+\setlength{\textwidth}{18cm}
+\setlength{\textheight}{24.5cm}
+
+\input{macros}
+
+\numberwithin{example}{chapter}
+
+\begin{document}
+
+\chapter{Introduction}
+
+\section{Getting started}
+
+As soon as you enter the room, please log on to the network,
+and start up Maple.  To do this, first double-click the ``Load
+application menus'' icon on the desktop.  When this has
+finished (which may take a minute), click on the start menu,
+then ``Applications'', then ``Academic'', then
+``Mathematics'', then ``Classic Worksheet Maple 12''.
+
+In working through this sheet, and the lab sheets in
+subsequent weeks, you will need to consult the ``Maple
+reference'' notes.  These were distributed in the first
+lecture, and also are available online at\\
+\verb~http://www.shef.ac.uk/nps/MAS100~.  
+If you see something in the lab sheet like \note{8.6},
+that means that item 8.6 in the Maple notes is relevant.
+
+\section{Maple as a calculator}
+
+\begin{exercise}\label{ex-twoplustwo}
+ Enter
+\begin{verbatim}
+  2+2;
+\end{verbatim}
+ (As with almost all Maple commands, we need a semicolon at
+ the end \note{\NOTEsemi}.  If Maple says ``Warning,
+ premature end of input'', you probably left out the
+ semicolon.)  Then press the ENTER key.  Maple will respond
+ with
+ \[ 4 \]
+ Now try the following calculation%
+ \footnote{From the Beaver's Lesson:
+ \verb~http://tinyurl.com/2dv793~,
+ verses 16--17}:
+\begin{verbatim}
+  (3 + 7 + 10) * (1000 - 8) /(900 + 90 + 2) - 17;
+\end{verbatim}
+ Note that we use \verb~*~ for
+ multiplication\note{\NOTEstar}; it is a very common error to 
+ leave this out.  If you ever see a message saying
+ \begin{quotation}
+  Error, missing operator or `;` 
+ \end{quotation}
+ then the most likely explanation is a missing \verb~*~.  
+\end{exercise}
+
+\begin{exercise}\label{ex-numeric-misc}
+ Try the following calculations.  In each case the answer will have
+ some kind of pattern to it; see if you can explain it. 
+ \begin{itemize}
+  \item[(a)] $6^{20}\;15^{20}/9^{20}$ (Enter this as
+   \verb~6^20*15^20/9^20;~) 
+  \item[(b)] $(10^{10}-1)/99$
+  \item[(c)] $(10^{10}-10-9^2)/9^2$ (The explanation here is
+   harder, and should be considered a challenge for enthusiasts only.)  
+  \item[(d)] $(10^9+1)(10^{10}-10-9^2)/9^2$ (You should be able to
+   explain how this relates to~(c), even if you cannot explain~(c)
+   itself.)  (The correct answer is \emph{not}
+   $1000000001/81$; if you get that answer, you probably
+   left out a \verb~*~.) 
+ \end{itemize}
+\end{exercise}
+
+Maple will usually leave answers as fractions (or other exact
+mathematical expressions) rather than giving an approximate numerical
+answer.  If you want a numerical answer, you can use the function
+\verb~evalf()~.  For example:
+\begin{verbatim}
+ 1 + 1/2 + 1/3 + 1/4;
+\end{verbatim}
+\[ 25/12 \]
+\begin{verbatim}
+ evalf(1 + 1/2 + 1/3 + 1/4);
+\end{verbatim}
+\[ 2.083333333 \]
+(A slightly more efficient approach here is to enter
+\verb~1+1/2+1/3+1/4;~, and then \verb~evalf(%);~.  The
+\verb~%~ symbol refers to the last thing that Maple worked
+out \note{\NOTEpercent}.) 
+
+\begin{exercise}\label{ex-cfrac-pi}
+ Calculate the following as exact fractions, then as numerical
+ approximations.  What do you see? 
+ \[ \text{(a)}\hspace{1em}
+     3+\cfrac{1}{7}
+    \hspace{3em}
+    \text{(b)}\hspace{1em}
+     3+\cfrac{1}{7 + \cfrac{1}{15}}
+    \hspace{3em}
+    \text{(c)}\hspace{1em}
+     3+\cfrac{1}{7 + \cfrac{1}{15 + \cfrac{1}{1 + \cfrac{1}{293}}}}  
+  \]
+  You need to be very careful with brackets when entering these
+  expressions.  For example, the last one should be
+\begin{verbatim}
+  3 + 1/(7 + 1/(15 + 1/(1 + 1/293)));
+\end{verbatim}
+\end{exercise}
+
+\begin{exercise}\label{ex-e-digits}
+ Maple's notation for the constant $e\simeq 2.718281828$ (the base of
+ natural logarithms) is \verb~exp(1)~  (see
+ \note{\NOTEexp}).  Read \note{\NOTEevalfdigits,\NOTEdigits} to find out
+ how to calculate $4997$ digits of $e$.  (You should notice
+ that the last $5$ digits are all the same; this is the first time
+ that this happens.) 
+ \footnote{You may think that calculating thousands of digits of $e$
+ is a useless activity, but it could get you a job at Google: see
+ \verb~http://tinyurl.com/ygat93~
+ }
+\end{exercise}
+
+\begin{exercise}\label{ex-near-int}
+ It is a remarkable fact that $e^{\pi\sqrt{163}}$ is extremely close
+ to being an integer (for a reason involving some very advanced
+ mathematics).  Let us check this. 
+ \begin{itemize}
+  \item[(a)] Tell Maple to do all calculations to $40$
+   digits (see \note{\NOTEdigits}).
+  \item[(b)] Enter \verb~x:=exp(Pi*sqrt(163));~.  Maple will
+   display this in traditional notation, but will not evaluate it
+   numerically.  For the syntax used here, see
+   \note{\NOTEcolonequals,\NOTEexp,\NOTEpi,\NOTEsqrt}. 
+  \item[(c)] Enter \verb~y:=evalf(x);~.  Maple will print this in
+   scientific notation, which is not too helpful for our present
+   purposes.  To display it in a more useful way, enter
+\begin{verbatim}
+  printf("%20.20f\n\n",y);
+\end{verbatim}
+   (Do not worry about the details of this, as we will not
+   use the \verb~printf~ command again.)  You should see
+   that there is a long string of $9$'s after the decimal
+   point, showing that $y$ is just a tiny bit less than an
+   integer. 
+  \item[(d)] To find the integer nearest to $y$, enter
+   \verb~z:=round(y);~.  (Of course this can just be read off
+   from~(c), but we prefer not to have to retype it.)  Now calculate
+   $y-z$, to see that $y$ is less than $10^{-12}$ away from an
+   integer. 
+  \item[(e)] Enter \verb~restart;~.  This removes the definitions of
+   $x$, $y$ and $z$, which would otherwise cause trouble in later
+   exercises. 
+ \end{itemize}
+\end{exercise}
+
+\section{Symbolic algebra}
+
+\begin{exercise}\label{ex-horner}
+ Enter
+\begin{verbatim}
+  A := (x^2-4*y^2)*(x^3-x*y^2);
+\end{verbatim}
+ (If Maple prints this as a horrible expression involving
+ $e^{\pi\sqrt{163}}$, then you probably forgot to remove the
+ definitions of $x$, $y$ and $z$ made in the previous exercise.  Enter
+ \verb~restart;~ and try again.) 
+ 
+ Now try \verb~simplify(A);~, \verb~expand(A);~, \verb~factor(A);~ and
+ \verb~convert(expand(A),horner,x);~.  Which of these forms do you think is
+ the most illuminating?  (There is no right answer.) 
+\end{exercise}
+
+\begin{exercise}\label{ex-rat-misc}
+ Ask Maple to simplify the expression 
+ \[ \frac{2x}{x^2-1} + \frac{1}{x+x^2} + \frac{1}{x-x^2}. \]
+ Now see if you can get the same answer by hand. 
+\end{exercise}
+
+\section{Plotting}
+
+\begin{exercise}\label{ex-sin-taylor}
+ Ask Maple to plot the graph of $y=\sin(x)$ from $x=-4$ to
+ $x=4$ (see \note{\NOTEbasicplot} for the syntax).  Now plot
+ the function
+ \[ y = x-x^3/6+x^5/120-x^7/5040 \]
+ from $x=-4$ to $x=4$.  What do you notice?  Plot the two curves
+ together, as explained in \note{\NOTEtwoplots}.
+\end{exercise}
+
+\section{Solving}
+
+\begin{exercise}
+ Ask Maple to solve the equations 
+ \begin{align*}
+  x^2 + y^2 &= 1 \\
+  (x-1)^2 + (y-1)^2 &= 1,
+ \end{align*}
+ like this:
+\begin{verbatim}
+  solve({x^2+y^2=1,(x-1)^2+(y-1)^2=1},{x,y});
+\end{verbatim}
+ Can you find the solution by hand?  Can you draw (by hand)
+ the curves $x^2+y^2=1$ and $(x-1)^2+(y-1)^2=1$, and thus
+ obtain the solution graphically?
+\end{exercise}
+
+\section{Calculus}
+
+\begin{exercise}
+ Read \note{\NOTEdiff,\NOTEdiffvar}.  Then ask Maple to
+ differentiate the function $\ln(\ln(\ln(x)))$ with respect
+ to $x$.  Now differentiate the functions $(3x+4)/(2x+3)$
+ and $(1+x^2+x^4/2)e^{-x^2}$, and simplify your answers.
+\end{exercise}
+
+\begin{exercise}
+ Ask Maple to evaluate the integral
+ $\int_0^1\sqrt{1-x^2}\,dx$, as explained in \note{\NOTEdefint}
+\end{exercise}
+
+\chapter{Solving equations} 
+
+Maple has powerful facilities for solving equations, but they are not
+perfect.  Often one has to rearrange an equation in some way before
+Maple will succeed in solving it.  It is quite common for Maple to
+give a complicated solution, when a slightly different approach might
+give a simpler one.  Thus, solving equations is more of an art than a
+science.  
+
+Exercises~\ref{ex-decimal-roots}, \ref{ex-mobius-fix},
+\ref{ex-adjusted-sin} and~\ref{ex-linear-trichotomy} appear on the
+online test for this week.
+
+Numbers in square brackets refer to the ``Maple
+reference'' notes, which were distributed in the first lecture, and
+are available online at \verb~http://www.shef.ac.uk/nps/MAS100~.
+
+\section{Algebraic equations}
+
+\begin{exercise}\label{ex-decimal-roots}
+ Enter
+\begin{verbatim}
+ f := (x) -> 2*x^4-2222*x^3+224220*x^2-2222000*x+2000000;
+\end{verbatim}
+ to define the function
+ \[ f(x) = 2x^4-2222x^3+224220x^2-2222000x+2000000. \]
+ (See \note{\NOTEarrow -- \NOTEshowfuncdef} for more about
+ the syntax used here for defining functions.) Then solve 
+ $f(x)=0$ (as explained in \note{\NOTEsolve})
+ to find the roots.  Use the answer to factorize $f(x)$, and then
+ enter \verb~factor(f(x));~ to check your answer.
+\end{exercise}
+
+\begin{exercise}\label{ex-biquadratic-roots}
+  Define $y=x^4-x^3-x^2-x/8+1/64$ and $z=16x^3-24x^2-6x+2$.  (Here we
+  do not use the arrow notation, because we do not have a $(x)$ on the
+  left hand side.)  Ask Maple to find the values of $x$ where $y=0$;
+  you should get four solutions.  It is best to use a command like
+  \verb~sols := solve(...)~ so that you can reuse the solutions later;
+  now \verb~sols[1]~ will refer to the first solution, \verb~sols[2]~
+  will refer to the second, and so on.  Now look more closely at the
+  solutions.  You should see that they all involve the same four
+  terms, but with different plus and minus signs.  Examine the pattern
+  of signs carefully.  Can you rephrase Maple's answer more neatly?
+  Next, read \note{\NOTEsubs -- \NOTEsolvesubs}.  Use the
+  \verb~subs()~ command to find the value of $z$ at the four points
+  where $y$ is zero.  You can do this as four separate steps, or
+  (better) you can read \note{\NOTEseq} and use the \verb~seq()~
+  command to do it in one go.  (There are some interesting phenomena
+  going on in this calculation, that will eventually be explained in
+  the level 4 course on Galois Theory.)
+\end{exercise}
+
+\begin{exercise}\label{ex-cubic-horrid}
+ As general background, you should be aware that the last two
+ exercises were chosen carefully to work out nicely.  For a typical
+ polynomial there may be no formula for the roots, and even if there
+ is, it may be very ugly.  Moreover, even if there is a formula and
+ the roots are all real numbers, the formula may still involve complex
+ numbers as an intermediate stage.  For an example of this, set
+ \verb~_EnvExplicit:=true;~ again, and then ask for the roots of
+ $x^3-3x+1$.  Notice that the answer involves $I$ (the square root of
+ minus one) in several places.
+
+ In a case like this, it is more useful to find numerical
+ approximations to the roots instead of a massive exact
+ formula.  Read \note{\NOTEfsolve}, and ask Maple to find an
+ approximate solution to the equation $y=0$, where $y=x^3-3x+1$.
+ It is also helpful to plot the graph (say for $-2\leq x\leq 2$) and
+ see where the roots lie: read \note{\NOTEbasicplot} for help with
+ this.  From either of these approaches, we see that there is
+ precisely one negative root for this equation.  Use \note{\NOTEdiff}
+ and \note{\NOTEsubs} to find the value of $dy/dx$ at this negative
+ root. 
+\end{exercise}
+
+\begin{exercise}\label{ex-mobius-fix}
+ Enter the definition
+ \[ g(x) = \frac{b^2-c^2+(1+c^2)x}{1-c^2+ c^2x}. \]
+ We will study the fixed points of $g$, or in other words the values
+ where $g(x)=x$.  
+ \begin{itemize}
+  \item[(a)] Ask Maple to solve the equation $g(x)=x$ for
+   $x$.  (Remember to use the syntax in \note{\NOTEarrow}
+   when entering the definition of $g$.)  You should get two
+   solutions. 
+  \item[(b)] For some special value(s) of $b$ and/or $c$, Maple's
+   answer does not make sense.  Go back to the definition of $g$ and
+   the equation $g(x)=x$, and work out by hand what happens in those
+   special cases.
+  \item[(c)] For which value(s) of $b$ and/or $c$ are Maple's two
+   solutions actually the same?
+  \item[(d)] Give a self-contained summary of your conclusions, that
+   could be read and understood by someone who had not attempted the
+   question. 
+ \end{itemize}
+\end{exercise}
+
+\section{Approximate solutions}
+
+\begin{exercise}\label{ex-adjusted-sin}
+ Define $f(x)=\sin(\pi x+e^{-x})$ (remembering that $e^{-x}$ is
+ \verb~exp(-x)~ and $\pi$ is \verb~Pi~).  If you ask Maple to solve
+ this, it will give an answer in terms of an obscure function called
+ \verb~LambertW~.  \footnote{If you are curious, you can enter
+   \verb~?LambertW~ or visit
+   \verb~http://mathworld.wolfram.com/LambertW-Function.html~.} 
+ We will ignore this for the moment, and look instead for a numerical
+ approximation to the roots, concentrating on the case where
+ $x\geq 0$.
+ \begin{itemize}
+  \item[(a)] First plot the graph of $f(x)$, say from $x=0$ to $x=10$. 
+   Roughly where are the roots?  Can you explain why they are where
+   they are? 
+  \item[(b)] Enter \verb~fsolve(f(x)=0,x);~.  This finds a root at
+   about $x=-0.55$, ignoring all the roots with $x\geq 0$ that we saw
+   in the graph.  To find a root near $x=2$ instead, enter
+\begin{verbatim}
+  fsolve(f(x)=0,x=2);
+\end{verbatim}
+   To find roots near $x=1$, $x=2$, $x=3$ and so on, up to $x=10$,
+   enter this:
+\begin{verbatim}
+  seq(fsolve(f(x)=0,x=n),n=1..10);
+\end{verbatim}
+  \item[(c)] Now define $r(n)=n-e^{-n}/\pi-e^{-2n}/\pi^2$
+   (using syntax as in \note{\NOTEseriesdef}).  In~(a)
+   and~(b) we saw that for every integer $n$, there is a root that is
+   close to $x=n$.  I claim that this root is even closer to
+   $x=r(n)$.  To see this, enter the definition of $r$ and then 
+\begin{verbatim}
+  seq(evalf(r(n)),n=1..10);
+\end{verbatim}
+   Compare this with your final answer in~(b). 
+ \end{itemize}
+\end{exercise}
+
+\section{Infinite families of solutions}
+
+\begin{exercise}
+ Consider the equation $\tan(\pi x)^2=3$.  
+ \begin{itemize}
+  \item[(a)] To find the solutions graphically, plot the
+   function $\tan(\pi x)^2-3$ for a reasonable range of
+   values of $x$.  (Because $\tan(\pi x)$ blows up to
+   infinity for certain values of $x$, it is necessary to cut
+   down the vertical range to get a meaningful picture
+   \note{\NOTEvertrange}, and it is also useful to ask Maple
+   to calculate extra points to make the graph more accurate
+   \note{\NOTEnumpoints}.  You should see that there are many
+   roots in the picture, repeating in a regular way, so there
+   are actually infinitely many roots if we allow $x$ to run
+   from $-\infty$ to $+\infty$.
+  \item[(b)] Click with your mouse on each of the places where the
+   graph crosses the $x$-axis; approximate coordinates will then be
+   shown in a small box at the top left of the Maple window.  You
+   should be able to guess the exact coordinates from this. 
+  \item[(c)] Ask Maple to solve the equation $\tan(\pi x)^2=3$ for $x$. 
+   Maple will report only two solutions, although we have seen that
+   there are really infinitely many. 
+  \item[(d)] You should have seen in~(b) that the solutions are all of
+   the form $x=n+1/3$ or $x=m-1/3$, where $n$ and $m$ are integers. 
+   To persuade Maple to find this answer, we have to enter
+   \verb~_EnvAllSolutions:=true;~, and then ask Maple again to solve
+   the equation.  It will respond as follows:
+   \[ \left\{ x=1/3+{\it \_Z1} \right\} ,
+      \left\{ x=-1/3+{\it \_Z2} \right\} 
+   \]
+   This is the same as our answer, except that Maple uses the symbols 
+   $\it \_Z1$ and $\it \_Z2$ (instead of $n$ and $m$) for arbitrary
+   integers.  
+ \end{itemize}
+\end{exercise}
+
+\section{Linear equations}
+ 
+\begin{exercise}\label{ex-hilbert-lineq}
+ Consider the equations
+  $x/2 + y/3 + z/4 = 1$, \hspace{2em}
+  $x/3 + y/4 + z/5 = 2$, \hspace{2em}
+  $x/4 + y/5 + z/6 = 3$.\\
+ To solve these, we enter
+\begin{verbatim}
+  eqns := {x/2 + y/3 + z/4 = 1,x/3 + y/4 + z/5 = 2,x/4 + y/5 + z/6 = 3};
+  sols := solve(eqns,{x,y,z});
+\end{verbatim}
+ It would also work to do all this in one step:
+\begin{verbatim}
+  solve({x/2+y/3+z/4=1,x/3+y/4+z/5=2,x/4+y/5+z/6=3},{x,y,z});
+\end{verbatim}
+ However, this can make things cramped and hard to organise,
+ especially if our equations are just one piece of a more complex
+ problem.  Now find the value of $x^2+y^2+z^2$ at the point where the
+ above equations are satisfied.
+\end{exercise}
+
+\begin{exercise}\label{ex-linear-trichotomy}
+ Solve the following systems of equations by hand.  You should find
+ that 
+ \begin{itemize}
+  \item one system has no solutions
+  \item one system has a single, fully-determined solution
+  \item one system has a solution in which one of the variables is
+   free to take any value; this means that there are infinitely many
+   different solutions. 
+ \end{itemize}
+ \begin{itemize}
+  \item[(a)] $p +  q +  r = 0$ \hspace{3em}
+             $p + 2q + 3r = 1$
+  \item[(b)]
+    $u + v  = 1001$,  \hspace{2em} 
+    $u + 2v = 1002$,  \hspace{2em} 
+    $u + 3v = 1006$
+  \item[(c)] 
+      $x +  y +  z = 2$,  \hspace{2em} 
+      $x + 2y + 3z = 2$,  \hspace{2em} 
+      $x + 4y + 9z = 2$
+ \end{itemize}
+ When you have found the solutions by hand, find them again
+ using Maple \note{\NOTEsolve,\NOTEmultisolve}.  Note that
+ Maple returns an equation like $w=w$ to indicate that $w$
+ may take any value.  Note also that when there are no
+ solutions, Maple prints nothing at all, which can be
+ disconcerting.  If this worries you, you can enclose the
+ \verb~solve~ command in square brackets.  For example,
+ \verb~solve({x=1,2*x=1},{x});~ gives a completely empty
+ response, but \verb~[solve({x=1,2*x=1},{x})];~ gives a
+ response of $[]$, so you can at least see that Maple has
+ actually done something.
+\end{exercise}
+
+\chapter{Plotting 1}
+
+Before starting each exercise, you should restart Maple, either by
+entering the \verb~restart;~ command, or by clicking the button with
+the circulating arrow at the right hand end of the toolbar.
+
+Numbers in square brackets refer to the ``Maple
+reference'' notes, which were distributed in the first lecture, and
+are available online at \verb~http://www.shef.ac.uk/nps/MAS100~.
+
+%There are some hints at the end.
+
+\begin{exercise}\label{ex-plot-misc}
+ Plot each of the following functions \note{\NOTEbasicplot}
+ for a suitable range of values of $x$.  Experiment to find
+ a range that displays the interesting features.  Write two
+ or three lines (for each function) describing those
+ features.
+ \begin{itemize}
+  \item[(a)] $2e^{-t}\sin(30 t)$ 
+  \item[(b)] $2\sin(20 t)+3\sin(21 t)$
+  \item[(c)] $\sin(x)+\sin(3x)/3+\sin(5x)/5+\sin(7x)/7$
+  \item[(d)] $\cos(\pi x^2)$
+ \end{itemize}
+\end{exercise}
+
+\begin{exercise}\label{ex-wiggle}
+ Consider the function 
+ \[ f(x) = (x^3-x)(x^2-4/9)(x^2-1/9). \] Enter this
+ definition, using the syntax explained in
+ \note{\NOTEarrow}.  Plot the graph for various ranges of
+ $x$, and describe the main features that you see.  Compare
+ $f(x)$ with the functions $x$, $x^2$, $x^3$ and so on, by
+ plotting them together \note{\NOTEtwoplots}.  Which of
+ these matches $f(x)$ most closely for large $x$?  Can you
+ explain why?  
+\end{exercise}
+
+\begin{exercise}\label{ex-mobius}
+ Consider the function
+ \[ g(x) = (2x+3)/(3x-4). \]
+ \begin{itemize}
+  \item[(a)]
+   Plot the graph for various ranges of $x$, and describe the main
+   features that you see.  You may find it helps to restrict the
+   vertical range \note{\NOTEvertrange} as well as the horizontal one.
+  \item[(b)] What is the value of $x$ where $g(x)$ is discontinuous? 
+   You can either work this out from the formula, or read this off
+   from the graph, or use the Maple command \verb~discont(g(x),x)~. 
+   You can also replot the graph, skipping over the
+   discontinuity, as explained in \note{\NOTEdiscont}.
+  \item[(c)] 
+   Plot the line $y=5$ along with the function $g(x)$  
+   \footnote{You should use the syntax in \note{\NOTEtwoplots}.  You
+   should also remember that the command to plot $y=5$ is
+   \verb~plot(5,...)~, not \verb~plot(y=5,...)~.}. 
+   You should see that the line crosses the graph.  If you change the
+   $5$ to $-1$ and redo the plot, then again you see that the line
+   $y=-1$ crosses the graph.  However, there is one horizontal line
+   (somewhere between $y=-1$ and $y=5$) that does not cross the
+   graph.  Can you find out which line it is?  You can either use
+   plotting and trial and error, or analyse the situation
+   algebraically. 
+  \item[(d)] Enter \verb~limit(g(x),x=infinity);~ and
+   \verb~limit(g(x),x=-infinity);~.  How are these related to
+   part~(c)? 
+ \end{itemize}
+\end{exercise}
+        
+\begin{exercise}\label{ex-lhopital}
+ Consider the function
+ \[ f(x) = \frac{1 - e^x + e^{2x} - e^{3x}}{\sin(x)}. \]
+ (Remember \note{\NOTEarrow} when entering this in Maple.)
+ What is $f(0)$?  The formula above gives $f(0)=(1-1+1-1)/0=0/0$,
+ which is meaningless.  However, if we plot the graph of $f(x)$ (for
+ $x$ from $-1$ to $1$, say) we see that there is a perfectly definite
+ value for $f(0)$; what is it?  
+% (See the hints at the end for a more careful discussion of the logic.) 
+\end{exercise}
+
+\begin{exercise}\label{ex-bessel}
+ We now use Maple to investigate the properties of a new function that
+ you probably have not met before: the Bessel function $J_2(x)$.  This
+ is one of a whole family of Bessel functions, which have many
+ applications, for example in studying the vibration of drums or the
+ behaviour of fibre-optic cables.  In Maple it is called
+ \verb~BesselJ(2,x)~. 
+ \begin{itemize}
+  \item[(a)] Plot $J_2(x)$ for $-50\leq x\leq 50$.  Describe the
+   main features. 
+  \item[(b)] Plot $J_2(x)$ and $x^2/5$ in the same picture, from $x=-0.1$
+   to $x=+0.1$.  Now change the $5$ to something else, and repeat. 
+   Which value makes the two curves match up most closely? 
+  \item[(c)] Plot $J_2(x)$ from $x=10$ to $300$.  You should see some
+   strange wiggles in the graph, which are in fact not really there;
+   they appear because Maple has not calculated enough points to draw
+   an accurate picture.  To fix this, we use the \verb~numpoints~
+   option (as in \note{\NOTEnumpoints}):
+\begin{verbatim}
+  plot(BesselJ(2,x),x=10..300,numpoints=200);
+  pic := %:
+\end{verbatim}
+   (The second line here saves the picture, so we do not have to
+   recalculate it later \note{\NOTEsaveplot}.) 
+
+   You should see an oscillation dying slowly away.  This leads us to
+   ask how large the oscillations are, and what is their frequency. 
+  \item[(d)] For the size of the oscillations, try plotting $0.15x^{-1}$
+   alongside $J_2(x)$, as in \note{\NOTEdisplay}:
+\begin{verbatim}
+  plots[display](pic,plot(0.15*x^(-1),x=10..300,color=blue));
+\end{verbatim}
+   Do the same with $0.3x^{-1/3}$ and $0.5x^{-1/2}$ and some other
+   similar functions.  (Do not retype the whole line; just edit the
+   relevant numbers, press ENTER, and Maple will redraw the graph.) 
+   If you get the numbers right, then the blue curve will just touch
+   the tops of all the waves.  (In fact it does not touch exactly, but
+   you need to zoom in very close to see that.) 
+  \item[(e)] For the frequency of the oscillations, try plotting
+   $J_2(x)$ alongside $\sin(x-\pi/4)$, for various ranges of $x$. 
+   This should convince you that $J_2$ oscillates with approximately
+   the same frequency as $\sin(x)$, at least when $x$ is reasonably
+   large. 
+  \item[(f)] Can you combine~(d) and~(e) to find an easier function
+   function $f(x)$ that is very close to $J_2(x)$ for large $x$?  Plot
+   $f$ and $J_2$ together to check your answer. 
+ \end{itemize}
+\end{exercise}
+
+\begin{exercise}\label{ex-quartic}
+ Put 
+ \[ g(a,x) =
+    \frac { (x-1-\sin(a/4))(x-1-\cos(a/4))
+            (x+1-\sin(a/4))(x+1-\cos(a/4))}
+          {1+{x}^{4}}. 
+ \]
+ (Remember \note{\NOTEarrow,\NOTEmultifunc} when entering
+ this in Maple.)  The object of this exercise is to describe
+ the properties of $g$.  
+ \begin{itemize}
+  \item[(a)] Plot $g(2,x)$ for $x$ from $-500$ to $500$.
+   Write two or three lines describing the main features of
+   the plot.  Then plot $g(3,x)$ and $g(4,x)$; you should see
+   that on this scale, they look almost exactly the same.
+  \item[(b)] Plot $g(2,x)$ and $g(4,x)$ for $x$ from $-2$ to $2$.  In
+   both cases, the curve dips below the $x$ axis.  Now plot $g(3,x)$
+   instead.  It appears that the curve does not dip below the axis,
+   but just touches it somewhere near $x=-0.3$, and again near
+   $x=1.7$.  To investigate further, we zoom in.  We plot only from
+   $x=-0.4$ to $x=-0.2$, to focus on the region of interest.  We also
+   restrict the vertical range \note{\NOTEvertrange} to be
+   from $-0.01$ to $0$, so only the part of the curve below
+   the axis will be shown.  Finally, we specify
+   \verb~numpoints=1000~ to make sure that Maple plots the
+   graph very accurately \note{\NOTEnumpoints}.  
+
+%   The command is as follows:  
+%\begin{verbatim}
+%   plot(g(3,x),x=-0.4..-0.2,-0.01..0,numpoints=1000);    
+%\end{verbatim}
+   We see that the graph still dips slightly below the axis.
+   However, there is a certain number $a$ close to $3$ for
+   which the curve does not dip below the axis at all ---
+   see if you can find it.  Plot the graph for various
+   different values of $a$, zooming in further if necessary,
+   and also thinking about which values of $a$ might make
+   something special happen in the formula for $g(a,x)$.
+  \item[(c)] Plot $1-8g(a,0)$ for a reasonable range of
+   values of $a$.  You should recognize the resulting graph,
+   and so should be able to give a simple formula for
+   $1-8g(a,0)$.  Can you derive this formula algebraically
+   from the definition of $g(a,x)$?
+  \item[(d)] Plot $g(a,0.5)$ for $a$ from $-40$ to $40$.
+   What are the main features?  You should see three tall
+   peaks and three lower peaks.  Consider the tall peak
+   closest to the $x$-axis.  Click on it and copy down the
+   coordinates that you see in the little box at the top
+   left of the Maple window.  They should be $(3,0.9)$
+   approximately.  To get more accurate numbers, recall that
+   the peak occurs where the derivative of the function is
+   zero.  Here we are thinking of $g$ as a function of $a$,
+   so the slope is $dg/da$, or in Maple terms:
+\begin{verbatim}
+    slope := diff(g(a,0.5),a);
+\end{verbatim}
+   We need to solve numerically for the place where the
+   slope is zero, close to $a=3$:
+\begin{verbatim}
+    fsolve(slope = 0,a=3);
+\end{verbatim}
+   You should recognize the answer.  Now find the
+   $x$-coordinates of the other two tall peaks in the same
+   way.  Can you give exact formulae for these as well?
+   (Hint: divide them by the $x$-coordinate of the first
+   peak.)
+  \item[(e)] Now try doing some $3$-dimensional plots, for
+   example
+\begin{verbatim}
+   plot3d(g(a,x),a=-20..20,x=-15..15,axes=boxed,grid=[100,100]);
+\end{verbatim}
+ \end{itemize}
+\end{exercise}
+
+\section*{Hints}
+
+\subsection*{Exercise~\ref{ex-lhopital}}
+\begin{verbatim}
+ f := (x) -> (1 - exp(x) + exp(2*x) - exp(3*x))/sin(x);
+ plot(f(x),x=-1..1);
+\end{verbatim}
+The graph crosses the $y$-axis at $y=-2$, suggesting that $f(0)=-2$. 
+
+If we want to be perfectly logical, we should say something a little
+bit different, however.  This is our function $f$, so it is our right
+and privilege to define it however we want.  The original formula does
+not make sense for $x=0$, so $f(0)$ is not yet defined.  We can, if we
+choose, declare that $f(0)$ is simply undefined.  Alternatively, we
+can, if we feel perverse, declare that $f(0)=42$.  Alternatively, we
+can declare that $f(0)=-2$.  The graph shows only that the last option
+is the most reasonable one, not that we are forced to take it. 
+
+\subsection*{Exercise~\ref{ex-bessel}}
+\begin{itemize}
+ \item[(b)] \verb~plot({BesselJ(2,x),x^2/5},x=-0.1..0.1);~\\
+  The best match occurs with $x^2/8$ instead of $x^2/5$. 
+ \item[(d)] The graph of the function $y=0.8x^{-1/2}$ touches the tops
+  of the waves (not exactly, but to a very good approximation). 
+ \item[(f)] The function $J_2(x)$ is very close to
+  $-0.8\sin(x+\pi/4)/\sqrt{x}$ (for large $x$).  Enter the following
+  to plot them together:
+\begin{verbatim}
+  plot({BesselJ(2,x),-0.8*sin(x+Pi/4)/sqrt(x)},x=1..40);
+\end{verbatim}
+\end{itemize}
+
+\subsection*{Exercise~\ref{ex-quartic}}
+The definition of $g$ is
+\begin{verbatim}
+  g := (a,x) -> (x-1-sin(a/4))*(x-1-cos(a/4))*
+                (x+1-sin(a/4))*(x+1-cos(a/4))/(1+x^4);
+\end{verbatim}
+
+\chapter{Plotting 2}
+
+Before starting each exercise, you should restart Maple, either by
+entering the \verb~restart;~ command, or by clicking the button with
+the circulating arrow at the right hand end of the toolbar.  After
+restarting Maple, enter \verb~with(plots):~ to (re)load the
+\verb~plots~ package.  (It is safest to do this for all questions,
+although it is unnecessary for some.  If the \verb~display~ command
+gives a big mess of coordinates instead of a picture, you probably
+forgot to enter \verb~with(plots):~.  Any warning messages produced by
+this command can safely be ignored.)
+
+\section{Parametric plotting}
+
+So far we have mostly drawn graphs where $y$ is given as a function of
+$x$.  We now instead draw some graphs where both $x$ and $y$ are given
+as functions of another variable, say $t$.
+
+\begin{exercise}
+ \begin{itemize}
+  \item[(a)]
+   Plot the curve given by $x=\cos(10t)/(1+t^2)$ and $y=\sin(10t)/(1+t^2)$,
+   as in \note{\NOTEparametric,\NOTEparametricbrackets}.
+  \item[(b)]
+   Plot the curve $(x,y)=(\sin(3t),\sin(2t))$ for $t$ from $0$ to
+   $2\pi$ (this is called a Lissajous figure).  Replace the $2$ and
+   $3$ by larger numbers, and investigate how the picture changes.
+  \item[(c)]
+   Plot the curve $(x,y)=(t-\sin(t),1-\cos(t))$ for $t$ from $0$ to
+   $8\pi$.  This is called a cycloid; it is the path traced out by a
+   point on the edge of a wheel as the wheel rolls along the ground.
+   It looks wrong because Maple draws it using different scales on the
+   $x$ and $y$ axes.  To fix this, click on the graph, and then click
+   on the button marked ``1:1'' on the toolbar.  You can click the
+   button repeatedly to switch between the distorted and undistorted
+   pictures.  Alternatively, use the option \verb~scaling=constrained~
+   when you first draw the graph \note{\NOTEscaling}, like this:
+\begin{verbatim}
+  plot([t-sin(t),1-cos(t),t=0..8*Pi],scaling=constrained);
+\end{verbatim}
+  \item[(d)] Plot the curve
+   $(x,y)=(2t/(1+t^2),(1-t^2)/(1+t^2))$, again using
+   \note{\NOTEparametric}.  What do you see?  Can you
+   explain it?
+ \end{itemize}
+\end{exercise}
+
+\begin{exercise}\label{ex-nodal}
+ Consider the curve $(x,y)=(4t^2-1,8t^3-8t)$, which is called a nodal
+ cubic.  In this exercise it will be convenient to enter these
+ definitions separately from the \verb~plot~ command:
+\begin{verbatim}
+  x := 4*t^2-1;
+  y := 8*t^3-8*t;
+\end{verbatim}
+ (You must remember to remove these definitions by restarting Maple
+ \note{\NOTErestart} before you go on to the next exercise.) 
+ \begin{itemize}
+  \item[(a)] Plot the curve from $t=-1.5$ to $t=1.5$:
+   \verb~plot([x,y,t=-1.5..1.5]);~  
+  \item[(b)] Notice that the curve crosses over itself.  What are the
+   $x$ and $y$ coordinates of the point where this happens, and what
+   are the corresponding values of $t$? 
+  \item[(c)] The curve crosses the $y$-axis twice.  What are the
+   values of $t$ and $y$ at these two points? 
+  \item[(d)] Now plot the function $(X-3)\sqrt{X+1}$ for $X$ from $-1$
+   to $8$.  (Maple will not let us use $x$ here because
+   $x$ has been defined in terms of $t$ and so is no longer a free
+   variable \note{\NOTEbadplotvar}.  We could use almost any
+   other letter, but $X$ seems a  natural choice.)  To
+   compare this precisely with~(a), combine the two pictures
+   like this \note{\NOTEdisplay,\NOTEparametricrange}: 
+\begin{verbatim}
+  display(
+    plot((X-3)*sqrt(X+1),X=-1..8,color=blue),
+    plot([x,y,t=-2..2],color=red),
+    view=[-2..8,-15..15]     
+  );
+\end{verbatim}
+   (If this gives a big mess of coordinates instead of a picture, you
+   probably forgot to enter \verb~with(plots):~.) 
+   What do you observe?  Can you test it algebraically? 
+ \end{itemize}
+\end{exercise}
+
+\begin{exercise}
+ \textbf{Do not enter} the following commands.  Instead, read them
+ carefully, study the reference notes, and sketch what Maple would
+ plot if you entered the commands.
+ \begin{itemize}
+  \item[(a)] \verb~plot([sin(x),cos(x),x=0..4*Pi]);~
+  \item[(b)] \verb~plot([sin(x),cos(x)],x=0..4*Pi);~
+  \item[(c)] \verb~plot([x,sin(x),x=0..4*Pi]);~
+  \item[(d)] \verb~plot([y,sin(y),y=0..4*Pi]);~
+  \item[(e)] \verb~plot([sin(y),y,y=0..4*Pi]);~
+  \item[(e)] \verb~plot([sin(y),y],y=0..4*Pi);~
+ \end{itemize}
+\end{exercise}
+
+\section{Implicit plotting}
+
+
+Often we want to plot a curve given by an equation like
+$x^2+y^2=100$, where $y$ is not explicitly a function of
+$x$.  Here we might let $x$ and $y$ run from $-11$ to $11$.
+Read \note{\NOTEimplicitplot} and ask Maple to plot the
+graph. 
+
+\begin{exercise}
+ Plot the curve $y^2=x^3-x$, for a range of values of $x$
+ and $y$ that shows the interesting features.  The
+ \verb~implicitplot~ command will give you a rather jagged
+ picture; you can improve it as in \note{\NOTEgrid}.
+
+ Now plot $y^2=x^3-x+a$ for various values of $a$ between
+ $0$ and $1$.  You should see that at a certain value of
+ $a$, the picture changes from being two separate curves to
+ a single, connected curve.  Find the relevant value of $a$
+ approximately, by trial and error.  Can you work out an
+ exact formula? 
+\end{exercise}
+
+\begin{exercise}
+ Plot the curve $x^2+y^2+a(\sin(2\pi x)+\cos(2\pi y))=100$ for
+ various values of $a$, starting with $a=1$, $a=5$ and
+ $a=20$.  You will need lots of points to get a good
+ picture, so use the option \verb~grid=[200,200]~.  Describe
+ the main features.  (I have not yet  worked out how to
+ explain them; you can take that as a challenge!) 
+\end{exercise}
+
+\section{Plotting lists of points}
+
+\begin{exercise}\label{ex-listplot}
+ Read \note{\NOTElistplot\dots\NOTElistplotgen}.  Ask Maple
+ to draw the seven points at $x=1,\dotsc,7$ with $y$-values
+ $10$, $40$, $20$, $30$, $50$, $10$ and $20$.  Do this with
+ a line joining the specified points \note{\NOTElistplot}
+ and then with just the points themselves
+ \note{\NOTElistplotstyle}.  Try changing the list of
+ $y$-values in various ways and redrawing the graph.
+\end{exercise}
+
+\begin{exercise}\label{ex-plotprimes}
+ \begin{itemize}
+  \item[(a)] Enter \verb~ithprime(1);~, \verb~ithprime(2);~ and so on
+   to list the first few prime numbers. 
+  \item[(b)] Enter \verb~seq(ithprime(i),i=1..100);~ to list the first
+   hundred primes in one go \note{\NOTEseq}. 
+  \item[(c)] To plot this list, enter 
+\begin{verbatim}
+  listplot([seq(ithprime(i),i=1..100)],style=POINT);
+\end{verbatim}
+   Note that the \verb~seq~ command gives a list with no
+   brackets, but the \verb~listplot~ command needs a list
+   with square brackets, so we have put square brackets
+   around the \verb~seq~ command.
+
+   To save this picture for future use, enter 
+\begin{verbatim}
+  pic1 := %:
+\end{verbatim}
+   \textbf{Note} that this ends with a colon, not a semicolon.  If you
+   use a semicolon, then Maple will print out all the coordinates of
+   all the points in the picture, giving several pages of useless
+   output.  
+ \item[(d)] It is a very interesting and important fact that the $n$'th
+  prime is approximately $n(\ln(\ln(n))+\ln(n)-1)$.  To check this,
+  plot the function $x(\ln(\ln(x))+\ln(x)-1)$ for $x$ from $1$ to
+  $100$, then enter \verb~pic2:=%:~
+  (with a colon, again) to save the picture.  Then enter
+  \verb~display(pic1,pic2);~ to compare the two plots. 
+ \item[(e)] Repeat for the first $1000$ primes.  This can be done in
+  one step, as follows:
+\begin{verbatim}
+   display(
+    listplot([seq(ithprime(i),i=1..1000)],style=POINT,symbol=POINT),
+    plot(x*(ln(ln(x)) + ln(x) - 1),x=1..1000)
+   );
+\end{verbatim}
+  (To lay this out neatly, as above, hold the SHIFT key when you press
+  RETURN at the end of each line.  Maple will not attempt to carry out
+  the command until you press RETURN without the SHIFT key.) 
+ \end{itemize}
+\end{exercise}
+
+\begin{exercise}
+ \begin{itemize}
+  \item[(a)] Enter \verb~20!;~ to calculate the number
+   $20!=1\tm 2\tm 3\tm\dotsb\tm 19\tm 20$.  Then enter
+   \verb~evalf(20!);~ to give the same answer in scientific notation,
+   making it easier to see the approximate size: about
+   $0.24\tm 10^{19}$. 
+  \item[(b)] Now calculate $1!,2!,\dotsc,20!$ using the
+   \verb~seq~ command.  Then plot these values, as
+   in Exercise~\ref{ex-plotprimes}(c). 
+   The result is not very informative --- why not? 
+  \item[(d)] Instead, plot the values of $\ln(n!)$ for $n$ from $1$ to
+   $20$; this gives a more useful picture.  Save the graph by entering
+   \verb~pic1:=%:~.  
+  \item[(e)] Define $f(x)=\sqrt{2\pi} x^{x+1/2} e^{-x}$
+   (using \note{\NOTEarrow}).  It is an
+   interesting and useful fact that $f(n)$ is a good approximation to
+   $n!$, and so $\ln(f(n))$ is a good approximation to $\ln(n!)$.  To
+   check this, plot $\ln(f(x))$ for $x$ from $1$ to $20$ (using the
+   ordinary \verb~plot()~ command rather than \verb~listplot()~). 
+   Save the result by entering \verb~pic2:=%:~,
+   then enter \verb~display(pic1,pic2);~ to combine the two graphs. 
+ \end{itemize}
+\end{exercise}
+
+\begin{exercise}
+ Define a sequence of functions $f(n,c)$ by $f(0,c)=0.5$ and
+ $f(n+1,c)=c\,f(n,c)(1-f(n,c))$, so for example
+ \begin{align*}
+  f(1,c) &= c\times 0.5 \times (1-0.5) = 0.25 c \\
+  f(2,c) &= c \times (0.25 c) * (1-0.25c) = 0.25c^2 - 0.0625 c^3. 
+ \end{align*}
+ (This comes from a very simple model of population dynamics, where
+ $c$ is a parameter depending on the reproductive behaviour of a
+ certain species, and $f_n(c)$ is the population density of that
+ species in the $n$'th year.)  It turns out that the long-term
+ pattern of this sequence depends in an intricate and interesting way
+ on $c$; this is the starting point of the theory of chaotic
+ dynamics. 
+
+ We can enter the definition in Maple as follows:
+\begin{verbatim}
+ f := proc(n,c)
+  option remember;
+  if n = 0 then
+   return 0.5;
+  else 
+   return c * f(n-1,c) * (1 - f(n-1,c));
+  end if;
+ end;
+\end{verbatim}
+ Now use the \verb~listplot~ command to plot the values $f(i,2.9)$
+ for $i$ from $1$ to $500$.  Just plot the points, not the lines
+ joining them \note{\NOTElistplotstyle}.  You should see that the
+ points bounce around a bit when $i$ is small, but they settle down so
+ that $f(i,2.9)$ is close to $0.655$ when $i$ is large.  Now change
+ the parameter $c$ from $2.9$ to $3.1$.  How does the pattern change?
+ Try various values between $2.9$ and $3.1$ to see in more detail what
+ happens and when.  Then look at the range $3.4\leq c\leq 3.5$, then
+ $3.52\leq c\leq 3.56$, then $3.62\leq c\leq 3.63$. 
+
+\end{exercise}
+
+\chapter{Differentiation 1}
+
+Various parts of questions~\ref{ex-Li}, \ref{ex-rolle}
+and~\ref{ex-schwartzian} will be on the online test.
+
+\begin{exercise}\label{ex-Li}
+ On the course home page (\verb~www.shef.ac.uk/nps/MAS100~), click on
+ the link marked \verb~defineq.mws~.  This should open up a worksheet 
+ containing a single line starting
+ \verb~q:=sscanf("f*6...~.  Click on this line and press
+ ENTER.  This will set up a ``mystery function'' called
+ $q(x)$, whose properties we will investigate. 
+ \footnote{For a non-mathematical challenge, you can enter
+  \verb~?option~ and \verb~?interface~, read the resulting help pages
+  carefully, and work out how to print out a more
+  comprehensible definition of $q(x)$.  You will then need
+  to read more help pages to understand the definition. 
+ }
+ \begin{itemize}
+  \item[(a)] Plot $q(x)$.  Experiment to find a range of $x$ values
+   that shows all the main features of the graph. 
+  \item[(b)] For which values of $x$ do we have $q'(x)<0$?  (You can
+   answer this by just looking at the graph.)  How about $q'(x)=0$ or
+   $q'(x)>0$? 
+  \item[(c)] Enter \verb~Q:=(x,h)->(q(x+h)-q(x))/h;~, so that $q'(x)$
+   is the limit of $Q(x,h)$ as $h$ tends to zero
+   \note{\NOTEmultifunc}.  Put \verb~e:=exp(1);~ for
+   convenience \note{\NOTEexp}.  Tell Maple to do all numerical
+   calculations to 30 digits \note{\NOTEdigits}. 
+  \item[(d)] Enter \verb~Q(e^2,0.1)~ to get an approximate value for
+   $q'(e^2)$.  Replace $0.1$ by a smaller number to get a better
+   approximation.  What do you think is the exact value of $q'(e^2)$? 
+  \item[(e)] Work out $q'(e^{-2})$ and $q'(e^4)$ in the same way. 
+   Guess the formula for $q'(e^t)$. 
+  \item[(f)] Suppose that $x>0$.  What is the number $t$
+   such that $x=e^t$?  Deduce a formula for $q'(x)$ (valid for $x>0$). 
+ \end{itemize}
+\end{exercise}
+
+
+\begin{exercise}\label{ex-rolle}
+ We will call the following \emph{Rolle's principle}: between any two
+ roots of a function $f(x)$, there is at least one root of $f'(x)$. 
+ \footnote{ As we will see, there are some exceptions.  However, there
+   is a more precisely formulated version, called \emph{Rolle's
+   Theorem} , for which there are no exceptions (that is what
+   ``theorem'' means).  
+ } 
+ \begin{itemize}
+  \item[(a)] How can you find the roots of $f'(x)$ by looking at the
+   graph of $f(x)$? 
+  \item[(b)] Define $f(x)=x^3-x$ using \note{\NOTEarrow}. 
+   Plot the graph.  You should see that Rolle's principle is
+   correct in this case.  We will now analyse this more precisely using
+   Maple (although it would be easy to do it by hand). 
+   \begin{itemize}
+    \item Ask Maple \note{\NOTEroots} to find the roots of $f(x)$. 
+    \item Ask Maple \note{\NOTEdiff,\NOTEleibniz} to find
+     $f'(x)$.  (Note that \verb~f'(x)~ is \textbf{not} valid
+     Maple syntax.) 
+    \item Ask Maple to find the roots of $f'(x)$. 
+    \item Plot $f(x)$ and $f'(x)$ together, and observe how the roots
+     of $f(x)$ alternate with the roots of $f'(x)$. 
+   \end{itemize}
+  \item[(c)] Repeat part~(b) for the function
+   $g(x)=\sin(x)+\sin(3x)/3$.  Maple will give you six roots for
+   $g(x)$, but four of them are complex numbers, so they can be
+   ignored.  It will just give three real roots for $g'(x)$.  However,
+   both $g(x)$ and $g'(x)$ are periodic, so they really have
+   infinitely many roots.  You should work out from the graph
+   where the rest of the roots lie.  (You could ask Maple to do this
+   by setting \verb~_EnvAllSolutions:=true;~, but it does not do a
+   good job: the answer comes out in a complicated and confusing
+   form.) 
+  \item[(d)] Can you explain roughly why Rolle's principle is true? 
+   (Part~(a) is relevant.) 
+  \item[(e)] Consider $h(x)=\tan(x)$.  Is Rolle's principle true in
+   this case?  How does this relate to your answer to~(d)?  
+ \end{itemize}
+\end{exercise}
+
+\begin{exercise}\label{ex-schwartzian}
+ Suppose that $y$ is a function of $x$, and we write $y'=dy/dx$ and so
+ on.  The \emph{schwartzian derivative} of $y$ is defined to be
+ \[ S(y) = y'''/y' - \frac{3}{2}(y''/y')^2. \]
+ \begin{itemize}
+  \item[(a)] Work out $S(x^n)$ by hand.  For which $n$ is $S(x^n)=0$? 
+   For which $n$ is $S(x^n)$ undefined? 
+  \item[(b)] Enter the definition into Maple:
+\begin{verbatim}
+  S := (u) -> diff(u,x,x,x)/diff(u,x) - (3/2)*(diff(u,x,x)/diff(u,x))^2;
+\end{verbatim}
+   Now use Maple to check your answer to~(a). 
+  \item[(c)] Define $y=(ax+b)/(cx+d)$ (where $a$, $b$, $c$ and $d$ are
+   constants), then ask Maple to calculate and simplify $y'$, $y''$,
+   $y'''$ and $S(y)$.  You should find that $S(y)=0$.  In fact,
+   functions of this form are the \emph{only} ones for which $S(y)=0$. 
+  \item[(d)] Now define $z=(ap^x+b)/(cp^x+d)$ (where $p$ is yet
+   another constant) and simplify $S(z)$.  You should find that $S(z)$
+   is a constant, not depending on $x$.  However, some creativity is
+   required to persuade Maple to do the right simplifications.  Here
+   is one approach that works: expand out $1/S(z)$, simplify it, and
+   then take $1$ over the result. 
+  \item[(e)] Now define 
+   \[ T(u) = (u')^{1/2} ((u')^{-1/2})''. \] Enter this
+   definition in Maple (with syntax similar to part~(b)). 
+   Choose some functions $w$ at random (eg $w=\ln(x)$, or
+   $w=\sin(x)^2$) and calculate $S(w)$ and $T(w)$.  What do
+   you notice?  Can you prove it? 
+ \end{itemize}
+\end{exercise}
+
+\begin{exercise}
+ Consider the function $y=\cos(-2\ln(x))$ (defined for $x>0$).
+ \begin{itemize}
+  \item[(a)] Plot the graph from $x=0$ to $x=0.01$, and then from
+   $x=0$ to $x=1000$.
+  \item[(b)] One of the roots of $y$ is at $x=a_0=e^{-\pi/4}$.  Let
+   $m_0$ be the gradient $dy/dx$ at $x=a_0$.  Find and simplify
+   $m_0$.  
+  \item[(c)] What is the equation of the line $L_0$ that passes
+   through $(a_0,0)$ with gradient $m_0$?  Plot this line together
+   with the graph of $y$, for $x$ from $0$ to $2a_0$.
+  \item[(c)] What are the other roots of $y$?  Repeat part~(b) for
+   several other roots.  What do you notice about the lines $L_i$?
+   Can you prove it?
+ \end{itemize}
+\end{exercise}
+
+\chapter{Differentiation 2}
+
+
+Parts of exercises~\ref{ex-polyexp-max}, \ref{ex-poly-max},
+\ref{ex-fermat-spiral}, \ref{ex-Psi}
+and~\ref{ex-diffop-jordan} will appear on the online test.
+
+\section{Maxima and minima}
+
+\begin{exercise}\label{ex-polyexp-max}
+ Plot the function $y=x^ne^{-x}$ for various values of $n$.
+ Solve $dy/dx=0$ and so find the maximum value of $y$
+ (assuming $x>0$).
+\end{exercise}
+
+\begin{exercise}\label{ex-poly-max}
+ Consider the function
+ \[ p(x) = -10x^6+156x^5-945x^4+2780x^3-4080x^2+2880x. \]
+ Plot the graph for a suitable range.  Find all the critical
+ points of $p(x)$ (where $p'(x)=0$).  Which of these are
+ inflection points (where $p''(x)=0$ as well)?  What is the
+ maximum value of $p(x)$, and for what value of $x$ does it
+ occur? 
+\end{exercise}
+
+\section{Implicit derivatives}
+
+\begin{exercise}\label{ex-fermat-spiral}
+ Put $u=x\sin(x^2+y^2)-y\cos(x^2+y^2)$.  Plot the curve
+ where $u=0$, using the \verb+implicitplot+ command
+ \note{\NOTEimplicitplot} .  Remember that you need
+ \verb~with(plots):~ to make this work
+ \note{\NOTEwithplots}.  A reasonable range is to let $x$
+ and $y$ run from $-5$ to $5$, and you should ask Maple to
+ plot extra points \note{\NOTEgrid} to get a decent picture.
+ The curve is called a \emph{Fermat spiral}.
+
+ Now find the slope of the curve using the
+ \verb+implicitdiff+ command \note{\NOTEimplicitdiff}, and
+ call the answer \verb+slope1+.  Maple will give the answer
+ in a form involving $\sin(x^2+y^2)$ and $\cos(x^2+y^2)$.
+ Can you use the relation $u=0$ to rewrite \verb+slope1+ in
+ a form that does not involve $\sin$ or $\cos$?
+
+ We next claim that the curve can also be described
+ parametrically by $(x,y)=(t\cos(t^2),t\sin(t^2))$.  In
+ checking this, we will use the symbol \verb~xt~ for ``$x$
+ in terms of $t$'', and thus enter
+\begin{verbatim}
+  xt := t*cos(t^2);  yt := t*sin(t^2);
+\end{verbatim}
+ Use the \verb~subs~ command \note{\NOTEsubs} to substitute
+ \verb~xt~ for \verb~x~ and \verb~yt~ for \verb~y~ in $u$,
+ and simplify the result.  You should get zero, indicating
+ that the point $(t\cos(t^2),t\sin(t^2))$ really does lie on
+ the curve $u=0$.  (It is not very hard to do this by hand
+ as well.)  You can also enter \verb~plot([xt,yt,t=-5..5]);~
+ and see that you get the same picture as before. 
+
+ Now calculate $dx/dt$ and $dy/dt$, and so get a formula for
+ $dy/dx$ in terms of $t$.  Call this one \verb~slope2~.  Use
+ the \verb~subs~ command to rewrite \verb~slope1~ in terms
+ of $t$ (rather than $x$ and $y$), simplify the result, and
+ check that it is the same as \verb~slope2~. 
+\end{exercise}
+
+\begin{exercise}\label{ex-trefoil}
+ Consider the curve with equation $u=0$, where
+ \[ u = (x^2+y^2)^2 + 85(x^2+y^2) - 500 + 18x(3y^2-x^2). \]
+ It turns out that this can also be given parametrically by 
+ \[ (x,y) =
+     (6\cos(t) + 8\cos(t)^2 - 4, 2\sin(t)(3-4\cos(t))). 
+ \]
+ Analyse this situation just as in the previous question:
+ plot the graph in two different ways, find the slope in two
+ different ways, and check that they are really the same. 
+\end{exercise}
+
+\section{Higher derivatives}
+
+\begin{exercise}\label{ex-Psi}
+ Enter the following definition into Maple
+ \note{\NOTEseriesdef,\NOTEmultidiff}:
+ \[ r(n) =
+    \frac{d^n}{dx^n}\left(\frac{x^n\ln(x)}{n!}\right). 
+ \]
+ Find $r(n)$ for a reasonable range of numbers $n$, using
+ the \verb~seq(...)~ command \note{\NOTEseq}.  Then
+ experiment to find a formula for $r(n)-r(n-1)$.  Finally,
+ deduce a formula for $r(n)$, of the form
+ \[ r(n) = \text{something} +
+            \sum_{k=1}^{n}\text{(something)}. 
+ \]
+\end{exercise}
+
+\begin{exercise}\label{ex-diffop-jordan}
+ Put $y=t^2e^t$.  Simplify the expression 
+ \[ z = y''' + a y'' + b y' + c y, \]
+ where $a$, $b$ and $c$ are constants.  Hence find $a$, $b$
+ and $c$ such that $y$ satisfies the differential equation 
+ \[ y''' + a y'' + by' + c y = 0 \]
+ for all $t$. 
+\end{exercise}
+
+\begin{exercise}\label{ex-hermite}
+ Put $p(n)=e^{x^2}\frac{d^n}{dx^n}(e^{-x^2})$.  Enter this
+ definition in Maple \note{\NOTEseriesdef,\NOTEmultidiff}, and then
+ calculate $p(n)$ for $n$ from  $1$ to $10$.  (It is best to
+ define $p(n)$ to be \verb~sort(expand(exp(x^2) * ...))~, to
+ get the  answer in a convenient form.  To print
+ $p(1),\ldots,p(10)$ on separate lines, enter
+ \verb~seq(print(p(n)),n=1..10)~ rather than just
+ \verb~seq(p(n),n=1..10)~.)  
+ 
+ Write down as many things as you can about the general form
+ of $p(n)$, distinguishing between the case where $n$ is
+ even and the case where $n$ is odd.  Using these, predict
+ as much as you can about $p(12)$, and then
+ check your predictions. 
+ 
+ In doing this question, you should see the numbers $2$,
+ $4$, $8$, $16$, $32$, $64$ and so on, which you should
+ recognise as powers of $2$.  You will also see the numbers
+ $2$, $12$, $120$, $1680$, $30240$, which are much less
+ likely to be familiar.  To see what they are, enter the
+ sequence in the search box at
+ \verb+http://www.research.att.com/~njas/sequences/+.  (The
+ response is long and complicated, but the formula that you
+ need appears in the first few lines.) 
+
+ It turns out that $p(n)$ is closely related to the Hermite
+ polynomials, which Maple calls \verb~HermiteH(n,x)~.  Enter 
+ \verb~q:=(n)->simplify(HermiteH(n,x));~, then work out
+ $q(n)$ for various values of $n$, then write down the
+ precise relationship between $p(n)$ and $q(n)$.  
+\end{exercise}
+
+\chapter{Integration 1}
+
+\section*{Setup}
+
+Visit \verb~http://www.shef.ac.uk/nps/MAS100~ and click with your
+\textbf{right} mouse button on the link marked \verb~ratint.mws~.
+Then select \verb~Save Target As..~, save the worksheet somewhere,
+start up Maple separately, and then open the worksheet using the File
+menu.  When the worksheet has started up, click the button on the
+Maple toolbar marked with a triple exclamation mark (!!!).  This will
+execute all the commands in the worksheet, which does two things:
+\begin{itemize}
+ \item[(a)] It defines a command called \verb~ratint()~.
+  This works in essentially the same way as the usual
+  integration command \verb~int()~, but it gives the answer
+  in a form which is slightly better for the questions on
+  this sheet.
+ \item[(b)] It defines a number of rational functions
+  $g_1(x),g_2(x),\dotsc$ (which you should enter as
+  \verb~g[1](x)~, \verb~g[2](x)~ and so on).  These can be
+  used as examples later (when the question says ``for
+  various rational functions \ldots'').
+\end{itemize}
+If you use \verb~restart~ in doing this problem sheet, you
+will lose the definition of \verb~ratint()~ and the
+functions $g_i(x)$.  It is better to use \verb~unassign~
+instead.  Remember that the syntax is like
+\verb~unassign('a','b')~, with single quote marks.
+
+\section*{Questions}
+
+Your task is to answer the following questions, using a
+mixture of mathematical thinking and experimental
+calculations with Maple.  When calculating integrals, use
+\verb~ratint(...,x);~ instead of \verb~int(...,x);~.
+
+\begin{exercise}
+ When $x$ is large, the graph of
+ $y=\displaystyle\int\left(\frac{x^3+1}{x^2+1}\right)^3\,dx$
+ looks like $y=cx^n$ for some constant $c$ and integer $n$.
+ Find $c$ and $n$.
+\end{exercise}
+
+\begin{exercise}
+ Let $a$, $b$, $c$ and $d$ be nonzero constants.  The graph
+ of $\displaystyle y=\int\frac{ax^2+b}{cx^2+d}\,dx$ looks
+ like a straight line for large $x$.  What is the slope of
+ the line?
+\end{exercise}
+
+\begin{exercise}
+ Are the following true or false?
+ \begin{itemize}
+  \item[(a)] Integrals of rational functions sometimes
+   involve terms like $a\ln(x^2+ux+v)$, where $a$, $u$ and
+   $v$ are constants.
+  \item[(b)] Integrals of rational functions sometimes
+   involve terms like $x\ln(x+u)$, where $u$ is constant.
+  \item[(c)] Integrals of rational functions sometimes
+   involve terms like $a\ln(x+u)^2$, where $a$ and $u$ are
+   constants. 
+ \end{itemize}
+\end{exercise}
+
+\begin{exercise}
+ For various different values of $b$ and $c$ (which may be
+ positive, negative or zero), do the following:
+ \begin{itemize}
+  \item[(i)] Plot $y=x^2+bx+c$.
+  \item[(ii)] Calculate $b^2-4c$.
+  \item[(iii)] Find $\displaystyle\int\frac{dx}{x^2+bx+c}$,
+   and observe whether it involves the functions $\arctan$
+   or $\ln$. 
+ \end{itemize}
+ What is the relationship between~(i), (ii) and (iii)?
+\end{exercise}
+
+\begin{exercise}
+ For various rational functions $g(x)$, do the following:
+ \begin{itemize}
+  \item[(i)] Find $\int g(x)\,dx$, and look for any terms
+   like $\ln(|x-u|)$ (but ignore terms like $\ln(x^2+px+q)$).
+  \item[(ii)] Plot $g(x)$ together with $\int g(x)\,dx$.
+   (You will generally need to specify the vertical range in
+   order to get a useful picture.)
+ \end{itemize}
+ How are the numbers in~(i) related to the pictures in~(ii)?  
+\end{exercise}
+
+\begin{exercise}
+ For various rational functions $g(x)$, do the following:
+ \begin{itemize}
+  \item[(i)] Enter \verb~d:=denom(factor(g(x)));~ to find
+   the denominator of $g(x)$ (in other words, the term on
+   the bottom when $g(x)$ is written as a single fraction).
+  \item[(ii)] Plot $d$.
+  \item[(iii)] Find $\int g(x)\,dx$, and look for terms like
+   $a/(x-u)$ or $a/(x-u)^n$. 
+ \end{itemize}
+ How are the numbers $u$ and $n$ in~(iii) related to the
+ answers to~(i) and~(ii)?
+ 
+ Now enter \verb~r:=randpoly(x)/randpoly(x);~ to generate a
+ random rational function, and then \verb~ratint(r,x);~ to
+ integrate it.  Now go back in the worksheet to the line
+ \verb~r:=randpoly(x)/randpoly(x);~ and press ENTER twice,
+ to generate and integrate a new example.  Repeat this many
+ times.  You should see that you only get $\ln()$ and
+ $\arctan()$ terms, together with multiples of $x^n$ for
+ some small values of $n$.  Can you see why terms like
+ $a/(x-u)$ hardly ever occur?
+\end{exercise}
+
+
+\chapter{Integration 2}
+
+
+This sheet deliberately gives very little help with Maple syntax, and
+the same will be true for the remaining sheets.  As you will see from
+the past papers on the course website, you will need a fairly detailed
+knowledge of the syntax for the exam.
+
+\begin{exercise}\label{ex-legendre}
+ Enter the following definitions:
+ \[
+  p_0 = \sqrt{\tfrac{1}{2}}            \hspace{2em}
+  p_1 = \sqrt{\tfrac{3}{2}} x          \hspace{2em}
+  p_2 = \sqrt{\tfrac{5}{8}}(3x^2 - 1)  \hspace{2em}
+  p_3 = \sqrt{\tfrac{7}{8}}(5x^3 - 3x)
+ \]
+ (Remember that $p_2$ should be entered as
+ \verb~p[2]~, and so on.)  Find
+ $\int_{-1}^1p_ip_j\,dx$ for various $i$ and $j$
+ (including the case $i=j$).  What pattern do you observe?
+ There is a function $p_4$ of the form $ax^4+bx^2+c$
+ (with $a>0$) that makes the pattern continue.  What are
+ $a$, $b$ and $c$?  (The first step is to define
+ $p_4=ax^4+bx^2+c$, leaving $a$, $b$ and $c$ as
+ variables.  Then calculate $\int_{-1}^1p_2p_4\, dx$
+ and so on, giving answers that depend on $a$, $b$ and $c$.
+ This should give you some equations relating $a$, $b$ and
+ $c$, which you should solve.  If you use the \verb~solve~
+ command, you may find it helps to set
+ \verb~_EnvExplicit:=true~ first.)
+
+ Now enter the definition
+ \[ q(n) =
+     \frac{\sqrt{n+1/2}}{2^n\,(n!)}
+      \frac{d^n}{dx^n}\left((x^2-1)^n\right).
+ \]
+ Check that $q(n)=p_n$ for $n=1,\ldots,4$.
+\end{exercise}
+
+\begin{exercise}
+ For various positive integers $n$ and $m$, calculate and
+ factorise the integral $\int x^n\ln(x)^m\,dx$.  What terms
+ appear in the answer?  How does this depend on $n$ and $m$?
+ Write down your conclusions as a self-contained statement
+ that would make sense to someone who had not read the
+ question. 
+\end{exercise}
+
+\begin{exercise}
+ You should be aware that there are many integrals for which
+ the answer simply cannot be written in terms of familiar
+ functions.  In same cases, Maple will write the answer in
+ terms of more obscure functions instead.  For example, try
+ the following:
+ \[ \text{\bf (a)} \int e^{-x^2}\,dx \hspace{2em}
+    \text{\bf (b)} \int \frac{dx}{\ln(x)} \hspace{2em}
+    \text{\bf (c)} \int \frac{dx}{\sqrt{1-x^2}\sqrt{1-2x^2}} \hspace{2em}
+    \text{\bf (d)} \int (x^8+1)^{-1/2}\,dx
+ \]
+ In some other cases, Maple will just give up.  For example,
+ try the following:
+ \[ \text{\bf (e)} \int \sin(x)\ln(\ln(x))\,dx \hspace{2em}
+    \text{\bf (f)} \int \sin(\sin(\sin(x)))\,dx \hspace{2em}
+    \text{\bf (g)} \int \frac{dx}{\sqrt{1+x+x^{10}}}
+ \]
+ What is the simplest function that you can find that makes
+ Maple give up?  (There is one that you can enter with just
+ three characters.)
+\end{exercise}
+
+\begin{exercise}
+ Consider the function
+ \[ y = \sin(x) + \tfrac{1}{3}\sin(3x) +
+        \tfrac{1}{5}\sin(5x) + \tfrac{1}{7}\sin(7x).
+ \]
+ Plot $y$ and $\int y\,dx$.  Describe and explain the
+ relationship between the shapes of these two graphs.
+\end{exercise}
+
+\begin{exercise}
+ Put $y=x\,e^{-x}\sin(20x)$ and $z=20 \int y\,dx$.  Plot $y$ and
+ $z$ for various ranges of $x$.  Describe in detail, and
+ explain, the relationship between the two graphs.  Then
+ plot $y^2+z^2$.  This is very close to a function with a
+ much simpler formula; work out what it is.
+\end{exercise}
+
+\begin{exercise}
+ Find $a$, $b$ and $c$ such that
+ $\int_0^\infty x^k(ax^2+bx+c)e^{-x}\,dx=k$ for $k=1,2$ and $3$.
+\end{exercise}
+
+\begin{center}
+ {\huge Maple syntax revision}
+\end{center}
+
+\begin{exercise}
+ Find an approximate solution to
+ $x(\ln(\ln(x))+\ln(x)-1)=541$ close to $x=100$. 
+\end{exercise}
+
+\begin{exercise}
+ What would you enter to generate the sequence
+ $a+b^2,a+b^3,a+b^4,\dotsc,a+b^{10}$? 
+\end{exercise}
+
+% \begin{exercise}
+%  Find the Taylor series of $\ln(\ln(x))$ around $x=e$, to
+%  order $4$.  (If your answer involves $\ln(e)$ then you have
+%  made a syntactic mistake, because $\ln(e)=1$ and Maple
+%  should know this.  Remember that $e$ cannot simply be
+%  entered as \verb~e~.)
+% \end{exercise}
+
+\begin{exercise}
+ Plot the curve $x^4+y^4=1$ together with the curve given
+ parametrically by $x=\cos(t)/(2+\cos(4t))$ and
+ $y=\sin(t)/(2+\cos(4t))$. 
+\end{exercise}
+
+\begin{exercise}
+ Find $\pi^{76}/e^{87}$ to 100 decimal places.
+\end{exercise}
+
+\begin{exercise}
+ Simplify the expression
+ $\displaystyle \sin(2x)\tan(2x)\frac{d^2}{dx^2}\log(\tan(x))$.
+\end{exercise}
+
+
+\chapter{Integration 3}
+
+Please refer to the ``Notes on Maple syntax'' as you do
+these questions.  If you do not have a paper copy with you,
+then visit
+\verb~http://www.shef.ac.uk/nps/MAS100/notes/primer.pdf~. 
+%Make sure you have a paper copy to consult when revising
+%over the Christmas break.
+
+\begin{exercise}
+ Enter the definitions $x_1=\sin(\theta)\sin(\phi)$,
+ $x_2=\sin(\theta)\cos(\phi)$, and $x_3=\cos(\theta)$.
+ Simplify $x_1^2+x_2^2+x_3^2$.
+\end{exercise}
+
+\begin{exercise}
+ Enter the definition
+ \[ u = 8 - (x-y)^2 (x+y)^2 (16 - 4x^2 - y^4). \]
+ Substitute $x=2\cos(t)$ and $y=2\sin(t)$ in $u$ and
+ simplify the result.  Try both the \verb~simplify()~
+ command and the \verb~combine()~ command.
+\end{exercise}
+
+\begin{exercise}
+ Solve the equations
+ \begin{align*}
+  ax+by+cz &= 1 \\
+  ay+bz+cx &= 1 \\
+  az+bx+cy &= 1
+ \end{align*}
+ to find $x$, $y$ and $z$ in terms of $a$, $b$ and $c$.
+\end{exercise}
+
+\begin{exercise}
+ Find an approximate solution of $x^4+\sin(x)=10^4$ close
+ to $x=10$.  Arrange your syntax so that Maple gives you an
+ equation, not just a number.
+\end{exercise}
+
+\begin{exercise}
+ Enter the definition $f(x)=(e^x+x^7)/(e^x-x^7)$.  Find
+ a numerical approximation to $f(5)$.  Then find numerical
+ approximations for the whole sequence
+ $f(0),f(1),\dotsc,f(50)$. 
+\end{exercise}
+
+\begin{exercise}
+ Plot the curve $x^4+y^4=4$, together with the curve given
+ by $x=(2+\sin(8t))\cos(t)$ and $y=(2+\sin(8t))\sin(t)$ (for
+ $0\leq t\leq 2\pi$).
+\end{exercise}
+
+\begin{exercise}
+ Plot $y=\tan(\pi x)$, $y=\cot(\pi x)$, $y=-1$ and $y=1$ on
+ the same graph, for $x$ from $-4$ to $4$.  Tell Maple to
+ restrict the vertical range from $-2$ to $2$, to use the
+ same scale on the two axes, and to skip over
+ discontinuities.
+\end{exercise}
+
+\begin{exercise}
+ Enter the definitions
+ \begin{align*}
+  f(t) &= \frac{(2+\sqrt{3})t-1}{2+\sqrt{3}+t} \\
+  g(t) &= f(f(f(t))) \\
+  h(t) &= g(g(t)).
+ \end{align*}
+ Simplify $g(t)$ and $h(t)$.
+\end{exercise}
+
+\begin{exercise}
+ Find and simplify $\displaystyle
+ \left(\frac{1}{y}\frac{d^8y}{dx^8}\right)^{1/8}$, where
+ $y=\sin(10x)$. 
+\end{exercise}
+
+% \begin{exercise}
+%  Find the Taylor series of $a\sin(x)+b\sin(2x)+c\sin(3x)$
+%  about $x=0$, to order $7$.  Convert the result to an
+%  ordinary polynomial, with no $O(x^7)$ term.  Now find $a$,
+%  $b$ and $c$ such that
+%  $a\sin(x)+b\sin(2x)+c\sin(3x)=30x+O(x^7)$.
+% \end{exercise}
+
+\begin{exercise}
+ Plot the curves $y=n^{3/2}x^n(1-x)^2$ for $n=1,\dotsc,10$ on the same
+ graph, with $x$ running from $0$ to $1$.  Ideally you should use the
+ \verb~seq()~ command, otherwise you will have to do a lot of typing.
+\end{exercise}
+
+\begin{exercise}
+ Put $\displaystyle y=\frac{x^4(1-x)^4}{1+x^2}$.  Find the
+ indefinite integral $\int y\,dx$, the definite integral
+ $\int_0^1 y\,dx$ and the derivative $dy/dx$.  Plot the
+ graph of $y$ from $x=0$ to $x=1$; you should see a single
+ hump.  Find numerical approximations to the position and
+ height of the hump.
+\end{exercise}
+
+\begin{exercise}
+ Define $a(n)$ to be the approximate numerical value of
+ $(1+1/n)^n/e$.  Find the sequence
+ $a(1),a(2),\dotsc,a(100)$.  What is the first $n$ for which
+ $a(n)>0.99$? 
+\end{exercise}
+
+\chapter{Taylor series}
+
+\section{Taylor series}\label{sec-taylor}
+
+\begin{exercise}\label{ex-ln}
+ We will study the Taylor series at $x=0$ of the function 
+ \[ y = \ln\left(\sqrt{\frac{1+x}{1-x}}\right).  \]
+ This has the form $y=\sum_{k=0}^\infty a_kx^k$, where $a_k$
+ is $1/k!$ times the value of $d^ky/dx^k$ at $x=0$.  You
+ should start by entering the definition of $y$.
+ \begin{itemize}
+  \item[(a)] Find \note{\NOTEmultidiff} and simplify
+   $d^5y/dx^5$.  Then put $x=0$ using the \verb~subs~
+   command \note{\NOTEsubs}, and divide by $5!$ to get $a_5$.
+  \item[(b)] Find $a_1$, $a_2$, $a_3$ and $a_4$ in the
+   same way.
+  \item[(c)] To do this more efficiently, enter 
+\begin{verbatim}
+ a := (n) -> subs(x=0,diff(y,x$n))/n!;
+\end{verbatim}
+   then use the \verb~seq~ command \note{\NOTEseq} to
+   calculate $a(1),\dotsc,a(5)$ in one go.  (This syntax does not
+   work properly when $n=0$, but it is easy to see that
+   $a_0=0$ anyway.)
+  \item[(d)] Now enter \verb~add(a(k)*x^k,k=1..12);~ to get
+   the $13$'th order Taylor series for $y$ at $x=0$.  Then do the
+   same thing more easily using the \verb~series~ command
+   \note{\NOTEtaylor}. 
+  \item[(e)] Guess the complete Taylor series for $y$ at $x=0$.
+ \end{itemize}
+\end{exercise}
+
+\begin{exercise}\label{ex-sin}
+ \begin{itemize}
+  \item[(a)] Find the $12$th order Taylor series for
+   $\sin(x)$ at $x=0$, using the \verb~series~ command
+   \note{\NOTEtaylor}.  Convert the answer to an ordinary
+   polynomial as in \note{\NOTEtaylorconv}. Call the result $s$. 
+  \item[(b)] Plot $s$ and $\sin(x)$ together
+   \note{\NOTEtwoplots} for $x$ from
+   $-8$ to $8$, with the vertical range also restricted
+   \note{\NOTEvertrange}  from $-10$ to $10$.  You should see that
+   the two graphs are very close together for $x$ between
+   $-5$ and $5$, but that they diverge very rapidly outside
+   that range. 
+  \item[(c)] Now define $t(n)$ to be the $n$'th order Taylor
+   series for the function $\sin(x)$ at $x=0$.  (Use syntax like 
+   \verb~t:=(n)->convert(series(...)...)~).  Plot $t(n)$ and
+   $\sin(x)$ together (with the same ranges as in~(b)) for
+   various $n$.  As you make $n$ bigger, the two graphs will
+   get closer together.  How big must $n$ be for the two
+   graphs to look identical?  What then happens if you
+   expand the horizontal range to run from $-10$ to $10$? 
+  \item[(d)] To plot $\sin(x)$ together with
+   $t(2),t(6),t(10),t(14),\ldots,t(42)$, enter
+\begin{verbatim}
+   plot([sin(x),seq(t(4*n+2),n=0..10)],x=0..20,-2..10);
+\end{verbatim}
+   Now modify this to get a good picture of
+   $t(4),t(8),\ldots,t(44)$.  Why do we not bother with
+   $t(n)$ for odd $n$? 
+  \item[(e)] Now define $r(n)$ to be the $n$'th order Taylor
+   series for $\cos(x)$ at $x=0$.  Expand out
+   $t(10)^2+r(10)^2$, and call the result $q$.  What should
+   this be equal to, approximately?  How could you check this? 
+ \end{itemize}
+\end{exercise}
+
+\begin{exercise}\label{ex-rat}
+ Find the Taylor series for $y=\frac{x(1+x)}{(1-x)^3}$ at
+ $x=0$, to some reasonably high order.  You should be able
+ to guess from this that
+ \[ y = \sum_{k=1}^\infty \text{(something)} x^k. \]
+ You can ask Maple to confirm this by entering
+\begin{verbatim}
+  sum((something) * x^k,k=1..infinity);
+\end{verbatim}
+ You should see that Maple's answer is the same as $y$
+ (rearranged slightly). 
+\end{exercise}
+
+\begin{exercise}\label{ex-sin-shift}
+ Enter \verb~series(sin(x),x=Pi/2,12)~ to find the 12th
+ order Taylor series of $\sin(x)$ around $x=\pi/2$.  How
+ is this related to the 12th order Taylor series of
+ $\cos(x)$ around $x=0$?  Why? 
+\end{exercise}
+
+\section{Maple syntax revision}
+
+The questions in this section all cover things you have done
+before, but this time there are no hints about the syntax. 
+Look at the notes on Maple
+(\verb~http://www.shef.ac.uk/nps/MAS100/notes/primer.pdf~)
+and/or the earlier lab sheets if there are things that you
+do not remember. 
+
+\begin{exercise}
+ Find $\cos(\ln(\pi+20))$ to $20$ decimal places. 
+\end{exercise}
+
+\begin{exercise}
+ Enter the definition $f(x)=x^2-29/16$.  Ask Maple to work
+ out $f(0)$.  If it just gives you ``$f(0)$'' back, then you
+ used the wrong syntax to define $f$; read Section~10 of the
+ Maple notes.  What is $f(f(f(-1/4)))$? 
+\end{exercise}
+
+\begin{exercise}
+ Using the various commands for manipulating
+ algebraic expressions, find out the relationship between
+ \[ a = (1+x)^5-3(1+x)^4+5(1+x)^3-3(1+x)^2+3(1+x)+3. \]
+ and
+ \[ b = (7x^2-6x-x^8)/(x-1)^2. \]
+\end{exercise}
+
+\begin{exercise}
+ Find the coefficient of $x^6$ in the expression
+ \[
+  \left(\frac{(x^{12}-1)(x^2-1)}{(x^6-1)(x^4-1)}\right)^{10}. 
+ \]
+ (You will need to simplify the expression first.) 
+\end{exercise}
+
+\begin{exercise}
+ The equations
+ \begin{align*}
+  x^2+y^2+z^2 &= 9 \\
+  (x-1)^2 + (y-1)^2 + (z-1)^2 &= 2 \\
+  4x^2+yz &= 2x(y+z) 
+ \end{align*}
+ have only one solution in which $x$, $y$ and $z$ are all
+ integers.  What is that solution? 
+\end{exercise}
+
+\begin{exercise}
+ Find all the (infinitely many) solutions to the equation
+ $\sin(\theta)^2=3\cos(\theta)^2$. 
+\end{exercise}
+
+\begin{exercise}
+ Find the solution to the equations $x^2-y^2=2xy=1$ for
+ which $x$ and $y$ are real numbers and $x>0$.  Your answer
+ should not involve the word \verb~RootOf~. 
+\end{exercise}
+
+\begin{exercise}
+ Find an approximate solution to $x=\log(x+20)$ close to
+ $x=3$.  
+\end{exercise}
+
+\chapter{Revision} 
+
+\section{Miscellaneous problems}
+
+\begin{exercise}
+ Plot the curve given by $x=\cos(t)/2-\cos(2t)/4$ and
+ $y=\sin(t)/2-\sin(2t)/4$, together with the circle of radius $1/4$
+ centred at $(-1,0)$, and two circles of radius $0.0945$ centred at
+ the points $(-0.1225,\pm 0.7449)$.  Display all these in the same
+ picture with the same scale in both directions, and with no axes.
+ (This is a basic outline of the Mandelbrot set.  Google will find you
+ much prettier pictures.)
+\end{exercise}
+
+\begin{exercise}
+ Plot all the curves $|x|^n+|y|^n=n^{n/2}$ in the same picture for
+ $n=1,\dotsc,9$.  Use the \verb~seq()~ command to avoid excessive
+ typing, make sure that you use a range that includes all nine curves,
+ and add an option to make Maple draw a more accurate picture.
+\end{exercise}
+
+\begin{exercise}
+ Use the \verb~listplot~ command to plot the values $50^n/n!$ for $n$
+ from $1$ to $100$.  Mark these values as separate points, not
+ connected by lines.
+\end{exercise}
+
+\begin{exercise}
+ There is a certain function $\zt(z)$ defined for complex numbers $z$,
+ called the Riemann zeta function.  It features in the most famous
+ open problem in all of pure mathematics, called the Riemann
+ Hypothesis: is it true that whenever $s$ and $t$ are positive real
+ numbers with $\zt(s+it)=0$, we have $s=1/2$?  There is a great deal
+ of evidence for this but no proof.  If true, it will have important
+ consequences for the distribution of prime numbers (and perhaps
+ therefore for cryptography).
+
+ \begin{itemize}
+  \item[(a)] Enter \verb~with(MTM)~ to load the definition of
+   $\zt(z)$.
+  \item[(b)] Enter \verb~f:=(t)->Re(zeta(1/2+I*t))~, to
+   define $f(t)$ to be the real part of $\zt(1/2+it)$.  Define $g(t)$ to
+   be the imaginary part in the same way.
+  \item[(c)] Plot the graphs of $f(t)$ and $g(t)$ together.  Note that
+   $\zt(1/2+it)$ is zero when both graphs cross the horizontal axis in
+   the same place.  What is the smallest positive value of $t$ where
+   this happens?
+  \item[(d)] Now instead plot the curve given parametrically by
+   $x=f(t)$ and $y=g(t)$ (so $(x,y)$ corresponds to $\zt(1/2+it)$ in
+   the Argand diagram).  In this picture, zeros of the $\zt$-function
+   correspond to the places where the curve passes through the
+   origin.  You should see that there are many of them (if you use a
+   suitable range for $t$).
+  \item[(e)] Now change the $1/2$ to some other value and repeat
+   steps~(c) and~(d).  The Riemann hypothesis predicts that you should
+   not find any zeros.  Thus, the two graphs in~(c) will never crosss
+   the horizontal axis at the same time, and the curve in~(d) will
+   never pass through the origin.  Check this.
+ \end{itemize}
+\end{exercise}
+
+\begin{exercise}
+ Put $y=\exp(-1/x)$, for $x>0$.  Investigate the behaviour of $y$ and
+ the derivatives $d^ky/dx^k$, by calculating formulae and plotting
+ graphs.  
+\end{exercise}
+
+\begin{exercise}\label{ex-expand-symmetric}
+ Use Maple to expand out the expression
+ \[ (x+y+z)^3 - 3(x+y+z)(xy+yz+zx) + 3xyz. \]
+\end{exercise}
+
+\begin{exercise}\label{ex-expand-unshift}
+ Use Maple to expand out the following expressions:
+ \begin{align*}
+  & (x+1)^3 - 3(x+1)^2 + 3(x+1) - 1 \\
+  & (x+1)^4 - 4(x+1)^3 + 6(x+1)^2 - 4(x+1) + 1 \\
+  & (x+1)^5 - 5(x+1)^4 + 10(x+1)^3 - 10(x+1)^2 + 5(x+1) - 1.
+ \end{align*}
+ What is the pattern?  Can you see a simple explanation?
+\end{exercise}
+
+\begin{exercise}\label{ex-oddone}
+ Four of the following five expressions are the same; which is the odd
+ one out?  (You may assume that all variables are positive, and that no
+ divisions by zero occur, so it is valid to use
+ \verb+simplify(...,symbolic);+)
+ \[ 
+  \frac{u^{-1}+v^{-1}}{x^{-1}+y^{-1}}            \hspace{2em}
+  \frac{uxv^{-1} + x}{uxy^{-1} + u}              \hspace{2em}
+  \frac{(x-y)(u/v-v/u)}{(u-v)(x/y-y/x)}          \hspace{2em}
+  \frac{(x^2+y^2)(u/v-v/u)}{(u^2+v^2)(x/y-y/x)}  \hspace{2em}
+  \frac{u^3xy+u^2vxy}{u^3vx+u^3vy}
+ \]
+\end{exercise}
+% \begin{solution}
+%  All the expressions simplify to 
+%  \[ \frac{(v+u)xy}{uv(y+x)}, \]
+%  except for D, which simplifies to 
+%  \[ \frac{(x^2+y^2)(u^2-v^2)yx}{uv(u^2+v^2)(x^2-y^2)}. \]
+%  (To do this by hand, you should note that $u/v-v/u=(u-v)(1+u/v)$.)
+% \end{solution}
+
+\begin{exercise}\label{ex-torus}
+ Simplify the expressions $U$ and $V$, defined below:
+ \[ 
+  X = (2+\cos(a))\cos(b) \hspace{2em}
+  Y = (2+\cos(a))\sin(b) \hspace{2em}
+  Z = \sin(a)            \hspace{2em}
+  U = (X^2+Y^2+Z^2-5)/4  \hspace{2em}
+  V = X/\sqrt{X^2+Y^2}
+ \]
+\end{exercise}
+% \begin{solution}
+%  As $\cos(b)^2+\sin(b)^2=1$, we have
+%  \begin{eqnarray*}
+%    X^2 + Y^2
+%     &=& (2+\cos(a))^2\cos(b)^2 + (2+\cos(a))^2\sin(b)^2 \\
+%     &=& (2+\cos(a))^2(\cos(b)^2+\sin(b)^2) = (2+\cos(a))^2 \\
+%     &=& 4 + 4\cos(a) + \cos(a)^2.
+%  \end{eqnarray*}  
+%  It follows that 
+%  \begin{eqnarray*}
+%    X^2+Y^2+Z^2-5 
+%     &=& 4 + 4\cos(a) + \cos(a)^2 + \sin(a)^2 - 5 \\
+%     &=& 4 + 4\cos(a) + 1 - 5 = 4\cos(a),
+%  \end{eqnarray*}
+%  so $U=(X^2+Y^2+Z^2-5)/4=\cos(a)$.  Next, we have seen that
+%  $X^2+Y^2=(2+\cos(a))^2$, so $\sqrt{X^2+Y^2}=2+\cos(a)$.  Thus
+%  \[ V = \frac{X}{\sqrt{X^2+Y^2}} = 
+%      \frac{(2+\cos(a))\cos(b)}{2+\cos(a)} = \cos(b).
+%  \]
+%  (Implicitly, this uses the fact that $\cos(a)$ is always greater
+%  than or equal to $-1$, so $2+\cos(a)$ is always positive, so
+%  there is no sign ambiguity in taking the square root.)
+% \end{solution}
+
+\begin{exercise}\label{ex-stereo}
+ Put
+ \begin{eqnarray*}
+   x &=& \frac{2u}{u^2+v^2+1} \\
+   y &=& \frac{2v}{u^2+v^2+1} \\
+   z &=& \frac{u^2+v^2-1}{u^2+v^2+1} \\
+   r &=& \sqrt{x^2+y^2+z^2} \\
+   w &=& x/(1-z).
+ \end{eqnarray*}
+ Simplify $r$ and $w$.
+\end{exercise}
+% \begin{solution}
+%  It works out that $r=1$ and $w=u$.  Indeed:
+%  \begin{eqnarray*}
+%   x^2+y^2+z^2 
+%    &=&
+%    \frac{(2u)^2 + (2v)^2 + (u^2+v^2-1)^2}{(u^2+v^2+1)^2} \\
+%    &=& 
+%    \frac{4u^2+4v^2+u^4+v^4+1-2u^2-2v^2+2u^2v^2}{(u^2+v^2+1)} \\
+%    &=& 
+%    \frac{u^4+v^4+1+2u^2+2v^2+2u^2v^2}{(u^2+v^2+1)^2} \\
+%    &=& 
+%    \frac{(u^2+v^2+1)^2}{(u^2+v^2+1)^2} = 1.
+%  \end{eqnarray*}
+%  Taking square roots, we see that $r=1$.  Next:
+%  \begin{eqnarray*}
+%   1-z 
+%    &=&
+%     1 - \frac{u^2+v^2-1}{u^2+v^2+1} 
+%     = \frac{(u^2+v^2+1) - (u^2+v^2-1)}{u^2+v^2+1} \\
+%    &=& \frac{2}{u^2+v^2+1} \\
+%   \frac{1}{1-z} &=& \frac{u^2+v^2+1}{2} \\
+%   w &=& \frac{x}{1-z} = 
+%       \frac{2u}{u^2+v^2+1} \frac{u^2+v^2+1}{2} \\ 
+%    &=& u.
+%  \end{eqnarray*}
+% \end{solution}
+
+\begin{exercise}\label{ex-truefalse}
+ Which of the following are true?  (You may assume that all variables
+ are positive, and that no divisions by zero occur, so it is valid to
+ use \verb+simplify(...,symbolic);+)
+ \[ \begin{array}{rlrl}
+  \text{(A)} &
+   (x^{ab}x^{bc}x^{ca})^{1/(abc)}=x^{1/a + 1/b + 1/c} &
+  \text{(B)} &
+   \frac{(x/y)/z}{x/(y/z)}=1 \\
+  \text{(C)} & 
+   (x+1)^6-6x(x+1)^4+9x^2(x+1)^2=x^6+1 &
+  \text{(D)} &
+   \frac{2}{x^3}+\frac{2}{x^9-x^3}=\frac{1}{x^3-1}+\frac{1}{x^3+1} \\
+  \text{(E)} &
+   \text{ If } z=\frac{px+qy}{p+q}, \text{ then }
+      \frac{px+qy+rz}{p+q+r}=z. & & 
+ \end{array} \]
+\end{exercise}
+% \begin{solution}
+%  To check equation A by hand, note that
+%  \begin{eqnarray*}
+%   (x^{ab}x^{bc}x^{ca})^{\frac{1}{abc}} 
+%    &=& (x^{ab+bc+ca})^{\frac{1}{abc}} \\
+%    &=& x^{(ab+bc+ca)/(abc)} \\
+%    &=& x^{1/a + 1/b + 1/c},
+%  \end{eqnarray*}
+%  so A is true.  You can also ask Maple to simplify both sides,
+%  but you must remember to us the {\tt symbolic} option to make
+%  it deal with powers in the expected way.
+%  \par
+%  To check B, note that
+%  \[ \frac{(x/y)/z}{x/(y/z)} = 
+%     \frac{x/(yz)}{(xz)/y} = 
+%     \frac{x}{yz}  \frac{y}{xz} = \frac{xy}{xyz^2} =
+%     \frac{1}{z^2}.
+%  \]
+%  Thus, B is false.
+%  \par
+%  For C, just expand out the left hand side, by hand or using
+%  Maple, to get $x^6+2x^3+1$ (not just $x^6+1$).  Thus, C is 
+%  also false.
+%  \par
+%  Equation D is true, because both sides simplify to
+%  $2x^3/(x^6-1)$.
+%  \par
+%  For E, you should enter {\tt z:=(p*x+q*y)/(p+q);} and then 
+%  {\tt simplify((p*x+q*y+r*z)/(p+q+r)-z);} to get 0, showing
+%  that the claim is true.  To do this by hand:
+%  \begin{eqnarray*}
+%   px+qy+rz &=& px+qy+ r\frac{px+qy}{p+q} \\
+%    &=& \frac{1}{p+q}((p+q)px + (p+q)qy + rpx + rqy) \\
+%    &=& \frac{1}{p+q}(p^2x+pqx+prx + pqy+q^2y+rqy) \\
+%    &=& \frac{1}{p+q}(p+q+r)(px+qy) = (p+q+r)z.
+%  \end{eqnarray*}
+%  Dividing both sides by $p+q+r$ gives
+%  \[ \frac{px+qy+rz}{p+q+r} = z \]
+%  as claimed. 
+% \end{solution}
+
+\section{Solitons}\label{sec-solitons}
+
+In this exercise we will investigate the behaviour of some
+interesting functions called solitons, which arise in the theory of
+water waves in a shallow channel.  Put
+\begin{align*}
+  q &= \sqrt{2} &
+  p &= \log(3 + 2q) \\
+  r &= x-4t  &
+  s &= q(x-8t) \\
+  T &= 32\cosh(2r-p) + 16\cosh(2s-p) + 16 &
+  B &= 4(1+q)\cosh(r)\cosh(s) + (4q-8)\exp(r+s) \\
+  \phi_0 &= 2\cosh(r)^{-2} &
+  \phi_1 &= 4\cosh(s)^{-2} \\
+  \phi_2 &= 2\cosh(r-p)^{-2} &
+  \phi_3 &= 4\cosh(s-p)^{-2} \\
+  \phi_4 &= T/B^2.
+\end{align*}
+Note that the functions $\phi_i$ depend $x$ (position) and also $t$
+(time).  We can therefore differentiate them with respect to $x$ or
+with respect to $t$.  In this situation where there are several
+variables, it is traditional to use the notation
+$\partial\phi_i/\partial x$ and $\partial\phi_i/\partial t$ rather
+than $d\phi_i/dx$ and $d\phi_i/dt$.  These can be entered in Maple in
+the usual way, as \verb~diff(phi[i],x)~ and \verb~diff(phi[i],t)~. 
+
+Check that the functions $\phi_i$ all satisfy the Korteweg-de Vries
+equation: 
+\[ \frac{\partial\phi_i}{\partial t} + 
+   \frac{\partial^3\phi_i}{\partial x^3} + 
+   6 \phi_i \frac{\partial\phi_i}{\partial x} = 0.
+\]
+Maple will do this quite happily for $i=0,\dotsc,3$.  For $\phi_4$,
+however, you need to help by telling Maple to convert all hyperbolic
+functions to explicit exponentials at the beginning.  The easiest
+thing is to enter \verb~phi[4] := convert(phi[4],exp);~ before working
+out the derivatives.
+
+Next, do some plots to investigate the behaviour of these functions.
+One approach is to use the \verb~subs()~ command to put $t=1$ (say),
+and then plot the result for $-30\leq x\leq 30$.  You can then change
+$t$ and do the same again.  It is illuminating to plot several of the
+functions $\phi_i$ in the same graph.  
+
+You can also make a movie.  For example:
+\begin{verbatim}
+with(plots):
+animate(
+ plot,
+ [[phi[2],phi[3]+5,phi[4]+10],x=-30..30],
+ t=-3..3,
+ frames=100, scaling=constrained, axes=none
+);
+\end{verbatim}
+This makes Maple work quite hard, so it may take a minute or so.  When
+the plot appears, click on it; then some playback controls will appear
+near the top of the Maple window, which should be fairly
+self-explanatory.  Note that we have plotted $\phi_2$, $\phi_3+5$ and
+$\phi_4+10$; the $+5$ and $+10$ terms just shift the graphs of
+$\phi_3$ and $\phi_4$ upwards, so we can see them more clearly.
+
+Experiment with further movies of this type, including functions like
+$\phi_0+\phi_2$ as well as the functions $\phi_i$ themselves.  See if
+you can write a clear, self-contained summary of how the functions
+$\phi_i$ are related to each other.
+
+Next, the \emph{momentum} of $\phi_i$ is defined to be the integral
+$M_i=\int_{-\infty}^\infty \phi_i\,dx$.  As $\phi_i$ depends on $t$ as
+well as $x$, you might think that $M_i$ depends on $t$.  However, it
+turns out that the dependence on $t$ cancels out, so $M_i$ is a
+constant.  Ask Maple to calculate $M_i$ for $i=0,\dotsc,3$, and you
+will see that this is true.
+
+Maple is not clever enough to calculate $M_4$ symbolically.  However,
+it can do it numerically if we tell it to fix a particular $t$ (say
+$t=0$) and give it a hint about the best numerical method to use:
+\begin{verbatim}
+ M[4] := int(subs(t=0,phi[4]),x=-infinity..infinity,numeric,method=_Gquad);
+\end{verbatim}
+(If we leave out \verb~method=_Gquad~ then Maple will use a different
+method which gives the same answer but takes several minutes, whereas
+the method above takes only a few seconds.)  You should then check
+that $M_4=M_0+M_3$.
+
+We also define the \emph{energy} of $\phi_i$ to be the integral
+$E_i=\int_{-\infty}^\infty\phi_i^2\,dx$.  Repeat the above steps for
+the energy, giving exact answers for $E_0,\dotsc,E_3$ and an
+approximate answer for $E_4$, and check that $E_4=E_0+E_3$.
+
+
+
+\end{document}

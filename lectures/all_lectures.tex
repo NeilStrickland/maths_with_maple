@@ -1,0 +1,4185 @@
+%\def\HO{1}
+\ifx\HO\undefined
+\documentclass[9pt]{beamer}
+\usepackage{pgfpages}
+\usepackage{beamerthemesplit}
+\usetheme[headheight=0pt,footheight=0pt]{boxes}
+\else
+\documentclass[9pt,handout]{beamer}
+\usepackage{pgfpages}
+\usepackage{beamerthemesplit}
+\usetheme[headheight=0pt,footheight=0pt]{boxes}
+\pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm,landscape]
+\fi
+
+\usepackage{tikz}
+\include{lectmac}
+\title{Introduction}
+\author{}
+
+\begin{document}
+
+%\slideCaption{\color{white}}
+
+\begin{frame}[t]
+\frametitle{}
+ {\Huge
+  \vspace{6ex}
+  \begin{center}
+   Mathematics with Maple\\
+   (MAS100)
+  \end{center}
+ }
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Introduction}
+ \begin{tabular}{ll}
+  \parbox{8cm}{
+   The lecturer is Professor Neil Strickland.\\
+   {\tt N.P.Strickland@sheffield.ac.uk}
+  } &
+%  \raisebox{-2cm}{\includegraphics[scale=0.15]{photos/NPS.jpg}}
+ \end{tabular}
+ \begin{itemize}
+  \uncover<2->{
+   \item We will learn how to use Maple, a powerful software
+    package for solving mathematical problems.
+  }
+  \uncover<3->{
+   \item In the process, we will review and extend many
+    parts of A-level mathematics, from a new perspective.
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]\frametitle{Algebraic manipulation}
+\uncover<2->{\noindent{\bf Skills to learn or practice:}}
+\begin{itemize}
+ \uncover<3->{
+  \item Expand out powers and products}
+ \uncover<4->{
+  \item Factorize simple expressions by inspection}
+ \uncover<5->{
+  \item Manipulate powers (using
+   $a^na^m=a^{n+m}$, $(a^n)^m=a^{nm}$ and so on)}
+ \uncover<6->{
+  \item Manipulate and simplify algebraic fractions}
+\end{itemize}
+\uncover<7->{\noindent{\bf Maple commands:}}
+ \begin{itemize}
+  \uncover< 8->{\item {\tt expand}, {\tt factor} and {\tt combine}}
+  \uncover< 9->{\item {\tt simplify}; the {\tt symbolic} option}
+  \uncover<10->{\item {\tt collect} and {\tt coeff}}
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]\frametitle{Expansion}
+\begin{itemize}
+ \uncover<2->{
+  \item You should practice expanding out products and powers of
+   algebraic expressions. 
+ }
+ \uncover<3->{
+  \item You should check and remember the following identities:
+   {\vspace{-2ex}\begin{align*}
+    \uncover<4->{(a+b)(a-b)} & \uncover<4->{=a^2-b^2} 
+     \hphantom{mmmmm} \\
+    \uncover<5->{(a+b)^2} & \uncover<5->{=a^2+2ab+b^2} \\
+    \uncover<6->{(a-b)^2} & \uncover<6->{=a^2-2ab+b^2}.
+   \end{align*}}\vspace{-2ex}}
+ \uncover<7->{
+  \item Often you will need to use these when $a$ and $b$ are
+   themselves complicated expressions.}
+ \uncover<8->{
+  \item {\bf Example:} To simplify
+   { $(w+x+y+z)^2-(x+y+z)^2$}, \\
+   put { $a=w+x+y+z$} and { $b=x+y+z$}.  Then
+   {\begin{align*}
+    \uncover<9->{(w+x+y+z)^2-(x+y+z)^2} & 
+    \uncover<9->{=a^2-b^2}%
+\ifx\HO\undefined
+    \only<9>{\hphantom{=(a+b)(a-b)}}
+\fi%
+    \uncover<10->{=(a+b)(a-b)} 
+    \uncover<9->{\hphantom{mmmm}}\\ &
+    \uncover<11->{=(w+2x+2y+2z)w} \\ &
+    \uncover<12->{=w^2+2xw+2yw+2zw.}
+   \end{align*}}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]\frametitle{An example: Cauchy-Schwartz}
+\begin{itemize}
+ \uncover<2->{
+  \item {\bf Problem:} Check the identity
+   { \begin{eqnarray*}
+    (x^2+y^2+z^2)(u^2+v^2+w^2) &=&
+     (xu+yv+zw)^2 + \\ && (xv-yu)^2 + (yw-zv)^2 + (zu-xw)^2 \\
+     & \uncover<18->{\geq} &
+       \uncover<18->{(xu+yv+zw)^2}
+   \end{eqnarray*}} \vspace{-4ex}}
+ \uncover<3->{
+  \item \ghost \vspace{-4ex}
+   {
+     \begin{eqnarray*}
+\ifx\HO\undefined
+       \only< 3>{(x^2+y^2+z^2)(u^2+v^2+w^2)}%
+       \only< 4>{(\RED{x^2}+y^2+z^2)(\BLUE{u^2}+v^2+w^2)}%
+       \only< 5>{(\RED{x^2}+y^2+z^2)(u^2+\BLUE{v^2}+w^2)}%
+       \only< 6>{(\RED{x^2}+y^2+z^2)(u^2+v^2+\BLUE{w^2})}%
+       \only< 7>{(x^2+\RED{y^2}+z^2)(\BLUE{u^2}+v^2+w^2)}%
+       \only< 8>{(x^2+\RED{y^2}+z^2)(u^2+\BLUE{v^2}+w^2)}%
+       \only< 9>{(x^2+\RED{y^2}+z^2)(u^2+v^2+\BLUE{w^2})}%
+       \only<10>{(x^2+y^2+\RED{z^2})(\BLUE{u^2}+v^2+w^2)}%
+       \only<11>{(x^2+y^2+\RED{z^2})(u^2+\BLUE{v^2}+w^2)}%
+       \only<12>{(x^2+y^2+\RED{z^2})(u^2+v^2+\BLUE{w^2})}%
+\fi%
+      \only<13->{(x^2+y^2+z^2)(u^2+v^2+w^2)} &
+\ifx\HO\undefined
+      \only<3>{\hphantom{=}}
+\fi%
+      \only<4->{=} &
+\ifx\HO\undefined
+       \only< 4>{\RED{x^2}\BLUE{u^2} + \cdots}
+       \only< 5>{x^2u^2 + \RED{x^2}\BLUE{v^2} + \cdots}
+       \only< 6>{x^2u^2 + x^2v^2 + \RED{x^2}\BLUE{w^2} + \cdots}
+       \only< 7>{x^2u^2 + x^2v^2 + x^2w^2 +}
+       \only< 8>{x^2u^2 + x^2v^2 + x^2w^2 +}
+       \only< 9>{x^2u^2 + x^2v^2 + x^2w^2 +}
+       \only<10>{x^2u^2 + x^2v^2 + x^2w^2 +}
+       \only<11>{x^2u^2 + x^2v^2 + x^2w^2 +}
+       \only<12>{x^2u^2 + x^2v^2 + x^2w^2 +}
+       \only<13>{x^2u^2 + x^2v^2 + x^2w^2 +}
+\fi%
+      \only<14->{\OLIVEGREEN{x^2u^2} + \RAWSIENNA{x^2v^2} + \PURPLE{x^2w^2} +} \\ &&
+\ifx\HO\undefined
+       \only< 7>{\RED{y^2}\BLUE{u^2} + \cdots}
+       \only< 8>{y^2u^2 + \RED{y^2}\BLUE{v^2} + \cdots}
+       \only< 9>{y^2u^2 + y^2v^2 + \RED{y^2}\BLUE{w^2} + \cdots}
+       \only<10>{y^2u^2 + y^2v^2 + y^2w^2 +}
+       \only<11>{y^2u^2 + y^2v^2 + y^2w^2 +}
+       \only<12>{y^2u^2 + y^2v^2 + y^2w^2 +}
+       \only<13>{y^2u^2 + y^2v^2 + y^2w^2 +}
+\fi%
+      \only<14->{\PURPLE{y^2u^2} + \OLIVEGREEN{y^2v^2} + \RAWSIENNA{y^2w^2} +} \\ &&
+\ifx\HO\undefined
+       \only<10>{\RED{z^2}\BLUE{u^2} + \cdots}
+       \only<11>{z^2u^2 + \RED{z^2}\BLUE{v^2} + \cdots}
+       \only<12>{z^2u^2 + z^2v^2 + \RED{z^2}\BLUE{w^2}}
+       \only<13>{z^2u^2 + z^2v^2 + z^2w^2}
+\fi
+       \only<14->{\RAWSIENNA{z^2u^2} + \PURPLE{z^2v^2} + \OLIVEGREEN{z^2w^2}} \\ &&
+      \only<3->{\hphantom{mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm}}
+     \end{eqnarray*}}\vspace{-6ex}}
+ \uncover<14->{
+  \item \ghost \vspace{-4ex}
+   {
+    \begin{eqnarray*}
+     (xu+yv+zw)^2 &=&
+\ifx\HO\undefined
+      \only<14>{\OLIVEGREEN{x^2u^2+y^2v^2+z^2w^2}+
+                      2xyuv+2xzuw+2yzvw}%
+      \only<15>{\OLIVEGREEN{x^2u^2+y^2v^2+z^2w^2}+
+                      \RED{2xyuv}+2xzuw+2yzvw}
+      \only<16>{\OLIVEGREEN{x^2u^2+y^2v^2+z^2w^2}+
+                      \RED{2xyuv}+2xzuw+\BLUE{2yzvw}}
+\fi%
+      \only<17->{\OLIVEGREEN{x^2u^2+y^2v^2+z^2w^2}+
+                      \RED{2xyuv}+\MAGENTA{2xzuw}+\BLUE{2yzvw}} \\
+      \uncover<15->{+(xv-yu)^2} &&
+      \uncover<15->{+\RAWSIENNA{x^2v^2} - \RED{2xyuv} + \PURPLE{y^2u^2}} \\
+      \uncover<16->{+(yw-zv)^2} &&
+      \uncover<16->{+\RAWSIENNA{y^2w^2} - \BLUE{2yzvw} + \PURPLE{z^2v^2}} \\
+      \uncover<17->{+(zu-xw)^2} &&
+      \uncover<17->{+\RAWSIENNA{z^2u^2} - \MAGENTA{2xzuw} + \PURPLE{x^2w^2}}
+    \end{eqnarray*}}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]\frametitle{Factoring}
+\begin{itemize}
+ \uncover<2->{
+  \item You should practice finding simple factorizations by
+        inspection.}
+ \uncover<3->{
+  \item \ghost \vspace{-4ex}
+   {
+    \begin{align*}
+     \uncover<3->{a^2-b^2} &
+     \uncover<4->{=(a+b)(a-b)} \\
+     \uncover<5->{a^3-b^3} & 
+     \uncover<6->{=(a^2+ab+b^2)(a-b)} \\
+     \uncover<7->{ax^2+bx^2+ay^2+by^2} & 
+     \uncover<8->{=(a+b)(x^2+y^2)} \\
+     \uncover<9->{1+t+t^2+t^3} & 
+     \uncover<10->{=(1+t)(1+t^2)} \\
+     \uncover<11->{u^2-5u+6} & 
+     \uncover<12->{=(u-2)(u-3)} \\
+     & \hphantom{mmmmmmmmmmmmmmmmmmmmmmmm}
+    \end{align*}\vspace{-5ex}}
+ }
+ \uncover<13->{
+  \item Maple's {\tt factor} command will handle more
+   complicated cases.
+ }
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]\frametitle{Powers}
+\begin{itemize}
+ \uncover<2->{
+  \item You should practice using the basic rules for powers:
+   {\[\begin{array}{rlcrl}
+    \uncover<3->{a^na^m}  & \uncover<3->{=a^{n+m}} 
+     & \hspace{2em} & 
+    \uncover<4->{(a^n)^m} & \uncover<4->{=a^{nm}} \\ 
+    \uncover<5->{a^nb^n}  & \uncover<5->{=(ab)^n} &&
+    \uncover<6->{a^n/b^n} & \uncover<6->{=(a/b)^n=a^nb^{-n}} \\
+    \uncover<7->{(a+b)^n} & \uncover<7->{\RED{\neq} a^n+b^n} &&
+    \uncover<8->{(a+b)^n} &
+     \uncover<8->{=\sum_{k=0}^n \frac{n!}{k!(n-k)!} a^k b^{n-k}} \\
+    \hphantom{mmm} & \hphantom{mmmmm} &&
+    \hphantom{mmm} & \hphantom{mmmmm} 
+   \end{array}\]}\vspace{-4ex}}
+ \uncover<9->{
+  \item {\bf Warning:} the rule $(a^n)^m=a^{nm}$ has
+  exceptions, for example:
+  \[ ((-3)^4)^{\frac{1}{4}} = (81)^{\frac{1}{4}} = +3 
+      \hspace{2em} \text{but} \hspace{2em}
+     (-3)^{4\tm \frac{1}{4}} = (-3)^1 = -3. \]
+  However, the rule works whenever $a>0$ or $n$ and $m$ are
+  integers. 
+ }
+ \uncover<10->{
+  \item {\bf Example:}
+   {\begin{align*}
+    \uncover<11->{(2^{1/2}3^{1/3}4^{1/4})^3} &
+    \uncover<12->{=2^{3/2}\RED{3^{3/3}}\BLUE{4^{3/4}}} \\ &
+    \uncover<13->{=2^{3/2}\BLUE{(2^2)^{3/4}}\RED{3}} \\ &
+    \uncover<14->{=2^{3/2}\BLUE{2^{3/2}}\RED{3}} \\ &
+    \uncover<15->{=2^3 3}
+    \uncover<16->{=24} \\
+    & \hphantom{mmmmmmmmmmmmm}
+   \end{align*}}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]\frametitle{Algebraic fractions}
+\begin{itemize}
+ \uncover<2->{
+  \item You should practice manipulating fractions of the form $a/b$,
+   where $a$ and $b$ are themselves complicated algebraic expressions.
+ }
+ \uncover<3->{
+  \item The rules are as follows:
+   {\begin{align*}
+    \uncover<4->{\frac{a}{b} + \frac{c}{d}} &
+    \uncover<4->{= \frac{ad+bc}{bd}} \\
+    \uncover<5->{\frac{a}{b} - \frac{c}{d}} &
+    \uncover<5->{= \frac{ad-bc}{bd}} \\
+    \uncover<6->{\frac{a}{b} \,.\, \frac{c}{d}} &
+    \uncover<6->{= \frac{ac}{bd}} \\
+    \uncover<7->{\frac{a}{b} / \frac{c}{d}} &
+    \uncover<7->{= \frac{ad}{bc}} \\
+    \uncover<8->{\left(\frac{a}{b}\right)^n} &
+    \uncover<8->{= \frac{a^n}{b^n}} \\
+    \uncover<9->{\left(\frac{a}{b}\right)^{-n}} &
+    \uncover<9->{= \frac{b^n}{a^n}}
+  \end{align*}}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]\frametitle{An example: the cross-ratio}
+ \begin{itemize}
+ \uncover<2->{
+   \item Put $\chi(a,b,c,d)=\frac{(d-a)(c-b)}{(d-b)(c-a)}$.}
+ \uncover<3->{
+   \item {\bf Problem:} Show that 
+         $\chi(a,b,c,d)=\chi(a^{-1},b^{-1},c^{-1},d^{-1})$.}
+ \uncover<4->{
+  \item \ghost \vspace{-4ex}
+   {
+     \begin{align*}
+      \chi(\frac{1}{a},\frac{1}{b},\frac{1}{c},\frac{1}{d})
+       &= \frac{\left(\frac{1}{d}-\frac{1}{a}\right)
+                \left(\frac{1}{c}-\frac{1}{b}\right)}
+               {\left(\frac{1}{d}-\frac{1}{b}\right)
+                \left(\frac{1}{c}-\frac{1}{a}\right)}
+          \hphantom{mmmmm}  \\ &
+ \uncover<5->{
+        = \frac{\frac{a-d}{ad}\,\frac{b-c}{bc}}
+               {\frac{b-d}{bd}\,\frac{a-c}{ac}}} \\ &
+ \uncover<6->{
+        = \frac{(a-d)(b-c)/(abcd)}{(b-d)(a-c)/(abcd)}} \\ &
+ \uncover<7->{
+        = \frac{--(d-a)(c-b)}{--(d-b)(c-a)}} \\ &
+ \uncover<8->{
+        = \frac{(d-a)(c-b)}{(d-b)(c-a)}} \\&
+ \uncover<9->{
+        = \chi(a,b,c,d).}
+     \end{align*}}}
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Special functions}
+ \uncover<2->{
+  The \DEFN{primary special functions} are
+  \begin{center}
+   $\exp$, $\ln$, $\sin$, $\cos$, $\tan$,
+   $\arcsin$, $\arccos$, $\arctan$.
+  \end{center} }
+ \uncover<3->{\noindent{\bf Things you should know:}}
+ \begin{itemize}
+  \uncover<4->{
+  \item The detailed shape of the graphs}
+  \uncover<5->{
+  \item Domains, ranges and inverses}
+  \uncover<6->{
+  \item Properties such as $\sin(x+y)=\sin(x)\cos(y)+\cos(x)\sin(y)$}
+  \uncover<7->{
+  \item Derivatives and integrals (covered in later lectures).
+  }
+ \end{itemize}
+
+ \uncover<8->{
+  The \DEFN{secondary special functions} are
+  \begin{center}
+   $\sec$, $\csc$, $\cot$, $\sinh$, $\cosh$, $\tanh$, \\
+   $\sech$, $\csch$, $\coth$, $\arcsinh$, $\arccosh$, $\arctanh$.
+  \end{center}}
+ \begin{itemize}
+  \uncover<9->{
+  \item You should know how these are defined in terms of the primary
+   functions \\
+   \uncover<10->{
+    (for example, $\sinh(x)=(\exp(x)-\exp(-x))/2$, and
+    $\sec(x)=1/\cos(x)$)}}  
+  \uncover<11->{
+  \item You should either remember the properties of the secondary
+   functions, or be able to derive them from the properties of the
+   primary functions}
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{The exponential function}
+ \begin{itemize}
+  \uncover<2->{
+  \item $\PURPLE{\exp(x)}=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\frac{x^4}{4!}+\cdots$\\
+   \uncover<3->{
+    \ORANGE{\bf Warning:} infinite sums are subtle.}}
+  \uncover<4->{
+  \item $\PURPLE{e}=\exp(1)=1+1+\frac{1}{2!}+\frac{1}{3!}+\cdots
+   \simeq 2.71828.$}
+  \uncover<5->{
+  \item \[ \mbox{\begin{tikzpicture}
+      \draw(0,0) node[draw,thick,olivegreen,rectangle] {\color{black} 
+       $\begin{array}{rlcrl}
+        \exp(x+y) &= \exp(x)\exp(y) &\qquad& \exp(x-y) &=\exp(x)/\exp(y) \\
+        \exp(0)   &= 1              &      & \exp(-x)  &=1/\exp(x) \\
+        \exp(nx)  &= \exp(x)^n      &      & \exp(x)   &= e^x
+       \end{array}$};
+     \end{tikzpicture}} \] }
+  \uncover<6->{
+  \item \[ \mbox{
+     \begin{tikzpicture}[yscale=0.3]
+      \draw[->] (-2,0) -- (2,0);
+      \draw[->] (0,0) -- (0,7.5);
+      \draw[domain=-2:2.1,color=red] plot (\x,{exp(\x)});
+      \draw[color=olivegreen] (1,0) -- (1,2.72) -- (0,2.72);
+      \draw[color=olivegreen] (2,0) -- (2,7.39) -- (0,7.39);
+      \draw(-.2,1) node[anchor=east]{$1$};
+      \draw(-.2,2.72) node[anchor=east]{$e$};
+      \draw(-.2,7.39) node[anchor=east]{$e^2$};
+      \draw(-2,-.3) node[anchor=north]{$-2$};
+      \draw(-1,-.3) node[anchor=north]{$-1$};
+      \draw( 0,-.3) node[anchor=north]{$0$};
+      \draw( 1,-.3) node[anchor=north]{$1$};
+      \draw( 2,-.3) node[anchor=north]{$2$};
+     \end{tikzpicture}
+    } \]
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{The formula $\exp(x)\exp(y)=\exp(x+y)$}
+ \begin{center}
+  \begin{tikzpicture}[scale=1.3]
+\ifx\HO\undefined
+   \only<2>{
+   \draw( 0, 0) node {$1$};
+   \draw( 1, 0) node {$x$};
+   \draw( 2, 0) node {$\frac{x^2}{2!}$};
+   \draw( 3, 0) node {$\frac{x^3}{3!}$};
+   \draw( 4, 0) node {$\frac{x^4}{4!}$};
+   \draw( 0,-1) node {$y$};
+   \draw( 1,-1) node {$xy$};
+   \draw( 2,-1) node {$\frac{x^2}{2!}y$};
+   \draw( 3,-1) node {$\frac{x^3}{3!}y$};
+   \draw( 4,-1) node {$\frac{x^4}{4!}y$};
+   \draw( 0,-2) node {$\frac{y^2}{2!}$};
+   \draw( 1,-2) node {$x\frac{y^2}{2!}$};
+   \draw( 2,-2) node {$\frac{x^2}{2!}\frac{y^2}{2!}$};
+   \draw( 3,-2) node {$\frac{x^3}{3!}\frac{y^2}{2!}$};
+   \draw( 4,-2) node {$\frac{x^4}{4!}\frac{y^2}{2!}$};
+   \draw( 0,-3) node {$\frac{y^3}{3!}$};
+   \draw( 1,-3) node {$x\frac{y^3}{3!}$};
+   \draw( 2,-3) node {$\frac{x^2}{2!}\frac{y^3}{3!}$};
+   \draw( 3,-3) node {$\frac{x^3}{3!}\frac{y^3}{3!}$};
+   \draw( 4,-3) node {$\frac{x^4}{4!}\frac{y^3}{3!}$};
+   \draw( 0,-4) node {$\frac{y^4}{4!}$};
+   \draw( 1,-4) node {$x\frac{y^4}{4!}$};
+   \draw( 2,-4) node {$\frac{x^2}{2!}\frac{y^4}{4!}$};
+   \draw( 3,-4) node {$\frac{x^3}{3!}\frac{y^4}{4!}$};
+   \draw( 4,-4) node {$\frac{x^4}{4!}\frac{y^4}{4!}$};
+  }
+\fi%
+  \uncover<3->{
+   \draw( 0, 0) node {$1$};
+   \draw( 1, 0) node {$x$};
+   \draw( 2, 0) node {$\frac{x^2}{2!}$};
+   \draw( 3, 0) node {$\frac{x^3}{3!}$};
+   \draw( 4, 0) node {$\frac{x^4}{4!}$};
+   \draw( 0,-1) node {$y$};
+   \draw( 1,-1) node {$\frac{2xy}{2!}$};
+   \draw( 2,-1) node {$\frac{3x^2y}{3!}$};
+   \draw( 3,-1) node {$\frac{4x^3y}{4!}$};
+   \draw( 4,-1) node {$\frac{5x^4y}{5!}$};
+   \draw( 0,-2) node {$\frac{y^2}{2!}$};
+   \draw( 1,-2) node {$\frac{3xy^2}{3!}$};
+   \draw( 2,-2) node {$\frac{6x^2y^2}{4!}$};
+   \draw( 3,-2) node {$\frac{10x^3y^2}{5!}$};
+   \draw( 4,-2) node {$\frac{15x^4y^2}{6!}$};
+   \draw( 0,-3) node {$\frac{y^3}{3!}$};
+   \draw( 1,-3) node {$\frac{4xy^3}{4!}$};
+   \draw( 2,-3) node {$\frac{10x^2y^3}{5!}$};
+   \draw( 3,-3) node {$\frac{20x^3y^3}{6!}$};
+   \draw( 4,-3) node {$\frac{35x^4y^3}{7!}$};
+   \draw( 0,-4) node {$\frac{y^4}{4!}$};
+   \draw( 1,-4) node {$\frac{5xy^4}{5!}$};
+   \draw( 2,-4) node {$\frac{15x^2y^4}{6!}$};
+   \draw( 3,-4) node {$\frac{35x^3y^4}{7!}$};
+   \draw( 4,-4) node {$\frac{70x^4y^4}{8!}$};
+  }
+  \uncover<4->{
+   \draw[dotted,blue] (-0.5,-1) -- (1.5,1);
+   \draw[dotted,blue] (-0.5,-2) -- (2.5,1);
+   \draw[dotted,blue] (-0.5,-3) -- (3.5,1);
+   \draw[dotted,blue] (-0.5,-4) -- (4.5,1);
+   \draw[dotted,blue] (-0.5,-5) -- (5.5,1);
+  }
+ 
+  \end{tikzpicture}
+ \end{center}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{The logarithm}
+ \begin{itemize}
+  \uncover<2->{
+  \item The natural log function $\ln(y)$ is the inverse of the
+   exponential.  }
+  \uncover<3->{
+  \item $\ln(y)$ is defined only when $y>0$ (unless we use complex
+   numbers).}
+  \uncover<4->{
+  \item We have $\ln(\exp(x))=\ln(e^x)=x$ for all $x$, and
+   $\exp(\ln(y))=e^{\ln(y)}=y$ when $y>0$ 
+   \uncover<5->{(\EMPH{\underline{NOT}} $\ln(x)=1/\exp(x)$)}.}
+  \uncover<6->{
+  \item \[ \mbox{\begin{tikzpicture}
+      \draw(0,0) node[draw,thick,olivegreen,rectangle] {\color{black} 
+       $\begin{array}{rlcrl}
+        \ln(xy) &= \ln(x)+\ln(y) &\qquad& \ln(x/y) &= \ln(x)-\ln(y) \\
+        \ln(1)  &= 0               &      & \ln(1/y) &= -\ln(y) \\
+        \ln(y^n)&= n\ln(y)        &      & \ln(e)   &= 1.
+       \end{array}$};
+     \end{tikzpicture}} \]}
+  \uncover<7->{
+  \item \[ \mbox{
+     \begin{tikzpicture}[xscale=0.3]
+      \draw[->] (0,0) -- (7.5,0);
+      \draw[->] (0,-2) -- (0,2);
+      \draw[domain=-2:2.1,color=red] plot ({exp(\x)},\x);
+      \draw[color=olivegreen] (0,1) -- (2.72,1) -- (2.72,0);
+      \draw[color=olivegreen] (0,2) -- (7.39,2) -- (7.39,0);
+      \draw(1,-.2)    node[anchor=north]{$1$};
+      \draw(2.72,-.2) node[anchor=north]{$e$};
+      \draw(7.39,-.2) node[anchor=north]{$e^2$};
+      \draw(-.3,-2)   node[anchor=east]{$-2$};
+      \draw(-.3,-1)   node[anchor=east]{$-1$};
+      \draw(-.3, 0)   node[anchor=east]{$0$};
+      \draw(-.3, 1)   node[anchor=east]{$1$};
+      \draw(-.3, 2)   node[anchor=east]{$2$};
+      \draw(5,1)      node {$\ln(x)$};
+     \end{tikzpicture}
+    } \]}
+ \end{itemize} 
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Logs to other bases}
+ \begin{itemize}
+  \uncover<2->{
+  \item $\PURPLE{\log_a(y)}$ is the number $t$ such that $y=a^t$
+   (defined for $a,y>0$).
+  }
+  \uncover<3->{
+  \item \ghost \vspace{-4ex}
+   {\begin{align*}
+     \log_{10}(1000) &= \log_{10}(10^3) = 3 \\
+     \log_2(1024) &= \log_2(2^{10}) = 10 \\
+     \log_{1024}(2) &= \log_{1024}(1024^{1/10}) = 1/10 \\
+     \log_3(1/9) &= \log_3(3^{-2}) = -2
+    \end{align*}}
+  } \vspace{-4ex} 
+  \uncover<4->{
+  \item $\log_a(y)=\ln(y)/\ln(a)$
+  }
+  \uncover<5->{
+  \item {\ORANGE{Check:}}
+   $a^{\ln(y)/\ln(a)}=(e^{\ln(a)})^{\ln(y)/\ln(a)}=e^{\ln(y)}=y$.
+  }
+  \uncover<6->{
+  \item $\log_{10}(y) = \text{the number $t$ such that $10^t=y$}$ \\
+   \hspace{4em} $\simeq$ the number of digits in $y$ left of the decimal point.}
+  \uncover<7->{
+  \item This is mostly of historical importance.
+  }
+  \uncover<8->{
+  \item $\log_{2}(y) = \text{the number $t$ such that $2^t=y$}$ \\
+   \hspace{4em} $\simeq$ the number of bits in $y$.}
+  \uncover<9->{
+  \item This is of some use in computer science and information
+   theory. 
+  }
+  \uncover<10->{
+  \item $\log_e(y)=\text{(the number $t$ such that $e^t=y$)}=\ln(y)=\log(y)$.
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Hyperbolic functions}
+ \begin{itemize}
+  \uncover<2->{
+  \item The hyperbolic functions are defined as follows:
+   {\[\begin{array}{rlcrlcrl}
+      \uncover<3->{\PURPLE{\sinh(x)}} &
+      \uncover<3->{=\frac{e^x - e^{-x}}{2}} &\quad&
+      \uncover<5->{\PURPLE{\tanh(x)}} &
+      \uncover<5->{=\frac{\sinh(x)}{\cosh(x)}} &\quad&
+      \uncover<8->{\PURPLE{\csch(x)}} &
+      \uncover<8->{=\frac{1}{\sinh(x)}} \\
+      \uncover<4->{\PURPLE{\cosh(x)}} &
+      \uncover<4->{=\frac{e^x + e^{-x}}{2}} &&
+      \uncover<6->{\PURPLE{\coth(x)}} &
+      \uncover<6->{=\frac{\cosh(x)}{\sinh(x)}} &&
+      \uncover<7->{\PURPLE{\sech(x)}} &
+      \uncover<7->{=\frac{1}{\cosh(x)}}
+     \end{array} \]}
+   \uncover<9->{
+    Use {\tt convert(...,exp)} in Maple to rewrite in terms
+    of exponentials.
+   }
+  }
+  \uncover<10->{
+  \item Properties are easily deduced from those of $\exp$.
+  }
+  \uncover<11->{
+  \item These are related to trig functions using complex numbers, eg
+   $\sin(x)=\sinh(ix)/i$, where $i=\sqrt{-1}$.
+  }
+  \uncover<12->{
+  \item \[ \mbox{ 
+     \begin{tikzpicture}[yscale=0.5]
+      \draw[->] (-2.2,0) -- (2.4,0);
+      \draw[->] (0,-4.2) -- (0,4.4);
+      \draw[dotted] (-2.3,+1) -- (2.3,+1);
+      \draw[dotted] (-2.3,-1) -- (2.3,-1);
+      \draw[domain=-2:2.1,color=red]        plot(\x,{(exp(\x)-exp(-\x))/2});
+      \draw[domain=-2:2.1,color=olivegreen] plot(\x,{(exp(\x)+exp(-\x))/2});
+      \draw[domain=-2:2.1,color=blue]       plot(\x,{(exp(\x)-exp(-\x))/(exp(\x)+exp(-\x))});
+      \draw( 1.9,1.77) node {\RED{$\scriptstyle\sinh(x)$}};
+      \draw(-1.0,2.36) node {\OLIVEGREEN{$\scriptstyle\cosh(x)$}};
+      \draw( 1.5,0.54) node {\BLUE{$\scriptstyle\tanh(x)$}};
+     \end{tikzpicture}}\]
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Hyperbolic identities}
+ \begin{itemize}
+  \uncover<2->{
+  \item \ghost \vspace{-5ex}
+   { \begin{align*}
+     \uncover<2->{\cosh(x)^2 - \sinh(x)^2} &
+     \uncover<2->{= 1 \hphantom{mmmmmmmmmmmmmmmmmmmmmmmmm}}\\
+     \uncover<3->{\sech(x)^2 + \tanh(x)^2} &
+     \uncover<3->{= 1 }\\
+     \uncover<4->{\sinh(x+y)} &
+     \uncover<4->{= \sinh(x)\cosh(y) + \cosh(x)\sinh(y) }\\
+     \uncover<5->{\cosh(x+y)} &
+     \uncover<5->{= \cosh(x)\cosh(y) + \sinh(x)\sinh(y) }
+    \end{align*}} \vspace{-4ex}}
+  \uncover<6->{
+  \item To check these, put $u=e^x$, so $\sinh(x)=\frac{u-u^{-1}}{2}$ and
+   $\cosh(x)=\frac{u+u^{-1}}{2}$. 
+  }
+  \uncover<7->{
+  \item \ghost \vspace{-2ex}
+   { \begin{align*}
+     \uncover<7->{ \cosh(x)^2 - \sinh(x)^2} &
+     \uncover<8->{= \frac{(u+u^{-1})^2}{4} - \frac{(u-u^{-1})^2}{4}
+      \hphantom{mmmmmmm}} \\&
+     \uncover<9->{= \frac{(\RED{u^2}+2+\OLIVEGREEN{u^{-2}}) -
+       (\RED{u^2}-2+\OLIVEGREEN{u^{-2}})}{4}} \\ &
+     \uncover<10->{= (2-(-2))/4 = 1.}
+    \end{align*}}} \vspace{-4ex}
+  \uncover<11->{
+  \item Now put $v=e^y$, so $uv=e^{x+y}$.
+  }
+  \uncover<12->{
+  \item { $\sinh(x)\cosh(y)+\cosh(x)\sinh(y)
+    \uncover<13->{=
+     \frac{(u-u^{-1})}{2}\frac{(v+v^{-1})}{2} +
+     \frac{(u+u^{-1})}{2}\frac{(v-v^{-1})}{2}}$}
+   \uncover<14->{   
+    \begin{align*}
+     &\uncover<14->{=
+      \frac{( \OLIVEGREEN{uv}+\RED{uv^{-1}}
+       -\ORANGE{u^{-1}v}-\PURPLE{u^{-1}v^{-1}}
+       +\OLIVEGREEN{uv}-\RED{uv^{-1}}
+       +\ORANGE{u^{-1}v}-\PURPLE{u^{-1}v^{-1}})}{4}} \\&
+     \uncover<15->{= 
+      \frac{\OLIVEGREEN{uv}-\PURPLE{(uv)^{-1}}}{2}
+     }
+     \uncover<16->{=\frac{e^{x+y}-e^{-x-y}}{2}}
+     \uncover<17->{=\sinh(x+y)}
+    \end{align*}}}
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Inverse hyperbolic functions}
+ \begin{itemize}
+  \uncover<2->{
+  \item \parbox[t]{6cm}{
+    The graph of $y=\sinh(x)$ crosses each horizontal line precisely
+    once, which means that there is an inverse function 
+    $x=\sinh^{-1}(y)=\arcsinh(y)$, defined for all $y\in\R$.
+   } \hspace{4em} 
+   \parbox[t]{1cm}{
+\ifx\HO\undefined
+    \only<2>{\begin{tikzpicture}[xscale=0.6,yscale=0.3]
+      \pgfsetbaseline{1.1cm}
+      \draw[->] (-2.2,0) -- (2.4,0);
+      \draw[->] (0,-4.2) -- (0,4.4);
+      \draw[dotted] (-2,-4) -- (2,-4);
+      \draw[dotted] (-2,-3) -- (2,-3);
+      \draw[dotted] (-2,-2) -- (2,-2);
+      \draw[dotted] (-2,-1) -- (2,-1);
+      \draw[dotted] (-2, 0) -- (2, 0);
+      \draw[dotted] (-2, 1) -- (2, 1);
+      \draw[dotted] (-2, 2) -- (2, 2);
+      \draw[dotted] (-2, 3) -- (2, 3);
+      \draw[dotted] (-2, 4) -- (2, 4);
+      \draw[domain=-2:2,color=red] (0,0) plot(\x,{(exp(\x)-exp(-\x))/2});
+     \end{tikzpicture}}%
+\fi%
+    \mode<beamer>{\only<3->{
+      \begin{tikzpicture}[xscale=0.6,yscale=0.3]
+       \pgfsetbaseline{1.1cm}
+       \draw[->] (-2.2,0) -- (2.4,0);
+       \draw[->] (0,-4.2) -- (0,4.4);
+       \draw[color=blue] (0, 3) -- (1.82, 3) -- (1.82,0);
+       \draw[fill=black] (1.82,0) circle(0.05);
+       \draw[fill=black] (0,3) circle(0.05);
+       \draw[domain=-2:2,color=red] (0,0) plot(\x,{(exp(\x)-exp(-\x))/2});
+       \draw(2,-0.5) node {$\scriptstyle x=\operatorname{arcsinh}(y)$};
+       \draw(-1,3)     node {$\scriptstyle\sinh(x)=y$};
+      \end{tikzpicture}}}
+   }}
+  \uncover<4->{
+  \item This can be written in terms of $\ln$: \qquad
+   $\arcsinh(y) = \ln(y + \sqrt{1+y^2}).$
+  }
+  \uncover<5->{
+  \item {}\ORANGE{\bf Check:} Suppose $y=\sinh(x)$; we must show that
+   $x=\ln(y+\sqrt{1+y^2})$.  
+   \begin{itemize}
+    \uncover<6->{
+    \item We have $1+y^2=1+\sinh(x)^2=\cosh(x)^2$ (and $\cosh(x),1+y^2>0$),
+     so $\sqrt{1+y^2}=\cosh(x)$.}
+    \uncover<7->{
+    \item Thus $y + \sqrt{1+y^2} = \sinh(x) + \cosh(x) =
+     \frac{e^x-e^{-x}}{2} + \frac{e^x+e^{-x}}{2} = e^x$}
+    \uncover<8->{
+    \item so $\ln(y+\sqrt{1+y^2})=\ln(e^x)=x$ as required.}
+   \end{itemize}
+  }
+  \uncover<9->{
+  \item Similarly, $\arccosh(y)=\ln(y+\sqrt{y^2-1})$, defined for
+   $y\geq 1$
+  }
+  \uncover<10->{
+  \item and $\arctanh(y)=\frac{1}{2}\ln\left(\frac{1+y}{1-y}\right)$,
+   defined when $-1<y<1$.
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Graphs}
+ \vspace{2ex}
+ \[ \begin{array}{ccc}
+   \begin{tikzpicture}[xscale=0.6,yscale=0.3]
+    \draw[->] (-2.2,0) -- (2.4,0);
+    \draw[->] (0,-4.2) -- (0,4.4);
+    \draw[domain=-2:2.1,color=red]        plot(\x,{(exp(\x)-exp(-\x))/2});
+   \end{tikzpicture} &
+   \begin{tikzpicture}[xscale=0.6,yscale=0.3]
+    \draw[->] (-2.2,0) -- (2.4,0);
+    \draw[->] (0,-4.2) -- (0,4.4);
+    \draw[dotted] (-2.2,0) -- (0,0);
+    \draw[dotted] (0,-4.2) -- (0,0);
+    \draw[domain=-2.1:0,style=dotted] plot(\x,{(exp(\x)+exp(-\x))/2});
+    \draw[domain=0:2.1,color=red] plot(\x,{(exp(\x)+exp(-\x))/2});
+   \end{tikzpicture} &
+   \begin{tikzpicture}[xscale=0.6,yscale=0.3]
+    \draw[->] (-2.2,0) -- (2.4,0);
+    \draw[->] (0,-1) -- (0,1);
+    \draw[dotted](0,-4.2) -- (0,4.2);
+    \draw[domain=-2:2.1,color=red]%
+    plot(\x,{(exp(\x)-exp(-\x))/(exp(\x)+exp(-\x))});
+   \end{tikzpicture} \\
+   \sinh(x) & \cosh(x) & \tanh(x) \\
+   && \\
+   \begin{tikzpicture}[xscale=0.3,yscale=0.6]
+    \draw[->] (0,-2.2) -- (0,2.4);
+    \draw[->] (-4.2,0) -- (4.4,0);
+    \draw[domain=-2:2.1,color=red]        plot({(exp(\x)-exp(-\x))/2},\x);
+   \end{tikzpicture} &
+   \begin{tikzpicture}[xscale=0.3,yscale=0.6]
+    \draw[->] (0,-2.2) -- (0,2.4);
+    \draw[->] (-4.2,0) -- (4.4,0);
+    \draw[dotted] (0,-2.2) -- (0,0);
+    \draw[dotted] (-4.2,0) -- (0,0);
+    \draw[domain=-2.1:0,style=dotted] plot({(exp(\x)+exp(-\x))/2},\x);
+    \draw[domain=0:2.1,color=red] plot({(exp(\x)+exp(-\x))/2},\x);
+   \end{tikzpicture} &
+   \begin{tikzpicture}[xscale=0.3,yscale=0.6]
+    \draw[->] (0,-2.2) -- (0,2.4);
+    \draw[->] (-1,0) -- (1,0);
+    \draw[dotted](-4.2,0) -- (4.2,0);
+    \draw[domain=-2:2.1,color=red]%
+    plot({(exp(\x)-exp(-\x))/(exp(\x)+exp(-\x))},\x);
+   \end{tikzpicture} \\
+   \arcsinh(x) & \arccosh(x) & \arctanh(x) \\
+  \end{array} \]
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Trigonometric functions}
+ \begin{itemize}
+  \uncover<2->{ 
+  \item Let $P$ be one unit away from the origin, at an angle of
+   $\tht$ measured anticlockwise from the point $A=(1,0)$. 
+   \begin{center}
+    \begin{tikzpicture}[scale=2]
+     \draw[->] (-1.2,0) -- (1.2,0);
+     \draw[->] (0,-0.2) -- (0,1.2);
+     \fill[black] (1.00,0.00) circle(0.02);
+     \fill[black] (0.50,0.87) circle(0.02);
+     \draw[red] (1,0) arc (0:180:1); 
+     \draw[red] (0.2,0) arc (0:60:0.2); 
+     \draw[blue] (0,0) -- (0.50,0.87);
+     \draw[magenta] (-0.3,.87) -- (0.5,.87) -- (0.5,-.3);
+     \draw[<->] (-0.15,0) -- (-0.15,0.87);
+     \draw[<->] (0,-0.15) -- (0.5,-0.15);
+     \draw (.25,-.2) node[anchor=north] {$\scriptstyle\cos(\theta)$};
+     \draw (-.2,.43) node[anchor=east] {$\scriptstyle\sin(\theta)$};
+     \draw (.55,.91) node[anchor=west] {$\scriptstyle P=(\cos(\theta),\sin(\theta))$};
+     \draw (1.05,-.05) node[anchor=north] {$\scriptstyle A=(1,0)$};
+     \draw (.26,.15) node {$\scriptstyle\theta$};
+    \end{tikzpicture}
+   \end{center}}
+  \uncover<3->{
+  \item (We measure $\tht$ in radians, so the length of the arc $AP$
+   is $\tht$.)
+  }
+  \uncover<4->{
+  \item The numbers \PURPLE{$\cos(\tht)$} and \PURPLE{$\sin(\tht)$}
+   are \EMPH{defined} to be the $x$ and $y$ coordinates of $P$.
+  }
+  \uncover<5->{
+  \item We also put 
+   {\vspace{-3ex} \[\begin{array}{rlcrl}
+      \uncover<5->{\PURPLE{\tan(x)}} &
+      \uncover<5->{=\frac{\sin(x)}{\cos(x)}} &\quad&
+      \uncover<6->{\PURPLE{\csc(x)}} &
+      \uncover<6->{=\frac{1}{\sin(x)}} \\
+      \uncover<7->{\PURPLE{\cot(x)}} &
+      \uncover<7->{=\frac{\cos(x)}{\sin(x)}} &&
+      \uncover<8->{\PURPLE{\sec(x)}} &
+      \uncover<8->{=\frac{1}{\cos(x)}}
+     \end{array} \]}
+  }
+ \end{itemize}
+\end{frame}
+
+\mode<beamer>{
+ \begin{frame}[t]
+  \frametitle{Graphs}
+  \vspace{-3ex}
+  \begin{center}
+   \begin{tikzpicture}
+    \draw[->] (-2,0) -- (2.2,0);
+    \draw[->] (0,-1.1) -- (0,1.1);
+    \draw[domain=-2:2.1,samples=100,color=red] plot(\x,{sin(360 * \x)});
+    \draw( -2,-.3) node {$\scriptstyle -4\pi$};
+    \draw( -1,-.3) node {$\scriptstyle -2\pi$} ;
+    \draw(0.5,-.3) node {$\scriptstyle \pi$};
+    \draw(  1,-.3) node {$\scriptstyle 2\pi$};
+    \draw(1.5,-.3) node {$\scriptstyle 3\pi$};
+    \draw(  2,-.3) node {$\scriptstyle 4\pi$};
+    \draw(1.5,1.1) node {$\scriptstyle \sin(\theta)$};
+   \end{tikzpicture} 
+   \hfill
+   \begin{tikzpicture}
+    \draw[->] (-2,0) -- (2.2,0);
+    \draw[->] (0,-1.1) -- (0,1.1);
+    \draw[domain=-2:2.1,samples=100,color=red] plot(\x,{cos(360 * \x)});
+    \draw( -2,-.3) node {$\scriptstyle -4\pi$};
+    \draw( -1,-.3) node {$\scriptstyle -2\pi$} ;
+    \draw(0.5,-.3) node {$\scriptstyle \pi$};
+    \draw(  1,-.3) node {$\scriptstyle 2\pi$};
+    \draw(1.5,-.3) node {$\scriptstyle 3\pi$};
+    \draw(  2,-.3) node {$\scriptstyle 4\pi$};
+    \draw(1.5,1.1) node {$\scriptstyle \cos(\theta)$};
+   \end{tikzpicture} 
+   \\[4ex]
+   \begin{tikzpicture}[yscale=0.5]
+    \draw[->] (-2,0) -- (2.2,0);
+    \draw[->] (0,-4.1) -- (0,4.3);
+    \draw[domain=-2.00:-1.58,samples=100,color=red]
+    plot(\x,{sin(180 * \x)/cos(180 * \x)});
+    \draw[domain=-1.42:-0.58,samples=100,color=red]
+    plot(\x,{sin(180 * \x)/cos(180 * \x)});
+    \draw[domain=-0.42: 0.42,samples=100,color=red]
+    plot(\x,{sin(180 * \x)/cos(180 * \x)});
+    \draw[domain= 0.58: 1.42,samples=100,color=red]
+    plot(\x,{sin(180 * \x)/cos(180 * \x)});
+    \draw[dotted,olivegreen] (-1.5,-4) -- (-1.5,4);
+    \draw[dotted,olivegreen] (-0.5,-4) -- (-0.5,4);
+    \draw[dotted,olivegreen] ( 0.5,-4) -- ( 0.5,4);
+    \draw[dotted,olivegreen] ( 1.5,-4) -- ( 1.5,4);
+    \draw( -2,-1) node {$\scriptstyle -2\pi$};
+    \draw( -1,-1) node {$\scriptstyle -\pi$} ;
+    \draw(0.5,-1) node {$\scriptstyle \frac{\pi}{2}$};
+    \draw(  1,-1) node {$\scriptstyle \pi$};
+    \draw(1.5,-1) node {$\scriptstyle \frac{3\pi}{2}$};
+    \draw(  2,-1) node {$\scriptstyle 2\pi$};
+    \draw(1.5,4.5) node {$\scriptstyle \tan(\theta)$};
+   \end{tikzpicture}
+   \hfill
+   \begin{tikzpicture}[yscale=0.5]
+    \draw[->] (-2,0) -- (2.2,0);
+    \draw[->] (0,-4.1) -- (0,4.3);
+    \draw[domain=-1.92:-1.08,samples=100,color=red] plot(\x,{cos(180 * \x)/sin(180 * \x)});
+    \draw[domain=-0.92:-0.08,samples=100,color=red] plot(\x,{cos(180 * \x)/sin(180 * \x)});
+    \draw[domain= 0.08: 0.92,samples=100,color=red] plot(\x,{cos(180 * \x)/sin(180 * \x)});
+    \draw[domain= 1.08: 1.92,samples=100,color=red] plot(\x,{cos(180 * \x)/sin(180 * \x)});
+    \draw[dotted,olivegreen] (-2.0,-4) -- (-2.0,4);
+    \draw[dotted,olivegreen] (-1.0,-4) -- (-1.0,4);
+    \draw[dotted,olivegreen] ( 0.0,-4) -- ( 0.0,4);
+    \draw[dotted,olivegreen] ( 1.0,-4) -- ( 1.0,4);
+    \draw[dotted,olivegreen] ( 2.0,-4) -- ( 2.0,4);
+    \draw( -2,-1) node {$\scriptstyle -2\pi$};
+    \draw( -1,-1) node {$\scriptstyle -\pi$} ;
+    \draw(0.5,-1) node {$\scriptstyle \frac{\pi}{2}$};
+    \draw(  1,-1) node {$\scriptstyle \pi$};
+    \draw(1.5,-1) node {$\scriptstyle \frac{3\pi}{2}$};
+    \draw(  2,-1) node {$\scriptstyle 2\pi$};
+    \draw(1.5,4.5) node {$\scriptstyle \cot(\theta)$};
+   \end{tikzpicture}
+  \end{center}
+ \end{frame}}
+
+\begin{frame}[t]
+ \frametitle{Graphs}
+ \vspace{-3ex}
+ \begin{center}
+  \begin{tikzpicture}
+   \draw[->] (-2,0) -- (2.2,0);
+   \draw[->] (0,-1.1) -- (0,1.1);
+   \draw[domain=-2:2.1,samples=100,color=red] plot(\x,{sin(360 * \x)});
+   \draw( -2,-.3) node {$\scriptstyle -4\pi$};
+   \draw( -1,-.3) node {$\scriptstyle -2\pi$} ;
+   \draw(0.5,-.3) node {$\scriptstyle \pi$};
+   \draw(  1,-.3) node {$\scriptstyle 2\pi$};
+   \draw(1.5,-.3) node {$\scriptstyle 3\pi$};
+   \draw(  2,-.3) node {$\scriptstyle 4\pi$};
+   \draw(1.5,1.1) node {$\scriptstyle \sin(\theta)$};
+  \end{tikzpicture} 
+  \hfill
+  \begin{tikzpicture}
+   \draw[->] (-2,0) -- (2.2,0);
+   \draw[->] (0,-1.1) -- (0,1.1);
+   \draw[domain=-2:2.1,samples=100,color=red] plot(\x,{cos(360 * \x)});
+   \draw( -2,-.3) node {$\scriptstyle -4\pi$};
+   \draw( -1,-.3) node {$\scriptstyle -2\pi$} ;
+   \draw(0.5,-.3) node {$\scriptstyle \pi$};
+   \draw(  1,-.3) node {$\scriptstyle 2\pi$};
+   \draw(1.5,-.3) node {$\scriptstyle 3\pi$};
+   \draw(  2,-.3) node {$\scriptstyle 4\pi$};
+   \draw(1.5,1.1) node {$\scriptstyle \cos(\theta)$};
+  \end{tikzpicture} 
+  \\[2ex]
+  \begin{tikzpicture}[yscale=0.35]
+   \draw[->] (-2,0) -- (2.2,0);
+   \draw[->] (0,-4.1) -- (0,4.3);
+   \draw[domain=-2.00:-1.58,samples=100,color=red]
+   plot(\x,{sin(180 * \x)/cos(180 * \x)});
+   \draw[domain=-1.42:-0.58,samples=100,color=red]
+   plot(\x,{sin(180 * \x)/cos(180 * \x)});
+   \draw[domain=-0.42: 0.42,samples=100,color=red]
+   plot(\x,{sin(180 * \x)/cos(180 * \x)});
+   \draw[domain= 0.58: 1.42,samples=100,color=red]
+   plot(\x,{sin(180 * \x)/cos(180 * \x)});
+   \draw[dotted,olivegreen] (-1.5,-4) -- (-1.5,4);
+   \draw[dotted,olivegreen] (-0.5,-4) -- (-0.5,4);
+   \draw[dotted,olivegreen] ( 0.5,-4) -- ( 0.5,4);
+   \draw[dotted,olivegreen] ( 1.5,-4) -- ( 1.5,4);
+   \draw( -2,-1) node {$\scriptstyle -2\pi$};
+   \draw( -1,-1) node {$\scriptstyle -\pi$} ;
+   \draw(0.5,-1) node {$\scriptstyle \frac{\pi}{2}$};
+   \draw(  1,-1) node {$\scriptstyle \pi$};
+   \draw(1.5,-1) node {$\scriptstyle \frac{3\pi}{2}$};
+   \draw(  2,-1) node {$\scriptstyle 2\pi$};
+   \draw(1.5,4.5) node {$\scriptstyle \tan(\theta)$};
+  \end{tikzpicture}
+  \hfill
+  \begin{tikzpicture}[yscale=0.35]
+   \draw[->] (-2,0) -- (2.2,0);
+   \draw[->] (0,-4.1) -- (0,4.3);
+   \draw[domain=-1.92:-1.08,samples=100,color=red] plot(\x,{cos(180 * \x)/sin(180 * \x)});
+   \draw[domain=-0.92:-0.08,samples=100,color=red] plot(\x,{cos(180 * \x)/sin(180 * \x)});
+   \draw[domain= 0.08: 0.92,samples=100,color=red] plot(\x,{cos(180 * \x)/sin(180 * \x)});
+   \draw[domain= 1.08: 1.92,samples=100,color=red] plot(\x,{cos(180 * \x)/sin(180 * \x)});
+   \draw[dotted,olivegreen] (-2.0,-4) -- (-2.0,4);
+   \draw[dotted,olivegreen] (-1.0,-4) -- (-1.0,4);
+   \draw[dotted,olivegreen] ( 0.0,-4) -- ( 0.0,4);
+   \draw[dotted,olivegreen] ( 1.0,-4) -- ( 1.0,4);
+   \draw[dotted,olivegreen] ( 2.0,-4) -- ( 2.0,4);
+   \draw( -2,-1) node {$\scriptstyle -2\pi$};
+   \draw( -1,-1) node {$\scriptstyle -\pi$} ;
+   \draw(0.5,-1) node {$\scriptstyle \frac{\pi}{2}$};
+   \draw(  1,-1) node {$\scriptstyle \pi$};
+   \draw(1.5,-1) node {$\scriptstyle \frac{3\pi}{2}$};
+   \draw(  2,-1) node {$\scriptstyle 2\pi$};
+   \draw(1.5,4.5) node {$\scriptstyle \cot(\theta)$};
+  \end{tikzpicture}
+ \end{center}
+ \begin{center}
+  \begin{tikzpicture}
+   \draw(0,0) node[draw,thick,olivegreen,rectangle] {\color{black} 
+    $\begin{array}{rllrl}
+     \sin(\pi/2+x) &= \cos(x)  &\hspace{4em}& \cos(\pi/2+x) &= -\sin(x) \\
+     \sin(\pi+x)   &= -\sin(x) &            & \cos(\pi+x)   &= -\cos(x) \\
+     \sin(2\pi+x)  &= \sin(x)  &            & \cos(2\pi+x)  &= \cos(x) \\
+     \sin(-x)      &= -\sin(x) &            & \cos(-x)      &= \cos(x).
+    \end{array}$};
+  \end{tikzpicture}
+ \end{center}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Preview of complex numbers}
+ \begin{itemize}
+  \uncover<2->{\item Complex numbers are expressions like $z=3+4i$, where $i$ satisfies
+   $i^2=-1$.}\uncover<3->{\item You can add and subtract complex numbers in an obvious way, for
+   example $(3+4i)+(7-3i)=10+i$.}\uncover<4->{\item To multiply:
+   expand out and use $i^2=-1$.
+   For example: \\
+   $\displaystyle (1+2i)(3+4i)
+   \uncover<5->{= 3 + 4i + 6i + 8i^2}
+   \uncover<6->{= 3 + 4i + 6i - 8}
+   \uncover<7->{= -5 + 10i.}
+   $}
+  \uncover<8->{\item Note that the powers of $i$ repeat with period $4$: 
+   {\tiny \[ 
+     \uncover<9->{i^0 = 1  \hspace{2em}}
+     \uncover<10->{i^1 = i  \hspace{2em}}
+     \uncover<11->{i^2 = -1 \hspace{2em}}
+     \uncover<12->{i^3 = -i \hspace{2em}}
+     \uncover<13->{i^4 = 1  \hspace{2em}}
+     \uncover<14->{i^5 = i  \hspace{2em}}
+     \uncover<15->{i^6 = -1 \hspace{2em}}
+     \uncover<16->{i^7 = -i \hspace{2em}}
+     \uncover<17->{i^8 = 1.}
+    \]}}\uncover<18->{\item By expanding and using this we find powers of any
+   complex number.
+   \begin{align*}
+    (1+i)^2 &= 1+2i+i^2 = 1+ 2i + (-1) = 2i \\
+    (1+i)^8 &= ((1+i)^2)^4 = 2^4i^4 = 2^4 = 16
+   \end{align*}}\uncover<19->{\item Note that 
+   {\small\begin{align*}
+     \exp(ix) =& 1 + ix + \frac{(ix)^2}{2} + \frac{(ix)^3}{6} +
+     \frac{(ix)^4}{24} + \frac{(ix)^5}{120} + \dotsb \\
+     \uncover<20->{=}& 
+     \uncover<20->{1 + ix - \frac{x^2}{2} - i\frac{x^3}{6} +
+      \frac{x^4}{24} + i\frac{x^5}{120} + \dotsb} \\
+     \uncover<21->{=}& 
+     \uncover<21->{\left(1-\frac{x^2}{2}+\frac{x^4}{24}+\dotsb\right) +
+      \left(x-\frac{x^3}{6}+\frac{x^5}{120}+\dotsb\right)i} \\
+     \uncover<22->{=}& \uncover<22->{\cos(x) + \sin(x)i.}
+    \end{align*}}}
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{De Moivre's theorem}
+ \uncover<2->{
+  \vspace{-3ex}
+  \[ \mbox{\begin{tikzpicture}
+     \draw(0,0) node[draw,thick,olivegreen,rectangle] {\color{black} 
+      $e^{i\tht} = \exp(i\tht) = \cos(\tht) + \sin(\tht)i$};
+    \end{tikzpicture}} \] }
+ \uncover<3->{
+  \vspace{-3ex}
+  \begin{align*}
+   \uncover<3->{e^{-i\tht} = \exp(-i\tht)} &
+   \uncover<3->{= \cos(\tht) - \sin(\tht)i} \\
+   \uncover<4->{\sin(\tht)} &
+\ifx\HO\undefined
+   \only<4>{=\frac{e^{i\tht}-e^{-i\tht}}{2i}
+    \hphantom{=\sinh(i\tht)/i}}
+\fi
+   \only<5->{=\frac{e^{i\tht}-e^{-i\tht}}{2i}=\sinh(i\tht)/i} \\ 
+   \uncover<6->{\cos(\tht)} &
+\ifx\HO\undefined
+   \only<6>{=\frac{e^{i\tht}+e^{-i\tht}}{2}
+    \hphantom{=\cosh(\tht)}} 
+\fi
+   \only<7->{=\frac{e^{i\tht}+e^{-i\tht}}{2}=\cosh(i\tht)} \\ 
+   \uncover<8->{\tan(\tht)} &
+   \uncover<8->{=\frac{\sin(\tht)}{\cos(\tht)}}
+   \uncover<9->{=\frac{\sinh(i\tht)/i}{\cosh(i\tht)}}
+   \uncover<10->{=\tanh(i\tht)/i.}
+  \end{align*}
+ }
+ \uncover<11->{
+  \[ \mbox{\begin{tikzpicture}
+     \draw(0,0) node[draw,thick,olivegreen,rectangle] {\color{black} 
+      $ \begin{array}{rl}
+       \uncover<11->{\cos(a)^2 + \sin(a)^2} &
+       \uncover<11->{= 1 \hphantom{mmmmmmmmmmm}}\\
+       \uncover<12->{\sec(a)^2} &
+       \uncover<12->{= 1  + \tan(a)^2 }\\
+       \uncover<13->{\sin(a+b)} &
+       \uncover<13->{= \sin(a)\cos(b) + \cos(a)\sin(b) }\\
+       \uncover<14->{\cos(a+b)} &
+       \uncover<14->{= \cos(a)\cos(b) - \sin(a)\sin(b) }\\
+       \uncover<15->{\sin(2a) } &
+       \uncover<15->{= 2\sin(a)\cos(a) }\\
+       \uncover<16->{\cos(2a) } &
+       \uncover<16->{= 2\cos(a)^2 - 1 = 1-2\sin(a)^2. }
+      \end{array} $};
+    \end{tikzpicture}}\]  }
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Examples}
+ \vspace{-4ex}
+ \begin{align*}
+  \uncover<2->{\cos(a)^2+\sin(a)^2 }
+  &\uncover<3->{= \left(\frac{e^{ia}+e^{-ia}}{2}\right)^2 + 
+   \left(\frac{e^{ia}-e^{-ia}}{2i}\right)^2
+   \hphantom{mmmmmmmmmmmmmmm}} \\
+  &%
+\ifx\HO\undefined
+  \only<4>{= (e^{2ia}+2e^{ia-ia}+e^{-2ia})/4 + 
+   (e^{2ia}-2e^{ia-ia}+e^{-2ia})/(-4)}%
+\fi%
+  \only<5->{= (\RED{e^{2ia}}+2+\BLUE{e^{-2ia}})/4 + 
+   (\RED{e^{2ia}}-2+\BLUE{e^{-2ia}})/(-4)} \\
+  &\uncover<6->{= 2/4 - 2/(-4) = 1}
+ \end{align*}
+ \vspace{-2ex}
+ \begin{align*}
+  \uncover<7->{\cos(a)^2-\sin(a)^2 }
+  &\uncover<8->{= \left(\frac{e^{ia}+e^{-ia}}{2}\right)^2 - 
+   \left(\frac{e^{ia}-e^{-ia}}{2i}\right)^2
+   \hphantom{mmmmmmmmmmmmmmm}} \\
+  &\uncover<9->{= (e^{2ia}+2+e^{-2ia})/4 + 
+   (e^{2ia}-2+e^{-2ia})/4} \\
+  &%
+\ifx\HO\undefined
+  \only<10>{= 2(e^{2ia}+e^{-2ia})/4}
+\fi
+  \only<11->{= (e^{2ia}+e^{-2ia})/2}
+  \uncover<12->{=\cos(2a)}
+ \end{align*}
+ \vspace{-2ex}
+ \begin{align*}
+  \uncover<13->{2\sin(a)\cos(a)}
+  &\uncover<14->{= 2\left(\frac{e^{ia}-e^{-ia}}{2i}\right)
+   \left(\frac{e^{ia}+e^{-ia}}{2}\right)} \\
+  &\uncover<15->{= \frac{2}{4i}\left(e^{2ia}+e^0-e^0-e^{-2ia}\right)}
+  \uncover<16->{= (e^{2ia}-e^{-2ia})/(2i)}\uncover<17->{ = \sin(2a)}
+ \end{align*}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{The addition formula}
+ \def\angleA{40}
+ \def\angleB{30}
+ \def\angleAB{70}
+ \def\cosA{0.766}
+ \def\sinA{0.643}
+ \def\cosB{0.866}
+ \def\sinB{0.500}
+ \def\cosAB{0.342}
+ \def\sinAB{0.940}
+ \def\cosAcosB{0.663}
+ \def\cosAsinB{0.383}
+ \def\sinAcosB{0.557}
+ \def\sinAsinB{0.321}
+ \def\spacers{%
+  \draw (0,-0.1) node[color=white] {0};%
+  \draw (0, 1.1) node[color=white] {0};%
+  \draw (-0.5,0) node[color=white] {0};%
+  \draw (+1.5,0) node[color=white] {0};%
+ }
+ \[ \sin(a+b)=\sin(a)\cos(b)+\cos(a)\sin(b) \]
+ \begin{center}
+  % Triangle with angle b, sides cos(b) & sin(b)
+  \mode<beamer>{
+   \only<1>{
+    \begin{tikzpicture}[scale=4]
+     \spacers
+    \end{tikzpicture}
+   } 
+   \only<2>{% Triangle with angle b, sides cos(b) & sin(b)
+    \begin{tikzpicture}[scale=4]
+     \spacers
+     \draw[->] (-0.1,0) -- (1.3,0);
+     \draw[->] (0,0) -- (0,1);
+     \draw[red,dashed] (1,0) arc (0:90:1);
+     \draw[red] (0.2,0) arc (0:\angleB:0.2);
+     \draw[red] (\cosB,0.1) -- (\cosB-0.1,0.1) -- (\cosB-0.1,0);
+     \draw[blue] (1,0) -- (0,0) -- (\cosB,\sinB) -- (\cosB,0);
+     \draw(0.25,0.07) node{$\scriptstyle b$};
+     \draw(.45,-.05) node[anchor=north]{$\scriptstyle\cos(b)$};
+     \draw(.83,0.25) node[anchor=east]{$\scriptstyle\sin(b)$};
+    \end{tikzpicture}}%
+   \only<3>{% Same triangle rotated by a
+    \begin{tikzpicture}[scale=4]
+     \spacers
+     \draw[->] (-0.1,0) -- (1.3,0);
+     \draw[->] (0,0) -- (0,1);
+     \draw[red,dashed] (1,0) arc (0:90:1);
+     \begin{scope}[rotate=\angleA]
+      \draw[red] (0.2,0) arc (0:\angleB:0.2);
+      \draw[red] (\cosB,0.1) -- (\cosB-0.1,0.1) -- (\cosB-0.1,0);
+      \draw[blue] (1,0) -- (0,0) -- (\cosB,\sinB) -- (\cosB,0);
+      \draw(0.25,0.07) node{$\scriptstyle b$};
+      \draw(.45,-.05) node[anchor=north]{$\scriptstyle\cos(b)$};
+      \draw(.83,0.25) node[anchor=east]{$\scriptstyle\sin(b)$};
+     \end{scope}
+     \draw[red] (0.2,0) arc (0:\angleA:0.2);
+     \draw(0.22,0.1) node{$\scriptstyle a$};
+    \end{tikzpicture}}%
+   \only<4>{% Old triangle dashed; triangle with angle a and hypotenuse cos(b)
+    \begin{tikzpicture}[scale=4]
+     \spacers
+     \draw[->] (-0.1,0) -- (1.3,0);
+     \draw[->] (0,0) -- (0,1);
+     \draw[red,dashed] (1,0) arc (0:90:1);
+     \begin{scope}[rotate=\angleA]
+      \draw[red] (0.2,0) arc (0:\angleB:0.2);
+      \draw[red] (\cosB,0.1) -- (\cosB-0.1,0.1) -- (\cosB-0.1,0);
+      \draw[blue,dashed] (1,0) -- (0,0) -- (\cosB,\sinB) -- (\cosB,0);
+      \draw(0.25,0.07) node{$\scriptstyle b$};
+      \draw(.45,-.05) node[anchor=north]{$\scriptstyle\cos(b)$};
+      \draw(.83,0.25) node[anchor=east]{$\scriptstyle\sin(b)$};
+     \end{scope}
+     \draw[red] (0.2,0) arc (0:\angleA:0.2);
+     \draw(0.22,0.1) node{$\scriptstyle a$};
+     \draw[blue] (0,0) -- (\cosAcosB,\sinAcosB) -- (\cosAcosB,0) -- (0,0);
+     \draw[red] (\cosAcosB,.1) -- (\cosAcosB-0.1,.1) -- (\cosAcosB-0.1,0);
+     \draw(0.68,0.28) node[anchor=west] {$\scriptstyle \sin(a)\cos(b)$};
+    \end{tikzpicture}}%
+   \only<5>{% Height sin(a) cos(b) displayed on right
+    \begin{tikzpicture}[scale=4]
+     \spacers
+     \draw[->] (-0.1,0) -- (1.3,0);
+     \draw[->] (0,0) -- (0,1);
+     \draw[red,dashed] (1,0) arc (0:90:1);
+     \begin{scope}[rotate=\angleA]
+      \draw[red] (0.2,0) arc (0:\angleB:0.2);
+      \draw[red] (\cosB,0.1) -- (\cosB-0.1,0.1) -- (\cosB-0.1,0);
+      \draw[blue,dashed] (1,0) -- (0,0) -- (\cosB,\sinB) -- (\cosB,0);
+      \draw(0.25,0.07) node{$\scriptstyle b$};
+      \draw(.45,-.05) node[anchor=north]{$\scriptstyle\cos(b)$};
+      \draw(.83,0.25) node[anchor=east]{$\scriptstyle\sin(b)$};
+     \end{scope}
+     \draw[red] (0.2,0) arc (0:\angleA:0.2);
+     \draw(0.22,0.1) node{$\scriptstyle a$};
+     \draw[blue] (0,0) -- (\cosAcosB,\sinAcosB) -- (\cosAcosB,0) -- (0,0);
+     \draw[red] (\cosAcosB,.1) -- (\cosAcosB-0.1,.1) -- (\cosAcosB-0.1,0);
+     \draw[black] (\cosAcosB,\sinAcosB) -- (1.2,\sinAcosB);
+     \draw[<->,color=magenta] (1.1,0) -- (1.1,\sinAcosB);
+     \draw(1.15,0.28) node[anchor=west] {$\scriptstyle \sin(a)\cos(b)$};
+    \end{tikzpicture}}%
+   \only<6>{% Add triangle with angle a and hypotenuse sin(b)
+    \begin{tikzpicture}[scale=4]
+     \spacers
+     \draw[->] (-0.1,0) -- (1.3,0);
+     \draw[->] (0,0) -- (0,1);
+     \draw[red,dashed] (1,0) arc (0:90:1);
+     \begin{scope}[rotate=\angleA]
+      \draw[red] (0.2,0) arc (0:\angleB:0.2);
+      \draw[red] (\cosB,0.1) -- (\cosB-0.1,0.1) -- (\cosB-0.1,0);
+      \draw[blue,dashed] (1,0) -- (0,0) -- (\cosB,\sinB) -- (\cosB,0);
+      \draw(0.25,0.07) node{$\scriptstyle b$};
+      \draw(.45,-.05) node[anchor=north]{$\scriptstyle\cos(b)$};
+      \draw(.83,0.25) node[anchor=east]{$\scriptstyle\sin(b)$};
+     \end{scope}
+     \draw[red] (0.2,0) arc (0:\angleA:0.2);
+     \draw(0.22,0.1) node{$\scriptstyle a$};
+     \draw[blue] (0,0) -- (\cosAcosB,\sinAcosB) -- (\cosAcosB,0) -- (0,0);
+     \draw[red] (\cosAcosB,.1) -- (\cosAcosB-0.1,.1) -- (\cosAcosB-0.1,0);
+     \draw[black] (\cosAcosB,\sinAcosB) -- (1.2,\sinAcosB);
+     \draw[<->,color=magenta] (1.1,0) -- (1.1,\sinAcosB);
+     \draw(1.15,0.28) node[anchor=west] {$\scriptstyle \sin(a)\cos(b)$};
+     \draw[blue] (\cosAB,\sinAB) -- (\cosAcosB,\sinAcosB) -- 
+     (\cosAcosB,\sinAB) -- (\cosAB,\sinAB);
+     \begin{scope}[shift={(\cosAcosB,\sinAcosB)},rotate=90]
+      \draw[red] (0.1,0) arc(0:\angleA:0.1);
+      \draw (0.15,0.05) node {$\scriptstyle a$};
+     \end{scope}
+     \begin{scope}[shift={(\cosAcosB,\sinAcosB)},rotate=180]
+      \draw[red] (0.1*\cosA,0.1*\sinA) arc(\angleA:90:0.1);
+      \draw (0.05,0.15) node {$\scriptstyle \pi/2-a$};
+     \end{scope}
+    \end{tikzpicture}}%
+   \only<7>{% Mark height = cos(a) sin(b)
+    \begin{tikzpicture}[scale=4]
+     \spacers
+     \draw[->] (-0.1,0) -- (1.3,0);
+     \draw[->] (0,0) -- (0,1);
+     \draw[red,dashed] (1,0) arc (0:90:1);
+     \begin{scope}[rotate=\angleA]
+      \draw[red] (0.2,0) arc (0:\angleB:0.2);
+      \draw[red] (\cosB,0.1) -- (\cosB-0.1,0.1) -- (\cosB-0.1,0);
+      \draw[blue,dashed] (1,0) -- (0,0) -- (\cosB,\sinB) -- (\cosB,0);
+      \draw(0.25,0.07) node{$\scriptstyle b$};
+      \draw(.45,-.05) node[anchor=north]{$\scriptstyle\cos(b)$};
+      \draw(.83,0.25) node[anchor=east]{$\scriptstyle\sin(b)$};
+     \end{scope}
+     \draw[red] (0.2,0) arc (0:\angleA:0.2);
+     \draw(0.22,0.1) node{$\scriptstyle a$};
+     \draw[blue] (0,0) -- (\cosAcosB,\sinAcosB) -- (\cosAcosB,0) -- (0,0);
+     \draw[red] (\cosAcosB,.1) -- (\cosAcosB-0.1,.1) -- (\cosAcosB-0.1,0);
+     \draw[black] (\cosAcosB,\sinAcosB) -- (1.2,\sinAcosB);
+     \draw[<->,color=magenta] (1.1,0) -- (1.1,\sinAcosB);
+     \draw(1.15,0.28) node[anchor=west] {$\scriptstyle \sin(a)\cos(b)$};
+     \draw[blue] (\cosAB,\sinAB) -- (\cosAcosB,\sinAcosB) -- 
+     (\cosAcosB,\sinAB) -- (\cosAB,\sinAB);
+     \begin{scope}[shift={(\cosAcosB,\sinAcosB)},rotate=90]
+      \draw[red] (0.1,0) arc(0:\angleA:0.1);
+      \draw (0.15,0.05) node {$\scriptstyle a$};
+     \end{scope}
+     \begin{scope}[shift={(\cosAcosB,\sinAcosB)},rotate=180]
+      \draw[red] (0.1*\cosA,0.1*\sinA) arc(\angleA:90:0.1);
+      \draw (0.05,0.15) node {$\scriptstyle \pi/2-a$};
+     \end{scope}
+     \draw(0.68,0.78) node[anchor=west] {$\scriptstyle \cos(a)\sin(b)$};
+    \end{tikzpicture}}}%
+  \only<8>{% Mark height = cos(a) sin(b)
+   \begin{tikzpicture}[scale=4]
+    \spacers
+    \draw[->] (-0.1,0) -- (1.3,0);
+    \draw[->] (0,0) -- (0,1);
+    \draw[red,dashed] (1,0) arc (0:90:1);
+    \begin{scope}[rotate=\angleA]
+     \draw[red] (0.2,0) arc (0:\angleB:0.2);
+     \draw[red] (\cosB,0.1) -- (\cosB-0.1,0.1) -- (\cosB-0.1,0);
+     \draw[blue,dashed] (1,0) -- (0,0) -- (\cosB,\sinB) -- (\cosB,0);
+     \draw(0.25,0.07) node{$\scriptstyle b$};
+     \draw(.45,-.05) node[anchor=north]{$\scriptstyle\cos(b)$};
+     \draw(.83,0.25) node[anchor=east]{$\scriptstyle\sin(b)$};
+    \end{scope}
+    \draw[red] (0.2,0) arc (0:\angleA:0.2);
+    \draw(0.22,0.1) node{$\scriptstyle a$};
+    \draw[blue] (0,0) -- (\cosAcosB,\sinAcosB) -- (\cosAcosB,0) -- (0,0);
+    \draw[red] (\cosAcosB,.1) -- (\cosAcosB-0.1,.1) -- (\cosAcosB-0.1,0);
+    \draw[black] (\cosAcosB,\sinAcosB) -- (1.2,\sinAcosB);
+    \draw[<->,color=magenta] (1.1,0) -- (1.1,\sinAcosB);
+    \draw(1.15,0.28) node[anchor=west] {$\scriptstyle \sin(a)\cos(b)$};
+    \draw[blue] (\cosAB,\sinAB) -- (\cosAcosB,\sinAcosB) -- 
+    (\cosAcosB,\sinAB) -- (\cosAB,\sinAB);
+    \begin{scope}[shift={(\cosAcosB,\sinAcosB)},rotate=90]
+     \draw[red] (0.1,0) arc(0:\angleA:0.1);
+     \draw (0.15,0.05) node {$\scriptstyle a$};
+    \end{scope}
+    \begin{scope}[shift={(\cosAcosB,\sinAcosB)},rotate=180]
+     \draw[red] (0.1*\cosA,0.1*\sinA) arc(\angleA:90:0.1);
+     \draw (0.05,0.15) node {$\scriptstyle \pi/2-a$};
+    \end{scope}
+    \draw (\cosAB,\sinAB) -- (1.2,\sinAB);
+    \draw[<->,color=magenta] (1.1,\sinAcosB) -- (1.1,\sinAB);
+    \draw(1.15,0.78) node[anchor=west] {$\scriptstyle \cos(a)\sin(b)$};
+   \end{tikzpicture}}%
+  \mode<beamer>{\only<9->{% Triangle with angle a+b, height sin(a+b)
+    \begin{tikzpicture}[scale=4]
+     \spacers
+     \draw[->] (-0.1,0) -- (1.3,0);
+     \draw[->] (0,0) -- (0,1);
+     \draw[red,dashed] (1,0) arc (0:90:1);
+     \draw[red] (0.2,0) arc (0:\angleAB:0.2);
+     \draw(0.23,0.16) node{$\scriptstyle a+b$};
+     \draw[blue] (0,0) -- (\cosAB,\sinAB) -- (\cosAB,0) -- (0,0);
+     \draw(0.48,0.4) node {$\scriptstyle\sin(a+b)$};
+     \draw[black] (\cosAB,\sinAcosB) -- (1.2,\sinAcosB);
+     \draw[<->,color=magenta] (1.1,0) -- (1.1,\sinAcosB);
+     \draw(1.15,0.28) node[anchor=west] {$\scriptstyle \sin(a)\cos(b)$};
+     \draw[black] (\cosAB,\sinAB) -- (1.2,\sinAB);
+     \draw[<->,color=magenta] (1.1,\sinAcosB) -- (1.1,\sinAB);
+     \draw(1.15,0.78) node[anchor=west] {$\scriptstyle \cos(a)\sin(b)$};
+    \end{tikzpicture}}}%
+ \end{center}
+ \uncover<10->{\begin{align*}
+   \sin(a)\cos(b)+\cos(a)\sin(b) &=
+   \frac{e^{ia}-e^{-ia}}{2i}\frac{e^{ib}+e^{-ib}}{2} + 
+   \frac{e^{ia}+e^{-ia}}{2}\frac{e^{ib}-e^{-ib}}{2i} \\
+   &\uncover<11->{=  \frac{e^{i(a+b)}-e^{-i(a+b)}}{2i}}
+   \uncover<12->{=\sin(a+b)}
+  \end{align*}}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Finite Fourier series}
+ \begin{itemize}
+  \uncover<2->{
+  \item A \DEFN{finite Fourier series} is a sum of constant multiples
+   of functions of the form $\RED{\sin(nx)}$ or $\BLUE{\cos(mx)}$ (with
+   $n,m\in\Z$).  Note that the constant function $f(x)=a=a\cos(0x)$ is
+   included.  
+  }
+  \uncover<3->{
+  \item The phrase \DEFN{trigonometric polynomial} means the same
+   thing. 
+  }
+  \uncover<4->{
+  \item Many functions can be rewritten as finite Fourier series:
+   {\vspace{-1ex}\begin{align*}
+     \uncover<5->{\sin(x)^2} &
+     \uncover<5->{={\scriptstyle \frac{1}{2}} -
+      {\scriptstyle \frac{1}{2}}\BLUE{\cos(2x)}
+      \hphantom{mmmmmmmmm}
+     } \\
+     \uncover<6->{\sin(x)^3} &
+     \uncover<6->{= {\scriptstyle \frac{3}{4}}\RED{\sin(x)} -
+      {\scriptstyle \frac{1}{4}}\BLUE{\sin(3x)}} \\
+     \uncover<7->{\sin(x)\sin(2x)\sin(4x)} &
+     \uncover<7->{= -\RED{\sin(x)}/4 + \RED{\sin(3x)}/4 +
+      \RED{\sin(5x)}/4 - \RED{\sin(7x)}/4} \\
+     \uncover<8->{\sin(x)^4 + \cos(x)^4} &
+     \uncover<8->{= {\scriptstyle \frac{3}{4}} +
+      {\scriptstyle \frac{1}{4}}\BLUE{\cos(4x)}} \\
+     \uncover<9->{\sin(nx)\sin(mx)} &
+     \uncover<9->{= {\scriptstyle \frac{1}{2}}\BLUE{\cos((n-m)x)} -
+      {\scriptstyle \frac{1}{2}}\BLUE{\cos((n+m)x)}.}
+    \end{align*} \vspace{-4ex}}
+  }
+  \uncover<10->{
+  \item {\bf Method:} Rewrite using
+   $\cos(n\tht)=(e^{in\tht}+e^{-in\tht})/2$ and 
+   $\sin(n\tht)=(e^{in\tht}-e^{-in\tht})/2i$, expand out,
+   then rewrite using $e^{im\tht}=\BLUE{\cos(m\tht)}+\RED{\sin(m\tht)}i$.
+  }
+  \uncover<11->{
+  \item Once a function has been rewritten in this form, it is very
+   easy to differentiate it or integrate it.
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Examples}
+ \uncover<2->{Problem: write $\sin(x)^4+\cos(x)^4$ as a Fourier series.
+  
+  \bigskip}
+ \uncover<3->{Put $u=e^{ix}$, so $\sin(x)=(u-u^{-1})/(2i)$ and
+  $\cos(x)=(u+u^{-1})/2$.}\uncover<4->{  Note that $i^2=-1$ so $i^4=(-1)^2=1$ so
+  $(2i)^4=2^4=16$.}\uncover<5->{  Note also that 
+  \[ (x+y)^4 = x^4 + 4x^3y + 6x^2y^2 + 4xy^3 + y^4 \]}
+ \uncover<6->{(use the binomial formula, or expand it out.)}\uncover<7->{  Thus }
+ \begin{align*}
+  \uncover<7->{\sin(x)^4+\cos(x)^4} &\uncover<7->{= 
+   (u-u^{-1})^4/16 + (u+u^{-1})^4/16 \hphantom{mmmmmm}}\\
+  &\uncover<8->{= (u^4 - 4 u^2 + 6 - 4 u^{-2} + u^{-4})/16 +} \\
+  &\uncover<8->{\hspace{1.6em} (u^4 + 4 u^2 + 6 + 4 u^{-2} + u^{-4})/16  }\\
+  &\uncover<9->{= 12/16 + 2(u^4+u^{-4})/16 }
+  \uncover<10->{= 3/4 + ((u^4+u^{-4})/2)/4 }\\
+  &\uncover<11->{= (3 + \cos(4x))/4}
+ \end{align*}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Special values}
+ \uncover<2->{
+  You should know the following values of $\sin(\tht)$ and
+  $\cos(\tht)$: 
+  \[ \begin{array}{|r|ccc|}
+    \hline
+    \tht  & \sin(\tht)  & \cos(\tht) & \tan(\tht) \\
+    \hline
+    \pi/2 & 1           & 0           & \infty    \\
+    \pi/3 & \sqrt{3}/2  & 1/2         & \sqrt{3}  \\
+    \pi/4 & \sqrt{2}/2  & \sqrt{2}/2  & 1         \\
+    \pi/6 & 1/2         & \sqrt{3}/2  & \sqrt{3}/3\\
+    \hline
+   \end{array}\]
+ }
+ \uncover<3->{
+  Proved by considering these triangles:
+  \begin{center}
+   \begin{tikzpicture}[thick,scale=3]
+    \begin{scope}
+     \draw[blue] (0,0) -- (1,0) -- (0,1) -- (0,0);
+     \draw[red] (.1,0) -- (.1,.1) -- (0,.1);
+     \draw[shift={(1,0)},color=red] (135:0.2) arc (135:180:0.2);
+     \draw[shift={(0,1)},color=red] (270:0.2) arc (270:315:0.2);
+     \draw(.5,-.1) node[anchor=north] {$\scriptstyle 1$};
+     \draw(-.1,.5) node[anchor=east] {$\scriptstyle 1$};
+     \draw(.54,.54) node {$\scriptstyle\sqrt{2}$};
+     \draw(.10,.75) node {$\scriptstyle\pi/4$};
+     \draw(.70,.06) node {$\scriptstyle\pi/4$};
+     \draw(.11,.11) node {$\scriptstyle\pi/2$};
+    \end{scope}
+    \begin{scope}[shift={(2,0)}]
+     \draw[blue] (0,0) -- (0,.866) -- (-.5,0) -- (.5,0) -- (0,.866);
+     \draw[red] (-.1,0) -- (-.1,.1) -- (.1,.1) -- (.1,0);
+     \draw[shift={(-0.5,0)},red] (0:0.14) arc (0:60:0.14);
+     \draw[shift={( 0.5,0)},red] (120:0.14) arc (120:180:0.14);
+     \draw[shift={(0,0.866)},red] (240:0.14) arc (240:300:0.14);
+     \draw(-.4,.4) node {$\scriptstyle 1$};
+     \draw( .4,.4) node {$\scriptstyle 1$};
+     \draw(-.25,-.07) node[anchor=north] {$\scriptstyle 1\over 2$};
+     \draw( .25,-.07) node[anchor=north] {$\scriptstyle 1\over 2$};
+     \draw(-.07,.4) node[anchor=north] {$\scriptstyle \sqrt{3}\over 2$};
+     \draw(-.31,.12) node {$\scriptstyle \pi\over 3$};
+     \draw( .31,.12) node {$\scriptstyle \pi\over 3$};
+     \draw(-.05,.65) node {$\scriptstyle \pi\over 6$};
+     \draw( .05,.65) node {$\scriptstyle \pi\over 6$};
+    \end{scope}
+   \end{tikzpicture}
+  \end{center}
+ }
+ \uncover<4->{
+  You should also be able to deduce things like
+  $\cos(5\pi/6)=-\sqrt{3}/2$. 
+ }
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Inverse trigonometric functions}
+ \[
+  \begin{array}{ccc}
+   \begin{tikzpicture}
+    \draw[->] (-1.1,0) -- (1.1,0);
+    \draw[->] (0,-1.1) -- (0,1.1);
+    \draw[domain=-1:1,samples=100,color=red] plot(\x,{sin(90 * \x)});
+    \draw (-.1,-1) node[anchor=east] {$\scriptstyle -1$};
+    \draw (-.1,+1) node[anchor=east] {$\scriptstyle 1$};
+    \draw (-1,-.1) node[anchor=north] {$\scriptstyle -\frac{\pi}{2}$};
+    \draw (+1,-.1) node[anchor=north] {$\scriptstyle \frac{\pi}{2}$};
+   \end{tikzpicture}
+   & 
+   \begin{tikzpicture}
+    \draw[->] (-0.1,0) -- (2.1,0);
+    \draw[->] (0,-1.1) -- (0,1.1);
+    \draw[domain=0:2,color=red] plot (\x,{cos(90 * \x)});
+    \draw (-.1,-1) node[anchor=east] {$\scriptstyle -1$};
+    \draw (-.1,+1) node[anchor=east] {$\scriptstyle 1$};
+    \draw (+2,-.1) node[anchor=north] {$\scriptstyle \pi$};
+   \end{tikzpicture}
+   & 
+   \begin{tikzpicture}[yscale=0.4]
+    \draw[->] (-1.1,0) -- (1.1,0);
+    \draw[->] (0,-3.3) -- (0,3.3);
+    \draw[domain=-0.8:0.8,color=red] plot(\x,{sin(90 * \x)/cos(90 * \x)});
+    \draw[color=olivegreen,dotted] (-1,-3) -- (-1,3);
+    \draw[color=olivegreen,dotted] ( 1,-3) -- ( 1,3);
+    \draw(-1.2,-.3) node {$\scriptstyle -\frac{\pi}{2}$};
+    \draw(+1.2,-.3) node {$\scriptstyle \frac{\pi}{2}$};
+   \end{tikzpicture} \\
+   {\scriptstyle \sin\:[-\frac{\pi}{2},\frac{\pi}{2}]\xra{}[-1,1]} &
+   {\scriptstyle \cos\:[0,\pi]\xra{}[-1,1]} &
+   {\scriptstyle \tan\:[-\frac{\pi}{2},\frac{\pi}{2}]\xra{}\R} \\
+   && \\
+   \begin{tikzpicture}
+    \draw[->] (-1.1,0) -- (1.1,0);
+    \draw[->] (0,-1.1) -- (0,1.1);
+    \draw[domain=-1:1,color=red] plot({sin(90*\x)},\x);
+    \draw (-1,-.1) node[anchor=north] {$\scriptstyle -1$};
+    \draw (+1,-.1) node[anchor=north] {$\scriptstyle 1$};
+    \draw (-.1,-1) node[anchor=east] {$\scriptstyle -\frac{\pi}{2}$};
+    \draw (-.1,+1) node[anchor=east] {$\scriptstyle \frac{\pi}{2}$};
+   \end{tikzpicture} & 
+   \begin{tikzpicture}
+    \draw[->] (-1.1,0) -- (1.1,0);
+    \draw[->] (0,-0.1) -- (0,2.1);
+    \draw[domain=0:2,color=red] plot({cos(90*\x)},\x);
+    \draw (-1,-.1) node[anchor=north] {$\scriptstyle -1$};
+    \draw (+1,-.1) node[anchor=north] {$\scriptstyle 1$};
+    \draw (-.1,+2) node[anchor=east] {$\scriptstyle \pi$};
+   \end{tikzpicture} & 
+   \begin{tikzpicture}[xscale=0.4]
+    \draw[->] (-3.3,0) -- (3.3,0);
+    \draw[->] (0,-1.1) -- (0,1.1);
+    \draw[domain=-0.8:0.8,color=red] plot({sin(90*\x)/cos(90*\x)},\x);
+    \draw[color=olivegreen,dotted] (-3,-1) -- (3,-1);
+    \draw[color=olivegreen,dotted] (-3,+1) -- (3,+1);
+    \draw (-.3,-1.2) node[anchor=north] {$\scriptstyle -\frac{\pi}{2}$};
+    \draw (-.3,+0.8) node[anchor=north] {$\scriptstyle \frac{\pi}{2}$};
+   \end{tikzpicture} \\
+   {\scriptstyle \arcsin\:[-1,1]\xra{}[-\frac{\pi}{2},\frac{\pi}{2}]} &
+   {\scriptstyle \arccos\:[-1,1]\xra{}[0,\pi]} &
+   {\scriptstyle \arctan\:\R\xra{}[-\frac{\pi}{2},\frac{\pi}{2}]}
+  \end{array} \]
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Differentiation}
+ \uncover<2->{\noindent{\bf Things you should know:}}
+ \begin{itemize}
+  \uncover<3->{
+  \item The meaning of differentiation 
+   (slopes of graphs, time-dependent and space-dependent variables,
+   etc)}
+  \uncover<4->{
+  \item Some derivatives from first principles: $x^2$, $1/x$, $e^x$.}
+  \uncover<5->{
+  \item Rules for finding derivatives:
+   \begin{itemize}
+    \uncover<6->{ \item The product rule ($(uv)'=u'v+uv'$) }
+    \uncover<7->{ \item The quotient rule ($(u/v)'=(u'v-uv')/v^2$) }
+    \uncover<8->{ \item The chain rule ($\frac{dz}{dx}=\frac{dz}{dy}\frac{dy}{dx}$)}
+    \uncover<9->{ \item The power rule ($(u^n)'=n u^{n-1}u'$) }
+    \uncover<10->{ \item The logarithmic rule ($\log(u)'=u'/u$) }
+    \uncover<11->{ \item The inverse function rule ($\frac{dx}{dy} = 1/\frac{dy}{dx}$)}
+   \end{itemize}
+  } 
+  \uncover<12->{
+  \item Derivatives of various classes of functions (eg the derivative
+   of a rational function is another rational function.)
+  }
+ \end{itemize}
+ \uncover<13->{
+  You must learn to find derivatives quickly and accurately.
+ }
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Meaning}
+ \begin{itemize}
+  \uncover<2->{
+  \item Consider related variables $x$ and $y$;
+   so whenever $x$ changes, so does $y$.
+  }
+  \uncover<3->{
+  \item Examples:
+   \begin{itemize}
+    \uncover<4->{ \item $p=\text{ price of chocolate }$;
+     $d=\text{ demand for chocolate }$. }
+    \uncover<5->{ \item $t=\text{ time }$;
+     $d=\text{ atmospheric $CO_2$ concentration }$. }
+    \uncover<6->{ \item $r=\text{ distance from sun }$;
+     $g=\text{ strength of solar gravity }$. }
+   \end{itemize}
+  }
+  
+  \uncover<7->{
+  \item If $x$ changes to $x+\dl x$, then $y$ changes to $y+\dl y$.
+   \uncover<8->{
+    \[ \frac{dy}{dx} = \lim_{\dl x\xra{} 0} \frac{\dl y}{\dl x}
+     = \text{ derivative of $y$ with respect to $x$. }
+    \]}
+  }
+  \uncover<9->{
+  \item If $y=f(x)$, then $\dl y=f(x+\dl x)-f(x)$, so
+   \uncover<10->{\[ f'(x) = \frac{dy}{dx} =
+     \lim_{\dl x\xra{}0} \frac{f(x+\dl x)-f(x)}{\dl x} 
+     \uncover<11->{= \lim_{h\xra{}0} \frac{f(x+h)-f(x)}{h}.}
+    \]}
+  }
+  \uncover<12->{
+  \item We sometimes write $y'$ for $dy/dx$ (\RED{care needed}).
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Slopes}
+ \begin{center}\begin{tikzpicture}[scale=2.4]
+   \draw[color=white] (-0.6,2.1) -- (-0.6,-2) -- (2.2,-2);
+   \draw[->] (-0.1,0) -- (1.7,0);
+   \draw[->] (0,0) -- (0,1.81);
+   \draw[domain=0:1.7] plot(\x,{(\x-0.8)*(\x-0.8) + 1});
+   \draw (1.8,1.9) node {${\scriptstyle y=f(x)}$};
+   \only<2->{
+    \draw[color=blue] (1,0) -- (1, 1.04) -- (0, 1.04);
+    \draw (1,-0.05) node[anchor=north] {${\scriptstyle x}$};
+    \draw (- 0.05, 1.04) node[anchor=east] {${\scriptstyle y}$};
+   }
+   \only<3->{
+    \draw[color=orange](0, 0.64) -- ( 1.7, 1.32);
+    \draw ( 1.9, 1.32) node[anchor=west] {slope $\scriptstyle dy/dx$};
+   }
+   \only<4-6>{
+    \draw ( 1.5,-0.05) node[anchor=north] {${\scriptstyle x+\dl x}$};
+    \draw (- 0.05, 1.49) node[anchor=east] {${\scriptstyle y+\dl y}$};
+    \draw[color=blue] ( 1.5,0) -- ( 1.5, 1.49) -- (0, 1.49);
+   }
+   \only<5-6>{
+    \draw[color=olivegreen,<->] (1, 1.04) -- ( 1.5, 1.04);
+    \draw[color=olivegreen,<->] (1, 1.04) -- (1, 1.49);
+    \draw ( 1.250, 0.94) node[anchor=north] {${\scriptstyle \dl x}$};
+    \draw ( 0.9, 1.265) node[anchor=east] {${\scriptstyle \dl y}$};
+   }%
+   \only<6>{
+    \draw[color=olivegreen] (0, 0.1400) -- ( 1.7, 1.670);
+    \draw ( 1.9, 1.670) node[anchor=west] {slope $\scriptstyle \dl y/\dl x$};
+   }%
+   \mode<beamer>{
+    \only<7>{
+     \draw[color=olivegreen] (0, 0.39) -- ( 1.7, 1.495);
+     \draw[color=blue] ( 1.25,0) -- ( 1.250, 1.202500000) -- (0, 1.202500000);
+     \draw ( 1.250,-0.05) node[anchor=north] {${\scriptstyle x+\dl x}$};
+     \draw (- 0.05, 1.202500000) node[anchor=east] {${\scriptstyle y+\dl y}$};
+     \draw[color=olivegreen,<->] (1, 1.04) -- ( 1.250, 1.04);
+     \draw[color=olivegreen,<->] (1, 1.04) -- (1, 1.202500000);
+     \draw ( 1.125, 0.94) node[anchor=north] {${\scriptstyle \dl x}$};
+     \draw ( 0.9, 1.121) node[anchor=east] {${\scriptstyle \dl y}$};
+     \draw ( 1.9, 1.495) node[anchor=west] {slope $\scriptstyle \dl y/\dl x$};
+    }%
+    \only<8>{
+     \draw[color=olivegreen] (0, 0.5150) -- ( 1.7, 1.407500000);
+     \draw[color=blue] ( 1.125,0) -- ( 1.125, 1.105625000) -- (0, 1.105625000);
+     \draw ( 1.125,-0.05) node[anchor=north] {${\scriptstyle x+\dl x}$};
+     \draw (- 0.05, 1.105625000) node[anchor=east] {${\scriptstyle y+\dl y}$};
+     \draw[color=olivegreen,<->] (1, 1.04) -- ( 1.125, 1.04);
+     \draw[color=olivegreen,<->] (1, 1.04) -- (1, 1.105625000);
+     \draw ( 1.062500000, 0.94) node[anchor=north] {${\scriptstyle \dl x}$};
+     \draw ( 0.9, 1.072812500) node[anchor=east] {${\scriptstyle \dl y}$};
+     \draw ( 1.9, 1.407500000) node[anchor=west] {slope $\scriptstyle \dl y/\dl x$};
+    }%
+    \only<9>{
+     \draw[color=olivegreen] (0, 0.5775) -- ( 1.7, 1.363750000);
+     \draw[color=blue] ( 1.062500000,0) -- ( 1.062500000, 1.068906250) -- (0, 1.068906250);
+     \draw ( 1.062500000,-0.05) node[anchor=north] {${\scriptstyle x+\dl x}$};
+     \draw (- 0.05, 1.068906250) node[anchor=east] {${\scriptstyle y+\dl y}$};
+     \draw[color=olivegreen,<->] (1, 1.04) -- ( 1.062500000, 1.04);
+     \draw[color=olivegreen,<->] (1, 1.04) -- (1, 1.068906250);
+     \draw ( 1.031250000, 0.94) node[anchor=north] {${\scriptstyle \dl x}$};
+     \draw ( 0.9, 1.054453125) node[anchor=east] {${\scriptstyle \dl y}$};
+     \draw ( 1.9, 1.363750000) node[anchor=west] {slope $\scriptstyle \dl y/\dl x$};
+    }}%
+   \draw (-1.4,-0.7) node[anchor=west] {\parbox[t]{10cm}{
+     \only<1>{\WHITE{0}}
+     \only<2>{Consider variables $x$ and $y$ related by $y=f(x)$.}%
+     \only<3>{$dy/dx$ is the slope of the tangent line to the graph.}%
+     \only<4-5>{If $x$ changes by a small amount $\dl x$, then $y$ will
+      change by a small amount $\dl y$.}%
+     \only<6>{The ratio $\dl y/\dl x$ is the slope of a chord cutting
+      across the graph.}%
+     \only<7>{The slope of the chord changes slightly as $\dl x$
+      decreases.}% 
+     \only<8-10>{As $\dl x$ approaches zero, the chord approaches the tangent,
+      and $\dl y/\dl x$ approaches $dy/dx$.}%
+    }%
+   };
+  \end{tikzpicture}\end{center}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{The function $f(x)=x^2$}
+ \begin{itemize}
+  \uncover<2->{
+  \item Consider the function $f(x)=x^2$.
+  }
+  \uncover<3->{
+  \item Then $f(x+h)=(x+h)^2=x^2+2xh+h^2$
+   \uncover<4->{
+    , so 
+    \begin{align*}
+     \frac{f(x+h) - f(x)}{h} &= \frac{(x+h)^2 - x^2}{h}
+     \hphantom{mmmmmmmm}\\
+     & \uncover<5->{
+      = \frac{\RED{x^2} + 2xh + h^2 - \RED{x^2}}{h}
+     } \\
+     & \uncover<6->{
+      = \frac{2x\OLIVEGREEN{h} + \OLIVEGREEN{h}^2}{\OLIVEGREEN{h}}
+     } \\
+     & \uncover<7->{
+      = 2x+h
+     }
+    \end{align*} 
+   }
+  }
+  \uncover<8->{
+  \item Thus
+   \[ f'(x) = \lim_{h\xra{}0} \frac{f(x+h) - f(x)}{h}
+    \uncover<9->{= \lim_{\RED{h}\xra{}0} (2x+\RED{h})} 
+    \uncover<10->{= 2x.}
+   \]
+  }
+  \uncover<11->{
+  \item Similarly: 
+   \bbox{$\frac{d}{dx}(x^n)=nx^{n-1}$ for all $n$.} 
+  }
+  
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{The function $f(x)=1/x$}
+ \begin{itemize}
+  \uncover<2->{
+  \item Consider the function $f(x)=1/x$.
+  }
+  \uncover<3->{
+  \item \ghost\vspace{-3ex}
+   \[ f(x+h)-f(x)
+    = \frac{1}{x+h} - \frac{1}{x} 
+    % \untilSlide*{3}{\hphantom{= \frac{\RED{x}-(\RED{x}+h)}{x(x+h)}}}
+    \uncover<4->{= \frac{\RED{x}-(\RED{x}+h)}{x(x+h)}}
+    % \untilSlide*{4}{\hphantom{= \frac{-h}{x(x+h)}}}
+    \uncover<5->{= \frac{-h}{x(x+h)}}
+   \]
+   \uncover<6->{
+    so 
+    \[ \frac{f(x+h) - f(x)}{h} = 
+     \frac{-1}{x(x+h)}
+    \]
+   }
+   \uncover<7->{
+    so
+    \[ f'(x) = 
+     \lim_{h\xra{}0} \frac{f(x+h) - f(x)}{h} 
+     \uncover<8->{= \lim_{\RED{h}\xra{}0} \frac{-1}{x(x+\RED{h})}}
+     \uncover<9->{= \frac{-1}{x^2}}
+    \]
+   }
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{The exponential function}
+ \begin{itemize}
+  \uncover<2->{
+  \item Consider the function
+   $f(x)=e^x=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\dotsb$.
+  }
+  \uncover<3->{
+  \item \ghost\vspace{-3ex}
+   \[ f(x+h)-f(x)
+    = e^{x+h} - e^x 
+    \uncover<4->{= e^x(e^h - 1)}
+    \uncover<5->{= e^x\left(h + \tfrac{h^2}{2!} + \tfrac{h^3}{3!}+\dotsb\right)}
+   \]
+   \uncover<6->{
+    so 
+    \[ \frac{f(x+h) - f(x)}{h} = 
+     e^x\left(1 + \tfrac{h}{2!} + \tfrac{h^2}{3!} + \dotsb\right) 
+    \]
+   }
+   \uncover<7->{
+    so
+    \begin{align*} f'(x) &= 
+     \lim_{h\xra{}0} \frac{f(x+h) - f(x)}{h} \hphantom{mmmmmmm} \\ &
+     \uncover<8->{= \lim_{\RED{h}\xra{}0} 
+      e^x\left(1 + \tfrac{\RED{h}}{2!} + \tfrac{\RED{h}^2}{3!} + \dotsb\right)} \\ & 
+     \uncover<9->{= e^x(1+0+0+\dotsb)} \\ &
+     \uncover<10->{= e^x.}
+    \end{align*}
+   }
+  }
+  \uncover<11->{
+  \item Conclusion: $\exp'(x)=\exp(x)$.
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Special functions}
+ \[ \begin{array}{rlcrl}
+   \uncover<2->{\exp'(x)}     & \uncover<2->{=\exp(x)} &\hspace{3em}&
+   \uncover<5->{\log'(x)}     & \uncover<5->{=1/x} \\
+   \uncover<3->{\sinh'(x)}    & \uncover<3->{=\cosh(x)} &&
+   \uncover<6->{\arcsinh'(x)} & \uncover<6->{=(1+x^2)^{-1/2}} \\
+   \uncover<3->{\cosh'(x)}    & \uncover<3->{=\sinh(x)} &&
+   \uncover<6->{\arccosh'(x)} & \uncover<6->{=(x^2-1)^{-1/2}} \\
+   \uncover<3->{\tanh'(x)}    & \uncover<3->{=\sech(x)^2 = 1 - \tanh(x)^2} &&
+   \uncover<6->{\arctanh'(x)} & \uncover<6->{=(1-x^2)^{-1}} \\
+   \uncover<4->{\sin'(x)}     & \uncover<4->{=\cos(x)} &&
+   \uncover<6->{\arcsin'(x)}  & \uncover<6->{=(1-x^2)^{-1/2}} \\
+   \uncover<4->{\cos'(x)}     & \uncover<4->{=-\sin(x)} &&
+   \uncover<6->{\arccos'(x)}  & \uncover<6->{=-(1-x^2)^{-1/2}} \\
+   \uncover<4->{\tan'(x)}     & \uncover<4->{=\sec(x)^2 = 1 + \tan(x)^2} &&
+   \uncover<6->{\arctan'(x)}  & \uncover<6->{=(1+x^2)^{-1}}
+  \end{array} \]
+ \begin{itemize}
+  \uncover<2->{\item We showed earlier that $\exp'(x)=\exp(x)$}
+  \uncover<3->{\item We deduce $\sinh'(x)$ using the identity
+   $\sinh(x)=(e^x-e^{-x})/2$.  Similarly for $\cosh$ and $\tanh$.}
+  \uncover<4->{\item Using $\cos(x)=\cosh(ix)$ etc, we find
+   $\sin'(x)$, $\cos'(x)$ and $\tan'(x)$.}
+  \uncover<5->{\item Using $\exp'(x)=\exp(x)$ and the inverse function
+   rule, we find that $\log'(x)=1/x$}
+  \uncover<6->{\item The inverse function rule also gives the
+   remaining derivatives.}
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{The product rule}
+ \begin{itemize}
+  \uncover<2->{
+  \item Consider variables $u$ and $v$ depending on $x$, and put
+   $w=uv$.  Then
+   \begin{center}\begin{tikzpicture}
+     \draw[white] (-4cm,-1cm) -- (-4cm,1cm) -- (4cm,1cm);
+     \draw(-2.5cm,0cm) node[draw,thick,olivegreen,rectangle] {
+      \color{black} $w' = (uv)' = u'v + u v'$};%
+     \uncover<3->{\draw(+2.5cm,0cm) node[draw,thick,olivegreen,rectangle] {
+       \color{black} $\frac{dw}{dx} = \frac{d}{dx}(uv) =
+       \frac{du}{dx} v + u \frac{dv}{dx}.$};}%
+    \end{tikzpicture}\end{center}
+  }
+  \uncover<4->{
+  \item If $x$ changes to $x+\RED{\dl x}$, then $u$ changes to
+   $u+\RED{\dl u}$ \& $v$ changes to $v+\RED{\dl v}$
+   \uncover<5->{ so $w$ changes to
+    \begin{align*} w + \RED{\dl w}  &= (u+\RED{\dl u})(v+\RED{\dl v}) 
+     \uncover<6->{ = uv + \RED{(\dl u)\,v + u\,(\dl v) + (\dl u)(\dl v)}}
+     \\
+     \uncover<7->{ \dl w} &
+     \uncover<7->{ = (\dl u)\,v + u\,(\dl v) + (\dl u)(\dl v)}
+     \\
+     \uncover<8->{\frac{\dl w}{\dl x}} &
+     \uncover<8->{
+      =
+      \frac{\dl u}{\dl x} v + u\frac{\dl v}{\dl x} + 
+      \frac{\dl u}{\dl x} \frac{\dl v}{\dl x} \dl x}
+     \\ &
+     \uncover<9->{
+      \simeq
+      \frac{du}{dx} v + u\frac{dv}{dx} + 
+      \frac{du}{dx} \frac{dv}{dx} \dl x
+     } 
+     \uncover<10->{
+      \simeq
+      \frac{du}{dx} v + u\frac{dv}{dx}
+     }
+    \end{align*}}
+   \uncover<11->{
+    (The approximations become exact in the limit as $\dl x\xra{}0$.)
+   }
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Examples of the product rule}
+ \begin{align*}
+  \uncover<2->{(\RED{u}\BLUE{v})'} & 
+  \uncover<2->{=\RED{u}'\BLUE{v}+\RED{u}\BLUE{v'}
+   \hphantom{mmmmmmmmmmmmmmmmmmmmmm}} \\
+  \uncover<3->{\frac{d}{dx}(\RED{\sin(x)}\BLUE{\cos(x)})} &
+  \uncover<4->{=\RED{\sin'(x)}\BLUE{\cos(x)} +
+   \RED{\sin(x)}\BLUE{\cos'(x)}}  \\ &
+  \uncover<5->{=\RED{\cos(x)}\BLUE{\cos(x)} + 
+   \RED{\sin(x)}(\BLUE{-\sin(x)}) } \\ &
+  \uncover<6->{=\cos(x)^2 - \sin(x)^2 } \\
+  \uncover<7->{\frac{d}{dx}(\RED{x^3}\BLUE{\log(x)})} &
+  \uncover<8->{=\RED{3x^2}\BLUE{\log(x)} + 
+   \RED{x^3}\BLUE{\log'(x)} } \\ &
+  \uncover<9->{=\RED{3x^2}\BLUE{\log(x)} + 
+   \RED{x^3}(\BLUE{x^{-1}})} \\ &
+  \uncover<10->{=(3\log(x) + 1)x^2 } \\ 
+  \uncover<11->{\frac{d}{dx}(\RED{e^{ax}}\BLUE{\sin(bx)})} &
+  \uncover<12->{=\RED{a\,e^{ax}}\BLUE{\sin(bx)} +
+   \RED{e^{ax}}\BLUE{b\cos(bx)}}  \\ &
+  \uncover<13->{=e^{ax}(a\sin(bx)+b\cos(bx))}
+ \end{align*}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{The quotient rule}
+ \begin{itemize}
+  \uncover<2->{
+  \item Consider variables $u$ and $v$ depending on $x$, and put
+   $w=u/v$.  Then
+   \bbox{$\displaystyle w' = \left(\frac{u}{v}\right)' = \frac{u'v - u v'}{v^2} $}
+  }
+  \uncover<3->{
+  \item Indeed: $u=vw$
+   \uncover<4->{, so $u'=v'w+vw'$ (product rule)}
+   \uncover<5->{, so
+    \[ w' = \frac{u' - v'w}{v}
+     \uncover<6->{ = \frac{u'}{v} - \frac{v'.(u/v)}{v} }
+     \uncover<7->{ = \frac{u'}{v} - \frac{uv'}{v^2} }
+     \uncover<8->{ = \frac{u'v - u v'}{v^2}. }
+    \]
+   }
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Examples of the quotient rule}
+ \vspace{-2ex}
+ \begin{align*}
+  % \uncover<2->{(\RED{u}/\BLUE{v})'} & 
+  % \uncover<2->{=(\RED{u}'\BLUE{v}-\RED{u}\BLUE{v'})/\BLUE{v^2}
+  % \hphantom{mmmmmmmmmmmmmmmmmmmmmm}} \\
+  \uncover<2->{\frac{d}{dx}\left(\frac{\RED{x}}{\BLUE{\log(x)}}\right)} &
+  \uncover<3->{=\frac{\RED{1}.\BLUE{\log(x)} - 
+    \RED{x}\BLUE{x^{-1}}}{\BLUE{\log(x)}^2}} 
+  \uncover<4->{=\frac{\log(x)-1}{\log(x)^2}}
+  \uncover<5->{=\log(x)^{-1}-\log(x)^{-2}} \\
+  \intertext{\uncover<6->{
+    \hspace{3em} (Aside: $x/\log(x) \simeq ($ number of primes $\leq x)$)
+   }}
+  \uncover<7->{\frac{d}{dx}\left(\frac{\RED{x}}{\BLUE{1-x^2}}\right)} &
+  \uncover<8->{= \frac{\RED{1}.(\BLUE{1-x^2}) - \RED{x}.(\BLUE{-2x})}
+   {\BLUE{(1-x^2)^2}} } 
+  \uncover<9->{= \frac{1-x^2+2x^2}{(1-x^2)^2}}
+  \uncover<10->{= \frac{1+x^2}{(1-x^2)^2}} \\
+  \intertext{
+   \uncover<11->{Now consider $\tan'(x)$, remembering that $\tan(x)=\sin(x)/\cos(x)$.}}
+  \uncover<12->{\frac{d}{dx}\left(\frac{\RED{\sin(x)}}{\BLUE{\cos(x)}}\right)} & 
+  \uncover<13->{=\frac{\RED{\sin'(x)}\BLUE{\cos(x)}-\RED{\sin(x)}\BLUE{\cos'(x)}}
+   {\BLUE{\cos(x)}^2}} \\ &
+  \uncover<14->{=\frac{\RED{\cos(x)}\BLUE{\cos(x)}-\RED{\sin(x)}(\BLUE{-\sin(x)})}
+   {\BLUE{\cos(x)}^2} } \\ &
+  \uncover<15->{=\frac{\cos(x)^2+\sin(x)^2}{\cos(x)^2}}
+  \uncover<16->{=\frac{1}{\cos(x)^2}}
+  \uncover<17->{=\sec(x)^2}
+ \end{align*}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{The chain rule}
+ \begin{itemize}
+  \uncover<2->{
+  \item Suppose that $y$ depends on $u$, and $u$ depends on $x$.  Then
+   \bbox{$\displaystyle\frac{dy}{dx} = \frac{dy}{du} \frac{du}{dx} $}
+  }
+  \uncover<3->{
+  \item If $x$ changes to $x+\dl x$, then $u$ changes to $u+\dl u$ and $y$
+   changes to $y+\dl y$.
+   \uncover<4->{Clearly
+    \[ \frac{\dl y}{\dl x} = \frac{\dl y}{\dl u} \frac{\dl u}{\dl x}. \]
+   }
+   \uncover<5->{In the limit, $\dl x$, $\dl u$ and $\dl y$ all approach
+    zero, and we get
+    \[ \frac{dy}{dx} = \frac{dy}{du} \frac{du}{dx}. \]
+   }
+  }
+  \uncover<6->{
+  \item Alternative notation: suppose that $f(x)=g(h(x))$.  Then
+   \bbox{$ f'(x) = g'(h(x)) h'(x) $}
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Examples of the chain rule}
+ \begin{itemize}
+  \uncover<2->{
+  \item Consider $y=\cos(x^2)$.
+   \uncover<3->{This is $y=\cos(u)$, where $u=x^2$.}
+   \[
+    \uncover<4->{\frac{du}{dx} = 2x \hspace{3em}}
+    \uncover<5->{\frac{dy}{du} = -\sin(u)}
+    \uncover<6->{= -\sin(x^2)}
+   \] \[
+    \uncover<7->{\frac{dy}{dx} = \frac{dy}{du}\frac{du}{dx}}
+    \uncover<8->{= -\sin(x^2).2x}
+    \uncover<9->{= -2x\sin(x^2).}
+   \]}
+  \uncover<10->{
+  \item Consider $f(x)=\exp(\sin(x))$.  
+   \[ \uncover<11->{f'(x) = \exp'(\sin(x)).\sin'(x)}
+    \uncover<12->{= \exp(\sin(x))\cos(x).}
+   \]
+  }
+  \uncover<13->{
+  \item Consider $y=a\sin(b x+c)$.  
+   \uncover<14->{Put $u=bx+c$, so $y=a\sin(u)$. \par}
+   \uncover<15->{Then $\frac{du}{dx}=b$}
+   \uncover<16->{and $\frac{dy}{du}=a\cos(u)$}
+   \uncover<17->{so }
+   \[ \uncover<17->{\frac{dy}{dx} = \frac{dy}{du}\frac{du}{dx}}
+    \uncover<18->{= a\cos(u).b = ab\cos(u)}
+    \uncover<19->{= ab\cos(bx+c). }
+   \]
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{The power rule}
+ \begin{itemize}
+  \uncover<2->{
+  \item If $u$ depends on $x$ and $n$ does not, then
+   \bbox{ $\displaystyle\frac{d}{dx}(u^n)=\RED{nu^{n-1}}\BLUE{\frac{du}{dx}}$ }
+  }
+  \uncover<3->{
+  \item Reason: If $y=u^n$ then $\frac{dy}{du}=nu^{n-1}$ so
+   $\frac{dy}{dx}=\frac{dy}{du}\frac{du}{dx}=nu^{n-1}\frac{du}{dx}$
+  }
+  \uncover<4->{
+  \item Consider $y=\sqrt{1+x^2}$.  This is $y=u^{1/2}$, where
+   $u=1+x^2$.  Then 
+   \[ \frac{dy}{du}=\RED{\frac{1}{2}u^{-1/2}}
+    = \RED{\frac{1}{2\sqrt{1+x^2}}}
+    \hspace{3em}
+    \uncover<5->{\frac{du}{dx}=\BLUE{2x}}
+   \]
+   \uncover<6->{
+    \[ \frac{dy}{dx} = \RED{\frac{1}{2\sqrt{1+x^2}}}\BLUE{2x}
+     = \frac{x}{\sqrt{1+x^2}}.
+    \]}
+  }
+  \uncover<7->{
+  \item $\frac{d}{dx}\left(\sin(x)^5\right)=
+   \RED{5\sin(x)^4}\BLUE{\cos(x)}$
+  }
+  \uncover<8->{
+  \item $\frac{d}{dx}\left(\log(x)^3\right)=
+   \RED{3\log(x)^2}\BLUE{x^{-1}}=3\log(x)^2/x$
+  } 
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{The logarithmic rule}
+ \begin{itemize}
+  \uncover<2->{
+  \item \ghost \vspace{-3ex}
+   \[ \mbox{\begin{tikzpicture}%
+      \draw(-2.5cm,0) node[draw,thick,olivegreen,rectangle]
+      {\color{black}
+       $\displaystyle\frac{d}{dx}\log(u) = \frac{1}{u}\,\frac{du}{dx}$};%
+      \uncover<3->{
+       \draw(+2.5cm,0) node[draw,thick,olivegreen,rectangle]
+       {\color{black}
+        $\displaystyle\frac{du}{dx} = u\,\frac{d}{dx}\log(u)$};}%
+     \end{tikzpicture}} \]
+  }
+  \uncover<4->{
+  \item \ghost \vspace{-3ex}
+   \[ \frac{d}{dx}\log(\cos(x)) 
+    \uncover<5->{= \frac{1}{\cos(x)}\cos'(x) }
+    \uncover<6->{= \frac{-\sin(x)}{\cos(x)} }
+    \uncover<7->{= -\tan(x)}
+   \]
+  }
+  \uncover<8->{
+  \item \ghost \vspace{-3ex}
+   \[ \frac{d}{dx}\log(1+x^2) 
+    \uncover<9->{= \frac{\frac{d}{dx}(1+x^2)}{1+x^2}}
+    \uncover<10->{= \frac{2x}{1+x^2} }
+   \]
+  }
+  \uncover<11->{
+  \item Consider $y=x^x$%
+   \uncover<12->{, so $\log(y)=x\log(x)$.}
+   \uncover<13->{Then }
+   \begin{align*}
+    \uncover<13->{\frac{d}{dx}\log(y)} &
+    \uncover<13->{= \frac{d}{dx}(x\log(x))} \\ &
+    \uncover<14->{= 1.\log(x) + x.x^{-1}}
+    \uncover<15->{= \log(x) + 1} \\
+    \uncover<16->{\frac{dy}{dx}} &
+    \uncover<16->{= y\frac{d}{dx}\log(y)} \\ &
+    \uncover<17->{= x^x(\log(x) + 1).}
+   \end{align*}
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{The inverse function rule}
+ \begin{itemize}
+  \uncover<2->{
+  \item If $x$ and $y$ are interdependent variables, then
+   \bbox{$\displaystyle \frac{dx}{dy} = 1/\frac{dy}{dx} $}
+  }
+  \uncover<3->{
+  \item (Take limits in the obvious relation 
+   $\frac{\dl x}{\dl y} = 1/\frac{\dl y}{\dl x}$.)
+  }
+  \uncover<4->{
+  \item Consider $y=\log(x)$\uncover<5->{, so $x=e^y$.} 
+   \[
+    \uncover<6->{\frac{dx}{dy}} 
+    \uncover<6->{=e^y=x} \hspace{4em}
+    \uncover<7->{\frac{dy}{dx}} 
+    \uncover<7->{=1/\frac{dx}{dy}}
+    \uncover<8->{=\frac{1}{x}}
+   \]
+  }
+  \uncover<9->{
+  \item Alternative notation: if $y=g(x)$ then $x=f(y)$, where
+   $f=g^{-1}$ and $g=f^{-1}$.  Then
+   \bbox{$ g'(x) = 1/f'(g(x)) $}
+  }
+  \uncover<10->{
+  \item $\log'(x)=1/\exp'(\log(x))=1/\exp(\log(x))=1/x$.
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{The arcsin function}
+ \begin{itemize}
+  \uncover<2->{
+  \item Consider $y=\arcsin(x)$\uncover<3->{, so $x=\sin(y)$.}
+   \begin{align*}
+    \uncover<4->{\frac{dx}{dy}} &
+    \uncover<5->{= \sin'(y) = \cos(y) \hphantom{mmmmm}} \\
+    \uncover<6->{\frac{dy}{dx}} &
+    \uncover<6->{= 1/\frac{dx}{dy} = \cos(y)^{-1}.}
+   \end{align*}
+  }
+  \uncover<7->{
+  \item Also $\sin(y)^2+\cos(y)^2=1$\uncover<8->{, so}
+   \begin{align*}
+    \uncover<8->{\cos(y)} &
+    \uncover<8->{=\sqrt{1-\sin(y)^2}} 
+    \uncover<9->{=\sqrt{1-x^2}} \\
+    \uncover<10->{\cos(y)^{-1}} &
+    \uncover<10->{=(1-x^2)^{-1/2}\hphantom{mmmmmmmmm}}
+   \end{align*}
+  }
+  \uncover<11->{
+  \item So $\arcsin'(x)=\frac{dy}{dx}=(1-x^2)^{-1/2}$.
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{The arctanh function}
+ \begin{itemize}
+  \uncover<2->{
+  \item Consider $y=\arctanh(x)$\uncover<3->{, so
+    $x=\tanh(y)=\frac{\sinh(y)}{\cosh(y)}$.}
+   \begin{align*}
+    \uncover<4->{\frac{dx}{dy}} &
+    \uncover<4->{= \tanh'(y) \hphantom{mmmmmmmmmmmmmmmmm}} \\ & 
+    \uncover<5->{= \frac{\sinh'(y)\cosh(y)-\sinh(y)\cosh'(y)}
+     {\cosh(y)^2}} \\ &
+    \uncover<6->{= \frac{\cosh(y)^2-\sinh(y)^2}{\cosh(y)^2}} \\ &
+    \uncover<7->{= 1 - \tanh(y)^2}
+    \uncover<8->{= 1-x^2} \\
+    \uncover<9->{\frac{dy}{dx}} &
+    \uncover<9->{= 1/\frac{dx}{dy} = \frac{1}{1-x^2}.}
+   \end{align*}
+  }
+  \uncover<10->{
+  \item So $\arctanh'(x)=\frac{dy}{dx}=(1-x^2)^{-1}$.
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Classes of functions}
+ \begin{itemize}
+  \uncover<2->{
+  \item If $f(x)$ is a polynomial, then so is $f'(x)$.
+   \begin{itemize}
+   \item \uncover<3->{
+     Eg $f(x)=x+x^{10}+x^{100}$;\qquad $f'(x)=1+10x^9+100x^{99}$}
+   \item \uncover<4->{
+     Eg $f(x)=(x-1)^4+(x+1)^4$;\qquad $f'(x)=4(x-1)^3+4(x+1)^3$}
+   \end{itemize}
+  }
+  \uncover<5->{
+  \item If $f(x)$ is a rational function, then so is $f'(x)$.
+   \begin{itemize}
+   \item \uncover<6->{
+     Eg $f(x)=\frac{x^2-1}{x^2+1}$;\qquad $f'(x)=\frac{4x}{(x^2+1)^2}$}
+   \item \uncover<7->{
+     Eg $f(x)=\frac{1}{x}+\frac{1}{x+1}+\frac{1}{x+2}$;\qquad
+     $f'(x)=-\frac{1}{x^2}-\frac{1}{(x+1)^2}-\frac{1}{(x+2)^2}$}
+   \end{itemize}
+  }
+  \uncover<8->{
+  \item If $f(x)$ is a trigonometric polynomial, so is $f'(x)$.
+   \begin{itemize}
+   \item \uncover<9->{
+     Eg $f(x)=\sin(x)+\sin(3x)/3+\sin(5x)/5$;\qquad
+     $f'(x)=\cos(x)+\cos(3x)+\cos(5x)$.}
+   \item \uncover<10->{
+     Eg $f(x)=\sin(3x)+\cos(3x)$;\qquad $f'(x)=3\cos(3x)-3\sin(3x)$.}
+   \end{itemize}
+  }
+  \uncover<11->{
+  \item If $f(x)$ is a polynomial times $e^x$, so is $f'(x)$.
+   \begin{itemize}
+   \item \uncover<12->{
+     Eg $f(x)=(x+x^2)e^x$;\qquad $f'(x)=(1+3x+x^2)e^x$.}
+   \item \uncover<13->{
+     Eg $f(x)=(x^4-4x^3+12x^2-24x+24)e^x$;\qquad $f'(x)=x^4e^x$.}
+   \end{itemize}
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Implicit differentiation}
+ \begin{itemize}
+  \uncover<2->{
+  \item Suppose that $x$ and $y$ are related by an equation
+   such as $y^4+xy=x^3$.  We cannot write $y$ as a function
+   of $x$, but we can still find $dy/dx$.
+  } \uncover<3->{
+  \item Differentiate both sides.  Terms in the
+   equation involving $y$ give terms in the derivative
+   involving $dy/dx$.  Rearranging gives $dy/dx$  in terms
+   of $x$ and $y$. 
+  }
+  \uncover<4->{
+  \item Suppose that $y^4+xy=x^3$\uncover<5->{, so 
+    \[ \tfrac{d}{dx}\left(y^4+xy\right) = 
+     \tfrac{d}{dx}\left(x^3\right) = 3x^2. 
+    \]}
+   \uncover<6->{
+    Also $\frac{d}{dx}(y^4)=4y^3\frac{dy}{dx}$ by the power rule\\
+   }
+   \uncover<7->{
+    and
+    $\frac{d}{dx}(xy)=\frac{dx}{dx}y+x\frac{dy}{dx}=y+x\frac{dy}{dx}$ 
+    by the product rule
+   }
+   \uncover<8->{
+    ; so 
+    \begin{align*}
+     4y^3\tfrac{dy}{dx} + y + x\tfrac{dy}{dx} &= 3x^2 \\ 
+     \uncover<9->{(4y^3+x)\tfrac{dy}{dx}} &
+     \uncover<9->{= 3x^2-y} \\
+     \uncover<10->{\tfrac{dy}{dx}} &
+     \uncover<10->{= \tfrac{3x^2-y}{4y^3+x}.}
+    \end{align*}
+   }
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Implicit examples}
+ \begin{itemize}
+  \uncover<2->{
+  \item Suppose $x+\sin(x)=y-\cos(y)$.  
+   \begin{align*}
+    \uncover<3->{\tfrac{d}{dx}(x+\sin(x))} &
+    \uncover<3->{=\tfrac{d}{dx}(y-\cos(y))} \\
+    \uncover<4->{1+\cos(x)} &
+    \uncover<4->{=\tfrac{dy}{dx}+\sin(y)\tfrac{dy}{dx}} \\
+    \uncover<5->{\tfrac{dy}{dx}} &
+    \uncover<5->{=\tfrac{1+\cos(x)}{1+\sin(y)}}
+   \end{align*}
+  }
+  \uncover<6->{
+  \item Suppose $y=\exp(x^2+y^2)$.  
+   \begin{align*}
+    \uncover<7->{\tfrac{dy}{dx}} &
+    \uncover<7->{= \tfrac{d}{dx}\exp(x^2+y^2)
+     = \tfrac{d}{dx}(e^{x^2} e^{y^2})} \\ &
+    \uncover<8->{=2x e^{x^2}e^{y^2} + e^{x^2}.2y\tfrac{dy}{dx}e^{y^2}} \\
+    & \uncover<9->{=2(x+y\tfrac{dy}{dx})\exp(x^2+y^2)} \\
+    \uncover<10->{(1-2y\exp(x^2+y^2))\tfrac{dy}{dx}} &
+    \uncover<10->{=2x\exp(x^2+y^2)} \\
+    \uncover<11->{\tfrac{dy}{dx}} &
+    \uncover<11->{=\tfrac{2x\exp(x^2+y^2)}{1-2y\exp(x^2+y^2)}}
+   \end{align*}
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Parametric differentiation}
+ \begin{itemize}
+  \uncover<2->{
+  \item Suppose that $x$ and $y$ are both functions of
+   another variable $t$.  Then 
+   \bbox{$\displaystyle \frac{dy}{dx}= \frac{dy/dt}{dx/dt} $}
+  }
+  \uncover<3->{
+  \item Suppose that $x=1+t^2$ and $y=t+t^3$ 
+   \uncover<7->{(so $t=y/x$)}
+   \[ \uncover<4->{
+     dy/dt = 1+3t^2 \hspace{5em} dx/dt = 2t
+    } \]
+   \[ \uncover<5->{
+     \frac{dy}{dx}  
+     = \frac{dy/dt}{dx/dt}
+    } \uncover<6->{
+     = \frac{1+3t^2}{2t}
+    } \uncover<7->{
+     = \frac{1+3(y/x)^2}{2(y/x)}
+    } \uncover<8->{
+     = \frac{x^2+3y^2}{2xy}
+    }
+   \]
+  }
+  \uncover<9->{
+  \item Suppose that $x=t-\sin(t)$ and $y=1-\cos(t)$.
+   \[ \uncover<10->{
+     dy/dt = \sin(t) \hspace{5em}
+     dx/dt = 1-\cos(t)
+    }\]
+   \[ \uncover<11->{
+     \frac{dy}{dx} = \frac{dy/dt}{dx/dt} = \frac{\sin(t)}{1-\cos(t)}
+    } 
+    \uncover<12->{=\frac{\sqrt{y(2-y)}}{y}}
+    \uncover<13->{=\sqrt{\frac{2-y}{y}}}
+   \]
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{The circle}
+ \begin{itemize}
+  \uncover<2->{
+  \item Consider a point $(x,y)$ on the unit circle, so
+   $x^2+y^2=1$. 
+  }
+  \uncover<3->{
+  \item Differentiate $x^2+y^2=1$; 
+   \uncover<4->{
+    $\displaystyle 2x + 2y\frac{dy}{dx} = 0$;
+   }
+   \uncover<5->{\[
+     \frac{dy}{dx}=
+     -\frac{2x}{2y} = -\frac{x}{y}
+    \]}
+  }
+  \uncover<6->{
+  \item Parametrically: $x=\cos(t)$, $y=\sin(t)$.
+   \[ \uncover<7->{\frac{dy}{dx} = \frac{dy/dt}{dx/dt}}
+    \uncover<8->{=\frac{\cos(t)}{-\sin(t)}}
+    \uncover<9->{=-\frac{x}{y}}
+   \]
+  }
+  \uncover<10->{
+  \item Directly: $y=(1-x^2)^{1/2}$
+   \[ \uncover<11->{
+     \frac{dy}{dx}
+     = \frac{1}{2}(1-x^2)^{-1/2}\frac{d}{dx}(1-x^2) }
+    \uncover<12->{
+     = \frac{1}{2}y^{-1}.(-2x)}
+    \uncover<13->{
+     = -\frac{x}{y}.}
+   \]
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Integration}
+ \uncover<2->{\noindent{\bf Things you should know:}}
+ \begin{itemize}
+  \uncover<3->{
+  \item The meaning of integration (take the sum of a large number of
+   very small contributions, and pass to the limit)}
+  \uncover<4->{
+  \item Integration as the reverse of differentiation}
+  \uncover<5->{
+  \item Integrals of standard functions and classes of functions
+  } 
+  \uncover<6->{
+  \item The method of undetermined coefficients
+  }
+  \uncover<7->{
+  \item Integration by parts
+  }
+  \uncover<8->{
+  \item Integration by substitution
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Meaning}
+ \begin{itemize}
+  \uncover<2->{
+  \item To define $\int_a^b f(x)\, dx$:
+   \begin{itemize}
+    \uncover<3->{
+    \item Divide the interval $[a,b]$ into many short intervals
+     $[x,x+h]$.} 
+    \uncover<4->{
+    \item For each short interval $[x,x+h]$, find $f(x)h$.}
+    \uncover<5->{
+    \item Add these terms together to get an
+     approximation to $\int_a^b f(x)\,dx$.}
+    \uncover<6->{
+    \item For the exact value of $\int_a^b f(x)\,dx$, take
+     the limit $h\xra{}0$.
+    }
+   \end{itemize}
+  }
+  \uncover<7->{
+  \item In economics, government revenue depends on time, and total
+   revenue in the last decade is
+   $\int_{1999}^{2009}\text{revenue(t)}\,dt$. 
+  }
+  \uncover<8->{
+  \item If a particle moves with velocity $v(t)>0$ at time $t$, then
+   the total distance moved between times $a$ and $b$ is
+   $\int_a^b v(t)\,dt$.
+  }
+  \uncover<9->{
+  \item A current flowing in a wire exerts a magnetic force on a moving
+   electron.  There is a formula for the force contributed by a short
+   section of wire; to get the total force, we integrate.
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Areas}
+ \begin{center}\begin{tikzpicture}[xscale=2]
+   \only<2-7>{\bx{1.4}}
+   \mode<beamer>{
+    \only<4-7>{\bx{1.2} \bx{1.6}}
+    \only<5-7>{\bx{1.0} \bx{1.8}}
+    \only<6-7>{\bx{2.0} \bx{2.2}}
+    \only<7>{\bx{2.4} \bx{2.6} \bx{2.8}}
+    \only<8>{
+     \bxp{1.0} \bxp{1.2} \bxp{1.4} \bxp{1.6} \bxp{1.8} 
+     \bxn{2.0} \bxn{2.2} \bxn{2.4} \bxn{2.6} \bxn{2.8}
+    }
+    \only<9>{
+     \renewcommand{\hh}{0.1}
+     \bxp{1.0} \bxp{1.1} \bxp{1.2} \bxp{1.3} \bxp{1.4} 
+     \bxp{1.5} \bxp{1.6} \bxp{1.7} \bxp{1.8} \bxp{1.9}
+     \bxn{2.0} \bxn{2.1} \bxn{2.2} \bxn{2.3} \bxn{2.4} 
+     \bxn{2.5} \bxn{2.6} \bxn{2.7} \bxn{2.8} \bxn{2.9}
+    }
+    \only<10>{
+     \fill[green,domain=1:3,samples=50]
+     plot (\x,{\ff{\x}}) -- (3,{\ff{3}}) -- (3,0) -- (1,0) -- cycle;
+    }}
+   \draw[->] (-0.3,0) -- (3.8,0);
+   \draw[->] (0,-0.3) -- (0,5.3);
+   \draw[red,domain=0:3.5,samples=50] plot (\x,{\ff{\x}});
+   \draw (1.0,0) -- (1.0,{\ff{1.0}});
+   \draw (3.0,0) -- (3.0,{\ff{3.0}});
+   \draw(1.0,-0.2) node {$\scriptstyle a$};
+   \draw(3.0,-0.2) node {$\scriptstyle b$};
+   \draw(3.0,4.7) node {$\scriptstyle y=f(x)$};
+   \only<2>{
+    \draw[<->,magenta] (1.35,0) -- (1.35,{\ff{1.4}});
+    \draw(1.32,{\ff{1.4} * 0.5}) node[anchor=east]{$\scriptstyle f(x)$};
+    \draw[<->,magenta] (1.4,{\ff{1.4} + 0.1}) -- (1.6,{\ff{1.4} + 0.1});
+    \draw (1.5,{\ff{1.4} + 0.2}) node[anchor=south] {$\scriptstyle h$};
+    \draw[->] (1.8,0.5) -- (1.5,0.5);
+    \draw (1.82,0.5) node[anchor=west]{$\text{Area} = f(x)h$};
+   }
+  \end{tikzpicture}\end{center}
+ \only<1>{Consider the integral $\int_a^b f(x)\,dx$.}%
+ \only<2>{For each short interval $[x,x+h]\subset [a,b]$, we have a
+  contribution $f(x)h$.  This is the area of the green rectangle.}%
+ \only<3>{This is the contribution from one short interval, but we
+  need to add together the contributions from many short intervals.}%
+ \mode<beamer>{
+  \only<4>{Here we have added in two more intervals}%
+  \only<5>{Here we have added in two more intervals -- and two more}%
+  \only<6>{Here we have added in two more intervals -- and two more --
+   and two more}%
+  \only<7>{Now we have divided the whole interval $[a,b]$ into
+   subintervals of length $h$.  The sum of the terms $f(x)h$ is the
+   area of the green region.}%
+  \only<8>{This is not exactly the same as the area under the curve,
+   because of the regions marked in blue and pink.}%
+  \only<9>{However, the error decreases if we make $h$ smaller.}%
+  \only<10>{However, the error decreases if we make $h$ smaller, and
+   tends to zero in the limit.}}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{The Fundamental Theorem of Calculus}
+ \begin{itemize}
+  \uncover<2->{
+  \item An \DEFN{indefinite integral} of $f(x)$ is a function $F(x)$
+   such that $F'(x)=f(x)$.
+  }
+  \uncover<3->{
+  \item Examples:
+   \begin{itemize}
+    \uncover<4->{
+    \item $\log(x)$ is an indefinite integral of $1/x$}
+    \uncover<5->{
+    \item $\sin(x)$ is an indefinite integral of $\cos(x)$}
+    \uncover<6->{
+    \item $F(x)=x^2+2x$ and $G(x)=(x+1)^2$ are indefinite integrals
+     of $2x+2$}
+   \end{itemize}
+  }
+  \uncover<7->{
+  \item The \DEFN{Fundamental Theorem of Calculus:}
+   \begin{itemize}
+    \uncover<8->{
+    \item For any number $a$, the function $F(x)=\int_a^x f(t)\,dt$
+     is an indefinite integral of $f(x)$.}
+    \uncover<9->{
+    \item If $F(x)$ is any indefinite integral of $f(x)$, then
+     $\int_a^b f(x)\,dx=
+     \left[\vphantom{\int}F(x)\right]_a^b = F(b)-F(a)$.}
+   \end{itemize}
+  }
+  \uncover<10->{
+  \item The functions $F(x)=\int_0^x 2t+2\,dt=x^2+2x$ and 
+   $G(x)=\int_{-1}^x 2t+2\,dt=(x+1)^2$ are both indefinite integrals
+   of $2x+2$.
+  }
+  \uncover<11->{
+  \item $\int_a^b\frac{1}{x}=\left[\vphantom{\int}\log(x)\right]_a^b
+   =\log(b)-\log(a)$
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Proof of the Fundamental Theorem}
+ \vspace{-1ex}
+ \begin{center}\begin{tikzpicture}[xscale=2]
+   \mode<beamer>{
+    \only<1>{
+     \fill[green,domain=1:3,samples=50]
+     plot (\x,{\ff{\x}}) -- (3,{\ff{3}}) -- (3,0) -- (1,0) -- cycle;
+     \draw (3.0,0) -- (3.0,{\ff{3.0}});
+     \draw (1.3,0.5) node[draw,olivegreen,rounded corners,anchor=west]%
+     {\color{black} $\text{Area }=F(x)$};
+    }
+    \only<2>{
+     \fill[green,domain=1:3.2,samples=50]
+     plot (\x,{\ff{\x}}) -- (3.2,{\ff{3.2}}) -- (3.2,0) -- (1,0) -- cycle;
+     \draw[dotted] (3.0,0) -- (3.0,{\ff{3.0}});
+     \draw (3.2,0) -- (3.2,{\ff{3.2}});
+     \draw (1.3,0.5) node[draw,olivegreen,rounded corners,anchor=west]%
+     {\color{black} $\text{Area }=F(x+h)$};
+    }
+    \only<2-4>{
+     \fill[black] (3.2,0) ellipse(0.025 and 0.05);
+     \draw(3.2,-0.2) node[anchor=west] {$\scriptstyle x+h$};
+    }
+    \only<3-4>{
+     \fill[green,domain=3:3.2,samples=50]
+     plot (\x,{\ff{\x}}) -- (3.2,{\ff{3.2}}) -- (3.2,0) -- (3,0) -- cycle;
+     \draw (3.0,0) -- (3.0,{\ff{3.0}});
+     \draw (3.2,0) -- (3.2,{\ff{3.2}});
+    }}
+   \only<3->{
+    \draw (1.8,3.6) node[draw,olivegreen,rounded corners,anchor=south]%
+    {\color{black} 
+     $\begin{array}{rl}
+      \text{Area} &= F(x+h)-F(x) \\
+      & \uncover<4->{\simeq f(x)h} 
+     \end{array}$
+    };
+    \draw[olivegreen,->] (1.8,3.6) -- (3.05,1.5); 
+   }
+   
+   \mode<beamer>{\only<4> {
+     \draw[magenta,<->] (2.95,0) -- (2.95,{\ff{3}});
+     \draw(2.95,1) node[anchor=east] {$\scriptstyle f(x)$};
+     \draw[magenta,<->] (3,{\ff{3}}) -- (3.2,{\ff{3}});
+     \draw(3.1,{\ff{3} - 0.15}) node {$\scriptstyle h$};
+    }}
+   
+   \only<5->{
+    \fill[green,domain=3:3.1,samples=50]
+    plot (\x,{\ff{\x}}) -- (3.1,{\ff{3.1}}) -- (3.1,0) -- (3,0) -- cycle;
+    \draw (3.0,0) -- (3.0,{\ff{3.0}});
+    \draw (3.1,0) -- (3.1,{\ff{3.1}});
+    \fill[black] (3.1,0) ellipse(0.025 and 0.05);
+    \draw(3.1,-0.2) node[anchor=west] {$\scriptstyle x+h$};
+    
+    \draw[magenta,<->] (2.95,0) -- (2.95,{\ff{3}});
+    \draw(2.95,1) node[anchor=east] {$\scriptstyle f(x)$};
+    \draw[magenta,<->] (3,{\ff{3}}) -- (3.1,{\ff{3}});
+    \draw(3.05,{\ff{3} - 0.15}) node {$\scriptstyle h$};
+   }
+   
+   \draw[->] (-0.3,0) -- (3.8,0);
+   \draw[->] (0,-0.3) -- (0,5.3);
+   \draw (1.0,0) -- (1.0,{\ff{1.0}});
+   
+   \draw[red,domain=0:3.5,samples=50] plot (\x,{\ff{\x}});
+   \draw(3.0,4.7) node {$\scriptstyle y=f(x)$};
+   
+   \fill[black] (1.0,0) ellipse(0.025 and 0.05);
+   \draw(1.0,-0.2) node {$\scriptstyle a$};
+   \fill[black] (3.0,0) ellipse(0.025 and 0.05);
+   \draw(3.0,-0.2) node {$\scriptstyle x$};
+   
+  \end{tikzpicture}\end{center}
+ \mode<beamer>{
+  \only<1>{
+   Choose a number $a$, and define $F(x)=\int_a^x f(t)\, dt$.  
+   We must show that $F'(x)=f(x)$.
+  }%
+  \uncover<2->{
+   We now change $x$ to $x+h$.
+  }%
+  \uncover<3->{
+   The increase in $F(x)$ is $F(x+h)-F(x)$, which is the area of the
+   thin strip as shown. 
+  }%
+  \uncover<4->{
+   This is approximately the same as $f(x)h$.
+  }%
+  \only<6>{
+   \[ F'(x) \simeq (F(x+h)-F(x))/h \simeq f(x). \]
+  }}%
+ \only<7>{
+  \[ F'(x) = \lim_{h\xra{}0} (F(x+h)-F(x))/h = f(x). \]
+ }%
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Constants}
+ \begin{itemize}
+  \uncover<2->{\item Is it $\displaystyle\int x^2\,dx=x^3/3$
+   or $\displaystyle\int x^2\,dx=x^3/3\RED{+c}$?
+  }
+  \uncover<3->{\item Either is acceptable in the exam.\\
+   Neither one is strictly logically satisfactory.
+  }
+  \uncover<4->{\item $x^3/3$ is \EMPH{an} indefinite
+   integral of $x^2$. 
+  }
+  \uncover<5->{\item \EMPH{Every} indefinite integral of
+   $x^2$ has the form $x^3/3+c$ for some $c$.
+  }
+  \uncover<6->{\item If you just want to calculate
+   $\int_a^bf(x)\,dx$, it does not matter which indefinite
+   integral you use.  Any two choices will give the same
+   answer. 
+  }
+  \uncover<7->{\item In solving differential equations, it
+   often does matter which indefinite integral you use.  You
+   must therefore include a '+c' term, and do some extra work
+   to see what $c$ should be.
+  }
+  \uncover<8->{\item Maple's {\tt int()} command will never
+   give you a '+c' term. \\
+   If you need one, you must insert it yourself.
+  } 
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Checking and Guessing}
+ \begin{itemize}
+  \uncover<2->{
+  \item 
+   \bbox{
+    Integrals can easily be checked by differentiating
+   }}
+  \uncover<3->{
+  \item %
+\ifx\HO\undefined
+   \only<3>{$\int \sin(x)^2\,dx=\sin(x)^3/3$?}
+\fi%
+   \uncover<4->{$\int \sin(x)^2\,dx\RED{\,\neq\,}\sin(x)^3/3$,
+    because
+    \[ \frac{d}{dx}\left(\sin(x)^3/3\right) = 
+     3\sin(x)^2\cos(x)/3 = \sin(x)^2\cos(x) \RED{\neq} \sin(x)^2. 
+    \] 
+   }
+  }
+  \uncover<5->{
+  \item %
+\ifx\HO\undefined
+   \only<5>{$\int \frac{\cos(x)}{x}-\frac{\sin(x)}{x^2}\,dx=
+    \frac{\sin(x)}{x}$?}
+\fi%
+   \uncover<6->{$\int \frac{\cos(x)}{x}-\frac{\sin(x)}{x^2}\,dx=
+    \frac{\sin(x)}{x}$,
+    because
+    \[ \frac{d}{dx}\left(\frac{\sin(x)}{x}\right) = 
+     \frac{\sin'(x).x-\sin(x).1}{x^2} =
+     \frac{\cos(x)}{x} - \frac{\sin(x)}{x^2}.
+    \] 
+   }
+  }
+  \uncover<7->{
+  \item $\int 2x\,e^{x^2}\,dx=e^{x^2}$\uncover<8->{, because
+    $\frac{d}{dx}e^{x^2}=2x\,e^{x^2}$.}
+  }
+  \uncover<9->{
+  \item $\int\frac{3x^2+2x+1}{x^3+x^2+x+1}\,dx=\log(x^3+x^2+x+1)$%
+   \uncover<10->{, 
+    because 
+    \[ \frac{d}{dx}\log(x^3+x^2+x+1) = 
+     \frac{\frac{d}{dx}(x^3+x^2+x+1)}{x^3+x^2+x+1} = 
+     \frac{3x^2+2x+1}{x^3+x^2+x+1}.
+    \]}
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Undetermined coefficients}
+ \begin{itemize}
+  \uncover<2->{
+  \item Suppose we know that for some constants $a,\dotsc,d$
+   \vspace{-1ex}
+   \[ \int \log(x)^3\,dx= (a\log(x)^3+b\log(x)^2+c\log(x)+d)x \]
+   \vspace{-1ex}
+   \uncover<3->{
+    (How could we know this? --- see later)
+   }}
+  \uncover<4->{
+  \item \textbf{Problem:} find $a$, $b$, $c$ and $d$.
+  }
+  \uncover<5->{
+  \item \ghost\vspace{-5ex}
+   \begin{eqnarray*}
+    \log(x)^3 &=&
+    \tfrac{d}{dx}\left((a\log(x)^3+b\log(x)^2+c\log(x)+d)x\right) \\ &
+    \uncover<6->{=} &
+    \uncover<6->{(3a\log(x)^2x^{-1} + 2b\log(x)x^{-1}+cx^{-1})x +} \\
+    && \uncover<6->{(a\log(x)^3+ b\log(x)^2+c\log(x)+d).1} 
+    \\ &
+    \uncover<7->{=} &
+    \uncover<7->{
+     a\log(x)^3 +(b+3a)\log(x)^2 + (c+2b)\log(x) + (d+c)
+    }
+   \end{eqnarray*}
+   \uncover<8->{
+   \item So $a=1$, $b+3a=0$, $c+2b=0$ and $d+c=0$ (compare coefficients)
+   }
+   \uncover<9->{
+   \item So $a=1$, $b=-3$, $c=6$ and $d=-6$
+   }
+   \uncover<10->{
+    \[ \int \log(x)^3\,dx= (\log(x)^3-3\log(x)^2+6\log(x)-6)x. \]
+   }
+  }
+  
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Standard integrals}%
+ \uncover<2->{
+  \[ \begin{array}{rlcrl}
+    \mode<beamer>{\only<2>{\exp'(x)\vphantom{\int\exp(x)\,dx}}}%
+    \only<3->{\int \exp(x)\,dx} &\!= %
+    \mode<beamer>{\only<2>{\exp(x)}}%
+    \only<3->{\exp(x)} &\hspace{1em}& %
+    \mode<beamer>{\only<2>{\log'(x)}}%
+    \only<3->{\int 1/x \,dx} &\!= %
+    \mode<beamer>{\only<2>{1/x}}%
+    \only<3->{\log(x)} \\ %
+    \mode<beamer>{\only<2>{\sinh'(x)}}%
+    \only<3->{\int \cosh(x)\,dx} &\!= %
+    \mode<beamer>{\only<2>{\cosh(x)}}%
+    \only<3->{\sinh(x)} && %
+    \mode<beamer>{\only<2>{\arcsinh'(x)}}%
+    \only<3->{\int (1+x^2)^{-1/2}\,dx} &\!= %
+    \mode<beamer>{\only<2>{(1+x^2)^{-1/2}}}%
+    \only<3->{\arcsinh(x)} \\ %
+    \mode<beamer>{\only<2>{\cosh'(x)}}%
+    \only<3->{\int \sinh(x)\,dx} &\!= %
+    \mode<beamer>{\only<2>{\sinh(x)}}%
+    \only<3->{\cosh(x)} && %
+    \mode<beamer>{\only<2>{\arccosh'(x)}}%
+    \only<3->{\int (x^2-1)^{-1/2}\,dx} &\!= %
+    \mode<beamer>{\only<2>{(x^2-1)^{-1/2}}}%
+    \only<3->{\arccosh(x)} \\ %
+    \mode<beamer>{\only<2>{\tanh'(x)}}%
+    \only<3->{\int \sech(x)^2 \,dx} &\!= %
+    \mode<beamer>{\only<2>{\sech(x)^2}}%
+    \only<3->{\tanh(x)} && %
+    \mode<beamer>{\only<2>{\arctanh'(x)}}%
+    \only<3->{\int (1-x^2)^{-1}\,dx} &\!= %
+    \mode<beamer>{\only<2>{(1-x^2)^{-1}}}%
+    \only<3->{\arctanh(x)} \\ %
+    \mode<beamer>{\only<2>{\sin'(x)}}%
+    \only<3->{\int \cos(x)\,dx} &\!= %
+    \mode<beamer>{\only<2>{\cos(x)}}%
+    \only<3->{\sin(x)} && %
+    \mode<beamer>{\only<2>{\arcsin'(x)}}%
+    \only<3->{\int (1-x^2)^{-1/2}\,dx} &\!= %
+    \mode<beamer>{\only<2>{(1-x^2)^{-1/2}}}%
+    \only<3->{\arcsin(x)} \\ %
+    \mode<beamer>{\only<2>{\cos'(x)}}%
+    \only<3->{\int \sin(x)\,dx} &\!= %
+    \mode<beamer>{\only<2>{-\sin(x)}}%
+    \only<3->{-\cos(x)} && %
+    \mode<beamer>{\only<2>{\arccos'(x)}}%
+    \only<3->{\int (1-x^2)^{-1/2}\,dx} &\!= %
+    \mode<beamer>{\only<2>{-(1-x^2)^{-1/2}}}%
+    \only<3->{-\arccos(x)} \\ %
+    \mode<beamer>{\only<2>{\tan'(x)}}%
+    \only<3->{\int \sec(x)^2 \,dx} &\!= %
+    \mode<beamer>{\only<2>{\sec(x)^2}}%
+    \only<3->{\tan(x)} && %
+    \mode<beamer>{\only<2>{\arctan'(x)}}%
+    \only<3->{\int (1+x^2)^{-1}\,dx} &\!= %
+    \mode<beamer>{\only<2>{(1+x^2)^{-1}}}%
+    \only<3->{\arctan(x)} \\
+    \hphantom{mmmmmmmm} & \hphantom{mmmmmmmm} &&
+    \hphantom{mmmmmmmmm} & \hphantom{mmmmmmmm} 
+   \end{array} \] }
+ \vspace{-6ex}
+ \begin{align*}
+  \uncover<4->{\textstyle\int x^n\, dx}       &
+  \uncover<4->{= x^{n+1}/(n+1) \hspace{3em} (n\neq -1)} \\
+  \uncover<5->{\textstyle\int a^x\, dx} &
+  \uncover<5->{= a^x/\log(a)} \\
+  \uncover<6->{\textstyle\int \log(x)\,dx} &
+  \uncover<6->{= x\log(x) - x} \\
+  \uncover<7->{\textstyle\int \tan(x)\, dx} &
+  \uncover<7->{= -\log(\cos(x))} \\
+  \uncover<8->{\textstyle\int \sin(x)^2\, dx} &
+  \uncover<8->{= (2x-\sin(2x))/4} \\
+  \uncover<9->{\textstyle\int \cos(x)^2\, dx} &
+  \uncover<9->{= (2x+\sin(2x))/4} \\
+ \end{align*}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Rational functions}
+ \begin{itemize}
+  \uncover<2->{\item
+   A \DEFN{rational function} of $x$ is a function defined using
+   only constants, addition, multiplication, division and integer
+   powers.}
+  \uncover<3->{\item
+   No roots, fractional powers, logs, exponentials, trigonometric
+   functions and so on can occur in a rational function.}
+  \uncover<4->{\item {\bf Examples:}
+   {\tiny $\displaystyle
+    \frac{1+x+x^2}{1-x+x^2}
+    \hspace{3em}
+    \frac{1}{x} + \frac{\pi}{x-1} + \frac{\pi^2}{x-2}
+    \hspace{3em}
+    x^2+x+1+x^{-1}+x^{-2}
+    $}}
+  \uncover<5->{\item {\bf Non-Examples:}
+   {\tiny $\displaystyle
+    e^{-x}\sin(x)
+    \hspace{3em}
+    \sqrt{1-x^2}
+    \hspace{3em}
+    \frac{\log(x)}{1+x}
+    \hspace{3em}
+    \frac{\arctan(x)}{2\pi}.
+    $}}
+  \uncover<6->{\item
+   If $f(x)$ is a rational function, then $\int f(x)\,dx$
+   is a sum of terms of the following types:
+   \begin{itemize}
+   \item Rational functions
+   \item Terms of the form $\ln(|x-u|)$
+   \item Terms of the form $\ln(x^2+vx+w)$
+   \item Terms of the form $\arctan(ux+v)$.
+   \end{itemize}}
+  \uncover<7->{\item
+   $\displaystyle \int \frac{4x^3+8}{x^6-x^2}\,dx = 
+   \frac{8}{x} + 3\ln(|x-1|) - \ln(|x+1|) - \ln(x^2+1) +
+   4\arctan(x)$
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Rational function examples}
+ \uncover<2->{
+  \begin{itemize}
+  \item 
+   $\displaystyle \int\frac{x^2+1}{x^2-1}\,dx = 
+   x + \ln(|x-1|) + \ln(|x+1|)$
+  \item
+   $\displaystyle \int\left(\frac{x+1}{x-1}\right)^3\,dx =
+   1+\frac{6}{x-1}+\frac{12}{(x-1)^2} + \frac{8}{(x-1)^3}$
+  \item
+   $\displaystyle \int\frac{2x+2}{x^2+1}\,dx =
+   \ln(x^2+1) + 2\arctan(x)$
+  \item
+   $\displaystyle \int\frac{1}{x^{-1}+1+x}\,dx =
+   \frac{1}{2}\ln(1+x+x^2)-
+   \frac{1}{\sqrt{3}}\arctan\left(\frac{1+2x}{\sqrt{3}}\right)$
+  \item
+   $\displaystyle \int\frac{4}{1-x^4}\,dx =
+   \ln(|x+1|)-\ln(|x-1|)+2\arctan(x)$
+   % \item
+   %  $\displaystyle \int\frac{6}{(x-1)(x-2)(x-4)}\,dx =
+   %  2\ln(|x-1|)-3\ln(|x-2|)+\ln(|x-4|)$
+  \end{itemize}}
+ \uncover<3->{
+  \[
+   \frac{d}{dx}\ln(|x-u|) = \frac{1}{x-u} \hspace{6em}
+   \frac{d}{dx}\ln(x^2+ux+v)=\frac{2x+u}{x^2+ux+v}
+  \]
+  \[ \frac{d}{dx}\arctan(ux+v) =
+   \frac{u}{1+(ux+v)^2}=\frac{u}{u^2x^2+2uvx+(v^2+1)}
+  \]
+ }
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Trigonometric polynomials}
+ \uncover<2->{
+  \bbox{$
+   \tint \sin(nx)\,dx = -\cos(nx)/n \hspace{3em}
+   \tint \cos(nx)\,dx = \sin(nx)/n$}}
+ \begin{align*}
+  \uncover<3->{\cos(2x)} &
+  \uncover<3->{
+   =\cos(x)^2-\sin(x)^2 = 2\cos(x)^2-1 = 1-2\sin(x)^2 \hphantom{m}
+  } \\
+  \uncover<4->{\sin(x)^2} &
+  \uncover<4->{= 1/2-\cos(2x)/2 } \\
+  \uncover<5->{\tint\sin(x)^2\,dx} &
+  \uncover<5->{= x/2-\sin(2x)/4 } \\
+  \uncover<6->{\tint\cos(x)^2\,dx} &
+  \uncover<6->{= x/2+\sin(2x)/4 } \\
+  \uncover<7->{\sin(x)^3} &
+  \uncover<7->{= 3\sin(x)/4 - \sin(3x)/4} \\
+  \uncover<8->{\tint \sin(x)^3\,dx} &
+  \uncover<8->{= -3\cos(x)/4 + \cos(3x)/12} \\
+  \uncover<9->{\sin(x)\sin(2x)\sin(4x)} &
+  \uncover<9->{= -\sin(x)/4 + \sin(3x)/4 + \sin(5x)/4 - \sin(7x)/4} \\
+  \uncover<10->{\tint\sin(x)\sin(2x)\sin(4x)\,dx} &
+  \uncover<10->{= \cos(x)/4 - \cos(3x)/12 - \cos(5x)/20 + \cos(7x)/28}\\
+  \uncover<11->{\sin(x)^4 + \cos(x)^4} &
+  \uncover<11->{= 3/4 + \cos(4x)/4} \\
+  \uncover<12->{\tint \sin(x)^4 + \cos(x)^4\,dx} &
+  \uncover<12->{= 3x/4 + \sin(4x)/16} \\
+ \end{align*}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Affine substitution}
+ \uncover<2->{
+  If $\displaystyle\int f(x)\,dx=g(x)$ and $a,b$ are
+  constant, then
+  \[ \int f(ax+b)\,dx=g(ax+b)/a \]
+ } 
+ \begin{align*}
+  \uncover<3->{\int\cos(x)\,dx} &
+  \uncover<3->{= \sin(x)\hphantom{mmmmmmm}} &
+  \uncover<4->{\int\cos(2x+3)\,dx} &
+  \uncover<4->{=\sin(2x+3)/2\hphantom{mmmmm}} \\
+  \uncover<5->{\int e^x\,dx} &
+  \uncover<5->{=e^x} &
+  \uncover<6->{\int e^{-2x+7}\,dx} &
+  \uncover<6->{=e^{-2x+7}/(-2)} \\
+  \uncover<7->{\int\tan(x)\,dx} &
+  \uncover<7->{=-\ln(\cos(x))} &
+  \uncover<8->{\int\tan(\pi x)\,dx} &
+  \uncover<8->{=-\ln(\cos(\pi x))/\pi}
+ \end{align*}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Exponential oscillations}
+ \begin{itemize}
+  \uncover<2->{
+  \item An \DEFN{exponential oscillation} is a function of the form 
+   \[ f(x) = e^{\lm x}(a\cos(\om x)+b\sin(\om x)), \] 
+   where $a$, $b$, $\lm$ and $\om$ are constants.
+  }
+  \uncover<3->{
+  \item The \DEFN{growth rate} is $\lm$, and the
+   \DEFN{angular frequency} is $\om$. 
+  }
+  \uncover<4->{
+   \begin{center}\begin{tikzpicture}[scale=1.6]
+     \draw[->] (-0.2,0) -- (3.3,0);
+     \draw[->] (0,-1) -- (0,1);
+     \draw[red,domain=0:3.3,samples=300] plot(\x,{exp(-\x) * sin(3600*\x)});
+     \draw(3.0,1.0) node[anchor=east] {$\scriptstyle y=e^{-x}\sin(20\pi x)$};
+     \draw(3.3,0.5) node[anchor=east] {$\scriptstyle (\lm=-1,\om=20\pi,a=0,b=1)$};
+    \end{tikzpicture}\end{center}
+  }
+  \uncover<5->{
+   \vspace{-3ex}
+  \item Special cases:
+   \begin{align*}
+    f(x) &= e^{\lm x}\sin(\om x)        && (a=0, b=1) \\
+    f(x) &= a\cos(\om x) + b\sin(\om x) && (\lm = 0) \\
+    f(x) &= ae^{\lm x}                  && (\om = 0).
+   \end{align*}
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Integrating exponential oscillations}
+ \uncover<2->{
+  The integral of an EO is another EO with the same growth
+  rate and angular frequency.
+ }
+ \uncover<3->{
+  \cbox{$\displaystyle
+   \int e^{\lm x}(a\cos(\om x) + b\sin(\om x)) \, dx = e^{\lm x}(A\cos(\om x) + B\sin(\om x))
+   $}
+ }
+ \uncover<4->{
+  \cbox{$\displaystyle
+   {A = \frac{a\lm - b\om}{\lm^2+\om^2}}
+   \hspace{3em}
+   {B = \frac{a\om + b\lm}{\lm^2+\om^2}}. 
+   $}
+ }
+ \begin{itemize}
+  \uncover<5->{
+  \item Example: find
+   \only<5>{$\int e^{-2x}(5\cos(4x) \BLACK{-} 3\sin(4x))\,dx$}\only<6->{$\int e^{\RED{-2}x}(\OLIVEGREEN{5}\cos(\BLUE{4}x) \MAGENTA{-} \MAGENTA{3}\sin(\BLUE{4}x))\,dx$}%
+   \begin{itemize}
+    \uncover<6->{\item $\RED{\lm=-2}$, $\BLUE{\om=4}$,
+     $\OLIVEGREEN{a=5}$, $\MAGENTA{b=-3}$}
+    \uncover<7->{\item
+     $\displaystyle A=\frac{\OLIVEGREEN{a}\RED{\lm}-\MAGENTA{b}\BLUE{\om}}{
+      \RED{\lm}^2+\BLUE{\om}^2}
+     =\frac{\OLIVEGREEN{5}.\RED{(-2)}-\MAGENTA{(-3)}.\BLUE{4}}{
+      \RED{(-2)}^2+\BLUE{4}^2}=1/10$}
+    \uncover<8->{\item
+     $\displaystyle B=\frac{\OLIVEGREEN{a}\BLUE{\om}+\MAGENTA{b}\RED{\lm}}{
+      \RED{\lm}^2+\BLUE{\om}^2}
+     =\frac{\OLIVEGREEN{5}.\BLUE{4}+\MAGENTA{(-3)}\RED{(-2)}}{
+      \RED{(-2)}^2+\BLUE{4}^2}=13/10$}
+   \end{itemize}
+   \[ \uncover<9->{\int e^{-2x}(5\cos(4x) - 3\sin(4x))\,dx = 
+     e^{-2x}(\cos(4x)+13\sin(4x))/10}
+   \]
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Integrating exponential oscillations}
+ \uncover<2->{
+  Alternatively:
+  \[ \int e^{-2x}(5\cos(4x) - 3\sin(4x))\,dx = 
+   e^{-2x}(A\cos(4x) + B\sin(4x)) 
+   \text{ for some } A,B
+  \]}
+ \begin{align*}
+  \uncover<3->{e^{-2x}(5\cos(4x) - 3\sin(4x))
+   =}& 
+  \uncover<3->{
+   \frac{d}{dx}\left(e^{-2x}(A\cos(4x) + B\sin(4x))\right)} \\
+  \uncover<4->{=}& 
+  \uncover<4->{
+   -2e^{-2x} (A\cos(4x) + B\sin(4x)) + } \\
+  &\uncover<4->{e^{-2x}(-4A\sin(4x) + 4B\cos(4x))} \\
+  \uncover<5->{=}& 
+  \uncover<5->{e^{-2x}((4B-2A)\cos(4x)-(2B+4A)\sin(4x))}
+ \end{align*}
+ \uncover<6->{By comparing coefficients, we must have
+  $4B-2A=5$ and $2B+4A=3$.}  
+ \uncover<7->{These equations can be solved to give
+  $A=1/10$ and $B=13/10$.}  
+ \uncover<8->{Thus 
+  \[ \int e^{-2x}(5\cos(4x) - 3\sin(4x))\,dx = 
+   e^{-2x}(\cos(4x) + 13\sin(4x))/10 .
+  \]}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Polynomial exponential oscillations}
+ \begin{itemize}
+  \uncover<2->{
+  \item A \DEFN{polynomial exponential oscillation} is a function of
+   the form 
+   \[ f(x) = e^{\lm x}(a(x)\cos(\om x) + b(x)\sin(\om x)), \]
+   where $a(x)$ and $b(x)$ are polynomials. 
+  }
+  \uncover<3->{
+  \item $\lm$ is the \DEFN{growth rate} and $\om$ is the
+   \DEFN{angular frequency}.  The \DEFN{degree} is the highest power of $x$
+   that occurs in $a(x)$ or in $b(x)$.
+  }
+  \uncover<4->{
+  \item The function
+   $\displaystyle
+   f(x) = e^{\RED{-2}x}((1+x^{\OLIVEGREEN{5}})\cos(\BLUE{4}x) +
+   x^3\sin(\BLUE{4}x)) 
+   $ \\
+   is a PEO of growth rate $\RED{-2}$,
+   frequency $\BLUE{4}$ and degree $\OLIVEGREEN{5}$.
+  }
+  \uncover<5->{
+  \item The function
+   $\displaystyle
+   f(x) = e^{\RED{4}x}((1+x^3+x^\OLIVEGREEN{6})\sin(\BLUE{3}x)) 
+   $ \\
+   is a PEO of growth rate $\RED{4}$,
+   frequency $\BLUE{3}$ and degree $\OLIVEGREEN{6}$.
+  }
+  \uncover<6->{
+  \item \textbf{Fact:} The integral of any PEO is another PEO with the
+   same growth rate, frequency and degree.   
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Integrating PEO's --- I}
+ \begin{itemize}
+  \uncover<2->{
+  \item $\int xe^{-x}\sin(x)\,dx$ is a PEO of degree $1$, growth $-1$,
+   frequency $1$.
+  }
+  \uncover<3->{
+  \item
+   $\int xe^{-x}\sin(x)\,dx=(Ax+B)e^{-x}\cos(x) + (Cx+D)e^{-x}\sin(x)$ \\
+   for some $A$, $B$, $C$, $D$.
+  }
+  \uncover<4->{
+  \item \ghost\vspace{-5ex}
+   \begin{eqnarray*}
+    \uncover<4->{xe^{-x}\sin(x)} & \uncover<4->{=} &
+    \uncover<4->{\tfrac{d}{dx}\left((Ax+B)e^{-x}\cos(x) +
+      (Cx+D)e^{-x}\sin(x)\right)} \\
+    & \uncover<5->{=} &
+    \uncover<5->{Ae^{-x}\cos(x)-(Ax+B)e^{-x}\cos(x)-(Ax+B)e^{-x}\sin(x) +} \\
+    && \uncover<5->{Ce^{-x}\sin(x)-(Cx+D)e^{-x}\sin(x)+(Cx+D)e^{-x}\cos(x)}\\
+    & \uncover<6->{=} & 
+    \uncover<6->{(\RED{-A+C})xe^{-x}\cos(x) +
+     (\OLIVEGREEN{A-B+D})e^{-x}\cos(x) +} \\
+    && \uncover<6->{(\BLUE{-A-C})xe^{-x}\sin(x) +
+     (\MAGENTA{-B+C-D})e^{-x}\sin(x).}
+   \end{eqnarray*}
+  }
+  \uncover<7->{
+  \item $\RED{-A+C}=0$, $\OLIVEGREEN{A-B+D}=0$, $\BLUE{-A-C}=1$, $\MAGENTA{-B+C-D}=0$.
+  }
+  \uncover<8->{
+  \item So $A=-1/2$, $B=-1/2$, $C=-1/2$, $D=0$ 
+  }
+  \uncover<9->{
+  \item $\int xe^{-x}\sin(x)\,dx=-((x+1)e^{-x}\cos(x) + xe^{-x}\sin(x))/2$.
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Integrating PEO's --- II}
+ \begin{itemize}
+  \uncover<2->{
+  \item $\int x^3e^x\,dx$ is a PEO of degree $3$, growth $1$ and
+   frequency $0$.
+  }
+  \uncover<3->{
+  \item $\int x^3e^x\,dx = (Ax^3+Bx^2+Cx+D)e^x$ for some $A$, $B$,
+   $C$, $D$.
+  }
+  \uncover<4->{
+  \item \ghost\vspace{-4ex}
+   \begin{align*}
+    x^3e^x &= \tfrac{d}{dx}\left((Ax^3+Bx^2+Cx+D)e^x\right) \\
+    &\uncover<5->{= (3Ax^2+2Bx+C)e^x + (Ax^3+Bx^2+Cx+D)e^x} \\
+    &\uncover<6->{= (\RED{A}x^3 + (\OLIVEGREEN{3A+B})x^2 + 
+     (\BLUE{2B+C})x + (\MAGENTA{C+D}))e^x.} 
+   \end{align*}
+  }
+  \uncover<7->{
+  \item $\RED{A}=1$, $\OLIVEGREEN{3A+B}=0$,
+   $\BLUE{2B+C}=0$, $\MAGENTA{C+D}=0$.
+  }
+  \uncover<8->{
+  \item so $A=1$, $B=-3$, $C=6$, $D=-6$
+  }
+  \uncover<9->{
+  \item so $\int x^3 e^x\, dx = (x^3-3x^2+6x-6)e^x$.
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Integration by parts --- I}
+ \begin{itemize}
+  \only<2>{
+  \item Consider $\displaystyle\int xe^{x/a}\,dx$.
+  }
+  \only<3->{
+  \item Consider $\displaystyle\int\RED{x}\BLUE{e^{x/a}}\,dx$.
+  }
+  \uncover<3->{
+  \item $\RED{u=x}$ \hfill $\BLUE{dv/dx=e^{x/a}}$ 
+  }
+  \uncover<4->{
+  \item $\RED{du/dx=1}$ \hfill 
+   \uncover<5->{$\BLUE{v=a\,e^{x/a}}$}
+  } 
+  \uncover<6->{
+  \item $\displaystyle\int\RED{x}\BLUE{e^{x/a}}\,dx=
+   \RED{u}\BLUE{v}-\int\RED{\frac{du}{dx}}\BLUE{v}\,dx
+   \uncover<7->{=axe^{x/a}-\int a\,e^{x/a}\,dx}
+   \uncover<8->{=axe^{x/a}-a^2e^{x/a}}$\\[1ex]
+  }
+  \uncover<3->{
+   \hrule\vspace{2ex}
+  \item To integrate a product, call the factors $\RED{u}$ and
+   $\BLUE{\frac{dv}{dx}}$.  
+  }
+  \uncover<4->{
+  \item Differentiate $u$ to find $du/dx$.
+  }
+  \uncover<5->{
+  \item Integrate $\frac{dv}{dx}$ to find $v$.
+  }
+  \uncover<6->{
+  \item Use the formula:
+   \vspace{-2ex}
+   \cbox{$\displaystyle 
+    \int u\frac{dv}{dx}\,dx = uv - \int \frac{du}{dx}v\, dx
+    $}
+   \vspace{-1ex}
+  }
+  \uncover<9->{
+  \item This is most useful when (a)~$du/dx$ is simpler than
+   $u$ (eg $u$ polynomial) and~(b)~$v$ is no more
+   complicated than $dv/dx$ (eg $dv/dx=\cos(x)$).
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Integration by parts --- II}
+ \begin{itemize}
+  \only<2>{
+  \item Consider $\displaystyle\int (1-\ln(x))x^{-2}\,dx$.
+  }
+  \only<3->{
+  \item Consider $\displaystyle\int\RED{(1-\ln(x))}\BLUE{x^{-2}}\,dx$.
+  }
+  \uncover<3->{
+  \item $\RED{u=1-\ln(x)}$ \hfill $\BLUE{dv/dx=x^{-2}}$ 
+  }
+  \uncover<4->{
+  \item $\RED{du/dx=-x^{-1}}$ \hfill 
+   \uncover<5->{$\BLUE{v=-x^{-1}}$}
+  } 
+  \uncover<6->{
+  \item $\displaystyle\int\RED{(1-\ln(x))}\BLUE{x^{-2}}\,dx=%
+   \RED{u}\BLUE{v}-\int\RED{\frac{du}{dx}}\BLUE{v}\,dx%
+   \uncover<7->{=-(1-\ln(x))x^{-1}-\int x^{-2}\,dx}$ \\[1.5ex]
+   $\uncover<8->{=(\ln(x)-1)x^{-1}+x^{-1}}
+   \uncover<9->{=\ln(x)/x}$ \\[1.5ex]
+  }
+  \uncover<3->{
+   \hrule\vspace{2ex}
+  \item To integrate a product, call the factors $\RED{u}$ and
+   $\BLUE{\frac{dv}{dx}}$.  
+  }
+  \uncover<4->{
+  \item Differentiate $u$ to find $du/dx$.
+  }
+  \uncover<5->{
+  \item Integrate $\frac{dv}{dx}$ to find $v$.
+  }
+  \uncover<6->{
+  \item Use the formula:
+   \vspace{-2ex}
+   \cbox{$\displaystyle
+    \int u\frac{dv}{dx}\,dx = uv - \int \frac{du}{dx}v\, dx
+    $}
+   \vspace{-1ex}
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Integration by parts --- III}
+ \begin{itemize}
+  \only<2>{
+  \item Consider $\displaystyle\int x\sin(\om x)\,dx$.
+  }
+  \only<3->{
+  \item Consider $\displaystyle\int\RED{x}\,\BLUE{\sin(\om x)}\,dx$.
+  }
+  \uncover<3->{
+  \item $\RED{u=x}$ \hfill $\BLUE{dv/dx=\sin(\om x)}$ 
+  }
+  \uncover<4->{
+  \item $\RED{du/dx=1}$ \hfill 
+   \uncover<5->{$\BLUE{v=-\om^{-1}\cos(\om x)}$}
+  } 
+  \uncover<6->{
+  \item $\displaystyle\int\RED{x}\,\BLUE{\sin(\om x)}\,dx=%
+   \RED{u}\BLUE{v}-\int\RED{\frac{du}{dx}}\BLUE{v}\,dx%
+   \uncover<7->{=-\om^{-1}x\cos(\om x)+
+    \int\om^{-1}\cos(\om x)\,dx}$ \\[1.5ex]
+   $\uncover<8->{=-\om^{-1}x\cos(\om x)+\om^{-2}\sin(\om x)}$
+   \\[1.5ex]
+  }
+  \uncover<3->{
+   \hrule\vspace{2ex}
+  \item To integrate a product, call the factors $\RED{u}$ and
+   $\BLUE{\frac{dv}{dx}}$.  
+  }
+  \uncover<4->{
+  \item Differentiate $u$ to find $du/dx$.
+  }
+  \uncover<5->{
+  \item Integrate $\frac{dv}{dx}$ to find $v$.
+  }
+  \uncover<6->{
+  \item Use the formula:
+   \vspace{-2ex}
+   \cbox{$\displaystyle
+    \int u\frac{dv}{dx}\,dx = uv - \int \frac{du}{dx}v\, dx
+    $}
+   \vspace{-1ex}
+  }
+ \end{itemize}
+\end{frame}
+
+
+% 
+\begin{frame}[t]
+ \frametitle{Integration by parts --- IV}
+ \begin{itemize}
+  \only<2>{
+  \item Consider $\displaystyle\int \arcsin(x)\,dx$.
+  }
+  \only<3->{
+  \item Consider $\displaystyle\int\RED{\arcsin(x)}.\BLUE{1}\,dx$.
+  }
+  \uncover<3->{
+  \item $\RED{u=\arcsin(x)}$ \hfill $\BLUE{dv/dx=1}$ 
+  }
+  \uncover<4->{
+  \item $\RED{du/dx=(1-x^2)^{-1/2}}$ \hfill 
+   \uncover<5->{$\BLUE{v=x}$}
+  } 
+  \uncover<6->{
+  \item $\displaystyle\int\RED{\arcsin(x)}.\BLUE{1}\,dx=%
+   \RED{u}\BLUE{v}-\int\RED{\frac{du}{dx}}\BLUE{v}\,dx%
+   \uncover<7->{=\arcsin(x).x-\int x(1-x^2)^{-1/2}\,dx}$ \\[1.5ex]
+   $\uncover<8->{=x\arcsin(x)+(1-x^2)^{1/2}}$
+   \\[1.5ex]
+  }
+  \uncover<3->{
+   \hrule\vspace{2ex}
+  \item To integrate a product, call the factors $\RED{u}$ and
+   $\BLUE{\frac{dv}{dx}}$.  
+  }
+  \uncover<4->{
+  \item Differentiate $u$ to find $du/dx$.
+  }
+  \uncover<5->{
+  \item Integrate $\frac{dv}{dx}$ to find $v$.
+  }
+  \uncover<6->{
+  \item Use the formula:
+   \vspace{-2ex}
+   \cbox{$\displaystyle
+    \int u\frac{dv}{dx}\,dx = uv - \int \frac{du}{dx}v\, dx
+    $}
+   \vspace{-1ex}
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Integration by substitution --- I}
+ \begin{itemize}
+  \only<2>{
+  \item Consider $\displaystyle \int\frac{\sin(x)}{\cos(x)^n}\,dx$.
+  }
+  \only<3->{
+  \item Consider $\displaystyle \int\frac{\sin(x)}{\RED{\cos(x)}^n}\,dx$.
+  }
+  \uncover<3->{
+  \item Put $u=\RED{\cos(x)}$\uncover<4->{, so $du/dx=-\sin(x)$}\uncover<5->{, so $dx=-du/\sin(x)$}
+  }
+  \uncover<6->{
+  \item \ghost\vspace{-4ex}
+   \begin{align*}
+    \int\frac{\sin(x)}{\cos(x)^n}\,dx &= 
+    \int \frac{\sin(x)}{u^n}\frac{-du}{\sin(x)} 
+    \uncover<7->{= -\int u^{-n}\,du} \\ &
+    \uncover<8->{=u^{1-n}/(n-1)} 
+    \uncover<9->{=\frac{\cos(x)^{1-n}}{n-1}}
+   \end{align*}
+  }
+  \uncover<3->{
+   \hrule
+  \item To find $\int f(x)\,dx$, pick out some part of $f(x)$ and call it $u$. 
+  }
+  \uncover<4->{
+  \item Find $du/dx$\uncover<5->{, and rearrange to express $dx$ in terms of $x$ and $du$.}
+  } 
+  \uncover<6->{
+  \item Rewrite the integral in terms of $u$ and $du$.
+  } 
+  \uncover<8->{
+  \item Evaluate the integral\uncover<9->{, then rewrite the result in terms of $x$.}
+  } 
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Integration by substitution --- II}
+ \begin{itemize}
+  \only<2>{
+  \item Consider $\displaystyle \int x e^{-4x^2}\,dx$.
+  }
+  \only<3->{
+  \item Consider $\displaystyle \int x e^{\RED{-4x^2}}\,dx$.
+  }
+  \uncover<3->{
+  \item Put $u=\RED{-4x^2}$\uncover<4->{, so $du/dx=-8x$}\uncover<5->{, so $dx=-du/(8x)$}
+  }
+  \uncover<6->{
+  \item \ghost\vspace{-4ex}
+   \begin{align*}
+    \int xe^{-4x^2}\,dx &= 
+    \int -xe^u\frac{du}{8x}
+    \uncover<7->{= -\frac{1}{8}\int e^u\,du} \\ &
+    \uncover<8->{=-e^u/8} 
+    \uncover<9->{=-e^{-4x^2}/8}
+   \end{align*}
+  }
+  \uncover<3->{
+   \hrule
+  \item To find $\int f(x)\,dx$, pick out some part of $f(x)$ and call it $u$. 
+  }
+  \uncover<4->{
+  \item Find $du/dx$\uncover<5->{, and rearrange to express $dx$ in terms of $x$ and $du$.}
+  } 
+  \uncover<6->{
+  \item Rewrite the integral in terms of $u$ and $du$.
+  } 
+  \uncover<8->{
+  \item Evaluate the integral\uncover<9->{, then rewrite the result in terms of $x$.}
+  } 
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Integration by substitution --- III}
+ \begin{itemize}
+  \only<2>{
+  \item Consider $\displaystyle \int \frac{dx}{4x^2+4x+2}$.
+  }
+  \only<3->{
+  \item Consider $\displaystyle \int \frac{dx}{4x^2+4x+2}=
+   \int\frac{dx}{(\RED{2x+1})^2+1}$.
+  }
+  \uncover<3->{
+  \item Put $u=\RED{2x+1}$\uncover<4->{, so $du/dx=2$}\uncover<5->{, so $dx=du/2$}
+  }
+  \uncover<6->{
+  \item \ghost\vspace{-4ex}
+   \begin{align*}
+    \int \frac{dx}{4x^2+4x+2} &= 
+    \int \frac{du/2}{u^2+1} \\ &
+    \uncover<7->{=\arctan(u)/2} 
+    \uncover<8->{=\arctan(2x+1)/2}
+   \end{align*}
+  }
+  \uncover<3->{
+   \hrule
+  \item To find $\int f(x)\,dx$, pick out some part of $f(x)$ and call it $u$. 
+  }
+  \uncover<4->{
+  \item Find $du/dx$\uncover<5->{, and rearrange to express $dx$ in terms of $x$ and $du$.}
+  } 
+  \uncover<6->{
+  \item Rewrite the integral in terms of $u$ and $du$.
+  } 
+  \uncover<7->{
+  \item Evaluate the integral\uncover<8->{, then rewrite the result in terms of $x$.}
+  } 
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Integration by substitution --- IV}
+ \begin{itemize}
+  \uncover<2->{
+  \item Consider $\displaystyle \int \frac{dx}{\sqrt{x-x^2}}$.
+  }
+  \uncover<3->{
+  \item Put $x=t^2$\uncover<4->{, so $dx/dt=2t$}\uncover<5->{, so $dx=2t\,dt$}
+   \begin{align*}
+    \uncover<6->{\sqrt{x-x^2}} & 
+    \uncover<6->{= \sqrt{t^2-t^4} = t\sqrt{1-t^2}} \\
+    \uncover<7->{\int\frac{dx}{\sqrt{x-x^2}}} &
+    \uncover<7->{= \int\frac{2t\,dt}{t\sqrt{1-t^2}}}
+    \uncover<8->{= 2\int\frac{dt}{\sqrt{1-t^2}}} \\ &
+    \uncover<9->{= 2\arcsin(t)} 
+    \uncover<10->{=2\arcsin(\sqrt{x})}
+   \end{align*}
+  }
+  \uncover<3->{
+   \hrule
+  \item To find $\int f(x)\,dx$, put $x$ equal to some function of $t$. 
+  }
+  \uncover<4->{
+  \item Find $dx/dt$\uncover<5->{, and rearrange to express $dx$ in terms of $t$ and $dt$.}
+  } 
+  \uncover<6->{
+  \item Rewrite the integral in terms of $t$ and $dt$.
+  } 
+  \uncover<9->{
+  \item Evaluate the integral\uncover<10->{, then rewrite the result in terms of $x$.}
+  } 
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Integration by substitution --- V}
+ \begin{itemize}
+  \uncover<2->{
+  \item Consider $\displaystyle\int\log(x)^2\,dx$.
+  }
+  \uncover<3->{
+  \item Put $x=e^t$\uncover<4->{, so $dx/dt=e^t$}\uncover<5->{, so $dx=e^t\,dt$}
+   \begin{align*}
+    \uncover<6->{\int\log(x)^2\,dx} &
+    \uncover<6->{= \int\log(e^t)^2 e^t\,dt}
+    \uncover<7->{= \int t^2e^t\,dt} \\ &
+    \uncover<8->{= (t^2-2t+2)e^t} 
+    \uncover<9->{= (\log(x)^2-2\log(x)+2)x}
+   \end{align*}
+  }
+  \uncover<3->{
+   \hrule
+  \item To find $\int f(x)\,dx$, put $x$ equal to some function of $t$. 
+  }
+  \uncover<4->{
+  \item Find $dx/dt$\uncover<5->{, and rearrange to express $dx$ in terms of $t$ and $dt$.}
+  } 
+  \uncover<6->{
+  \item Rewrite the integral in terms of $t$ and $dt$.
+  } 
+  \uncover<8->{
+  \item Evaluate the integral\uncover<9->{, then rewrite the result in terms of $x$.}
+  } 
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Examples I}
+ \begin{itemize}
+  \uncover<2->{
+  \item $\displaystyle \int\tan(x)\,dx
+   \uncover<3->{=\int\frac{\sin(x)}{\cos(x)}\,dx}
+   \uncover<4->{=-\int\frac{\cos'(x)}{\cos(x)}\,dx}
+   \uncover<5->{=-\log(\cos(x)).}$
+  }
+  \uncover<6->{
+  \item Consider $\int x^2\tan(x^3)\,dx$.
+   \uncover<7->{Put $u=x^3$, so $du=3x^2\,dx$, so $dx=du/(3x^2)$.}
+   \begin{align*}
+    \uncover<8->{\int x^2\tan(x^3)\,dx} &
+    \uncover<8->{=\int x^2\tan(u)\frac{du}{3x^2}} 
+    \uncover<9->{=\frac{1}{3}\int\tan(u)\,du} 
+    \uncover<10->{=-\log(\cos(u))/3} \\ &
+    \uncover<11->{=-\log(\cos(x^3))/3}
+   \end{align*}
+  }
+  \uncover<12->{ 
+  \item Consider $\int x e^{\sqrt{x}}\,dx$.
+   \uncover<13->{Put $t=\sqrt{x}$, so $x=t^2$, so $dx=2t\,dt$.}
+   \begin{align*}
+    \uncover<14->{\int x e^{\sqrt{x}}\,dx} &
+    \uncover<14->{=\int t^2 e^t.2t\,dt} 
+    \uncover<15->{=2\int t^3 e^t\,dt} 
+    \uncover<16->{=2(t^3-3t^2+6t-6)e^t} \\ &
+    \uncover<17->{=(2x^{3/2}-6x+12x^{1/2}-12)e^{\sqrt{x}}}
+   \end{align*}
+  }
+  
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Examples II}
+ \begin{itemize}
+  \uncover<2->{
+  \item \ghost\vspace{-5ex}
+   \begin{align*}
+    \int (2(x^2+1)e^x)^2\,dx 
+    \uncover<3->{=} &
+    \uncover<3->{\int (4x^4+8x^2+4)e^{2x}\,dx} \\
+    \uncover<4->{=} & 
+    \uncover<4->{(Ax^4+Bx^3+Cx^2+Dx+E)e^{2x}} \\ 
+    \uncover<5->{(\RED{4}x^4+\OLIVEGREEN{8}x^2+\BLUE{4})e^{2x} =} &
+    \uncover<5->{\frac{d}{dx}((Ax^4+Bx^3+Cx^2+Dx+E)e^{2x})} \\ 
+    \uncover<6->{=} & 
+    \uncover<6->{(4Ax^3+3Bx^2+2Cx+D)e^{2x} + } \\
+    & \uncover<6->{(Ax^4+Bx^3+Cx^2+Dx+E).2e^{2x}} \\
+    \uncover<7->{=} &
+    \uncover<7->{e^{2x}(\RED{2A}x^4+(4A+2B)x^3+\OLIVEGREEN{(3B+2C)}x^2+} \\ &
+    \uncover<7->{\hspace{3em}(2C+2D)x+\BLUE{(D+2E)})}
+   \end{align*}
+   \uncover<8->{
+    \noindent So $\RED{4}=\RED{2A}$, $0=4A+2B$,
+    $\OLIVEGREEN{8}=\OLIVEGREEN{3B+2C}$, $0=2C+2D$, $\BLUE{4}=\BLUE{D+2E}$ \\
+   }
+   \uncover<9->{
+    So $A=2$, $B=-4$, $C=10$, $D=-10$, $E=7$  \\
+   }
+   \uncover<10->{
+    \[ \int (2(x^2+1)e^x)^2\,dx = 
+     (2x^4-4x^3+10x^2-10x+7)e^{2x}.
+    \]
+   }
+  }
+ \end{itemize} 
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Examples III}
+ \begin{itemize}
+  \uncover<2->{
+  \item \ghost\vspace{-5ex}
+   \begin{align*}
+    \int 1+\cosh(x)+\cosh(x)^2 \,dx &
+    \uncover<3->{
+     =\int 1 + \frac{e^x+e^{-x}}{2} +
+     \left(\frac{e^x+e^{-x}}{2}\right)^2\,dx
+    } \\ &
+    \uncover<4->{=\frac{1}{4}\int 4 + 2e^x + 2e^{-x} +
+     e^{2x} + 2 + e^{-2x} \, dx } \\ &
+    \uncover<5->{=\frac{1}{4}\left(6x + 2e^x - 2e^{-x} +
+      \tfrac{1}{2}e^{2x} - \tfrac{1}{2}e^{-2x}\right)} \\ & 
+    \uncover<6->{
+     = \frac{3}{2}x + \frac{e^x-e^{-x}}{2} +
+     \frac{1}{4} \frac{e^{2x}-e^{-2x}}{2}
+    } \\ &
+    \uncover<7->{
+     = \frac{3}{2} x + \sinh(x) + \frac{1}{4}\sinh(2x).
+    }
+   \end{align*}
+  }
+ \end{itemize} 
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Examples IV}
+ \begin{itemize}
+  \uncover<2->{
+  \item To show that $\displaystyle\int\frac{dx}{\cos(x)}=\log\left(\frac{1+\sin(x)}{\cos(x)}\right)$:
+   \begin{align*}
+    \uncover<3->{\frac{d}{dx}\left(\frac{1+\sin(x)}{\cos(x)}\right)} & 
+    \uncover<3->{=\frac{\cos(x).\cos(x) - (1+\sin(x))(-\sin(x))}{\cos(x)^2}} \\ &
+    \uncover<4->{=\frac{\cos(x)^2+\sin(x)^2+\sin(x)}{\cos(x)^2}}
+    \uncover<5->{= \frac{1+\sin(x)}{\cos(x)^2}} \\
+    \uncover<6->{\frac{d}{dx}\log\left(\frac{1+\sin(x)}{\cos(x)}\right)} &
+    \uncover<6->{=\left(\frac{1+\sin(x)}{\cos(x)}\right)^{-1}
+     \frac{d}{dx}\left(\frac{1+\sin(x)}{\cos(x)}\right)} \\ &
+    \uncover<7->{= \frac{\cos(x)}{1+\sin(x)} \frac{1+\sin(x)}{\cos(x)^2}}
+    \uncover<8->{= \frac{1}{\cos(x)}}
+   \end{align*}
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Examples V}
+ \begin{itemize}
+  \uncover<2->{
+  \item \ghost\vspace{-5ex}
+   \begin{align*}
+    \int 8x\sin(x)\cos(x)\,dx &
+    \uncover<3->{= \int 4x\sin(2x)\,dx} \\ &
+    \uncover<4->{= -2x\cos(2x) + \int 2\cos(2x)\, dx} \\ &
+    \uncover<5->{= -2x\cos(2x) + \sin(2x).}
+   \end{align*}
+  }
+  \uncover<6->{
+  \item Consider $\displaystyle\int 10 e^{-x}\sin(x)^2\,dx
+   \uncover<7->{=\int 5e^{-x}\,dx+\int -5e^{-x}\cos(2x)\,dx.}$
+   \begin{align*}
+    \uncover<8->{\int -5e^{-x}\cos(2x)\,dx} &
+    \uncover<8->{= e^{-x}(A\cos(2x)+B\sin(2x))} \\
+    \uncover<9->{-5e^{-x}\cos(2x)} &
+    \uncover<9->{= e^{-x}((2B-A)\cos(2x) - (2A+B)\sin(2x))} \\
+    & \uncover<10->{\qquad A=1,\qquad B=-2} \\
+    \uncover<11->{\int 10 e^{-x}\sin(x)^2\,dx} &
+    \uncover<11->{= -5e^{-x}+e^{-x}\cos(2x)-2e^{-x}\sin(2x).}
+   \end{align*}}
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Taylor series}
+ \vspace{-3ex}
+ \begin{align*}
+  \uncover<2->{e^x=\exp(x)} &
+  \uncover<2->{= 1+x+\frac{x^2}{2}+\frac{x^3}{6}+\cdots 
+   = \sum_{k=0}^\infty \frac{x^k}{k!}
+   \hspace{12em}\mbox{\ghost}} \\
+  \uncover<3->{\frac{x}{(1-x)^2}} &
+  \uncover<3->{= x+2x^2+3x^3+4x^4+\cdots
+   = \sum_{k=0}^\infty k x^k
+   \hspace{3em} (\text{ for } |x|<1) } \\
+  \uncover<4->{\cos(x)} &
+  \uncover<4->{= 1-\frac{x^2}{2}+\frac{x^4}{24}+\cdots 
+   = \sum_{k=0}^\infty \frac{(-1)^kx^{2k}}{(2k)!}} \\
+  \uncover<5->{\arctan(x)} &
+  \uncover<5->{= x-\frac{x^3}{3}+\frac{x^5}{5}-\frac{x^7}{7}+\cdots 
+   = \sum_{k=0}^\infty \frac{(-1)^kx^{2k+1}}{2k+1}}                
+ \end{align*}
+ \begin{itemize}
+  \uncover<6->{
+  \item For any reasonable function $f(x)$, there are
+   coefficients $a_k$ such that
+   \[ f(x) = \sum_{k=0}^\infty a_k x^k   \]
+   (when $x$ is sufficiently small).  This is the
+   \emph{Taylor series} for $f(x)$.
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Exceptions}
+ \uncover<2->{
+  Not every function has a Taylor series.
+ }
+ \begin{itemize}
+  \uncover<3->{\item
+   $f_0(x)=1/x$ does not, because $f_0(0)$ is undefined.
+  } 
+  \uncover<4->{\item
+   $f_1(x)=|x|$ and $f_2(x)=x^{1/3}$ do not, because the
+   slopes $f'_1(0)$ and $f'_2(0)$ are not defined.
+  } 
+  \uncover<5->{\item
+   $f_3(x)=\ln(x)$ does not, because $f_3'(x)$ is undefined
+   for $x<0$.
+  }
+  \uncover<6->{\item
+   $f_4(x)=e^{-1/x^2}$ does not, for a more subtle reason.
+  }
+ \end{itemize}
+ \uncover<7->{
+  For a full explanation, see Level 3 complex analysis.
+ }
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Truncated series}
+ \vspace{-1ex}
+ \uncover<2->{
+  Often we only calculate with finitely many terms of the
+  Taylor series.  
+ } 
+ \uncover<3->{
+  \vspace{-0.5ex}
+  \[ \tan(x) = x + x^3/3 + 2x^5/15 + O(x^7) \]
+  \vspace{-0.5ex}
+ }
+ \uncover<4->{
+  The notation $O(x^7)$ means that there are extra terms
+  involving powers $x^k$ with $k\geq 7$.  
+ }
+ \uncover<5->{
+  The above is the \emph{7th order Taylor series} for
+  $\tan(x)$.  It is a good approximation to $\tan(x)$ if $x$
+  is sufficiently small.
+ }
+ \vfill
+ \mode<beamer>{\only<6>{
+   $\tan(x)=x+O(x^3)$
+   \begin{center}\begin{tikzpicture}[yscale=0.5]
+     \draw[->] (-2,0) -- (2,0);
+     \draw[->] (0,-5) -- (0,5);
+     \draw[red,domain=-1.35:1.35] plot (\x,{sin(57.3*\x)/cos(57.3*\x)});
+     \draw[olivegreen,domain=-1.35:1.35] plot (\x,{\x});
+    \end{tikzpicture}\end{center}
+  }
+  \only<7>{
+   $\tan(x)=x+x^3/3+O(x^5)$
+   \begin{center}\begin{tikzpicture}[yscale=0.5]
+     \draw[->] (-2,0) -- (2,0);
+     \draw[->] (0,-5) -- (0,5);
+     \draw[red,domain=-1.35:1.35] plot (\x,{sin(57.3*\x)/cos(57.3*\x)});
+     \draw[olivegreen,domain=-1.35:1.35] plot (\x,{\x+\x^3/3});
+    \end{tikzpicture}\end{center}
+  }
+  \only<8>{
+   $\tan(x)=x+x^3/3+2x^5/15+O(x^7)$
+   \begin{center}\begin{tikzpicture}[yscale=0.5]
+     \draw[->] (-2,0) -- (2,0);
+     \draw[->] (0,-5) -- (0,5);
+     \draw[red,domain=-1.35:1.35] plot (\x,{sin(57.3*\x)/cos(57.3*\x)});
+     \draw[olivegreen] plot coordinates {
+      (-1.35,-2.77) (-1.30,-2.53) (-1.25,-2.31) (-1.20,-2.11)
+      (-1.15,-1.93) (-1.10,-1.76) (-1.05,-1.61) (-1.00,-1.47)
+      (-0.95,-1.34) (-0.90,-1.22) (-0.85,-1.11) (-0.80,-1.01)
+      (-0.75,-0.92) (-0.70,-0.84) (-0.65,-0.76) (-0.60,-0.68)
+      (-0.55,-0.61) (-0.50,-0.55) (-0.45,-0.48) (-0.40,-0.42)
+      (-0.35,-0.36) (-0.30,-0.31) (-0.25,-0.26) (-0.20,-0.20)
+      (-0.15,-0.15) (-0.10,-0.10) (-0.05,-0.05) (0.00,0.00)
+      (0.05,0.05) (0.10,0.10) (0.15,0.15) (0.20,0.20) (0.25,0.26)
+      (0.30,0.31) (0.35,0.36) (0.40,0.42) (0.45,0.48) (0.50,0.55)
+      (0.55,0.61) (0.60,0.68) (0.65,0.76) (0.70,0.84) (0.75,0.92)
+      (0.80,1.01) (0.85,1.11) (0.90,1.22) (0.95,1.34) (1.00,1.47)
+      (1.05,1.61) (1.10,1.76) (1.15,1.93) (1.20,2.11) (1.25,2.31)
+      (1.30,2.53) (1.35,2.77)};
+    \end{tikzpicture}\end{center}
+  }}
+ \only<9>{
+  $\tan(x)=x+x^3/3+2x^5/15+17x^7/315+O(x^9)$
+  \begin{center}\begin{tikzpicture}[yscale=0.5]
+    \draw[->] (-2,0) -- (2,0);
+    \draw[->] (0,-5) -- (0,5);
+    \draw[red,domain=-1.35:1.35] plot (\x,{sin(57.3*\x)/cos(57.3*\x)});
+    \draw[olivegreen] plot coordinates {
+     (-1.35,-3.21) (-1.30,-2.87) (-1.25,-2.57) (-1.20,-2.30)
+     (-1.15,-2.07) (-1.10,-1.86) (-1.05,-1.68) (-1.00,-1.52)
+     (-0.95,-1.38) (-0.90,-1.25) (-0.85,-1.13) (-0.80,-1.03)
+     (-0.75,-0.93) (-0.70,-0.84) (-0.65,-0.76) (-0.60,-0.68)
+     (-0.55,-0.61) (-0.50,-0.55) (-0.45,-0.48) (-0.40,-0.42)
+     (-0.35,-0.36) (-0.30,-0.31) (-0.25,-0.26) (-0.20,-0.20)
+     (-0.15,-0.15) (-0.10,-0.10) (-0.05,-0.05) (0.00,0.00)
+     (0.05,0.05) (0.10,0.10) (0.15,0.15) (0.20,0.20) (0.25,0.26)
+     (0.30,0.31) (0.35,0.36) (0.40,0.42) (0.45,0.48) (0.50,0.55)
+     (0.55,0.61) (0.60,0.68) (0.65,0.76) (0.70,0.84) (0.75,0.93)
+     (0.80,1.03) (0.85,1.13) (0.90,1.25) (0.95,1.38) (1.00,1.52)
+     (1.05,1.68) (1.10,1.86) (1.15,2.07) (1.20,2.30) (1.25,2.57)
+     (1.30,2.87) (1.35,3.21)};
+   \end{tikzpicture}\end{center}
+ }
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Finding coefficients}
+ \uncover<2->{
+  \bbox{$\displaystyle
+   y=\sum_{k=0}^\infty a_kx^k,
+   \quad\text{ where } \quad 
+   a_k=\frac{1}{k!}\,\left.\frac{d^ky}{dx^k}\right|_{x=0}
+   $}
+ } 
+ \uncover<3->{
+  \bbox{$\displaystyle
+   f(x)=\sum_{k=0}^\infty a_kx^k,
+   \quad\text{ where } \quad 
+   a_k=f^{(k)}(0)/k!
+   $}
+ } 
+ \uncover<4->{
+  \noindent\textbf{Example:}
+  \[ \exp^{(k)}(x) = \dotsb =
+   \exp'''(x)=\exp''(x)=\exp'(x)=\exp(x)=e^x
+  \]
+ }
+ \uncover<5->{
+  \[ \exp^{(k)}(0) = \dotsb =
+   \exp'''(0)=\exp''(0)=\exp'(0)=\exp(0)=1
+  \]
+ }
+ \uncover<6->{
+  Thus $a_k=1/k!$, and $\exp(x)=\sum_k x^k/k!$.
+ }
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Another example}
+ \vspace{-0.7ex}
+ \uncover<2->{Take $f(x)=\sin(x).$}
+ \vspace{-0.7ex}
+ {\tiny \begin{align*}
+   \uncover<3->{f(x)    }&
+   \uncover<3->{= \sin(x) }&
+   \uncover<3->{f'(x)   }&
+   \uncover<3->{= \cos(x) }&
+   \uncover<3->{f''(x)  }&
+   \uncover<3->{= -\sin(x) }&
+   \uncover<3->{f'''(x) }&
+   \uncover<3->{= -\cos(x)} \\
+   \uncover<4->{f^{(4)}(x)    }&
+   \uncover<4->{= \sin(x) }&
+   \uncover<4->{f^{(5)}(x)   }&
+   \uncover<4->{= \cos(x) }&
+   \uncover<4->{f^{(6)}(x)  }&
+   \uncover<4->{= -\sin(x) }&
+   \uncover<4->{f^{(7)}(x) }&
+   \uncover<4->{= -\cos(x)} \\
+   \uncover<5->{f^{(8)}(x)    }&
+   \uncover<5->{= \sin(x) }&
+   \uncover<5->{f^{(9)}(x)   }&
+   \uncover<5->{= \cos(x) }&
+   \uncover<5->{f^{(10)}(x)  }&
+   \uncover<5->{= -\sin(x) }&
+   \uncover<5->{f^{(11)}(x) }&
+   \uncover<5->{= -\cos(x)} \\
+   \uncover<6->{}&
+   \uncover<6->{}&
+   \uncover<6->{}&
+   \uncover<6->{}&
+   \uncover<6->{}&
+   \uncover<6->{}&
+   \uncover<6->{}&
+   \uncover<6->{} \\
+   \uncover<6->{f(0)    }&
+   \uncover<6->{= 0 }&
+   \uncover<6->{f'(0)   }&
+   \uncover<6->{= 1 }&
+   \uncover<6->{f''(0)  }&
+   \uncover<6->{= 0 }&
+   \uncover<6->{f'''(0) }&
+   \uncover<6->{= -1} \\
+   \uncover<7->{f^{(4)}(0)    }&
+   \uncover<7->{= 0 }&
+   \uncover<7->{f^{(5)}(0)   }&
+   \uncover<7->{= 1 }&
+   \uncover<7->{f^{(6)}(0)  }&
+   \uncover<7->{= 0 }&
+   \uncover<7->{f^{(7)}(0) }&
+   \uncover<7->{= -1} \\
+   \uncover<8->{f^{(8)}(0)    }&
+   \uncover<8->{= 0 }&
+   \uncover<8->{f^{(9)}(0)   }&
+   \uncover<8->{= 1 }&
+   \uncover<8->{f^{(10)}(0)  }&
+   \uncover<8->{= 0 }&
+   \uncover<8->{f^{(11)}(0) }&
+   \uncover<8->{= -1} \\
+   \uncover<9->{}&
+   \uncover<9->{}&
+   \uncover<9->{}&
+   \uncover<9->{}&
+   \uncover<9->{}&
+   \uncover<9->{}&
+   \uncover<9->{}&
+   \uncover<9->{} \\
+   \uncover<9->{a_0}&
+   \uncover<9->{=0}&
+   \uncover<9->{a_1}&
+   \uncover<9->{=1}&
+   \uncover<9->{a_2}&
+   \uncover<9->{=0}&
+   \uncover<9->{a_3}&
+   \uncover<9->{=-1/3!} \\
+   \uncover<10->{a_4}&
+   \uncover<10->{=0}&
+   \uncover<10->{a_5}&
+   \uncover<10->{=1/5!}&
+   \uncover<10->{a_6}&
+   \uncover<10->{=0}&
+   \uncover<10->{a_7}&
+   \uncover<10->{=-1/7!} \\
+   \uncover<11->{a_8}&
+   \uncover<11->{=0}&
+   \uncover<11->{a_9}&
+   \uncover<11->{=1/9!}&
+   \uncover<11->{a_{10}}&
+   \uncover<11->{=0}&
+   \uncover<11->{a_{11}}&
+   \uncover<11->{=-1/11!}
+  \end{align*}}
+ \vspace{-0.8ex}
+ \[
+  \uncover<12->{\sin(x) =
+   x - \frac{x^3}{3!} + \frac{x^5}{5!} - 
+   \frac{x^7}{7!} + \frac{x^9}{9!} -
+   \frac{x^{11}}{11!} + \dotsc} 
+  \uncover<13->{= \sum_{k=0}^\infty\frac{(-1)^k x^{2k+1}}{(2k+1)!}}
+ \]
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Other methods}
+ \uncover<2->{
+  It is often easiest to deduce a Taylor series from known
+  series for other functions.
+ } 
+ {\tiny \begin{align*}
+   \uncover<3->{e^{-x^2}} &
+   \uncover<4->{= \sum_k \frac{(-x^2)^k}{k!}}
+   \uncover<5->{= \sum_k (-1)^k\frac{x^{2k}}{k!}} \\
+   \uncover<6->{\cosh(x)} &
+   \uncover<7->{= (e^x+e^{-x})/2} 
+   \uncover<8->{= \sum_k \frac{x^k+(-x)^k}{2\;(k!)}}
+   \uncover<9->{= \sum_{k \text{even}} \frac{x^k}{k!}}
+   \uncover<10->{= \sum_j \frac{x^{2j}}{(2j)!}} \\
+   \uncover<11->{\sinh(x)/x} &
+   \uncover<12->{= (e^x-e^{-x})/(2x)} 
+   \uncover<13->{= \sum_k \frac{x^k-(-x)^k}{2 x\;(k!)}}
+   \uncover<14->{= \sum_{k \text{odd}} \frac{x^{k-1}}{k!}}
+   \uncover<15->{= \sum_j \frac{x^{2j}}{(2j+1)!}} \\
+   \uncover<16->{1/(1-x)} &
+   \uncover<17->{= 1+x+x^2+x^3+\dotsc} 
+   \uncover<18->{= \sum_k x^k} \\
+   \uncover<19->{x \frac{d}{dx}\left(\frac{1}{1-x}\right)} &
+   \uncover<20->{= x\frac{d}{dx}\sum_k x^k}
+   \uncover<21->{= x\sum_k k\,x^{k-1}} 
+   \uncover<22->{= \sum_k k\, x^k} \\
+   \uncover<23->{x/(1-x)^2} &
+   \uncover<24->{= \sum_k k\,x^k.}
+  \end{align*}}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Odd and even functions}
+ \uncover<2->{
+  Recall that $f(x)$ is \DEFN{even} if $f(-x)=f(x)$, and \DEFN{odd} if $f(-x)=-f(x)$.
+  \\}
+ \uncover<3->{
+  For example, $\cos(x)$ is even and $\sin(x)$ is odd.
+ }
+ \uncover<4->{
+  If
+  \[ f(x)=\sum_k a_kx^k =
+   \sum_{k\;\text{ even }} a_kx^k + 
+   \sum_{k\;\text{ odd }} a_kx^k
+  \]
+  then
+  \[ f(-x)=\sum_k a_k(-x)^k =
+   \sum_{k\;\text{ even }} a_kx^k - 
+   \sum_{k\;\text{ odd }} a_kx^k.
+  \]
+ }
+ \uncover<5->{
+  Thus $f(x)$ is even iff the Taylor series involves only even powers of
+  $x$, and $f(x)$ is odd iff the Taylor series involves only odd powers
+  of $x$.
+ }
+ \uncover<6->{
+  \begin{align*}
+   \sin(x) &=
+   x - \frac{x^3}{3!} + \frac{x^5}{5!} - 
+   \frac{x^7}{7!} + \frac{x^9}{9!} -
+   \frac{x^{11}}{11!} + \dotsc  
+   = \sum_{k=0}^\infty\frac{(-1)^k x^{2k+1}}{(2k+1)!} \\
+   \cos(x) &=
+   1 - \frac{x^2}{2!} + \frac{x^4}{4!} - 
+   \frac{x^6}{6!} + \frac{x^8}{8!} -
+   \frac{x^{10}}{10!} + \dotsc  
+   = \sum_{k=0}^\infty\frac{(-1)^k x^{2k}}{(2k)!}
+  \end{align*}
+ }
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Algebra of series}
+ \uncover<2->{
+  \[ \tan(x) = x + \tfrac{1}{3}x^3 + \tfrac{2}{15}x^5 +
+   O(x^7) 
+  \]}
+ \begin{align*}
+  \uncover<3->{\tan(x)^2 =}& 
+  \uncover<3->{(x + \tfrac{1}{3}x^3 + \tfrac{2}{15}x^5)^2 +
+   O(x^7)} \\
+  \uncover<4->{=}& \uncover<4->{x^2 + \BLUE{\tfrac{1}{3}x^4} +
+   \OLIVEGREEN{\tfrac{2}{15}x^6} + }\\
+  & \uncover<4->{ \BLUE{\tfrac{1}{3}x^4} + \OLIVEGREEN{\tfrac{1}{9}x^6}
+   + \RED{\tfrac{2}{45}x^8}} \\
+  & \uncover<4->{\OLIVEGREEN{\tfrac{2}{15}x^6} + \RED{\tfrac{2}{45}x^8}
+   + \RED{\tfrac{4}{225}x^{10}} + O(x^7)} \\
+  \uncover<5->{=}& \uncover<5->{x^2 + \tfrac{2}{3} x^4 + \tfrac{17}{45} x^6 + O(x^7).}
+ \end{align*}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{Expansion about other points}
+ \uncover<2->{
+  We can also expand $f(x)$ in terms of powers $(x-\al)^k$,
+  for any $\al$.  
+ } 
+ \uncover<3->{
+  More precisely,
+  \bbox{$
+   f(x)=\sum_{k=0}^\infty b_k(x-\al)^k,
+   \quad\text{ where } \quad 
+   b_k=f^{(k)}(\al)/k!
+   $}
+ }
+ {\tiny \begin{align*}
+   &             &
+   \uncover<4->{\ln'(x) }&\uncover<4->{= x^{-1}     }&
+   \uncover<5->{\ln''(x) }&\uncover<5->{= -x^{-2}   }&
+   \uncover<6->{\ln'''(x) }&\uncover<6->{= 2 x^{-3} }&
+   \uncover<7->{\ln^{(4)}(x) }&\uncover<7->{= -6 x^{-4}}  \\
+   \uncover<8->{\ln(1)} &\uncover<8->{= 0           }&
+   \uncover<8->{\ln'(1) }&\uncover<8->{= 1          }&
+   \uncover<8->{\ln''(1) }&\uncover<8->{= -1        }&
+   \uncover<8->{\ln'''(1) }&\uncover<8->{= 2        }&
+   \uncover<8->{\ln^{(4)}(1) }&\uncover<8->{= -6}         \\
+   \uncover<9->{b_0 }&\uncover<9->{=  0             }&
+   \uncover<9->{b_1 }&\uncover<9->{=  1             }& 
+   \uncover<9->{b_2 }&\uncover<9->{= -1/2           }&
+   \uncover<9->{b_3 }&\uncover<9->{= 2/3! = 1/3     }&
+   \uncover<9->{b_4 }&\uncover<9->{= -6/4! = -1/4}
+  \end{align*}}
+ \uncover<10->{
+  \[ \ln(x) = (x-1) -(x-1)^2/2 + (x-1)^3/3 - (x-1)^4/4 +
+   O((x-1)^5).
+  \]}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{More examples}
+ We will find the series for $\tan(x)$ near $x=\tfrac{\pi}{4}$.
+ \begin{align*}
+  \uncover<2->{f(x)} &\uncover<2->{=\tan(x)} \\
+  \uncover<3->{f'(x)} &\uncover<3->{= \frac{1}{\cos(x)^2}} \\
+  \uncover<4->{f''(x)} &\uncover<4->{=-2\cos(x)^{-3}.-\sin(x) 
+   =\frac{2\sin(x)}{\cos(x)^3}}
+ \end{align*}
+ \begin{align*}
+  \uncover<5->{f(\tfrac{\pi}{4})} &\uncover<5->{= 1} &
+  \uncover<6->{f'(\tfrac{\pi}{4})} &\uncover<6->{= \frac{1}{(2^{-1/2})^2} = 2} &
+  \uncover<7->{f''(\tfrac{\pi}{4})} &\uncover<7->{= \frac{2.2^{-1/2}}{(2^{-1/2})^3} = 4} \\
+  \uncover<8->{a_0} &\uncover<8->{= 1/0!=1} & 
+  \uncover<8->{a_1} &\uncover<8->{= 2/1!=2} &
+  \uncover<8->{a_2} &\uncover<8->{= 4/2!=2}
+ \end{align*}
+ \uncover<9->{
+  \[ \tan(x) = 1 + 2(x-\tfrac{\pi}{4}) + 2 (x-\tfrac{\pi}{4})^2 + O((x-\tfrac{\pi}{4})^3). \]
+ }
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{More examples}
+ Consider $y=x/(e^x-1)$.
+ \begin{align*}
+  \uncover<2->{e^x} &\uncover<2->{= 1 + x + x^2/2 + x^3/6 + O(x^4)} \\
+  \uncover<3->{e^x - 1} &\uncover<3->{= x + x^2/2 + x^3/6 + O(x^4)} \\
+  \uncover<4->{\frac{1}{y}=\frac{e^x-1}{x}} &
+  \uncover<4->{= 1 + x/2 + x^2/6 + O(x^3)}\uncover<5->{ = 1 + u + O(x^3)
+   \hspace{3em} u = x/2 + x^2/6} \\
+  \uncover<6->{y=\frac{1}{1+u}} &
+  \uncover<6->{= 1 - u + u^2 + O(u^3) = 1 - u + u^2 + O(x^3)} \\
+  \uncover<7->{u^2} &\uncover<7->{= x^2/4 + x^3/6 + x^4/36}\uncover<8->{ = x^2/4 + O(x^3)} \\
+  \uncover<9->{\frac{x}{e^x-1}} &\uncover<9->{= 1-u+u^2 + O(x^3)} \\
+  &\uncover<10->{= 1-x/2-x^2/6+x^2/4 + O(x^3)}\uncover<11->{ = 1-x/2+x^2/12 + O(x^3)}
+ \end{align*}
+\end{frame}
+
+\end{document}

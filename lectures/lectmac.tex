@@ -1,0 +1,97 @@
+\input{coldef}
+%\input{nullcoldef}
+
+\newcommand{\bbm}       {\left[\begin{matrix}}
+\newcommand{\ebm}       {\end{matrix}\right]}
+\newcommand{\bsm}       {\left[\begin{smallmatrix}}
+\newcommand{\esm}       {\end{smallmatrix}\right]}
+\newcommand{\bpm}       {\begin{pmatrix}}
+\newcommand{\epm}       {\end{pmatrix}}
+\newcommand{\bcf}[2]{\left(\begin{array}{c}{#1}\\{#2}\end{array}\right)}
+
+
+\newcommand{\csch}     {\operatorname{csch}}
+\newcommand{\sech}     {\operatorname{sech}}
+\newcommand{\arcsinh}  {\operatorname{arcsinh}}
+\newcommand{\arccosh}  {\operatorname{arccosh}}
+\newcommand{\arctanh}  {\operatorname{arctanh}}
+
+\newcommand{\range}     {\operatorname{range}}
+\newcommand{\trans}     {\operatorname{trans}}
+\newcommand{\trc}       {\operatorname{trace}}
+\newcommand{\adj}       {\operatorname{adj}}
+
+\newcommand{\tint}{\textstyle\int}
+\newcommand{\tm}{\times}
+\newcommand{\sse}{\subseteq}
+\newcommand{\st}{\;|\;}
+\newcommand{\sm}{\setminus}
+\newcommand{\iffa}      {\Leftrightarrow}
+\newcommand{\xra}{\xrightarrow}
+
+\renewcommand{\:}{\colon}
+
+\newcommand{\N}         {{\mathbb{N}}}
+\newcommand{\Z}         {{\mathbb{Z}}}
+\newcommand{\Q}         {{\mathbb{Q}}}
+\newcommand{\R}       {{\mathbb{R}}}
+\newcommand{\C}         {{\mathbb{C}}}
+
+\newcommand{\al}        {\alpha}
+\newcommand{\bt}        {\beta} 
+\newcommand{\gm}        {\gamma}
+\newcommand{\dl}        {\delta}
+\newcommand{\ep}        {\epsilon}
+\newcommand{\zt}        {\zeta}
+\newcommand{\et}        {\eta}
+\newcommand{\tht}       {\theta}
+\newcommand{\io}        {\iota}
+\newcommand{\kp}        {\kappa}
+\newcommand{\lm}        {\lambda}
+\newcommand{\ph}        {\phi}
+\newcommand{\ch}        {\chi}
+\newcommand{\ps}        {\psi}
+\newcommand{\rh}        {\rho}
+\newcommand{\sg}        {\sigma}
+\newcommand{\om}        {\omega}
+
+\newcommand{\EMPH}[1]{\emph{\RED{#1}}}
+\newcommand{\DEFN}[1]{\emph{\PURPLE{#1}}}
+\newcommand{\VEC}[1]    {\mathbf{#1}}
+
+\newcommand{\ghost}{{\tiny $\color[rgb]{1,1,1}.$}}
+
+\newcommand{\fs}{\fromSlide}
+
+\newcommand{\bbox}[1]{
+\[ \mbox{\begin{tikzpicture}%
+   \draw(0,0) node[draw,thick,olivegreen,rectangle] {\color{black} #1};%
+  \end{tikzpicture}} \]
+}
+
+\newcommand{\cbox}[1]{
+\begin{center}\begin{tikzpicture}%
+   \draw(0,0) node[draw,thick,olivegreen,rectangle] {\color{black} #1};%
+\end{tikzpicture}\end{center}
+}
+
+\newcommand{\hh}{0.2}
+\newcommand{\ff}[1]{( ( ( (5 - 0.6 * (#1)) * (#1) - 12.8) * (#1) + 10.4) * (#1) + 1)} 
+\newcommand{\bx}[1]{%
+\filldraw[fill=green,draw=olivegreen]%
+ (#1,0) -- (#1,{\ff{#1}}) -- ({#1 + \hh},{\ff{#1}}) -- ({#1 + \hh},0) -- (#1,0);%
+}
+
+\newcommand{\bxn}[1]{%
+\fill[blue,domain={#1}:{#1 + \hh}]%
+ plot(\x,{\ff{\x}}) -- ({#1 + \hh},{\ff{#1}}) -- cycle;
+\filldraw[fill=green,draw=olivegreen]%
+ (#1,0) -- (#1,{\ff{#1}}) -- ({#1 + \hh},{\ff{#1}}) -- ({#1 + \hh},0) -- (#1,0);%
+}
+
+\newcommand{\bxp}[1]{%
+\fill[fill=green,draw=olivegreen,domain={#1}:{#1 + \hh}]%
+ plot(\x,{\ff{\x}}) -- ({#1 + \hh},0) -- (#1,0) -- cycle;
+\fill[magenta,domain={#1}:{#1 + \hh}]%
+ plot(\x,{\ff{\x}}) -- ({#1 + \hh},{\ff{#1}}) -- cycle;
+}

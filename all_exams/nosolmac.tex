@@ -1,0 +1,33 @@
+\newcounter{probcounter}
+\newcounter{marksassigned}
+\newcounter{marksawarded}
+\newcounter{totalmarks}
+
+\newcommand{\mrks}[1]{%
+\addtocounter{marksassigned}{#1}%
+\addtocounter{totalmarks}{#1}%
+\textbf{(#1 marks)}}
+\newcommand{\mks}[1]{\addtocounter{marksawarded}{#1}\textbf{[#1]}}
+\newcommand{\mk}{\mks{1}}
+
+\newenvironment{problem}{
+\stepcounter{probcounter}
+\setcounter{marksawarded}{0}
+\bigskip\par\noindent\textbf{(\arabic{probcounter})}
+}{
+\typeout{Q\arabic{probcounter}: \arabic{marksassigned} marks assigned}
+\setcounter{marksassigned}{0}
+}
+
+\newcommand{\printtotalmarks}{%
+\typeout{Total assigned: \arabic{totalmarks} marks}%
+}
+
+\newcommand{\sct}{\section}
+
+
+\newenvironment{solution}{\comment}{\endcomment}
+
+
+
+
