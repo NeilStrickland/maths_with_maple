@@ -688,7 +688,7 @@ simplify or otherwise manipulate.
   The \verb~series~ command gives an answer including a term
   like $O(x^7)$,  to indicate that there are
    infinitely many more terms, starting with a multiple of
-   $x^{12}$.  Maple will not let us do very much with this
+   $x^{7}$.  Maple will not let us do very much with this
    answer until we have converted it to an ordinary
    polynomial (without the $O(x^7)$ term on the end).  To do
    this, use the command \verb~convert(...,polynom)~. 
@@ -832,35 +832,5 @@ simplify or otherwise manipulate.
   it may be that you entered \verb~pi~ instead of \verb~Pi~
   by mistake.  You can cure this by entering \verb~pi:=Pi;~. 
 \end{itemize}
-
-\section{Why the Classic Worksheet?}\label{sec-classic}
-
-There are two different user interfaces to Maple: the ``Classic
-Worksheet'' interface (with the orange icon) and the ``Standard''
-interface (with the red icon).  We will use the Classic
-interface, for several reasons:
-
-\begin{itemize}
- \item The syntax used by the Classic interface is similar to that used
-  in other contexts: programming languages such as Java or PHP,
-  spreadsheet systems such as Excel, mathematical software such as
-  Matlab, and so on.  It is therefore a good general skill to be
-  familiar with this syntax.  By contrast, the skills that you need for
-  the Standard interface are of little use for other systems.
- \item With the Classic interface you type a sequence of characters
-  and they appear on the screen as you typed them.  This means that it
-  is easy for the lecturer to explain what you need to type, and how
-  to fix the most obvious problems.  The Standard interface involves
-  much more clicking with the mouse and typing cursor and tab keys
-  that are not directly visible on the screen.  This makes it much
-  harder to provide comprehensible written instructions.
- \item The online tests also use the same syntax as the Classic
-  interface (and it is not possible to change that).
- \item The Classic interface is much faster on less powerful computers.
-\end{itemize}
-
-You are free to experiment with the Standard interface if you wish to,
-but you should remember that some points in the exam will rely on
-knowledge of the Classic interface.
 
 \end{document}
