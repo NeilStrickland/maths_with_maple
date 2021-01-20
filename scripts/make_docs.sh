@@ -3,6 +3,7 @@ cp ../labs/primer.pdf ../docs/labs
 cp ../labs/all_labs.pdf ../docs/labs
 cp ../lab_sols/lab_sols*.mw ../docs/lab_sols
 cp ../lab_sols/pdf/lab_sols*.pdf ../docs/lab_sols/pdf
+cp ../lab_sols_maxima/*.wxmx ../docs/lab_sols_maxima
 cp ../lab_setup/defineq.mw ../docs/lab_setup
 cp ../lab_setup/ratint.mw ../docs/lab_setup
 cp ../lectures/all_handouts.pdf ../docs/lectures
