@@ -1,0 +1,13 @@
+cp ../all_exams/all_exams.pdf ../web/all_exams
+cp ../labs/primer.pdf ../web/labs
+cp ../labs/all_labs.pdf ../web/labs
+cp ../lab_sols/lab_sols*.mw ../web/lab_sols
+cp ../lab_sols/pdf/lab_sols*.pdf ../web/lab_sols/pdf
+cp ../lab_sols_maxima/*.wxmx ../web/lab_sols_maxima
+cp ../lab_setup/defineq.mw ../web/lab_setup
+cp ../lab_setup/ratint.mw ../web/lab_setup
+cp ../lectures/all_handouts.pdf ../web/lectures
+cp ../lectures/all_lectures.pdf ../web/lectures
+cp ../presentations/presentation*.mw ../web/presentations
+cp ../presentations/presentation*.pdf ../web/presentations
+cp ../tutorials/all_probs.pdf ../web/tutorials

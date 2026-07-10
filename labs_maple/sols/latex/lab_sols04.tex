@@ -1,0 +1,575 @@
+%% Created by Maple 2022.1, Windows 10
+%% Source Worksheet: lab_sols04
+%% Generated: Wed May 08 10:32:21 BST 2024
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{maple}
+\usepackage[utf8]{inputenc}
+\usepackage[svgnames]{xcolor}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{textcomp}
+\begin{document}
+\lstset{basicstyle=\ttfamily,breaklines=true,columns=flexible}
+\pagestyle{empty}
+\DefineParaStyle{Maple Bullet Item}
+\DefineParaStyle{Maple Heading 1}
+\DefineParaStyle{Maple Warning}
+\DefineParaStyle{Maple Heading 4}
+\DefineParaStyle{Maple Heading 2}
+\DefineParaStyle{Maple Heading 3}
+\DefineParaStyle{Maple Dash Item}
+\DefineParaStyle{Maple Error}
+\DefineParaStyle{Maple Title}
+\DefineParaStyle{Maple Ordered List 1}
+\DefineParaStyle{Maple Text Output}
+\DefineParaStyle{Maple Ordered List 2}
+\DefineParaStyle{Maple Ordered List 3}
+\DefineParaStyle{Maple Normal}
+\DefineParaStyle{Maple Ordered List 4}
+\DefineParaStyle{Maple Ordered List 5}
+\DefineCharStyle{Maple 2D Output}
+\DefineCharStyle{Maple 2D Input}
+\DefineCharStyle{Maple Maple Input}
+\DefineCharStyle{Maple 2D Math}
+\DefineCharStyle{Maple Hyperlink}
+\begin{center}
+\begin{Maple Normal}
+\underline{\textbf{More plotting}}
+\end{Maple Normal}
+\end{center}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 1.1}
+\end{Maple Normal}
+\begin{lstlisting}
+> restart;
+\end{lstlisting}
+\textbf{(a)}\begin{lstlisting}
+> plot([cos(10*t)/(1+t^2),sin(10*t)/(1+t^2),t=0..5]);
+\end{lstlisting}
+\begin{Maple Normal}
+This starts at 
+$ (1,0) $ and moves anticlockwise spiralling in towards the origin.
+\end{Maple Normal}
+\textbf{(b)}\begin{lstlisting}
+> plot([sin(3*t),sin(2*t),t=0..2*Pi]);
+plot([sin(6*t),sin(7*t),t=0..2*Pi]);
+\end{lstlisting}
+\textbf{(c)}\begin{lstlisting}
+> plot([t-sin(t),1-cos(t),t=0..8*Pi]);
+\end{lstlisting}
+\begin{lstlisting}
+> plot([t-sin(t),1-cos(t),t=0..8*Pi],scaling=constrained);
+\end{lstlisting}
+\textbf{(d)}\begin{lstlisting}
+> plot([2*t/(1+t^2),(1-t^2)/(1+t^2),t=-8..8]);
+\end{lstlisting}
+\begin{Maple Normal}
+This is (most of) a circle of radius one, centred at the origin.  To see algebraically that the point 
+$ (\frac{2 t}{1+t^{2}},\frac{1-t^{2}}{1+t^{2}}) $ lies on the circle, we must show that 
+$ (\frac{2 t}{1+t^{2}})^{2}+(\frac{1-t^{2}}{1+t^{2}})^{2}=1 $:
+\end{Maple Normal}
+\begin{lstlisting}
+> simplify((2*t/(1+t^2))^2+((1-t^2)/(1+t^2))^2);
+\end{lstlisting}
+\begin{Maple Normal}
+To do this by hand, note that
+\end{Maple Normal}
+\begin{center}
+
+$ (1-t^{2})^{2}+(2 t)^{2}=1-2 t^{2}+t^{4}+4 t^{2} $
+$ =1+2 t^{2}+t^{4} $
+$ =(1+t^{2})^{2} $.\end{center}
+\begin{Maple Normal}
+\
+
+Divide this by 
+$ (1+t^{2})^{2} $ to get the required result.
+\end{Maple Normal}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 1.2}
+\end{Maple Normal}
+\begin{lstlisting}
+> restart;
+\end{lstlisting}
+\begin{lstlisting}
+> x := 4*t^2-1;
+y := 8*t^3-8*t;
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(a)}
+\end{Maple Normal}
+\begin{lstlisting}
+> plot([x,y,t=-1.5..1.5]);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\textbf{(b) }We can see from the graph that the curve crosses itself at the point where 
+$ x =3 $ and 
+$ y =0 $.  We can find the corresponding values of 
+$ t  $ as follows:\begin{lstlisting}
+> solve(\{x=3,y=0\},\{t\});
+\end{lstlisting}
+\begin{Maple Normal}
+We can substitute back to check that this is correct:
+\end{Maple Normal}
+\begin{lstlisting}
+> subs(t=1,[x,y]);
+\end{lstlisting}
+\begin{lstlisting}
+> subs(t=1,[x,y]);
+\end{lstlisting}
+\textbf{(c)} \begin{lstlisting}
+> solve(x=0,\{t\});
+\end{lstlisting}
+\begin{lstlisting}
+> subs(t=1/2,[x,y]);
+\end{lstlisting}
+\begin{lstlisting}
+> subs(t=-1/2,[x,y]);
+\end{lstlisting}
+\begin{Maple Normal}
+We conclude that the curve crosses the 
+$ y  $ axis at the points 
+$ [0,-3] $ (when 
+$ t =\frac{1}{2} $) and 
+$ [0,3] $ (when 
+$ t =-\frac{1}{2} $).
+\end{Maple Normal}
+\textbf{(d)}\begin{lstlisting}
+> plot((X-3)*sqrt(X+1),X=-1..8);
+\end{lstlisting}
+\begin{lstlisting}
+> plots[display](
+    plot((X-3)*sqrt(X+1),X=-1..8,color=blue),
+    plot([x,y,t=-2..2],color=red),
+    view=[-2..8,-15..15]     
+);
+\end{lstlisting}
+\begin{Maple Normal}
+The two curves fit together, indicating that our functions 
+$ x =4 t^{2}-1 $ and 
+$ y =8 t^{3}-8 t  $ satisfy 
+$ y =(x -3) \sqrt{x +1} $.  As the graph of 
+$ (X -3) \sqrt{X +1} $ covers only half of the curve, there must be some wrinkle in the story somewhere, and it is not too hard to see that this comes from the sign ambiguity in the square root.  The right thing to check is the equation obtained by squaring, which says that 
+$ y^{2}=(x -3)^{2} (x +1) $.  Maple tells us that this is indeed correct:
+\end{Maple Normal}
+\begin{lstlisting}
+> simplify(y^2-(x-3)^2*(x+1));
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 1.3}
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{lstlisting}
+> restart;
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+In the command \textcolor[RGB]{255,0,0}{\textbf{plot([sin(x),cos(x),x=0..4*Pi])}}, the range\textcolor[RGB]{255,0,0}{\textbf{ x=0..4*Pi}} is inside\
+
+the square brackets, so this is a parametric plot, with the horizontal coordinate being 
+$ \sin (x) $ and the \
+
+vertical coordinate being 
+$ \cos (x) $.  This is just a circle of radius one around the origin.
+\end{Maple Normal}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> plot([sin(x),cos(x),x=0..4*Pi]);
+
+\end{lstlisting}
+\begin{Maple Normal}
+In the command \textcolor[RGB]{255,0,0}{\textbf{plot([sin(x),cos(x)],x=0..4*Pi)}}, the range is outside the square\
+
+brackets.  We therefore have an ordinary plot of two different functions shown together, the first\
+
+(in red) being 
+$ \sin (x) $, and the second (in blue) being 
+$ \cos (x) $.\
+
+
+\end{Maple Normal}
+\begin{lstlisting}
+> plot([sin(x),cos(x)],x=0..4*Pi);
+
+\end{lstlisting}
+\begin{Maple Normal}
+The command \textcolor[RGB]{255,0,0}{\textbf{plot([x,sin(x),x=0..4*Pi])}} again has the range inside the square \
+
+brackets, so it is a parametric plot of the curve 
+$ (x ,\sin (x)) $.  However, because the horizontal\
+
+coordinate is just 
+$ x  $, this is the same as the ordinary graph of the function 
+$ \sin (x) $.
+\end{Maple Normal}
+\begin{lstlisting}
+> plot([x,sin(x),x=0..4*Pi]);
+\end{lstlisting}
+\begin{Maple Normal}
+The command \textcolor[RGB]{255,0,0}{\textbf{plot([y,sin(y),y=0..4*Pi])}} generates exactly the same picture\
+
+as the previous command.  Maple pays no attention to the convention that 
+$ x  $ usually represents\
+
+the horizontal coordinate, and 
+$ y  $ usually represents the vertical one.  Instead, the first entry\
+
+(which is 
+$ y  $ here) is always the horizontal coordinate, and the second entry (which is 
+$ \sin (y) $)\
+
+is always the vertical coordinate.  With this interpretation, it does not make any difference whether\
+
+the variable is called 
+$ x  $ or 
+$ y  $.\
+
+
+\end{Maple Normal}
+\begin{lstlisting}
+> plot([y,sin(y),y=0..4*Pi]);
+\end{lstlisting}
+\begin{Maple Normal}
+In the command \textcolor[RGB]{255,0,0}{\textbf{plot([sin(y),y,y=0..4*Pi])}} the 
+$ y  $ comes second and so represents\
+
+the vertical coordinate, and the function 
+$ \sin (y) $ gives the horizontal coordinate.  We therefore \
+
+get a standard sin wave running vertically.
+\end{Maple Normal}
+\begin{lstlisting}
+> plot([sin(y),y,y=0..4*Pi]);
+\end{lstlisting}
+\begin{Maple Normal}
+Finally, in the command \textcolor[RGB]{255,0,0}{\textbf{plot([sin(y),y],y=0..4*Pi)}} the range is again outside the square\
+
+brackets, so we have an ordinary plot of the two functions 
+$ \sin (y) $ (in red) and 
+$ y  $ (in blue) against 
+$ y  $.
+\end{Maple Normal}
+\begin{lstlisting}
+> plot([sin(y),y],y=0..4*Pi);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 2.1}
+\end{Maple Normal}
+\begin{lstlisting}
+> restart;
+\end{lstlisting}
+\begin{lstlisting}
+> with(plots):
+\end{lstlisting}
+\begin{lstlisting}
+> implicitplot(y^2=x^3-x,x=-2..2,y=-4..4);
+\end{lstlisting}
+\begin{lstlisting}
+> implicitplot(y^2=x^3-x,x=-2..2,y=-4..4,grid=[100,100]);
+\end{lstlisting}
+\begin{Maple Normal}
+The picture below shows that the topology of the curve 
+$ y^{2}=x^{3}-x +a  $ changes somewhere between 
+$ a = 0.3 $ and 
+$ a = 0.4 $.
+\end{Maple Normal}
+\begin{lstlisting}
+> implicitplot([y^2=x^3-x+0.3,y^2=x^3-x+0.4],
+             x=-2..2,y=-4..4,
+             color=[red,blue],
+             grid=[100,100]);
+\end{lstlisting}
+\begin{Maple Normal}
+The following, more detailed picture, shows that the change is close to 
+$ a = 0.385 $
+\end{Maple Normal}
+\begin{lstlisting}
+> implicitplot([y^2=x^3-x+0.38,
+              y^2=x^3-x+0.385,
+              y^2=x^3-x+0.39],
+             x=0.4..0.8,y=-0.5..0.5,
+             color=[red,blue,green],
+             grid=[100,100]);
+\end{lstlisting}
+\begin{Maple Normal}
+To find the exact value where the change occurs, note that we have 
+$ y =\sqrt{g (x)} $ or 
+$ y =-\sqrt{g (x)} $, where\
+
+
+$ g (x)=x^{3}-x +a  $.  If 
+$ g (x) $ is negative near  
+$ x = 0.6 $ then there is no square root and we have a gap in the\
+
+graph.  If 
+$ g (x) $ is positive near 
+$ x = 0.6 $ then there are two separate square roots and so two disjoint\
+
+branches of the graph.  The crossover occurs when the graph of 
+$ g (x) $ just touches the 
+$ x  $-axis near 
+$ x = 0.6 $,\
+
+so we have a repeated root, where 
+$ g (x) $ and its derivative both vanish.  The derivative is 
+$ 3 x^{2}-1 $, and the\
+
+only place near 
+$ x = 0.6 $ where this vanishes is at 
+$ x =\frac{1}{\sqrt{3}} $, which means that 
+$ g (x)=(\frac{1}{\sqrt{3}})^{3}-\frac{1}{\sqrt{3}}+a  $.\
+
+We want this to be zero as well, so we must have\
+
+
+$ a =\frac{1}{\sqrt{3}}-(\frac{1}{\sqrt{3}})^{3} $
+$ =\frac{2}{3 \sqrt{3}} $  
+$ = 0.3849001795 $
+\end{Maple Normal}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 2.2}
+\end{Maple Normal}
+\begin{Maple Normal}
+We now look at the curve 
+$ x^{2}+y^{2}+a (\sin (2 \mathrm{Pi} x)+\cos (2 \mathrm{Pi} y))=100 $.  When 
+$ a =0 $, this is just a circle.  When 
+$ a =1 $, it is a circle with wiggles:
+\end{Maple Normal}
+\begin{lstlisting}
+> a := 1; implicitplot(x^2+y^2+a*(sin(2*Pi*x)+cos(2*Pi*y))=100,
+             x=-11..11,y=-11..11,grid=[200,200]);
+\end{lstlisting}
+\begin{Maple Normal}
+When 
+$ a  $ is a little larger, some bubbles break away from the circle:
+\end{Maple Normal}
+\begin{lstlisting}
+> a := 5; implicitplot(x^2+y^2+a*(sin(2*Pi*x)+cos(2*Pi*y))=100,
+             x=-11..11,y=-11..11,grid=[200,200]);
+\end{lstlisting}
+\begin{Maple Normal}
+As 
+$ a  $ increases, we get an octagonal curve with squarish wiggles, with rows of bubbles running parallel to the curve, with the more distant rows being smaller.
+\end{Maple Normal}
+\begin{lstlisting}
+> a := 20; implicitplot(x^2+y^2+a*(sin(2*Pi*x)+cos(2*Pi*y))=100,
+             x=-11..11,y=-11..11,grid=[500,500]);
+\end{lstlisting}
+\begin{lstlisting}
+> a := 80; implicitplot(x^2+y^2+a*(sin(2*Pi*x)+cos(2*Pi*y))=100,
+             x=-21..21,y=-21..21,grid=[200,200]);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 3.1}
+\end{Maple Normal}
+\begin{lstlisting}
+> restart;
+with(plots):
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(a)}
+\end{Maple Normal}
+\begin{lstlisting}
+> listplot([10,40,20,30,50,10,20],style=POINT);
+\end{lstlisting}
+\begin{lstlisting}
+> listplot([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
+          19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,
+          2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+          style=POINT);
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(b)}
+\end{Maple Normal}
+\begin{lstlisting}
+> listplot([10,40,20,30,50,10,20],style=POINT,symbol=CROSS);
+\end{lstlisting}
+\begin{lstlisting}
+> listplot([10,40,20,30,50,10,20],style=POINT,symbol=BOX);
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(c)}
+\end{Maple Normal}
+\begin{lstlisting}
+> listplot([10,40,20,30,50,10,20]);
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 3.2}
+\end{Maple Normal}
+\begin{lstlisting}
+> restart;
+\end{lstlisting}
+\begin{lstlisting}
+> with(plots):
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(a)}
+\end{Maple Normal}
+\begin{lstlisting}
+> ithprime(1);
+\end{lstlisting}
+\begin{lstlisting}
+> ithprime(2);
+\end{lstlisting}
+\begin{lstlisting}
+> ithprime(3);
+\end{lstlisting}
+\begin{lstlisting}
+> ithprime(4);
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(b)}
+\end{Maple Normal}
+\begin{lstlisting}
+> seq(ithprime(i),i=1..100);
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(c)}
+\end{Maple Normal}
+\begin{lstlisting}
+> listplot([seq(ithprime(n),n=1..100)],style=POINT);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(d)}
+\end{Maple Normal}
+\begin{lstlisting}
+> plot([x*(ln(ln(x))+ln(x)-1),x*(ln(ln(x))+ln(x))],x=1..100);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> display(
+ listplot([seq(ithprime(n),n=1..100)],style=POINT),
+ plot([x*(ln(ln(x))+ln(x)-1),x*(ln(ln(x))+ln(x))],x=1..100)
+);
+
+\end{lstlisting}
+\begin{lstlisting}
+> f0 := (n) -> n * log(n);
+f1 := (n) -> n * (log(n) + log(log(n)) - 1);
+f2 := (n) -> n * (log(n) + log(log(n)) - 1 + (log(log(n)) - 2)/log(n) + (6*log(log(n)) - log(log(n))^2-11)/log(n)^2);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> display(
+    listplot([seq(ithprime(i),i=1..1000)],
+             style=POINT,symbol=POINT),
+#    plot([x*(ln(ln(x)) + ln(x) - 1),x*(ln(ln(x)) + ln(x))],x=1..1000)
+     plot(f1(x),x=2..1000)
+   );
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 3.3}
+\end{Maple Normal}
+\begin{lstlisting}
+> restart;
+\end{lstlisting}
+\begin{lstlisting}
+> with(plots):
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(a)}
+\end{Maple Normal}
+\begin{lstlisting}
+> 20!;
+\end{lstlisting}
+\begin{lstlisting}
+> evalf(20!);
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(b)}
+\end{Maple Normal}
+\begin{lstlisting}
+> seq(evalf(n!),n=1..20);
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(c)}
+\end{Maple Normal}
+\begin{lstlisting}
+> listplot([seq(evalf(n!),n=1..20)],style=POINT,axes=FRAME);
+\end{lstlisting}
+\begin{Maple Normal}
+We can see very little in this picture because 1!, 2!, ..., 17! are all very much smaller than 20!.  The scale is chosen so that 20! fits in the picture, but this means that 1!, 2!, ..., 17! are jammed right down by the 
+$ x  $-axis.  (The effect of the option \textcolor[RGB]{255,0,0}{\textbf{axes=FRAME}} is to draw the axis a little below 
+$ y =0 $, allowing us to see the points.  If we left out that option then the points would actually lie on the axis.)
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{(d)}
+\end{Maple Normal}
+\begin{lstlisting}
+> listplot([seq(log(n!),n=1..20)],style=POINT);
+\end{lstlisting}
+\begin{lstlisting}
+> pic1 :=%:
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(e)}
+\end{Maple Normal}
+\begin{lstlisting}
+> f := (x) -> sqrt(2*Pi)*x^(x+1/2)*exp(-x);
+\end{lstlisting}
+\begin{lstlisting}
+> plot(log(f(x)),x=1..20);
+\end{lstlisting}
+\begin{lstlisting}
+> pic2:=%:
+\end{lstlisting}
+\begin{lstlisting}
+> display(pic1,pic2);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\end{document}

@@ -1,0 +1,549 @@
+%% Created by Maple 2022.1, Windows 10
+%% Source Worksheet: lab_sols08
+%% Generated: Wed May 08 10:35:42 BST 2024
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{maple}
+\usepackage[utf8]{inputenc}
+\usepackage[svgnames]{xcolor}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{textcomp}
+\begin{document}
+\lstset{basicstyle=\ttfamily,breaklines=true,columns=flexible}
+\pagestyle{empty}
+\DefineParaStyle{Maple Bullet Item}
+\DefineParaStyle{Maple Heading 1}
+\DefineParaStyle{Maple Warning}
+\DefineParaStyle{Maple Heading 4}
+\DefineParaStyle{Maple Heading 2}
+\DefineParaStyle{Maple Heading 3}
+\DefineParaStyle{Maple Dash Item}
+\DefineParaStyle{Maple Error}
+\DefineParaStyle{Maple Title}
+\DefineParaStyle{Maple Ordered List 1}
+\DefineParaStyle{Maple Text Output}
+\DefineParaStyle{Maple Ordered List 2}
+\DefineParaStyle{Maple Ordered List 3}
+\DefineParaStyle{Maple Normal}
+\DefineParaStyle{Maple Ordered List 4}
+\DefineParaStyle{Maple Ordered List 5}
+\DefineCharStyle{Maple 2D Output}
+\DefineCharStyle{Maple 2D Input}
+\DefineCharStyle{Maple Maple Input}
+\DefineCharStyle{Maple 2D Math}
+\DefineCharStyle{Maple Hyperlink}
+\begin{center}
+\begin{Maple Normal}
+\underline{\textbf{Integration 2}}
+\end{Maple Normal}
+\end{center}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 1}
+\end{Maple Normal}
+\begin{lstlisting}
+> p[0] := sqrt(1/2);
+p[1] := sqrt(3/2) * x;
+p[2] := sqrt(5/8) * (3*x^2 - 1);
+p[3] := sqrt(7/8) * (5*x^3 - 3*x);
+\end{lstlisting}
+\begin{Maple Normal}
+We find experimentally that 
+${\textcolor{gray}{\int}}_{\!\!-1}^{1}p_{i}(x) p_{j}(x)\textcolor{gray}{d}x$ is 
+$0$ unless 
+$i =j$, in which case the integral is 
+$1$.\
+
+Here are three cases:
+\end{Maple Normal}
+\begin{lstlisting}
+> int(p[1] * p[2],x=-1..1);
+\end{lstlisting}
+\begin{lstlisting}
+> int(p[2] * p[2],x=-1..1);
+\end{lstlisting}
+\begin{lstlisting}
+> int(p[3] * p[2],x=-1..1);
+\end{lstlisting}
+\begin{Maple Normal}
+We can do all 16 cases together and print the results in a table, as follows:
+\end{Maple Normal}
+\begin{lstlisting}
+> Matrix(
+ [seq(
+   [seq(int(p[i] * p[j],x=-1..1),
+        j=0..3)],
+  i=0..3)]
+);
+\end{lstlisting}
+\begin{Maple Normal}
+We now need to find a function 
+$p_{4}(x)=a x^{4}+b x^{2}+c$ that makes the pattern continue: 
+\end{Maple Normal}
+\begin{lstlisting}
+> p[4] := a*x^4 + b*x^2 + c ;
+\end{lstlisting}
+\begin{Maple Normal}
+The following integrals should be 0, 0, 0, 0 and 1, respectively:
+\end{Maple Normal}
+\begin{lstlisting}
+> int(p[0] * p[4],x=-1..1);
+int(p[1] * p[4],x=-1..1);
+int(p[2] * p[4],x=-1..1);
+int(p[3] * p[4],x=-1..1);
+int(p[4] * p[4],x=-1..1);
+\end{lstlisting}
+\begin{Maple Normal}
+We can get Maple to find 
+$a$, 
+$b$ and 
+$c$ based on this information:
+\end{Maple Normal}
+\begin{lstlisting}
+> _EnvExplicit := true;
+\end{lstlisting}
+\begin{lstlisting}
+> sol := solve(\{
+ int(p[0] * p[4],x=-1..1) = 0,
+ int(p[1] * p[4],x=-1..1) = 0,
+ int(p[2] * p[4],x=-1..1) = 0,
+ int(p[3] * p[4],x=-1..1) = 0,
+ int(p[4] * p[4],x=-1..1) = 1,
+ a > 0
+\},\{a,b,c\});
+\end{lstlisting}
+\begin{lstlisting}
+> p[4] := factor(subs(sol,p[4]));
+\end{lstlisting}
+\begin{lstlisting}
+> q := (n) -> sqrt(n + 1/2)*diff((x^2-1)^n,x$n)/(2^n * n!);
+\end{lstlisting}
+\begin{lstlisting}
+> q(1); q(2); q(3); q(4);
+\end{lstlisting}
+\begin{lstlisting}
+> seq(factor(q(n)/p[n]),n=1..4);
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 2}
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+The general picture is that for any positive integers 
+$n$ and 
+$m$, there are constants 
+$a_{0},\mathit{...} ,a_{m}$ such that
+\end{Maple Normal}
+\begin{center}
+$\displaystyle \textcolor{gray}{\int}x^{n} \ln (x)^{m}\textcolor{gray}{d}x =x^{n +1} (a_{0}+a_{1} \ln (x)+\mathit{...} +a_{m} \mathrm{log}(x)^{m})$\end{center}
+\begin{Maple Normal}
+Here are some examples:
+\end{Maple Normal}
+\begin{lstlisting}
+> factor(int(x^3*ln(x)^5,x));
+\end{lstlisting}
+\begin{lstlisting}
+> factor(int(x^4*ln(x),x));
+\end{lstlisting}
+\begin{lstlisting}
+> factor(int(x^4*ln(x)^3,x));
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 3}
+\end{Maple Normal}
+\begin{Maple Normal}
+These first few integrals involve functions that you may not have seen before.  The 
+$\mathrm{erf}()$ function \
+
+is essentially the cumulative probability function for the normal distribution, so is important in\
+
+statistics.  The functions 
+$\mathrm{Ei}()$, 
+$\mathrm{EllipticF}()$ and 
+$\mathrm{hypergeom}()$ are more obscure, but they have\
+
+various applications in more advanced mathematics.  You can learn more about them by entering\
+
+?Ei, ?EllipticF or ?hypergeom in Maple.
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{(a)}
+\end{Maple Normal}
+\begin{lstlisting}
+> int(exp(-x^2),x);
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(b)}
+\end{Maple Normal}
+\begin{lstlisting}
+> int(1/ln(x),x);
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(c)}
+\end{Maple Normal}
+\begin{lstlisting}
+> int(1/(sqrt(1-x^2)*sqrt(1-2*x^2)),x);
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(d)}
+\end{Maple Normal}
+\begin{lstlisting}
+> int((x^8+1)^(-1/2),x);
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(e)}
+\end{Maple Normal}
+\begin{lstlisting}
+> int(sin(x)*ln(ln(x)),x);
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(f)}
+\end{Maple Normal}
+\begin{lstlisting}
+> int(sin(sin(sin(x))),x);
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(g)}
+\end{Maple Normal}
+\begin{lstlisting}
+> int(1/sqrt(1+x+x^10),x);
+\end{lstlisting}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+We are looking for a function of 
+$x$ that can be defined in three characters, but cannot
+\end{Maple Normal}
+\begin{Maple Normal}
+easily be integrated.  At least one of the characters must be \textcolor[RGB]{255,0,0}{\textbf{x}} (otherwise our function would
+\end{Maple Normal}
+\begin{Maple Normal}
+be constant, so we could integrate it).  That does not leave much space for anything else:
+\end{Maple Normal}
+\begin{Maple Normal}
+we could have a letter or digit, or any of the characters \textcolor[RGB]{255,0,0}{\textbf{+}}, \textcolor[RGB]{255,0,0}{\textbf{-}}, \textcolor[RGB]{255,0,0}{\textbf{*}}, \textcolor[RGB]{255,0,0}{\textbf{/}} or \textcolor[RGB]{255,0,0}{\textbf{^}}.  Most functions 
+\end{Maple Normal}
+\begin{Maple Normal}
+built from these ingredients are easy to integrate:
+\end{Maple Normal}
+\begin{lstlisting}
+> int(x+3,x);
+\end{lstlisting}
+\begin{lstlisting}
+> int(x*x,x);
+\end{lstlisting}
+\begin{lstlisting}
+> int(2^x,x);
+\end{lstlisting}
+\begin{Maple Normal}
+There is just one exception:
+\end{Maple Normal}
+\begin{lstlisting}
+> int(x^x,x);
+\end{lstlisting}
+\begin{Maple Normal}
+There is actually an answer that is even shorter:
+\end{Maple Normal}
+\begin{lstlisting}
+> int(x!,x);
+\end{lstlisting}
+\begin{Maple Normal}
+This is a little bit dubious because 
+$x !$ is usually only defined when 
+$x$ is an integer, and that would make\
+
+the integral meaningless.  However, Maple does have a way to interpret 
+$x !$ even when 
+$x$ is not an \
+
+integer (eg 
+$ 1.5!= 1.329340388$), which you can learn about by entering ?factorial and ?GAMMA.
+\end{Maple Normal}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 4}
+\end{Maple Normal}
+\begin{lstlisting}
+> y := sin(x) + sin(3*x)/3 + sin(5*x)/5 + sin(7*x)/7;
+\end{lstlisting}
+\begin{lstlisting}
+> z := int(y,x);
+\end{lstlisting}
+\begin{Maple Normal}
+The graph of 
+$y$ spends half the time wiggling near 
+$ 0.8$ and half the time wiggling near 
+$- 0.8$, jumping\
+
+rapidly between these levels at 
+$x =0$, 
+$x =\mathrm{Pi}$, 
+$x =2 \mathrm{Pi}$ and all other multiples of 
+$\mathrm{Pi}$.  The graph of\
+
+
+$z$ is a sawtooth, climbing from about 
+$- 1.2$ at 
+$x =0$ in a roughly straight line to about 
+$ 1.2$ at\
+
+
+$x =\mathrm{Pi}$, then dropping in a roughly straight line to about 
+$- 1.2$ again at 
+$x =2 \mathrm{Pi}$, and so on.  This\
+
+makes sense because 
+$y =\frac{\mathit{dz}}{\mathit{dx}}$, which is the slope of the graph of 
+$z$.  When 
+$y$ is near 
+$ 0.8$, the graph\
+
+of 
+$z$ slopes upwards at a roughly constant angle; when 
+$y$ is near 
+$- 0.8$, the graph of 
+$z$ slopes down\
+
+at a nearly constant angle. 
+\end{Maple Normal}
+\begin{lstlisting}
+> plot([y,z],x=-2*Pi..2*Pi);
+\end{lstlisting}
+\begin{lstlisting}
+> unassign('y','z');
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 5}
+\end{Maple Normal}
+\begin{lstlisting}
+> y := x*sin(20*x)*exp(-x);
+\end{lstlisting}
+\begin{lstlisting}
+> z := 20*int(y,x);
+\end{lstlisting}
+\begin{Maple Normal}
+In this plot, 
+$y$ and 
+$z$ look very similar:
+\end{Maple Normal}
+\begin{lstlisting}
+> plot([y,z],x=0..10);
+\end{lstlisting}
+\begin{Maple Normal}
+When we look more closely, we see that size of the oscillations in the two graphs are nearly the\
+
+same, as is the frequency of the oscillations, but the oscillations in 
+$y$ lag behind those in 
+$z$.
+\end{Maple Normal}
+\begin{lstlisting}
+> plot([y,z],x=0..3);
+\end{lstlisting}
+\begin{Maple Normal}
+By focusing still further, we see that the extent of the lag is about a quarter of a complete cycle.
+\end{Maple Normal}
+\begin{lstlisting}
+> plot([y,z],x=1.255..1.57);
+\end{lstlisting}
+\begin{Maple Normal}
+All this makes sense if we look at the formulae:
+\end{Maple Normal}
+\begin{lstlisting}
+> y;
+\end{lstlisting}
+\begin{lstlisting}
+> z;
+\end{lstlisting}
+\begin{Maple Normal}
+If we expand out 
+$z$, the first term is 
+$-(\frac{400}{401}) x \,{\mathrm e}^{-x} \cos (20 x)$, which is nearly 
+$-x \,{\mathrm e}^{-x} \cos (20 x)$.  \
+
+The remaining terms are much smaller.  The function 
+$-\cos (20 x)$ is the same as 
+$\sin (20 x)$ shifted by a \
+
+quarter cycle (because 
+$\sin (\theta -\frac{\mathrm{Pi}}{2})=-\cos (\theta)$).  Thus, everything fits together.\
+
+\
+
+
+\end{Maple Normal}
+\begin{Maple Normal}
+In the first step mentioned above, you might want to enter \textcolor[RGB]{255,0,0}{\textbf{expand(z)}} rather than doing it by hand.\
+
+This does not work very well, as Maple insists on converting 
+$\cos (20 x)$ into a polynomial in 
+$\cos (x)$,\
+
+giving a very messy result.  However, the following (rather obscure) syntax does the trick:
+\end{Maple Normal}
+\begin{lstlisting}
+> evalf(frontend('expand',[z]));
+\end{lstlisting}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+We now consider 
+$y^{2}+z^{2}$:
+\end{Maple Normal}
+\begin{lstlisting}
+> plot(y^2+z^2,x=0..6);
+\end{lstlisting}
+\begin{lstlisting}
+> simplify(y^2+z^2);
+\end{lstlisting}
+\begin{Maple Normal}
+\
+
+The first term is 
+$(\frac{25921282001}{25856961601}) x^{2} {\mathrm e}^{-2 x}$.  As 
+$25921282001$ is close to 
+$25856961601$, \
+
+this is approximately 
+$x^{2} {\mathrm e}^{-2 x}$.  The other terms are much smaller, so we guess that 
+$y^{2}+z^{2}$\
+
+should be close to 
+$x^{2} {\mathrm e}^{-2 x}$.  We can check this graphically as follows:
+\end{Maple Normal}
+\begin{lstlisting}
+> plot([y^2+z^2,x^2*exp(-2*x)],x=0..6);
+\end{lstlisting}
+\begin{lstlisting}
+> unassign('y','z');
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 6}
+\end{Maple Normal}
+\begin{Maple Normal}
+Here is a solution in a single step:
+\end{Maple Normal}
+\begin{lstlisting}
+> solve(
+  \{seq(int(x^k*(a*x^2+b*x+c)*exp(-x),x=0..infinity)=k,k=1..3)\},
+  \{a,b,c\}
+);
+\end{lstlisting}
+\begin{Maple Normal}
+Here it is again, more slowly:
+\end{Maple Normal}
+\begin{lstlisting}
+> y := (a*x^2+b*x+c)*exp(-x);
+\end{lstlisting}
+\begin{lstlisting}
+> int1 := int(x*y,x=0..infinity);
+\end{lstlisting}
+\begin{lstlisting}
+> int2 := int(x^2*y,x=0..infinity);
+\end{lstlisting}
+\begin{lstlisting}
+> int3 := int(x^3*y,x=0..infinity);
+\end{lstlisting}
+\begin{lstlisting}
+> solve(\{int1 = 1, int2 = 2, int3 = 3\},\{a,b,c\});
+\end{lstlisting}
+\begin{lstlisting}
+> unassign('y');
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 7}
+\end{Maple Normal}
+\begin{lstlisting}
+> fsolve(x*(ln(ln(x)) + ln(x) - 1) = 541,\{x=100\});
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 8}
+\end{Maple Normal}
+\begin{lstlisting}
+> seq(a+b^n,n=2..10);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 9}
+\end{Maple Normal}
+\begin{lstlisting}
+> with(plots):
+\end{lstlisting}
+\begin{lstlisting}
+> display(
+ implicitplot(x^4+y^4=1,x=-2..2,y=-2..2),
+ plot([cos(t)/(2+cos(4*t)),sin(t)/(2+cos(4*t)),t=0..2*Pi])
+);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 10}
+\end{Maple Normal}
+\begin{lstlisting}
+> evalf[100](Pi^76/exp(87));
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 11}
+\end{Maple Normal}
+\begin{lstlisting}
+> simplify(sin(2*x) * tan(2*x) * diff(log(tan(x)),x,x));
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\end{document}

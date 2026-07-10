@@ -1,0 +1,667 @@
+%% Created by Maple 2022.1, Windows 10
+%% Source Worksheet: lab_sols07
+%% Generated: Wed May 08 10:35:54 BST 2024
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{maple}
+\usepackage[utf8]{inputenc}
+\usepackage[svgnames]{xcolor}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{textcomp}
+\begin{document}
+\lstset{basicstyle=\ttfamily,breaklines=true,columns=flexible}
+\pagestyle{empty}
+\DefineParaStyle{Maple Bullet Item}
+\DefineParaStyle{Maple Heading 1}
+\DefineParaStyle{Maple Warning}
+\DefineParaStyle{Maple Heading 4}
+\DefineParaStyle{Maple Heading 2}
+\DefineParaStyle{Maple Heading 3}
+\DefineParaStyle{Maple Dash Item}
+\DefineParaStyle{Maple Error}
+\DefineParaStyle{Maple Title}
+\DefineParaStyle{Maple Ordered List 1}
+\DefineParaStyle{Maple Text Output}
+\DefineParaStyle{Maple Ordered List 2}
+\DefineParaStyle{Maple Ordered List 3}
+\DefineParaStyle{Maple Normal}
+\DefineParaStyle{Maple Ordered List 4}
+\DefineParaStyle{Maple Ordered List 5}
+\DefineCharStyle{Maple 2D Output}
+\DefineCharStyle{Maple 2D Input}
+\DefineCharStyle{Maple Maple Input}
+\DefineCharStyle{Maple 2D Math}
+\DefineCharStyle{Maple Hyperlink}
+\begin{center}
+\begin{Maple Normal}
+\underline{\textbf{Integration 1}}
+\end{Maple Normal}
+\end{center}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\section{\textbf{The }\textcolor[RGB]{255,0,0}{\textbf{ratint}}\textbf{ function}}
+\begin{lstlisting}
+> myarctan := 
+ proc(y,x) 
+  `if`(nargs = 1, arctan(y),evalf(Pi/2)-arctan(expand(x/y)));
+ end:
+myarctanh := (y) -> myln(1+y)/2 - myln(1-y)/2:
+myln := 
+ proc(u)
+  local c,d,v;
+  d := degree(u,x);
+  c := coeff(u,x,d);
+  v := expand(x^d + (u-c*x^d)/c);
+  if d = 1 then v := abs(v); fi;
+  ln(v);
+ end:ratint := 
+ proc(f,x)
+  local g;
+  g := int(f,x);
+  if has(g,\{RootOf,int\}) then 
+    g := int(convert(evalf(f),parfrac,x),x);
+  fi;
+  g := eval(
+        subs(ln=myln,arctan = myarctan,arctanh=myarctanh,
+             signum=1,abs=(x->x),
+             g));
+  g := expand(g);
+  if (type(g,`+`)) then 
+   g := remove((a)->type(a,constant),g);
+  fi;
+  g;
+ end:
+\end{lstlisting}
+\section{\textbf{Various rational functions}}
+\begin{lstlisting}
+> g[1] := (x) -> x^2 + x + 1 + 1/x + 1/x^2;g[2] := (x) -> 1/(x-1) + 1/(x^2-1) + 1/(x^3-1);g[3] := (x) -> 1/(x-1)^2 + 1/(x-2)^3 + 1/(x-3)^4;g[4] := (x) -> 1/(x+1) + 1/(x^2+1) + 1/(x^3+1);g[5] := (x) -> x/(x+1)*(x+2)/(x+3)*(x+4);g[6] := (x) -> x/(x+1)^2*(x+2)/(x+3)^2*(x+4);g[7] := (x) -> (x^3+4*x^2+x+2)/(x-1)^2/(x+1)^3;g[8] := (x) -> 1/(x^2+8*x+1);g[9] := (x) -> (x^2+1)^(-5);g[10] := (x) -> 1/(x^8+x^2+1);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 1}
+\end{Maple Heading 2}
+\begin{Maple Normal}
+When 
+$x$is large, 
+$y$is approximately 
+$\frac{x^{4}}{4}$.  Indeed, the formula for 
+$y$ is as follows:
+\end{Maple Normal}
+\begin{lstlisting}
+> y := ratint(((x^3+1)/(x^2+1))^3,x);
+\end{lstlisting}
+\begin{Maple Normal}
+The first term is 
+$\frac{x^{4}}{4}$, and the other terms are much smaller, at least when 
+$x$ is large.  Indeed, when 
+$x$\
+
+is large, all of the terms with 
+$x^{2}+1$ on the bottom will be very small.  Also, you should recall from\
+
+the theory of trigonometric functions that 
+${| \arctan (x)|}$ is always at most 
+$\frac{\mathrm{Pi}}{2}$, so this will also be negligible\
+
+in comparison to 
+$\frac{x^{4}}{4}$ for large 
+$x$.  The terms 
+$3 x$ and 
+$\frac{3 x^{2}}{2}$ will get large as 
+$x$ does, but much more \
+
+slowly than 
+$\frac{x^{4}}{4}$ does.  For example, when 
+$x =1000$, the term 
+$\frac{x^{4}}{4}$ is of the order of a trillion, whereas \
+
+
+$\frac{3 x^{2}}{2}$ is of the order of a million, and 
+$3 x$ is only 
+$3000$.  The behaviour of 
+$\ln (x^{2}+1)$ is a little less obvious,\
+
+but in fact it grows much more slowly even than 
+$x$, as you could check by plotting the graph.\
+
+\
+
+We can ask Maple to separate the terms as follows:
+\end{Maple Normal}
+\begin{lstlisting}
+> terms := [op(y)];
+\end{lstlisting}
+\begin{Maple Normal}
+We can then check the relative size when 
+$x =1000$:
+\end{Maple Normal}
+\begin{lstlisting}
+> evalf(subs(x=1000,terms));
+\end{lstlisting}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+You can see that the first term is much bigger than the rest.  We can also see this by plotting.\
+
+In the picture below, the red curve is 
+$\frac{x^{4}}{4}$, and the other terms are plotted in various different colours.
+\end{Maple Normal}
+\begin{Maple Normal}
+By 
+$x =5$, the red curve is already much bigger than the others.  If you change the range to \textcolor[RGB]{255,0,0}{\textbf{1..100}}\
+
+(say) then only the red curve is visible because all other terms are squashed down onto the 
+$x$ axis. 
+\end{Maple Normal}
+\begin{lstlisting}
+> plot(terms,x=1..5);
+\end{lstlisting}
+\begin{Maple Normal}
+We can also just plot 
+$y$ and 
+$\frac{x^{4}}{4}$ together.  If we stop at 
+$x =9$ then you can still see the difference between\
+
+the two curves, but if we went much further than that then they would be indistinguishable.
+\end{Maple Normal}
+\begin{lstlisting}
+> plot([y,x^4/4],x=-9..9);
+\end{lstlisting}
+\begin{lstlisting}
+> unassign('y','terms');
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 2}
+\end{Maple Heading 2}
+\begin{Maple Normal}
+Here is the formula for 
+$y$:
+\end{Maple Normal}
+\begin{lstlisting}
+> y := ratint((a*x^2+b)/(c*x^2+d),x);
+\end{lstlisting}
+\begin{Maple Normal}
+This is 
+$y =\frac{a x}{c}$ (which gives a line of slope 
+$\frac{a}{c}$) plus some other terms, which will be much smaller when 
+$x$ is large.  One way to see this is to look at  
+$\frac{\mathit{dy}}{\mathit{dx}}$ when 
+$x$ is large, or in other words, the limit of 
+$\frac{\mathit{dy}}{\mathit{dx}}$ as 
+$x$ tends to infinity.  Of course 
+$\frac{\mathit{dy}}{\mathit{dx}}$ is just the function we first thought of, namely 
+$\frac{a x^{2}+b}{c x^{2}+d}$.  When 
+$x$ is very large, 
+$b$ and 
+$d$ will be negligible compared with 
+$a x^{2}$ and 
+$c x^{2}$, so the function is approximately 
+$\frac{a x^{2}}{c x^{2}}=\frac{a}{c}$.
+\end{Maple Normal}
+\begin{lstlisting}
+> limit(diff(y,x),x=infinity);
+\end{lstlisting}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+We can see this graphically if we choose some numbers for 
+$a ,b ,c$ and 
+$d$.
+\end{Maple Normal}
+\begin{lstlisting}
+> plot(subs(a=7,b=-3,c=2,d=8,[y,a*x/c]),x=10..100);
+\end{lstlisting}
+\begin{lstlisting}
+> unassign('y');
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 3}
+\end{Maple Heading 2}
+\begin{Maple Normal}
+\textbf{(a)} It is true that the integral of a rational function can contain terms like 
+$a \ln (x^{2}+u x +v)$.  For example:
+\end{Maple Normal}
+\begin{lstlisting}
+> y := (8*x+8)/(x^2+2*x+3);
+\end{lstlisting}
+\begin{lstlisting}
+> ratint(y,x);
+\end{lstlisting}
+\begin{Maple Normal}
+or more generally:
+\end{Maple Normal}
+\begin{lstlisting}
+> y := a*(2*x+u)/(x^2+u*x+v);
+\end{lstlisting}
+\begin{lstlisting}
+> ratint(y,x);
+\end{lstlisting}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{(b)} It is \textit{not} true that terms like 
+$x \ln (x +u)$ can occur in the integral of a rational function 
+$g (x)$.  
+\end{Maple Normal}
+\begin{Maple Normal}
+If there were a term 
+$x \ln (x +u)$ in 
+$\int g (x)d x$, then there would have to be a term 
+\end{Maple Normal}
+\begin{Maple Normal}
+
+$\frac{\partial}{\partial x} (x \ln (x +u))$ in 
+$\frac{d}{d x} (\int g (x)d x)$.  In other words, there would be a term 
+\end{Maple Normal}
+\begin{Maple Normal}
+
+$\ln (x +u)+\frac{x}{x +u}$ in 
+$g (x)$, which is not allowed, as 
+$g (x)$ is supposed to be a rational function.
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{(c) }For essentially the same reason, there cannot be any terms like 
+$a \ln (x +u)^{2}$ in the integral 
+\end{Maple Normal}
+\begin{Maple Normal}
+of a rational function, because 
+$\frac{\partial}{\partial x} (a \ln (x +u)^{2})=\frac{2 a \ln (x +u)}{x -u}$, which is not allowed as
+\end{Maple Normal}
+\begin{Maple Normal}
+a term in a rational function.
+\end{Maple Normal}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 4}
+\end{Maple Heading 2}
+\begin{Maple Normal}
+If 
+$b^{2}-4 c <0$ then the function 
+$x^{2}+b x +c$ has no real roots, and the integral 
+$\int \frac{1}{x^{2}+b x +c}d x$ involves
+\end{Maple Normal}
+\begin{Maple Normal}
+the 
+$\arctan ()$ function.   Here is an example:
+\end{Maple Normal}
+\begin{lstlisting}
+> b := 2; c := 3; b^2-4*c;
+\end{lstlisting}
+\begin{lstlisting}
+> plot(x^2+b*x+c,x=-2..1,0..6);
+
+\end{lstlisting}
+\begin{lstlisting}
+> ratint(1/(x^2+b*x+c),x);
+\end{lstlisting}
+\begin{Maple Normal}
+If 
+$b^{2}-4 c =0$ then the function 
+$x^{2}+b x +c$ has only one real root (where the graph 
+\end{Maple Normal}
+\begin{Maple Normal}
+touches the 
+$x$ axis but does not cross it) and the integral involves neither 
+$\arctan ()$ nor 
+$\ln ()$; in fact, it just
+\end{Maple Normal}
+\begin{Maple Normal}
+has the form 
+$-\frac{1}{x -u}$.  Here is an example:
+\end{Maple Normal}
+\begin{lstlisting}
+> b := 4; c := 4; b^2-4*c;
+\end{lstlisting}
+\begin{lstlisting}
+> plot(x^2+b*x+c,x=-4..1,0..6);
+
+\end{lstlisting}
+\begin{lstlisting}
+> ratint(1/(x^2+b*x+c),x);
+\end{lstlisting}
+\begin{Maple Normal}
+If 
+$0<b^{2}-4 c$ then the function 
+$x^{2}+b x +c$ has two real roots,  and the integral is a
+\end{Maple Normal}
+\begin{Maple Normal}
+sum of two terms involving 
+$\ln ()$.  Here is an example:
+\end{Maple Normal}
+\begin{lstlisting}
+> b := -5; c := 4; b^2-4*c;
+\end{lstlisting}
+\begin{lstlisting}
+> plot(x^2+b*x+c,x=-1..5);
+
+\end{lstlisting}
+\begin{lstlisting}
+> ratint(1/(x^2+b*x+c),x);
+\end{lstlisting}
+\begin{lstlisting}
+> unassign('b','c');
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 5}
+\end{Maple Heading 2}
+\begin{Maple Normal}
+Terms like 
+$\ln ({| x -u |})$ in 
+$\textcolor{gray}{\int}g (x)\textcolor{gray}{d}x$ are associated with places where 
+$g (x)$ blows up to infinity (which
+\end{Maple Normal}
+\begin{Maple Normal}
+are known as the \textit{poles }of 
+$g (x)$).  More precisely, if there is a term 
+$\ln ({| x -u |})$ in the integral, then
+\end{Maple Normal}
+\begin{Maple Normal}
+
+$g (x)$ \textit{must }blow up at 
+$x =u$.  Conversely, if 
+$g (x)$ blows up at 
+$x =u$ then there will \textit{usually} be a term
+\end{Maple Normal}
+\begin{Maple Normal}
+
+$\ln ({| x -u |})$ in the integral, but not always; there may instead be terms of the form 
+$(x -u)^{-n}$.  The
+\end{Maple Normal}
+\begin{Maple Normal}
+functions 
+$g_{3}(x)$ and 
+$g_{7}(x)$ are examples of this.
+\end{Maple Normal}
+\begin{Maple Normal}
+  
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+Here we consider 
+$g_{2}(x)$; there are poles at 
+$x =-1$ and 
+$x =1$, and corresponding terms 
+$\ln ({| x +1|})$
+\end{Maple Normal}
+\begin{Maple Normal}
+and 
+$\ln ({| x -1|})$ in the integral.
+\end{Maple Normal}
+\begin{lstlisting}
+> y := g[2](x); z := ratint(y,x);
+\end{lstlisting}
+\begin{lstlisting}
+> plot([y,z],x=-5..5,-10..10);
+\end{lstlisting}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+Here we consider 
+$g_{3}(x)$.   There are no 
+$\ln ()$ terms in the integral, but nonetheless there are poles
+\end{Maple Normal}
+\begin{Maple Normal}
+at 
+$x =1$, 
+$x =2$ and 
+$x =3$.
+\end{Maple Normal}
+\begin{lstlisting}
+> y := g[3](x); z := ratint(y,x);
+\end{lstlisting}
+\begin{lstlisting}
+> plot([y,z],x=0..5,-100..100,numpoints=400);
+\end{lstlisting}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+Here we consider 
+$g_{4}(x)$.  There is a pole at 
+$x =-1$, and a corresponding term 
+$\ln ({| x +1|})$ in the
+\end{Maple Normal}
+\begin{Maple Normal}
+integral.
+\end{Maple Normal}
+\begin{lstlisting}
+> y := g[4](x); z := ratint(y,x);
+\end{lstlisting}
+\begin{lstlisting}
+> plot([y,z],x=-5..5,-10..10);
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 6}
+\end{Maple Heading 2}
+\begin{Maple Normal}
+We only get terms like 
+$\frac{1}{x -u}$ or 
+$\frac{1}{(x -u)^{n}}$ in 
+$\textcolor{gray}{\int}g (x)\textcolor{gray}{d}x$ if the denominator of 
+$g (x)$ has repeated roots.
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+A repeated root at 
+$x =u$ gives a factor 
+$(x -u)^{n}$ in the denominator, with 
+$1<n$.  This gives a term 
+$\frac{1}{(x -u)^{n -1}}$ in the integral (and possibly also some terms like 
+$\frac{1}{(x -u)^{k}}$ for smaller values of 
+$k$).
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+Here we consider 
+$g_{3}(x)$:
+\end{Maple Normal}
+\begin{lstlisting}
+> y := g[3](x);
+\end{lstlisting}
+\begin{Maple Normal}
+The denominator has repeated roots at 
+$x =1$, 
+$x =2$ and 
+$x =3$:
+\end{Maple Normal}
+\begin{lstlisting}
+> d := denom(factor(y));
+\end{lstlisting}
+\begin{Maple Normal}
+These show up in the graph of 
+$d$ as points where the graph touches the 
+$x$ axis without crossing it,\
+
+or where it crosses but the tangent line at the crossing point is horizontal: 
+\end{Maple Normal}
+\begin{lstlisting}
+> plot(d,x=0..4,-0.3...0.3);
+\end{lstlisting}
+\begin{Maple Normal}
+The integral has terms of the form 
+$\frac{1}{(x -u)^{n}}$ for 
+$u =1,2$ and 
+$3$.
+\end{Maple Normal}
+\begin{lstlisting}
+> ratint(y,x);
+\end{lstlisting}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+Here we consider 
+$g_{4}(x)$:
+\end{Maple Normal}
+\begin{lstlisting}
+> y := g[4](x);
+\end{lstlisting}
+\begin{Maple Normal}
+The denominator has a root at 
+$x =-1$, which is not repeated:
+\end{Maple Normal}
+\begin{lstlisting}
+> d := denom(factor(y));
+\end{lstlisting}
+\begin{Maple Normal}
+This is visible in the graph of 
+$d$.  Note that where the graph meets the 
+$x$ axis, the tangent line is not
+\end{Maple Normal}
+\begin{Maple Normal}
+horizontal, corresponding to the fact that the root is not repeated.
+\end{Maple Normal}
+\begin{lstlisting}
+> plot(d,x=-2..2,-10..10);
+\end{lstlisting}
+\begin{Maple Normal}
+The integral has no terms of the form 
+$\frac{1}{(x -u)^{n}}$.
+\end{Maple Normal}
+\begin{lstlisting}
+> ratint(y,x);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+Here we consider 
+$g_{6}(x)$:
+\end{Maple Normal}
+\begin{lstlisting}
+> y := g[6](x);
+\end{lstlisting}
+\begin{Maple Normal}
+The denominator has repeated roots at 
+$x =-3$ and 
+$x =-1$:
+\end{Maple Normal}
+\begin{lstlisting}
+> d := denom(factor(y));
+\end{lstlisting}
+\begin{Maple Normal}
+These visible in the graph of 
+$d$, as points where the curve meets the 
+$x$ axis without crossing it.
+\end{Maple Normal}
+\begin{Maple Normal}
+Note that the tangent line is horizontal at these points.
+\end{Maple Normal}
+\begin{lstlisting}
+> plot(d,x=-4..2,-10..10);
+\end{lstlisting}
+\begin{Maple Normal}
+The integral has terms of the form 
+$\frac{1}{x -u}$ for 
+$x =-3$ and 
+$x =-1$.
+\end{Maple Normal}
+\begin{lstlisting}
+> ratint(y,x);
+\end{lstlisting}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+We now integrate some random rational functions, and observe that we do not get any terms like
+\end{Maple Normal}
+\begin{Maple Normal}
+
+$\frac{1}{(x -u)^{n}}$.  The reason is simply that the denominator is a random polynomial, which will almost
+\end{Maple Normal}
+\begin{Maple Normal}
+never have repeated roots.  The roots of a random polynomial are randomly distributed, so it 
+\end{Maple Normal}
+\begin{Maple Normal}
+would be a big coincidence for two roots to be in the same place, and this does not often happen.
+\end{Maple Normal}
+\begin{lstlisting}
+> r := randpoly(x)/randpoly(x);
+\end{lstlisting}
+\begin{lstlisting}
+> ratint(r,x);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> r := randpoly(x)/randpoly(x);
+\end{lstlisting}
+\begin{lstlisting}
+> ratint(r,x);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> r := randpoly(x)/randpoly(x);
+\end{lstlisting}
+\begin{lstlisting}
+> ratint(r,x);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\end{document}

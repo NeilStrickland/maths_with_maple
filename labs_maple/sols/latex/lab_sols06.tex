@@ -1,0 +1,670 @@
+%% Created by Maple 2022.1, Windows 10
+%% Source Worksheet: lab_sols06
+%% Generated: Thu May 09 11:30:56 BST 2024
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{maple}
+\usepackage[utf8]{inputenc}
+\usepackage[svgnames]{xcolor}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{textcomp}
+\begin{document}
+\lstset{basicstyle=\ttfamily,breaklines=true,columns=flexible}
+\pagestyle{empty}
+\DefineParaStyle{Maple Bullet Item}
+\DefineParaStyle{Maple Heading 1}
+\DefineParaStyle{Maple Warning}
+\DefineParaStyle{Maple Heading 4}
+\DefineParaStyle{Maple Heading 2}
+\DefineParaStyle{Maple Heading 3}
+\DefineParaStyle{Maple Dash Item}
+\DefineParaStyle{Maple Error}
+\DefineParaStyle{Maple Title}
+\DefineParaStyle{Maple Ordered List 1}
+\DefineParaStyle{Maple Text Output}
+\DefineParaStyle{Maple Ordered List 2}
+\DefineParaStyle{Maple Ordered List 3}
+\DefineParaStyle{Maple Normal}
+\DefineParaStyle{Maple Ordered List 4}
+\DefineParaStyle{Maple Ordered List 5}
+\DefineCharStyle{Maple 2D Output}
+\DefineCharStyle{Maple 2D Input}
+\DefineCharStyle{Maple Maple Input}
+\DefineCharStyle{Maple 2D Math}
+\DefineCharStyle{Maple Hyperlink}
+\begin{center}
+\begin{Maple Title}
+\underline{\textbf{More differentiation}}
+\end{Maple Title}
+\end{center}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 1.1}
+\end{Maple Heading 2}
+\begin{Maple Normal}
+Here are the graphs of 
+$y =x^{n} {\mathrm e}^{-x}$ for 
+$n =3,4$ and 
+$5$:
+\end{Maple Normal}
+\begin{lstlisting}
+> plot(x^3*exp(-x),x=0..8);
+plot(x^4*exp(-x),x=0..8);
+plot(x^5*exp(-x),x=0..8);
+\end{lstlisting}
+\begin{Maple Normal}
+You can just about see that the peaks occur at 
+$x =3$, 
+$x =4$ and 
+$x =5$, suggesting that for general 
+$n$ 
+\end{Maple Normal}
+\begin{Maple Normal}
+we should have a peak at 
+$x =n$.  To check this, we must solve 
+$\frac{\mathit{dy}}{\mathit{dx}}=0$.
+\end{Maple Normal}
+\begin{lstlisting}
+> y := x^n * exp(-x);
+\end{lstlisting}
+\begin{lstlisting}
+> simplify(diff(y,x));
+\end{lstlisting}
+\begin{lstlisting}
+> solve(diff(y,x)=0,\{x\});
+\end{lstlisting}
+\begin{Maple Normal}
+This shows that the peak does indeed occur at 
+$x =n$.  To find the height of the peak, we must put
+\end{Maple Normal}
+\begin{Maple Normal}
+
+$x =n$ in 
+$y$:
+\end{Maple Normal}
+\begin{lstlisting}
+> y[max] := subs(x=n,y);
+\end{lstlisting}
+\begin{Maple Normal}
+It follows that 
+$\frac{y}{y_{\max}}=(\frac{x}{n})^{n} {\mathrm e}^{n -x}$, so the maximum value of  
+$(\frac{x}{n})^{n} {\mathrm e}^{n -x}$ is 
+$1$.  We can plot these functions for different 
+$n$ together as follows:
+\end{Maple Normal}
+\begin{lstlisting}
+> plot([seq((x/n)^n*exp(n-x),n=1..8)],x=0..20);
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 1.2}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> p := (x) -> -10*x^6+156*x^5-945*x^4+2780*x^3-4080*x^2+2880*x;
+\end{lstlisting}
+\begin{lstlisting}
+> plot(p(x),x=0..5);
+\end{lstlisting}
+\begin{Maple Normal}
+We see from the picture that the maximum value is about 1000, occurring at about 
+$x =3$. 
+\end{Maple Normal}
+\begin{Maple Normal}
+There also seem to be two inflection points, where the curve flattens out but does not
+\end{Maple Normal}
+\begin{Maple Normal}
+have a maximum or minimum.  To check this, we solve for 
+$\mathit{p'} (x)=0$:
+\end{Maple Normal}
+\begin{lstlisting}
+> p1 := diff(p(x),x);
+\end{lstlisting}
+\begin{lstlisting}
+> solve(p1=0,x);
+\end{lstlisting}
+\begin{Maple Normal}
+This shows that the critical points are at 
+$x =1$, 
+$x =3$ and 
+$x =4$.  The numbers 1 and 4 are
+\end{Maple Normal}
+\begin{Maple Normal}
+repeated because they are double roots of 
+$\mathit{p'} (x)$, and therefore inflection points of 
+$p (x)$.
+\end{Maple Normal}
+\begin{Maple Normal}
+To check this, we differentiate again:
+\end{Maple Normal}
+\begin{lstlisting}
+> p2 := diff(p(x),x,x);
+\end{lstlisting}
+\begin{lstlisting}
+> subs(x=1,p2);
+\end{lstlisting}
+\begin{lstlisting}
+> subs(x=3,p2);
+\end{lstlisting}
+\begin{lstlisting}
+> subs(x=4,p2);
+\end{lstlisting}
+\begin{Maple Normal}
+As 
+$\mathit{p'} (3)=0$ and 
+$\mathit{p''} (3)<0$ we see that 
+$x =3$ is a local maximum; by looking at the graph we
+\end{Maple Normal}
+\begin{Maple Normal}
+see that it is a global maximum.  The maximum value of 
+$p (x)$ is thus given by 
+$p (3)$:
+\end{Maple Normal}
+\begin{lstlisting}
+> p(3);
+\end{lstlisting}
+\begin{Maple Normal}
+The values of 
+$p (x)$ at the inflection points are strictly smaller, as expected:
+\end{Maple Normal}
+\begin{lstlisting}
+> p(1),p(4);
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 2.1}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> restart;
+\end{lstlisting}
+\begin{lstlisting}
+> u := x*sin(x^2+y^2)-y*cos(x^2+y^2);
+\end{lstlisting}
+\begin{lstlisting}
+> with(plots):
+\end{lstlisting}
+\begin{lstlisting}
+> implicitplot(u=0,x=-5..5,y=-5..5,grid=[100,100]);
+\end{lstlisting}
+\begin{lstlisting}
+> slope1 := implicitdiff(u=0,y,x);
+\end{lstlisting}
+\begin{Maple Normal}
+The answer can be rewritten more nicely using the original relation
+\end{Maple Normal}
+\begin{center}
+ 
+$x \sin (x^{2}+y^{2})=y \cos (x^{2}+y^{2})$, \end{center}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+which allows us to rewrite 
+$\sin (x^{2}+y^{2})$ as 
+$\frac{y \cos (x^{2}+y^{2})}{x}$, after which we can cancel 
+\end{Maple Normal}
+\begin{Maple Normal}
+the cos terms.
+\end{Maple Normal}
+\begin{lstlisting}
+> subs(sin(x^2+y^2) = (y/x)*cos(x^2+y^2),slope1);
+\end{lstlisting}
+\begin{lstlisting}
+> simplify(%);
+\end{lstlisting}
+\begin{lstlisting}
+> slope1 := %;
+\end{lstlisting}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+We now write the curve parametrically in terms of 
+$t$:
+\end{Maple Normal}
+\begin{lstlisting}
+> xt := t * cos(t^2); yt := t * sin(t^2);
+\end{lstlisting}
+\begin{Maple Normal}
+To check that this really is the same curve as before, we put 
+$x =t \cos (t^{2})$ and 
+$y =t \sin (t^{2})$ in 
+$u$ and make sure that we get zero:
+\end{Maple Normal}
+\begin{lstlisting}
+> subs(x=xt,y=yt,u);
+\end{lstlisting}
+\begin{lstlisting}
+> simplify(subs(x=xt,y=yt,u));
+\end{lstlisting}
+\begin{Maple Normal}
+We can also check graphically:
+\end{Maple Normal}
+\begin{lstlisting}
+> plot([xt,yt,t=-5..5]);
+\end{lstlisting}
+\begin{Maple Normal}
+We now calculate 
+$\frac{\mathit{dy}}{\mathit{dx}}$ again from the parametric representation:
+\end{Maple Normal}
+\begin{lstlisting}
+> diff(xt,t);
+\end{lstlisting}
+\begin{lstlisting}
+> diff(yt,t);
+\end{lstlisting}
+\begin{lstlisting}
+> slope2 := diff(yt,t)/diff(xt,t);
+\end{lstlisting}
+\begin{Maple Normal}
+This should be the same as what we get by putting 
+$x =t \cos (t^{2})$ and 
+$y =t \sin (t^{2})$ in our earlier answer:
+\end{Maple Normal}
+\begin{lstlisting}
+> simplify(subs(x=xt,y=yt,slope1));
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 2.2}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> restart;
+\end{lstlisting}
+\begin{Maple Normal}
+We start by entering the definitions given in the question:
+\end{Maple Normal}
+\begin{lstlisting}
+> u := (x^2+y^2)^2 + 85*(x^2+y^2) - 500 + 18*x*(3*y^2-x^2);
+\end{lstlisting}
+\begin{lstlisting}
+> xt := 6*cos(t) + 8*cos(t)^2 - 4;
+yt := 2*sin(t)*(3-4*cos(t));
+\end{lstlisting}
+\begin{Maple Normal}
+We now plot the curve 
+$u =0$ and the curve given parametrically in terms of 
+$t$:
+\end{Maple Normal}
+\begin{lstlisting}
+> with(plots):
+\end{lstlisting}
+\begin{lstlisting}
+> implicitplot(u=0,x=-10..10,y=-10..10,grid=[100,100]);
+\end{lstlisting}
+\begin{lstlisting}
+> plot([xt,yt,t=0..2*Pi]);
+\end{lstlisting}
+\begin{Maple Normal}
+The curves certainly look the same.  This can be tested as follows:
+\end{Maple Normal}
+\begin{lstlisting}
+> simplify(subs(x=xt,y=yt,u));
+\end{lstlisting}
+\begin{Maple Normal}
+We next find 
+$\frac{\mathit{dy}}{\mathit{dx}}$ by implicit differentiation:
+\end{Maple Normal}
+\begin{lstlisting}
+> slope1 := simplify(implicitdiff(u=0,y,x));
+\end{lstlisting}
+\begin{Maple Normal}
+Alternatively, we can find 
+$\frac{\mathit{dy}}{\mathit{dx}}$ from the parametric representation:
+\end{Maple Normal}
+\begin{lstlisting}
+> slope2 := simplify(diff(yt,t)/diff(xt,t));
+\end{lstlisting}
+\begin{Maple Normal}
+This is the same as what we get by rewriting 
+$\mathit{slope1}$ in terms of 
+$t$:
+\end{Maple Normal}
+\begin{lstlisting}
+> simplify(subs(x=xt,y=yt,slope1));
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 3.1}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> r := (n) -> diff(x^n*ln(x)/n!,x$n);
+\end{lstlisting}
+\begin{lstlisting}
+> seq(r(n),n=1..10);
+\end{lstlisting}
+\begin{lstlisting}
+> seq(r(n)-r(n-1),n=2..10);
+\end{lstlisting}
+\begin{Maple Normal}
+We see from this that 
+$r (n)-r (n -1)=\frac{1}{n}$.  We start with 
+$r (1)=\ln (x)+1$, and then
+\end{Maple Normal}
+\begin{Maple Normal}
+     
+$r (2)=r (1)+r (2)-r (1)$
+$=r (1)+\frac{1}{2}$
+$=\ln (x)+1+\frac{1}{2}$
+\end{Maple Normal}
+\begin{Maple Normal}
+     
+$r (3)=r (2)+r (3)-r (2)$
+$=r (2)+\frac{1}{3}$
+$=\ln (x)+1+\frac{1}{2}+\frac{1}{3}$
+\end{Maple Normal}
+\begin{Maple Normal}
+     
+$r (4)=r (3)+r (4)-r (3)$
+$=r (3)+\frac{1}{4}$
+$=\ln (x)+1+\frac{1}{2}+\frac{1}{3}+\frac{1}{4}$
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+and so on.  In general, we have
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{center}
+
+$r (n)=\ln (x)+1+\frac{1}{2}+\mathit{...} +\frac{1}{n}$
+$=\ln (x)+\moverset{n}{\munderset{k =1}{\sum}}\frac{1}{k}$\end{center}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+Maple knows about a constant called 
+$\mathrm{gamma}$ (Euler's constant, approximately 0.577) and a special 
+\end{Maple Normal}
+\begin{Maple Normal}
+function called 
+$\Psi$ with the property that 
+$\moverset{n}{\munderset{k =1}{\sum}}\frac{1}{k}=\Psi (n +1)+\mathrm{gamma}$ for any positive integer 
+$n$.
+\end{Maple Normal}
+\begin{Maple Normal}
+(You can enter \textcolor[RGB]{255,0,0}{\textbf{?Psi}} to find out more.)  Using this, we could also write
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{center}
+$\displaystyle r (n)=\ln (x)+\Psi (n +1)+\mathrm{gamma}$\end{center}
+\begin{Maple Normal}
+We can check this as follows:
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{lstlisting}
+> seq(r(n),n=1..8);
+\end{lstlisting}
+\begin{lstlisting}
+> seq(ln(x)+Psi(n+1)+gamma,n=1..8);
+\end{lstlisting}
+\begin{lstlisting}
+> unassign('r');
+\end{lstlisting}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+We can prove that the formula is valid by induction, but we will not give the details here. 
+\end{Maple Normal}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 3.2}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> y := t^2*exp(t);
+\end{lstlisting}
+\begin{lstlisting}
+> z := simplify(
+     diff(y,t,t,t) + 
+ a * diff(y,t,t) + 
+ b * diff(y,t) +
+ c *y
+); 
+\end{lstlisting}
+\begin{Maple Normal}
+We want this to be zero for all 
+$t$, so the coefficients of the individual powers of 
+$t$ must all be
+\end{Maple Normal}
+\begin{Maple Normal}
+zero.  To find these coefficients, we use the \textcolor[RGB]{255,0,0}{\textbf{collect}} function:
+\end{Maple Normal}
+\begin{lstlisting}
+> collect(z,t);
+\end{lstlisting}
+\begin{Maple Normal}
+We must therefore find 
+$a ,b$ and 
+$c$ such that 
+\end{Maple Normal}
+\begin{center}
+
+$1+a +b +c =6+4 a +2 b$
+$=6+2 a$
+$=0$\end{center}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{lstlisting}
+> solve(\{1+a+b+c=0,6+4*a+2*b=0,6+2*a=0\},\{a,b,c\});
+\end{lstlisting}
+\begin{Maple Normal}
+The conclusion is that 
+$\mathit{y'''} -3 \mathit{y''} +3 \mathit{y'} -y = 0.0$
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+You might think that we could do this more quickly by just solving 
+$z =0$.  This does not work,
+\end{Maple Normal}
+\begin{Maple Normal}
+because it does not capture the fact that 
+$a ,b$ and 
+$c$ are supposed to be constants.  Maple
+\end{Maple Normal}
+\begin{Maple Normal}
+gives us the following answer, in which 
+$b$ and 
+$c$ can be anything, but 
+$a$ depends on 
+$t$:
+\end{Maple Normal}
+\begin{lstlisting}
+> solve(z=0,\{a,b,c\});
+\end{lstlisting}
+\begin{Maple Normal}
+A correct approach along these lines is to replace the equation \textcolor[RGB]{255,0,0}{\textbf{z=0}} by the expression \textcolor[RGB]{255,0,0}{\textbf{identity(z=0,t)}} to indicate that the equation is supposed to hold for all 
+$t$. 
+\end{Maple Normal}
+\begin{Maple Normal}
+This is probably the best approach, if you can remember the syntax.
+\end{Maple Normal}
+\begin{lstlisting}
+> solve(identity(z=0,t),\{a,b,c\});
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 3.3}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> p := (n) -> sort(expand(exp(x^2)*diff(exp(-x^2),x$n)));
+\end{lstlisting}
+\begin{lstlisting}
+> p(2);
+\end{lstlisting}
+\begin{lstlisting}
+> p(3);
+\end{lstlisting}
+\begin{lstlisting}
+> p(4);
+\end{lstlisting}
+\begin{lstlisting}
+> seq(print(p(n)),n=1..10);
+\end{lstlisting}
+\begin{Maple Normal}
+We first look at the leading term of  
+$p (n)$.  The leading term of 
+$p (1)$ is 
+$-2 x$, the leading term of 
+$p (2)$ is 
+$4 x^{2}$, the leading term of 
+$p (3)$ is 
+$-8 x^{3}$ and so on.  The signs alternate, the constant is 
+$2^{n}$, and the power of 
+$x$ is 
+$x^{n}$.  More succinctly, the leading term in 
+$p (n)$ is 
+$(-2 x)^{n}$.
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+Next, note that when 
+$n$ is even we only get even powers of 
+$x$, and when 
+$n$ is odd we only get odd powers of 
+$x$.  For example, 
+$p (7)$ involves only 
+$x ,x^{3},x^{5}$ and 
+$x^{7}$, whereas 
+$p (6)$ involves 
+$x^{2},x^{4}$ and 
+$x^{6}$ (and a constant term, which we can think of as a multiple of 
+$x^{0}$).
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+Now look at the last term in 
+$p (n)$.  When 
+$n$ is even, the last term is a constant, but when 
+$n$ is odd, it is a multiple of 
+$x$.  It is best to consider these separately, starting with the even case, where we may write 
+$n =2 m$.
+\end{Maple Normal}
+\begin{lstlisting}
+> seq(print(p(2*m)),m=1..6);
+\end{lstlisting}
+\begin{Maple Normal}
+We see that the last term is 
+$(-1)^{m}$ times a constant, with the sequence of constants being 
+$2,12,120,1680,302040,665280$ and so on.  If we enter this in the \href{http://www.research.att.com/~njas/sequences/}{Online Encyclopedia of Integer Sequences}  we get an answer including the line 
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{center}
+\textbf{Name:  }    Quadruple factorial numbers: (2n)!/n!.\end{center}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+We need to be a little careful with this formula.  The encyclopedia assumes that the numbers we entered
+\end{Maple Normal}
+\begin{Maple Normal}
+correspond to 
+$n =1,2,3,\mathit{...}$ and gives the formula 
+$\frac{(2 n)!}{n !}$.  In fact our numbers correspond to 
+$m =1,2,3,\mathit{...}$ (where 
+$n =2 m$) so the right formula for the constant term in 
+$p (2 m)$ is 
+$\frac{(-1)^{m} (2 m)!}{m !}$.
+\end{Maple Normal}
+\begin{Maple Normal}
+Of course this kind of experimental approach does not really prove that the formula is correct, but it is very suggestive.
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+We now look at the case where 
+$n$ is odd, say 
+$n =2 m -1$:
+\end{Maple Normal}
+\begin{lstlisting}
+> seq(print(p(2*m-1)),m=1..5);
+\end{lstlisting}
+\begin{Maple Normal}
+The final terms are the same as before, but multiplied by 
+$x$.  In other words, the last term in 
+$p (2 m -1)$ 
+\end{Maple Normal}
+\begin{Maple Normal}
+is 
+$\frac{(-1)^{m} (2 m)! x}{m !}$. 
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+We can now predict that 
+$p (12)$ should start with 
+$(-2 x)^{12}=4096 x^{12}$, and that it should contain multiples of 
+$x^{10},x^{8},x^{6},x^{4},x^{2}$ and a constant term.  This is the case where 
+$n =2 m$ and 
+$m =6$, so the constant term is 
+$\frac{(-1)^{6}\cdot 12!}{6!}=665280$.  We check this as follows:
+\end{Maple Normal}
+\begin{lstlisting}
+> p(12);
+\end{lstlisting}
+\begin{Maple Normal}
+We now compare 
+$p (n)$ with the Hermite polynomial 
+$H_{n}(x)$, entered in Maple as \textcolor[RGB]{255,0,0}{\textbf{simplify(HermiteH(n,x))}}:
+\end{Maple Normal}
+\begin{lstlisting}
+> q := (n) -> simplify(HermiteH(n,x));
+\end{lstlisting}
+\begin{lstlisting}
+> seq(print([p(n),q(n)]),n=1..6);
+\end{lstlisting}
+\begin{Maple Normal}
+We see that 
+$q (n)$ is the same as 
+$p (n)$ when 
+$n$ is even, and the same as 
+$-p (n)$ when 
+$n$ is odd.  In other words, we have 
+$q (n)=(-1)^{n} p (n)$.
+\end{Maple Normal}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\end{document}

@@ -1,0 +1,219 @@
+%\def\HO{1}
+\ifx\HO\undefined
+\documentclass[9pt]{beamer}
+\usepackage{pgfpages}
+\usepackage{beamerthemesplit}
+\usetheme[headheight=0pt,footheight=0pt]{boxes}
+\else
+\documentclass[9pt,handout]{beamer}
+\usepackage{pgfpages}
+\usepackage{beamerthemesplit}
+\usetheme[headheight=0pt,footheight=0pt]{boxes}
+\pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm,landscape]
+\fi
+
+\usepackage{tikz}
+\include{lectmac}
+\title{Introduction}
+\author{}
+
+\begin{document}
+
+%\slideCaption{\color{white}}
+
+
+\begin{frame}[t]
+ \frametitle{Slopes}
+ \begin{center}\begin{tikzpicture}[scale=2.4]
+   \draw[color=white] (-0.6,2.1) -- (-0.6,-2) -- (2.2,-2);
+   \draw[->] (-0.1,0) -- (1.7,0);
+   \draw[->] (0,0) -- (0,1.81);
+   \draw[domain=0:1.7] plot(\x,{(\x-0.8)*(\x-0.8) + 1});
+   \draw (1.8,1.9) node {${\scriptstyle y=f(x)}$};
+   \only<2->{
+    \draw[color=blue] (1,0) -- (1, 1.04) -- (0, 1.04);
+    \draw (1,-0.05) node[anchor=north] {${\scriptstyle x}$};
+    \draw (- 0.05, 1.04) node[anchor=east] {${\scriptstyle y}$};
+   }
+   \only<3->{
+    \draw[color=orange](0, 0.64) -- ( 1.7, 1.32);
+    \draw ( 1.9, 1.32) node[anchor=west] {slope $\scriptstyle dy/dx$};
+   }
+   \only<4-6>{
+    \draw ( 1.5,-0.05) node[anchor=north] {${\scriptstyle x+\dl x}$};
+    \draw (- 0.05, 1.49) node[anchor=east] {${\scriptstyle y+\dl y}$};
+    \draw[color=blue] ( 1.5,0) -- ( 1.5, 1.49) -- (0, 1.49);
+   }
+   \only<5-6>{
+    \draw[color=olivegreen,<->] (1, 1.04) -- ( 1.5, 1.04);
+    \draw[color=olivegreen,<->] (1, 1.04) -- (1, 1.49);
+    \draw ( 1.250, 0.94) node[anchor=north] {${\scriptstyle \dl x}$};
+    \draw ( 0.9, 1.265) node[anchor=east] {${\scriptstyle \dl y}$};
+   }%
+   \only<6>{
+    \draw[color=olivegreen] (0, 0.1400) -- ( 1.7, 1.670);
+    \draw ( 1.9, 1.670) node[anchor=west] {slope $\scriptstyle \dl y/\dl x$};
+   }%
+   \mode<beamer>{
+    \only<7>{
+     \draw[color=olivegreen] (0, 0.39) -- ( 1.7, 1.495);
+     \draw[color=blue] ( 1.25,0) -- ( 1.250, 1.202500000) -- (0, 1.202500000);
+     \draw ( 1.250,-0.05) node[anchor=north] {${\scriptstyle x+\dl x}$};
+     \draw (- 0.05, 1.202500000) node[anchor=east] {${\scriptstyle y+\dl y}$};
+     \draw[color=olivegreen,<->] (1, 1.04) -- ( 1.250, 1.04);
+     \draw[color=olivegreen,<->] (1, 1.04) -- (1, 1.202500000);
+     \draw ( 1.125, 0.94) node[anchor=north] {${\scriptstyle \dl x}$};
+     \draw ( 0.9, 1.121) node[anchor=east] {${\scriptstyle \dl y}$};
+     \draw ( 1.9, 1.495) node[anchor=west] {slope $\scriptstyle \dl y/\dl x$};
+    }%
+    \only<8>{
+     \draw[color=olivegreen] (0, 0.5150) -- ( 1.7, 1.407500000);
+     \draw[color=blue] ( 1.125,0) -- ( 1.125, 1.105625000) -- (0, 1.105625000);
+     \draw ( 1.125,-0.05) node[anchor=north] {${\scriptstyle x+\dl x}$};
+     \draw (- 0.05, 1.105625000) node[anchor=east] {${\scriptstyle y+\dl y}$};
+     \draw[color=olivegreen,<->] (1, 1.04) -- ( 1.125, 1.04);
+     \draw[color=olivegreen,<->] (1, 1.04) -- (1, 1.105625000);
+     \draw ( 1.062500000, 0.94) node[anchor=north] {${\scriptstyle \dl x}$};
+     \draw ( 0.9, 1.072812500) node[anchor=east] {${\scriptstyle \dl y}$};
+     \draw ( 1.9, 1.407500000) node[anchor=west] {slope $\scriptstyle \dl y/\dl x$};
+    }%
+    \only<9>{
+     \draw[color=olivegreen] (0, 0.5775) -- ( 1.7, 1.363750000);
+     \draw[color=blue] ( 1.062500000,0) -- ( 1.062500000, 1.068906250) -- (0, 1.068906250);
+     \draw ( 1.062500000,-0.05) node[anchor=north] {${\scriptstyle x+\dl x}$};
+     \draw (- 0.05, 1.068906250) node[anchor=east] {${\scriptstyle y+\dl y}$};
+     \draw[color=olivegreen,<->] (1, 1.04) -- ( 1.062500000, 1.04);
+     \draw[color=olivegreen,<->] (1, 1.04) -- (1, 1.068906250);
+     \draw ( 1.031250000, 0.94) node[anchor=north] {${\scriptstyle \dl x}$};
+     \draw ( 0.9, 1.054453125) node[anchor=east] {${\scriptstyle \dl y}$};
+     \draw ( 1.9, 1.363750000) node[anchor=west] {slope $\scriptstyle \dl y/\dl x$};
+    }}%
+   \draw (-1.4,-0.7) node[anchor=west] {\parbox[t]{10cm}{
+     \only<1>{\WHITE{0}}
+     \only<2>{Consider variables $x$ and $y$ related by $y=f(x)$.}%
+     \only<3>{$dy/dx$ is the slope of the tangent line to the graph.}%
+     \only<4-5>{If $x$ changes by a small amount $\dl x$, then $y$ will
+      change by a small amount $\dl y$.}%
+     \only<6>{The ratio $\dl y/\dl x$ is the slope of a chord cutting
+      across the graph.}%
+     \only<7>{The slope of the chord changes slightly as $\dl x$
+      decreases.}% 
+     \only<8-10>{As $\dl x$ approaches zero, the chord approaches the tangent,
+      and $\dl y/\dl x$ approaches $dy/dx$.}%
+    }%
+   };
+  \end{tikzpicture}\end{center}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{The function $f(x)=x^2$}
+ \begin{itemize}
+  \uncover<2->{
+  \item Consider the function $f(x)=x^2$.
+  }
+  \uncover<3->{
+  \item Then $f(x+h)=(x+h)^2=x^2+2xh+h^2$
+   \uncover<4->{
+    , so 
+    \begin{align*}
+     \frac{f(x+h) - f(x)}{h} &= \frac{(x+h)^2 - x^2}{h}
+     \hphantom{mmmmmmmm}\\
+     & \uncover<5->{
+      = \frac{\RED{x^2} + 2xh + h^2 - \RED{x^2}}{h}
+     } \\
+     & \uncover<6->{
+      = \frac{2x\OLIVEGREEN{h} + \OLIVEGREEN{h}^2}{\OLIVEGREEN{h}}
+     } \\
+     & \uncover<7->{
+      = 2x+h
+     }
+    \end{align*} 
+   }
+  }
+  \uncover<8->{
+  \item Thus
+   \[ f'(x) = \lim_{h\xra{}0} \frac{f(x+h) - f(x)}{h}
+    \uncover<9->{= \lim_{\RED{h}\xra{}0} (2x+\RED{h})} 
+    \uncover<10->{= 2x.}
+   \]
+  }
+  \uncover<11->{
+  \item Similarly: 
+   \bbox{$\frac{d}{dx}(x^n)=nx^{n-1}$ for all $n$.} 
+  }
+  
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{The function $f(x)=1/x$}
+ \begin{itemize}
+  \uncover<2->{
+  \item Consider the function $f(x)=1/x$.
+  }
+  \uncover<3->{
+  \item \ghost\vspace{-3ex}
+   \[ f(x+h)-f(x)
+    = \frac{1}{x+h} - \frac{1}{x} 
+    % \untilSlide*{3}{\hphantom{= \frac{\RED{x}-(\RED{x}+h)}{x(x+h)}}}
+    \uncover<4->{= \frac{\RED{x}-(\RED{x}+h)}{x(x+h)}}
+    % \untilSlide*{4}{\hphantom{= \frac{-h}{x(x+h)}}}
+    \uncover<5->{= \frac{-h}{x(x+h)}}
+   \]
+   \uncover<6->{
+    so 
+    \[ \frac{f(x+h) - f(x)}{h} = 
+     \frac{-1}{x(x+h)}
+    \]
+   }
+   \uncover<7->{
+    so
+    \[ f'(x) = 
+     \lim_{h\xra{}0} \frac{f(x+h) - f(x)}{h} 
+     \uncover<8->{= \lim_{\RED{h}\xra{}0} \frac{-1}{x(x+\RED{h})}}
+     \uncover<9->{= \frac{-1}{x^2}}
+    \]
+   }
+  }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+ \frametitle{The exponential function}
+ \begin{itemize}
+  \uncover<2->{
+  \item Consider the function
+   $f(x)=e^x=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\dotsb$.
+  }
+  \uncover<3->{
+  \item \ghost\vspace{-3ex}
+   \[ f(x+h)-f(x)
+    = e^{x+h} - e^x 
+    \uncover<4->{= e^x(e^h - 1)}
+    \uncover<5->{= e^x\left(h + \tfrac{h^2}{2!} + \tfrac{h^3}{3!}+\dotsb\right)}
+   \]
+   \uncover<6->{
+    so 
+    \[ \frac{f(x+h) - f(x)}{h} = 
+     e^x\left(1 + \tfrac{h}{2!} + \tfrac{h^2}{3!} + \dotsb\right) 
+    \]
+   }
+   \uncover<7->{
+    so
+    \begin{align*} f'(x) &= 
+     \lim_{h\xra{}0} \frac{f(x+h) - f(x)}{h} \hphantom{mmmmmmm} \\ &
+     \uncover<8->{= \lim_{\RED{h}\xra{}0} 
+      e^x\left(1 + \tfrac{\RED{h}}{2!} + \tfrac{\RED{h}^2}{3!} + \dotsb\right)} \\ & 
+     \uncover<9->{= e^x(1+0+0+\dotsb)} \\ &
+     \uncover<10->{= e^x.}
+    \end{align*}
+   }
+  }
+  \uncover<11->{
+  \item Conclusion: $\exp'(x)=\exp(x)$.
+  }
+ \end{itemize}
+\end{frame}
+
+
+\end{document}

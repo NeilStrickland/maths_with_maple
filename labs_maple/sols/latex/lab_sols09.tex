@@ -1,0 +1,310 @@
+%% Created by Maple 2022.1, Windows 10
+%% Source Worksheet: lab_sols09
+%% Generated: Wed May 08 10:35:32 BST 2024
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{maple}
+\usepackage[utf8]{inputenc}
+\usepackage[svgnames]{xcolor}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{textcomp}
+\begin{document}
+\lstset{basicstyle=\ttfamily,breaklines=true,columns=flexible}
+\pagestyle{empty}
+\DefineParaStyle{Maple Bullet Item}
+\DefineParaStyle{Maple Heading 1}
+\DefineParaStyle{Maple Warning}
+\DefineParaStyle{Maple Heading 4}
+\DefineParaStyle{Maple Heading 2}
+\DefineParaStyle{Maple Heading 3}
+\DefineParaStyle{Maple Dash Item}
+\DefineParaStyle{Maple Error}
+\DefineParaStyle{Maple Title}
+\DefineParaStyle{Maple Ordered List 1}
+\DefineParaStyle{Maple Text Output}
+\DefineParaStyle{Maple Ordered List 2}
+\DefineParaStyle{Maple Ordered List 3}
+\DefineParaStyle{Maple Normal}
+\DefineParaStyle{Maple Ordered List 4}
+\DefineParaStyle{Maple Ordered List 5}
+\DefineCharStyle{Maple 2D Output}
+\DefineCharStyle{Maple 2D Input}
+\DefineCharStyle{Maple Maple Input}
+\DefineCharStyle{Maple 2D Math}
+\DefineCharStyle{Maple Hyperlink}
+\begin{center}
+\begin{Maple Title}
+\underline{\textbf{Maple revision}}
+\end{Maple Title}
+\end{center}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 1}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> x[1] := sin(theta) * sin(phi);
+\end{lstlisting}
+\begin{lstlisting}
+> x[2] := sin(theta) * cos(phi);
+\end{lstlisting}
+\begin{lstlisting}
+> x[3] := cos(theta);
+\end{lstlisting}
+\begin{lstlisting}
+> simplify(x[1]^2 + x[2]^2 + x[3]^2);
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 2}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> u := 8-(x-y)^2*(x+y)^2*(16-4*x^2-y^4);
+\end{lstlisting}
+\begin{lstlisting}
+> v := subs( x = 2*cos(t), y = 2*sin(t), u);
+\end{lstlisting}
+\begin{lstlisting}
+> simplify(v);
+\end{lstlisting}
+\begin{lstlisting}
+> combine(v);
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 3}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> solve(\{a*x+b*y+c*z=1,
+       a*y+b*z+c*x=1,
+       a*z+b*x+c*y=1\},
+      \{x,y,z\});
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 4}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> fsolve(x^4+sin(x)=10^4,\{x=10\});
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 5}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> f := (x) -> (exp(x) + x^7)/(exp(x) - x^7);
+\end{lstlisting}
+\begin{lstlisting}
+> evalf(f(5));
+\end{lstlisting}
+\begin{lstlisting}
+> seq(  evalf(f(n)),  n = 0.. 50);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 6}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> with(plots):
+\end{lstlisting}
+\begin{lstlisting}
+> display(
+ implicitplot(x^4+y^4=4,x=-3..3,y=-3..3),
+ plot([(2+sin(8*t))*cos(t),(2+sin(8*t))*sin(t),t=0..2*Pi])
+);
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 7}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> plot(
+[tan(Pi*x),cot(Pi*x),-1,1],    # functions to plot
+  x=-4..4,                     # horizontal range
+    -2..2,                     # vertical range
+  scaling=constrained,         # same scale on both axes
+  discont=true                 # skip over discontinuities
+);
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 8}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> restart;
+\end{lstlisting}
+\begin{lstlisting}
+> f := (t) -> ((2+sqrt(3))*t-1)/(2+sqrt(3)+t);
+\end{lstlisting}
+\begin{lstlisting}
+> g := (t) -> f(f(f(t)));
+\end{lstlisting}
+\begin{lstlisting}
+> h := (t) -> g(g(t));
+\end{lstlisting}
+\begin{lstlisting}
+> simplify(g(t));
+\end{lstlisting}
+\begin{lstlisting}
+> simplify(h(t));
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 9}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> y := sin(10*x);
+\end{lstlisting}
+\begin{lstlisting}
+> (diff(y,x$8)/y)^(1/8);
+\end{lstlisting}
+\begin{lstlisting}
+> simplify(%);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 10}
+\end{Maple Heading 2}
+\begin{Maple Normal}
+Here is the efficient method using the \textcolor[RGB]{255,0,0}{\textbf{seq()}} command:\
+
+
+\end{Maple Normal}
+\begin{lstlisting}
+> plot([seq(n^(3/2) * x^n * (1-x)^2,n=1..10)],x=0..1);
+\end{lstlisting}
+\begin{Maple Normal}
+\
+
+Here is the less efficient method with more typing:
+\end{Maple Normal}
+\begin{lstlisting}
+> plot([
+x * (1-x)^2,
+2^(3/2) * x^2 * (1-x)^2,
+3^(3/2) * x^3 * (1-x)^2,
+4^(3/2) * x^4 * (1-x)^2,
+5^(3/2) * x^5 * (1-x)^2,
+6^(3/2) * x^6 * (1-x)^2,
+7^(3/2) * x^7 * (1-x)^2,
+8^(3/2) * x^8 * (1-x)^2,
+9^(3/2) * x^9 * (1-x)^2,
+10^(3/2) * x^10 * (1-x)^2
+],x=0..1);
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 11}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> y := x^4*(1-x)^4/(1+x^2);
+\end{lstlisting}
+\begin{lstlisting}
+> int(y,x);
+\end{lstlisting}
+\begin{lstlisting}
+> int(y,x=0..1);
+\end{lstlisting}
+\begin{lstlisting}
+> simplify(diff(y,x));
+\end{lstlisting}
+\begin{lstlisting}
+> plot(y,x=0..1);
+\end{lstlisting}
+\begin{Maple Normal}
+The hump has position 
+$p$ and height 
+$h$, where 
+$p$ is the root of 
+$\frac{\mathit{dy}}{\mathit{dx}}=0$ near 
+$x = 0.5$ and 
+$h$ is obtained\
+
+by putting 
+$x =p$ in 
+$y$.
+\end{Maple Normal}
+\begin{lstlisting}
+> p := fsolve(diff(y,x)=0,x=0.5);
+\end{lstlisting}
+\begin{lstlisting}
+> h := subs(x=p, y);
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 12}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> a := (n) -> evalf((1+1/n)^n/exp(1));
+\end{lstlisting}
+\begin{lstlisting}
+> seq(a(n),n=1..100);
+\end{lstlisting}
+\begin{Maple Normal}
+The first number greater than 0.99 occurs around the middle of the list, close to 
+$n =50$.  We therefore\
+
+look at a shorter list centred around that value:
+\end{Maple Normal}
+\begin{lstlisting}
+> seq(a(n),n=48..52);
+\end{lstlisting}
+\begin{Maple Normal}
+We see that 
+$a (50)= 0.9901799000$, and that this is the first number greater than 0.99.\
+
+
+\end{Maple Normal}
+\begin{Maple Normal}
+Here is a slicker way:
+\end{Maple Normal}
+\begin{lstlisting}
+> min(op(select(n -> (a(n)>0.99),[seq(n,n=1..100)])));
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\end{document}

@@ -1,0 +1,349 @@
+%% Created by Maple 2022.1, Windows 10
+%% Source Worksheet: lab_sols01
+%% Generated: Wed May 08 10:37:48 BST 2024
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{maple}
+\usepackage[utf8]{inputenc}
+\usepackage[svgnames]{xcolor}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{textcomp}
+\begin{document}
+\lstset{basicstyle=\ttfamily,breaklines=true,columns=flexible}
+\pagestyle{empty}
+\DefineParaStyle{Maple Bullet Item}
+\DefineParaStyle{Maple Heading 1}
+\DefineParaStyle{Maple Warning}
+\DefineParaStyle{Maple Heading 4}
+\DefineParaStyle{Maple Heading 2}
+\DefineParaStyle{Maple Heading 3}
+\DefineParaStyle{Maple Dash Item}
+\DefineParaStyle{Maple Error}
+\DefineParaStyle{Maple Title}
+\DefineParaStyle{Maple Ordered List 1}
+\DefineParaStyle{Maple Text Output}
+\DefineParaStyle{Maple Ordered List 2}
+\DefineParaStyle{Maple Ordered List 3}
+\DefineParaStyle{Maple Normal}
+\DefineParaStyle{Maple Ordered List 4}
+\DefineParaStyle{Maple Ordered List 5}
+\DefineCharStyle{Maple 2D Output}
+\DefineCharStyle{Maple 2D Input}
+\DefineCharStyle{Maple Maple Input}
+\DefineCharStyle{Maple 2D Math}
+\DefineCharStyle{Maple Hyperlink}
+\begin{center}
+\begin{Maple Title}
+\underline{\textbf{Introduction to Maple}}
+\end{Maple Title}
+\end{center}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 2.1}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> 2+2;
+\end{lstlisting}
+\begin{lstlisting}
+> (3+7+10)*(1000-8)/(900+90+2) - 17;
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 2.2}
+\end{Maple Heading 2}
+\begin{Maple Normal}
+\textbf{(a)}
+\end{Maple Normal}
+\begin{lstlisting}
+> 6^20 * 15^20 / 9^20;
+\end{lstlisting}
+\begin{Maple Normal}
+The answer is one followed by 20 zeros, or in other words 
+$ 10^{20} $.  This is easy to see by hand, because 
+$ \frac{6^{20} 15^{20}}{9^{20}}=(\frac{\mathit{6\,x\,15\,}}{9})^{20} $ and (6 x 15)/9 is just 10.
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{(b)}
+\end{Maple Normal}
+\begin{lstlisting}
+> (10^10 - 1)/99;
+\end{lstlisting}
+\begin{Maple Normal}
+The answer is 
+$ 1+100+10000+1000000+100000000 $, or in other words 
+$ 1+100+100^{2}+100^{3}+100^{4} $.  The standard geometric progression formula says that this is the same as 
+$ \frac{100^{5}-1}{100-1} $, or in other words 
+$ \frac{10^{10}-1}{99} $.
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{(c)}
+\end{Maple Normal}
+\begin{lstlisting}
+> (10^10 - 10 - 9^2)/9^2;
+\end{lstlisting}
+\begin{Maple Normal}
+To check this by hand, let 
+$ x  $ be the number 
+$ 123456789 $.  Then 
+$ 10 x =1234567890 $ and so 
+$ 10 x +9=1234567899 $.  If we subtract 
+$ x  $ from this the digits mostly cancel and we get 
+$ 9 x +9=1111111110 $.  Multiply by 9 again to get 
+$ 9^{2} (x +1)=9999999990 $, which is 
+$ 10^{10}-10 $.  Rearrange this to get 
+$ x +1=\frac{10^{10}-10}{9^{2}} $ and so 
+$ x =\frac{10^{10}-10-9^{2}}{9^{2}} $.
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{(d)}
+\end{Maple Normal}
+\begin{lstlisting}
+> (10^9+1)*(10^10 - 10 - 9^2)/9^2;
+\end{lstlisting}
+\begin{Maple Normal}
+Assuming part (c), we have 
+$ \frac{10^{10}-10-9^{2}}{9^{2}}=123456789 $ and so 
+$ \frac{10^{9} (10^{10}-10-9^{2})}{9^{2}}=123456789000000000 $.  These two numbers can be added without any carrying, to give
+$ \frac{(10^{9}+1) (10^{10}-10-9^{2})}{9^{2}}=123456789000000000+123456789 $ = 123456789123456789.
+\end{Maple Normal}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 2.3}
+\end{Maple Heading 2}
+\begin{Maple Normal}
+The numbers in this exercise are approximations to 
+$ \mathrm{Pi} $; in a certain sense, they are actually the best possible approximations.
+\end{Maple Normal}
+\begin{lstlisting}
+> 3 + 1/7;
+\end{lstlisting}
+\begin{lstlisting}
+> evalf(%);
+\end{lstlisting}
+\begin{lstlisting}
+> 3 + 1/(7 + 1/15);
+\end{lstlisting}
+\begin{lstlisting}
+> evalf(%);
+\end{lstlisting}
+\begin{lstlisting}
+> 3+1/(7+1/(15 + 1/(1 + 1/293)));
+\end{lstlisting}
+\begin{lstlisting}
+> evalf(%);
+\end{lstlisting}
+\begin{lstlisting}
+> evalf(Pi);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 2.4}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> evalf[4997](exp(1));
+\end{lstlisting}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 2.5}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> Digits := 40;
+\end{lstlisting}
+\begin{lstlisting}
+> x := exp(Pi*sqrt(163));
+\end{lstlisting}
+\begin{lstlisting}
+> y := evalf(x);
+\end{lstlisting}
+\begin{lstlisting}
+> printf("%20.20f\n\n",y);
+\end{lstlisting}
+\begin{lstlisting}
+> z := round(y);
+\end{lstlisting}
+\begin{lstlisting}
+> y-z;
+\end{lstlisting}
+\begin{lstlisting}
+> restart;
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 3.1}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> A := (x^2-4*y^2)*(x^3-x*y^2);
+\end{lstlisting}
+\begin{lstlisting}
+> simplify(A);
+\end{lstlisting}
+\begin{lstlisting}
+> expand(A);
+\end{lstlisting}
+\begin{lstlisting}
+> factor(A);
+\end{lstlisting}
+\begin{lstlisting}
+> convert(expand(A),horner,x);
+\end{lstlisting}
+\begin{Maple Normal}
+I would vote for 
+$ (x -2 y) (x +2 y) x (x -y) (x +y) $ as the most useful version, but of course it depends what you want to use it for.
+\end{Maple Normal}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 3.2}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> simplify(2*x/(x^2-1)+1/(x+x^2)+1/(x-x^2));
+\end{lstlisting}
+\begin{Maple Normal}
+To do this by hand, note that 
+$ x^{2}-1=(x +1)(x -1) $ and 
+$ x +x^{2}=x (x +1) $ and 
+$ x -x^{2}=-x (x -1) $.  Thus, our expression is 
+$ \frac{2 x^{2}}{x (x +1) (x -1)}+\frac{x -1}{x (x +1) (x -1)}-\frac{x +1}{x (x +1) (x -1)} $, which simplifies to 
+$ \frac{2 x^{2}-2}{x (x +1) (x -1)} $.  The numerator here factors as 
+$ 2 (x +1) (x -1) $ and so everything cancels to leave 
+$ \frac{2}{x} $.
+\end{Maple Normal}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 4.1}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> plot(sin(x),x=-5..5);
+\end{lstlisting}
+\begin{lstlisting}
+> plot(x-x^3/6+x^5/120-x^7/5040,x=-5..5);
+\end{lstlisting}
+\begin{lstlisting}
+> plot([sin(x),x-x^3/6+x^5/120-x^7/5040],x=-5..5);
+\end{lstlisting}
+\begin{Maple Normal}
+The two graphs are very close together for 
+$ x  $ between about 
+$ -3 $ and 
+$ 3 $, but outside that range they move apart very rapidly.
+\end{Maple Normal}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 5.1}
+\end{Maple Heading 2}
+\begin{lstlisting}
+>   solve(\{x^2+y^2=1,(x-1)^2+(y-1)^2=1\},\{x,y\});
+\end{lstlisting}
+\begin{Maple Normal}
+To obtain this by hand, expand out the second equation to get 
+$ x^{2}-2 x +1+y^{2}-2 y +1=1 $, or equivalently 
+$ x^{2}+y^{2}=2 x +2 y -1 $.  Subtracting the first equation gives 
+$ 0=2 x +2 y -2 $, so 
+$ x +y =1 $.  Squaring this gives 
+$ x^{2}+y^{2}+2 x y =1 $, and subtracting the first equation gives 
+$ 2 x y =0 $.  This means that either 
+$ x  $ or 
+$ y  $ must be zero, and the equation 
+$ x +y =1 $ means that the other one must be 
+$ 1 $.
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+Geometrically, the equation 
+$ x^{2}+y^{2}=1 $ describes the circle of radius one centred at the origin, and the equation 
+$ (x -1)^{2}+(y -1)^{2}=1 $ describes the circle of radius one centred at (1,1).  The two circles intersect at the points (1,0) and (0,1), which give the two solutions to our equations.
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{lstlisting}
+> plots[display](
+  plot([cos(t),sin(t),t=0..2*Pi],color=blue),
+  plot([1+cos(t),1+sin(t),t=0..2*Pi],color=red)
+);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 6.1}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> diff(ln(ln(ln(x))),x);
+\end{lstlisting}
+\begin{lstlisting}
+> (3*x+4)/(2*x+3);
+\end{lstlisting}
+\begin{lstlisting}
+> diff(%,x);
+\end{lstlisting}
+\begin{lstlisting}
+> simplify(%);
+\end{lstlisting}
+\begin{lstlisting}
+> (1+x^2+x^4/2)*exp(-x^2);
+\end{lstlisting}
+\begin{lstlisting}
+> diff(%,x);
+\end{lstlisting}
+\begin{lstlisting}
+> simplify(%);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Heading 2}
+\textbf{Exercise 6.2}
+\end{Maple Heading 2}
+\begin{lstlisting}
+> int(sqrt(1-x^2),x=0..1);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\end{document}

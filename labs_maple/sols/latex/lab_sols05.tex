@@ -1,0 +1,581 @@
+%% Created by Maple 2022.1, Windows 10
+%% Source Worksheet: lab_sols05
+%% Generated: Wed May 08 10:34:45 BST 2024
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{maple}
+\usepackage[utf8]{inputenc}
+\usepackage[svgnames]{xcolor}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{textcomp}
+\begin{document}
+\lstset{basicstyle=\ttfamily,breaklines=true,columns=flexible}
+\pagestyle{empty}
+\DefineParaStyle{Maple Bullet Item}
+\DefineParaStyle{Maple Heading 1}
+\DefineParaStyle{Maple Warning}
+\DefineParaStyle{Maple Heading 4}
+\DefineParaStyle{Maple Heading 2}
+\DefineParaStyle{Maple Heading 3}
+\DefineParaStyle{Maple Dash Item}
+\DefineParaStyle{Maple Error}
+\DefineParaStyle{Maple Title}
+\DefineParaStyle{Maple Ordered List 1}
+\DefineParaStyle{Maple Text Output}
+\DefineParaStyle{Maple Ordered List 2}
+\DefineParaStyle{Maple Ordered List 3}
+\DefineParaStyle{Maple Normal}
+\DefineParaStyle{Maple Ordered List 4}
+\DefineParaStyle{Maple Ordered List 5}
+\DefineCharStyle{Maple 2D Output}
+\DefineCharStyle{Maple 2D Input}
+\DefineCharStyle{Maple Maple Input}
+\DefineCharStyle{Maple 2D Math}
+\DefineCharStyle{Maple Hyperlink}
+\begin{center}
+\begin{Maple Normal}
+\underline{\textbf{Differentiation}}
+\end{Maple Normal}
+\end{center}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 1}
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{(a)}
+\end{Maple Normal}
+\begin{lstlisting}
+> q := sscanf("f*6#%\"xG6\"6#%*CopyrightGF%-%#ifG6%-%%typeG6$9$%)constantG-%&evalfG6#-%#LiG6#F.-.%\"qGF5F%F%F%","%m")[1];
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> plot(q(x),x=-1..10,-3..7);
+\end{lstlisting}
+\begin{Maple Normal}
+The function is undefined for 
+$x <0$.  It zero (and the graph is flat) at 
+$x =0$, then it drops down to 
+$-\infty $ at 
+$x =1$, then climbs back to zero at about 
+$x = 1.4$, and increases thereafter towards 
+$\infty $.
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{(b)}
+\end{Maple Normal}
+\begin{Maple Normal}
+When 
+$x <0$, the function 
+$\mathit{q'} (x)$ is undefined (because 
+$q (x)$ is).  We have 
+$\mathit{q'} (0)=0$, and then 
+$\mathit{q'} (x)<0$ for 0 < 
+$x $ < 1 (because the graph is sloping downwards).  The derivative is undefined again when 
+$x =1$, but 
+$\mathit{q'} (x)$ > 0 for 
+$x $ > 1 (because the graph is sloping upwards).
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{(c)}
+\end{Maple Normal}
+\begin{lstlisting}
+> Q := (x,h) -> (q(x+h)-q(x))/h;
+\end{lstlisting}
+\begin{lstlisting}
+> e := exp(1);
+\end{lstlisting}
+\begin{lstlisting}
+> Digits := 30;
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(d)}
+\end{Maple Normal}
+\begin{lstlisting}
+> Q(e^2,0.01);
+\end{lstlisting}
+\begin{lstlisting}
+> Q(e^2,0.0000001);
+\end{lstlisting}
+\begin{lstlisting}
+> Q(e^2,10^(-10));
+\end{lstlisting}
+\begin{Maple Normal}
+It is clear from this that 
+$\mathit{q'} (e^{2})=\frac{1}{2}$.
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{(e)}
+\end{Maple Normal}
+\begin{lstlisting}
+> Q(e^3,10^(-10));
+\end{lstlisting}
+\begin{lstlisting}
+> Q(e^4,10^(-10));
+\end{lstlisting}
+\begin{Maple Normal}
+It is clear from this that 
+$\mathit{q'} (e^{3})=\frac{1}{3}$ and 
+$\mathit{q'} (e^{4})=\frac{1}{4}$.  We therefore guess that 
+$\mathit{q'} (e^{t})=\frac{1}{t}$ for all 
+$t $.  Moreover, given 
+$x $ > 0, we can write 
+$x =e^{t}$ with 
+$t =\ln (x)$, so 
+$\mathit{q'} (x)=\frac{1}{\ln (x)}$.  This means that 
+$q (x)$ is actually the same as a standard function called 
+$\mathrm{Li}(x)$, which is defined by 
+$\mathrm{Li}(x)={\textcolor{gray}{\int}}_{\!\!0}^{x}\frac{1}{\ln (t)}\textcolor{gray}{d}t $; you can enter  \textcolor[RGB]{255,0,0}{\textbf{?Li}} for more information.
+\end{Maple Normal}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 2}
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{(a)}
+\end{Maple Normal}
+\begin{Maple Normal}
+The roots of 
+$\mathit{f\,'} (x)$ occur where the graph of 
+$f (x)$ is flat, or in other words, the tangent line is horizontal.  This occurs wherever 
+$f (x)$ has a local maximum or a local minimum (and possibly also in some other places, called inflexion points).
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{(b)}
+\end{Maple Normal}
+\begin{lstlisting}
+> f := (x)->x^3-x;
+\end{lstlisting}
+\begin{lstlisting}
+> plot(f(x),x=-1.1..1.1);
+\end{lstlisting}
+\begin{Maple Normal}
+There are roots of 
+$f (x)$ at 
+$x =-1$, 
+$x =0$ and 
+$x =1$.  Between 
+$x =-1$ and 
+$x =0$ we have a root of 
+$\mathit{f\,'} (x)$ at about 
+$x =- 0.6$, corresponding to the top of the left-hand hump.  Between 
+$x =0$ and 
+$x =1$ we have a root of 
+$\mathit{f\,'} (x)$ at about 
+$x = 0.6$, corresponding to the top of the right-hand hump.  Thus, Rolle's principle is satisfied.
+\end{Maple Normal}
+\begin{lstlisting}
+> solve(f(x)=0,x);
+\end{lstlisting}
+\begin{lstlisting}
+> D(f)(x);solve(D(f)(x)=0,x);
+\end{lstlisting}
+\begin{lstlisting}
+> 3*x^2-1;
+\end{lstlisting}
+\begin{lstlisting}
+> plot([f(x),D(f)(x)],x=-1.1..1.1,-1..1);
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(c)}
+\end{Maple Normal}
+\begin{lstlisting}
+> g := (x)->sin(x)+sin(3*x)/3;
+\end{lstlisting}
+\begin{lstlisting}
+> plot([g(x),D(g)(x)],x=-2*Pi..2*Pi);
+\end{lstlisting}
+\begin{Maple Normal}
+We can see roots of 
+$g (x)$ at 
+$x =-2 \mathrm{Pi}$, 
+$-\mathrm{Pi}$, 
+$0$, 
+$\mathrm{Pi}$ and 
+$2 \mathrm{Pi}$; in general, the roots are at 
+$x =n \mathrm{Pi}$ for integers 
+$n $.  Between 
+$x =0$ and 
+$x =\mathrm{Pi}$ there are two maxima and one local minimum, giving three roots of 
+$\mathit{g'} (x)$.  (This is perfectly consistent with Rolle's principle, which says only that there is \textit{at least one} root of 
+$\mathit{g'} (x)$ between 
+$0$ and 
+$\mathrm{Pi}$.)  Similarly, between 
+$x =\mathrm{Pi}$ and 
+$x =2 \mathrm{Pi}$ there are two minima and one local maximum for 
+$g (x)$, corresponding to the three places where the graph of 
+$\mathit{g'} (x)$ (in green) crosses the 
+$x $-axis.  We can find the location of the these roots as follows:
+\end{Maple Normal}
+\begin{lstlisting}
+> solve(D(g)(x)=0,x);
+\end{lstlisting}
+\begin{Maple Normal}
+Maple has reported only the roots between 
+$0$ and 
+$\mathrm{Pi}$.  We see from the graph that these roots can be shifted by any multiple of 
+$\mathrm{Pi}$, so the roots have the form 
+$n +\frac{\mathrm{Pi}}{4}$ or 
+$n +\frac{\mathrm{Pi}}{2}$ or 
+$n +\frac{3 \mathrm{Pi}}{4}$ for integers 
+$n $.  (We can get Maple to produce this answer by setting \textcolor[RGB]{255,0,0}{\textbf{\_EnvAllSolution:=true;}} however, it reports the result in a convoluted and confusing form, so it is better to just inspect the graph.)
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{(d)}
+\end{Maple Normal}
+\begin{Maple Normal}
+Suppose that 
+$a $ and 
+$b $ are two different roots of 
+$f (x)$, so 
+$f (a)=0$ and 
+$f (b)=0$.  As 
+$x $ moves from 
+$a $ to 
+$b $, the function 
+$f (x)$ cannot increase all the time (otherwise 
+$f (b)$ would be greater than 0) and it cannot decrease all the time (otherwise 
+$f (b)$ would be less than 0).  It must increase some of the time and decrease some of the time, so there must be some point at which it changes over from increasing to decreasing (or vice-versa), and at that point we will have 
+$\mathit{f\,'} (x)=0$.
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{(e)}
+\end{Maple Normal}
+\begin{Maple Normal}
+As we see in the plot below, the roots of 
+$h (x)=\tan (x)$ are at 
+$x =n \mathrm{Pi}$ for integers 
+$n $.
+\end{Maple Normal}
+\begin{lstlisting}
+> plot(tan(x),x=-Pi..Pi,-10..10,discont=true);
+\end{lstlisting}
+\begin{Maple Normal}
+The graph is always sloping upwards, so 
+$\mathit{h'} (x)$ > 0 for all 
+$x $.  In fact, we have 
+$\mathit{h'} (x)=\sec (x)^{2}$
+$=1+\tan (x)^{2}$, which shows that 
+$1\le \mathit{h'} (x)$ for all 
+$x $.  In any case, 
+$\mathit{h'} (x)$ has no roots at all, contradicting Rolle's principle.  So what goes wrong in the argument that we outlined?  As 
+$x $ moves from 
+$0$ to 
+$\mathrm{Pi}$, the function increases from 
+$0$ up towards 
+$\infty $, then jumps down discontinuously.   When 
+$x =\frac{\mathrm{Pi}}{2}$, neither 
+$h (x)$ nor 
+$\mathit{h'} (x)$ is really well-defined.
+\end{Maple Normal}
+\begin{lstlisting}
+> D(tan)(x);
+\end{lstlisting}
+\begin{lstlisting}
+> plot(D(tan)(x),x=-Pi..Pi,0..10);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 3}
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{(a)}
+\end{Maple Normal}
+\begin{Maple Normal}
+Put 
+$y =x^{n}$.  Then 
+$\mathit{y'} =n \,x^{n -1}$ and 
+$\mathit{y''} =n (n -1) x^{n -2}$ and 
+$\mathit{y'''} =n (n -1) (n -2) x^{n -3}$.  If 
+$n =0$ then 
+$\mathit{y'} =0$, so we cannot divide by 
+$\mathit{y'} $, so 
+$S (y)$ is undefined.  For any other value of 
+$n $, we have  
+$\frac{\mathit{y''}}{\mathit{y'}}=\frac{n -1}{x}$ and  
+$\frac{\mathit{y'''}}{\mathit{y'}}=\frac{(n -1) (n -2)}{x^{2}}$  .  This gives
+\end{Maple Normal}
+\begin{Maple Normal}
+
+$S (y)=\frac{\mathit{y'''}}{\mathit{y'}}-\frac{3 (\frac{\mathit{y''}}{\mathit{y'}})^{2}}{2}$ 
+$=\frac{(n -1) (n -2)}{x^{2}}-\frac{3 (\frac{n -1}{x})^{2}}{2}$
+$=\frac{2 (n^{2}-3 n +2)-3 (n -1)^{2}}{2 x^{2}}$
+$=\frac{1-n^{2}}{2 x^{2}}$
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+This is zero for 
+$n =1$ or 
+$n =-1$.
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{(b)}
+\end{Maple Normal}
+\begin{lstlisting}
+> S := (y) -> diff(y,x,x,x)/diff(y,x) - 
+            (3/2)*(diff(y,x,x)/diff(y,x))^2;
+\end{lstlisting}
+\begin{lstlisting}
+> S(x^n);
+\end{lstlisting}
+\begin{lstlisting}
+> simplify(S(x^n));
+\end{lstlisting}
+\begin{lstlisting}
+> solve(%=0,n);
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(c)}
+\end{Maple Normal}
+\begin{lstlisting}
+> y := (a*x+b)/(c*x+d);
+\end{lstlisting}
+\begin{lstlisting}
+> simplify(diff(y,x));
+\end{lstlisting}
+\begin{lstlisting}
+> simplify(diff(y,x,x));
+\end{lstlisting}
+\begin{lstlisting}
+> simplify(diff(y,x,x,x));
+\end{lstlisting}
+\begin{lstlisting}
+> simplify(S(y));
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(d)}
+\end{Maple Normal}
+\begin{lstlisting}
+> z := (a*p^x+b)/(c*p^x+d);
+\end{lstlisting}
+\begin{lstlisting}
+> simplify(S(z));
+\end{lstlisting}
+\begin{lstlisting}
+> 1/simplify(expand(1/%));
+\end{lstlisting}
+\begin{Maple Normal}
+\textbf{(e)}
+\end{Maple Normal}
+\begin{lstlisting}
+> T := (u) -> diff(u,x)^(1/2) * diff(diff(u,x)^(-1/2),x,x);
+\end{lstlisting}
+\begin{Maple Normal}
+Now try some examples:
+\end{Maple Normal}
+\begin{lstlisting}
+> w := x^n; simplify([S(w),T(w)]);
+\end{lstlisting}
+\begin{lstlisting}
+> w := sin(x)^2; simplify([S(w),T(w)]);
+\end{lstlisting}
+\begin{lstlisting}
+> w := ln(x); simplify([S(w),T(w)]);
+\end{lstlisting}
+\begin{Maple Normal}
+In each case we see that 
+$T (w)=-\frac{S (w)}{2}$.  In fact, this is true for any 
+$w $.  This can be shown as follows.  We first use the chain rule to get:
+\end{Maple Normal}
+\begin{center}
+$\displaystyle \frac{\partial}{\partial x} (\frac{\partial}{\partial x} u)^{-\frac{1}{2}}=-\frac{1}{2} (\frac{\partial}{\partial x} u)^{-\frac{3}{2}} (\frac{\partial^{2}}{\partial x^{2}} u)$\end{center}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+We then differentiate once more, using the product rule and the chain rule, to get 
+\end{Maple Normal}
+\begin{center}
+$\displaystyle \frac{\partial^{2}}{\partial x^{2}} (\frac{\partial}{\partial x} u)^{-\frac{1}{2}}=-\frac{1}{2} (-\frac{3}{2}) (\frac{\partial}{\partial x} u)^{-\frac{5}{2}} (\frac{\partial^{2}}{\partial x^{2}} u)^{2}-(\frac{1}{2}) (\frac{\partial}{\partial x} u)^{-\frac{3}{2}} (\frac{\partial^{3}}{\partial x^{3}} u)$\end{center}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+We now multiply both sides by 
+$\sqrt{\frac{\partial}{\partial x} u}$ and simplify to get
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{center}
+$\displaystyle \sqrt{\frac{\partial}{\partial x} u}\, (\frac{\partial^{2}}{\partial x^{2}} (\frac{\partial}{\partial x} u)^{-\frac{1}{2}})=(\frac{3}{4}) (\frac{\partial}{\partial x} u)^{-2} (\frac{\partial^{2}}{\partial x^{2}} u)^{2}-(\frac{1}{2}) (\frac{\partial}{\partial x} u)^{-1} (\frac{\partial^{3}}{\partial x^{3}} u)$\end{center}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{Maple Normal}
+or in different notation
+\end{Maple Normal}
+\begin{Maple Normal}
+
+\end{Maple Normal}
+\begin{center}
+
+$T (u)=\frac{3 (\frac{\mathit{u''}}{\mathit{u'}})^{2}}{4}-\frac{\mathit{u'''}}{2 \mathit{u''}}$
+$=(-\frac{1}{2}) (\frac{\mathit{u'''}}{\mathit{u'}}-\frac{3 (\frac{\mathit{u''}}{\mathit{u'}})^{2}}{2})$
+$=-\frac{S (u)}{2}$\end{center}
+\begin{Maple Normal}
+as claimed.
+\end{Maple Normal}
+\begin{Maple Normal}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{Maple Normal}
+\begin{Maple Normal}
+\textbf{Exercise 4}
+\end{Maple Normal}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> y := cos(-2*ln(x));
+\end{lstlisting}
+\begin{lstlisting}
+> plot(y,x=0..0.02);
+\end{lstlisting}
+\begin{lstlisting}
+> plot(y,x=0..1000);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> a[0] := exp(-Pi/4);
+\end{lstlisting}
+\begin{Maple Normal}
+Here is the general formula for the derivative of 
+$f (x)$:
+\end{Maple Normal}
+\begin{lstlisting}
+> diff(y,x);
+\end{lstlisting}
+\begin{Maple Normal}
+We can find the gradient at 
+$x =a_{0}$ using the 
+$\mathit{subs} ()$ command:
+\end{Maple Normal}
+\begin{lstlisting}
+> m[0] := subs(x=a[0],diff(y,x));
+\end{lstlisting}
+\begin{Maple Normal}
+However, it looks better if we simplify this: 
+\end{Maple Normal}
+\begin{lstlisting}
+> m[0] := simplify(subs(x=a[0],diff(y,x)));
+\end{lstlisting}
+\begin{Maple Normal}
+The equation of the line of slope 
+$m_{0}$ passing through 
+$[a_{0},0]$ is just 
+$y =m_{0} (x -a_{0})$.  \
+
+We can plot this together with 
+$y $ as follows:
+\end{Maple Normal}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> plot([y,m[0]*(x-a[0])],x=0 .. 2*a[0]);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+To find the other roots, note that 
+$\cos (t)=0$ precisely when 
+$t $ has the form 
+$(k -\frac{1}{2}) \mathrm{Pi}$ for some integer 
+$k $.\
+
+Thus, we have 
+$y =\cos (-2 \ln (x))$ 
+$=0$ precisely when 
+$-2 \ln (x)=(k -\frac{1}{2}) \mathrm{Pi}$,  so 
+$\ln (x)=(\frac{1}{4}-\frac{k}{2}) \mathrm{Pi}$,\
+
+so 
+$x ={\mathrm e}^{(\frac{1}{4}-\frac{k}{2}) \mathrm{Pi}}$.  We write 
+$a_{k}$ for this root.  
+\end{Maple Normal}
+\begin{Maple Normal}
+The steps that we did for 
+$a_{0}$ can be repeated for 
+$a_{3}$ as shown below.  Then to do 
+$a_{4}$ (for example) \
+
+just change the 
+$3$ to  
+$4$ and press ENTER four times. 
+\end{Maple Normal}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> k := 3;
+\end{lstlisting}
+\begin{lstlisting}
+> a[k] := exp((1/4-k/2)*Pi);
+\end{lstlisting}
+\begin{lstlisting}
+> m[k] := simplify(subs(x=a[k],diff(y,x)));
+\end{lstlisting}
+\begin{lstlisting}
+> plot([y,m[k]*(x-a[k])],x=0 .. 2*a[k]);
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{Maple Normal}
+We find that the tangent lines always meet the 
+$y $-axis at 
+$y =2$ or 
+$y =-2$.  This is not too hard to see directly.\
+
+In general we have 
+$\frac{\mathit{dy}}{\mathit{dx}}=-\frac{2 \sin (2 \ln (x))}{x}$.  When 
+$x =a_{k}$ we have 
+$2 \ln (x)=(\frac{1}{2}-k) \mathrm{Pi}$ and so\
+
+ 
+$\sin (2 \ln (x))=(-1)^{k}$   , so  
+$m_{k}=\frac{2 (-1)^{k +1}}{a_{k}}$  .   The line 
+$L_{k}$ has equation 
+$y =m_{k} (x -a_{k})$ so the\
+
+intercept at 
+$x =0$ is 
+$-m_{k} a_{k}$  , which is 
+$2 (-1)^{k}$.
+\end{Maple Normal}
+\begin{Maple Normal}
+ 
+\end{Maple Normal}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\begin{lstlisting}
+> 
+\end{lstlisting}
+\end{document}
