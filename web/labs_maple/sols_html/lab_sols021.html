@@ -1,0 +1,625 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252">
+<title>lab_sols021.html</title>
+<!-- Created by Maple 2026.1, Windows 11 -->
+</head>
+<a name="MapleAutoBookmark1" />
+
+<body bgcolor="FFFFFF">
+<p align="center"><font color="#000000" size="5" face="Arial"><strong><u>Solving equations</u></strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial">_________________________________________________________________________________</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>Exercise 1.1</strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>restart;</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>f := (x) -&gt; 2*x^4-2222*x^3+224220*x^2-2222000*x+2000000;</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_1.gif" width="416" height="21" alt="Typesetting:-mprintslash([f := proc (x) options operator, arrow; `+`(`*`(2, `*`(`^`(x, 4))), `-`(`*`(2222, `*`(`^`(x, 3)))), `*`(224220, `*`(`^`(x, 2))), `-`(`*`(2222000, `*`(x))), 2000000) end proc],..." align="center" border="0"></td>
+<td width='5%' align='center'>(1)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>solve(f(x)=0,{x});</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_2.gif" width="270" height="18" alt="{x = 1}, {x = 10}, {x = 1000}, {x = 100}" align="center" border="0"></td>
+<td width='5%' align='center'>(2)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial">Whenever a polynomial <img src="images02/lab_sols02_3.gif" width="44" height="18" alt="f(x); "_noterminate" align="center" border="0"> has a root <img src="images02/lab_sols02_4.gif" width="43" height="18" alt="x = a; "_noterminate" align="center" border="0">, the term <img src="images02/lab_sols02_5.gif" width="48" height="18" alt="`+`(x, `-`(a)); "_noterminate" align="center" border="0"> is a factor of <img src="images02/lab_sols02_6.gif" width="44" height="18" alt="f(x); "_noterminate" align="center" border="0">. &nbsp;This indicates that <img src="images02/lab_sols02_7.gif" width="44" height="18" alt="f(x); "_noterminate" align="center" border="0"> should be a multiple of the polynomial <img src="images02/lab_sols02_8.gif" width="320" height="18" alt="g(x) = `*`(`+`(x, `-`(1)), `*`(`+`(x, `-`(10)), `*`(`+`(x, `-`(100)), `*`(`+`(x, `-`(1000)))))); "_noterminate" align="center" border="0">. &nbsp;However, the coefficient of <img src="images02/lab_sols02_9.gif" width="25" height="21" alt="`*`(`^`(x, 4)); "_noterminate" align="center" border="0"> in <img src="images02/lab_sols02_10.gif" width="44" height="18" alt="f(x); "_noterminate" align="center" border="0"> is <img src="images02/lab_sols02_11.gif" width="21" height="18" alt="2; "_noterminate" align="center" border="0">, whereas the coefficient of <img src="images02/lab_sols02_12.gif" width="25" height="21" alt="`*`(`^`(x, 4)); "_noterminate" align="center" border="0"> in the expansion of <img src="images02/lab_sols02_13.gif" width="43" height="18" alt="g(x); "_noterminate" align="center" border="0"> is <img src="images02/lab_sols02_14.gif" width="21" height="18" alt="1; "_noterminate" align="center" border="0">. &nbsp;Thus, the multiplier must be <img src="images02/lab_sols02_15.gif" width="21" height="18" alt="2; "_noterminate" align="center" border="0">, and we must have</font>&nbsp;</p>
+<p align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images02/lab_sols02_16.gif" width="101" height="18" alt="f(x) = `+`(`*`(2, `*`(g(x)))); "_noterminate" align="center" border="0"><img src="images02/lab_sols02_17.gif" width="302" height="18" alt="" align="center" border="0"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial">Maple confirms this as follows:</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>factor(f(x));</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_18.gif" width="286" height="18" alt="`+`(`*`(2, `*`(`+`(x, `-`(1)), `*`(`+`(x, `-`(10)), `*`(`+`(x, `-`(1000)), `*`(`+`(x, `-`(100))))))))" align="center" border="0"></td>
+<td width='5%' align='center'>(3)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial">_________________________________________________________________________________</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>Exercise 1.2</strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>restart;</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>y := x^4-x^3-x^2-x/8+1/64;</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_19.gif" width="218" height="39" alt="Typesetting:-mprintslash([y := `+`(`*`(`^`(x, 4)), `-`(`*`(`^`(x, 3))), `-`(`*`(`^`(x, 2))), `-`(`*`(`/`(1, 8), `*`(x))), `/`(1, 64))], [`+`(`*`(`^`(x, 4)), `-`(`*`(`^`(x, 3))), `-`(`*`(`^`(x, 2))), `..." align="center" border="0"></td>
+<td width='5%' align='center'>(4)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>_EnvExplicit := true:</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>solve(y=0,x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_20.gif" width="768" height="43" alt="`+`(`/`(1, 4), `*`(`/`(1, 4), `*`(`^`(6, `/`(1, 2)))), `*`(`/`(1, 4), `*`(`^`(3, `/`(1, 2)))), `*`(`/`(1, 4), `*`(`^`(2, `/`(1, 2))))), `+`(`/`(1, 4), `*`(`/`(1, 4), `*`(`^`(6, `/`(1, 2)))), `-`(`*`(`..." align="center" border="0"></td>
+<td width='5%' align='center'>(5)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>sols := solve(y=0,{x});</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_21.gif" width="768" height="34" alt="Typesetting:-mprintslash([sols := {x = `+`(`/`(1, 4), `*`(`/`(1, 4), `*`(`^`(6, `/`(1, 2)))), `*`(`/`(1, 4), `*`(`^`(3, `/`(1, 2)))), `*`(`/`(1, 4), `*`(`^`(2, `/`(1, 2)))))}, {x = `+`(`/`(1, 4), `*`(..." align="center" border="0"></td>
+<td width='5%' align='center'>(6)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial">In each of the four solutions, the sign attached to <img src="images02/lab_sols02_22.gif" width="38" height="23" alt="sqrt(6); "_noterminate" align="center" border="0"> is the product of the signs attached to <img src="images02/lab_sols02_23.gif" width="38" height="23" alt="sqrt(2); "_noterminate" align="center" border="0"> and <img src="images02/lab_sols02_24.gif" width="38" height="23" alt="sqrt(3); "_noterminate" align="center" border="0">. &nbsp;Using this observation, we see that the four solutions are (1±<img src="images02/lab_sols02_25.gif" width="38" height="23" alt="sqrt(2); "_noterminate" align="center" border="0">)(1±<img src="images02/lab_sols02_26.gif" width="38" height="23" alt="sqrt(3); "_noterminate" align="center" border="0">)/4.</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>z := 16*x^3-24*x^2-6*x+2;</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_27.gif" width="195" height="21" alt="Typesetting:-mprintslash([z := `+`(`*`(16, `*`(`^`(x, 3))), `-`(`*`(24, `*`(`^`(x, 2)))), `-`(`*`(6, `*`(x))), 2)], [`+`(`*`(16, `*`(`^`(x, 3))), `-`(`*`(24, `*`(`^`(x, 2)))), `-`(`*`(6, `*`(x))), 2)]..." align="center" border="0"></td>
+<td width='5%' align='center'>(7)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>simplify(subs(sols[1],z),symbolic);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_28.gif" width="53" height="23" alt="`+`(`-`(`*`(`^`(2, `/`(1, 2)))))" align="center" border="0"></td>
+<td width='5%' align='center'>(8)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>simplify(subs(sols[2],z),symbolic);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_29.gif" width="35" height="23" alt="`*`(`^`(2, `/`(1, 2)))" align="center" border="0"></td>
+<td width='5%' align='center'>(9)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>simplify(subs(sols[3],z),symbolic);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_30.gif" width="35" height="23" alt="`*`(`^`(2, `/`(1, 2)))" align="center" border="0"></td>
+<td width='5%' align='center'>(10)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>simplify(subs(sols[4],z),symbolic);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_31.gif" width="53" height="23" alt="`+`(`-`(`*`(`^`(2, `/`(1, 2)))))" align="center" border="0"></td>
+<td width='5%' align='center'>(11)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>seq(simplify(subs(sols[i],z),symbolic),i=1..4);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_32.gif" width="166" height="23" alt="`+`(`-`(`*`(`^`(2, `/`(1, 2))))), `*`(`^`(2, `/`(1, 2))), `*`(`^`(2, `/`(1, 2))), `+`(`-`(`*`(`^`(2, `/`(1, 2)))))" align="center" border="0"></td>
+<td width='5%' align='center'>(12)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial">_________________________________________________________________________________</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>Exercise 1.3</strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>restart;</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>_EnvExplicit := true;</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_33.gif" width="143" height="18" alt="Typesetting:-mprintslash([_EnvExplicit := true], [true])" align="center" border="0"></td>
+<td width='5%' align='center'>(13)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>y := x^3-3*x+1;</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_34.gif" width="125" height="21" alt="Typesetting:-mprintslash([y := `+`(`*`(`^`(x, 3)), `-`(`*`(3, `*`(x))), 1)], [`+`(`*`(`^`(x, 3)), `-`(`*`(3, `*`(x))), 1)])" align="center" border="0"></td>
+<td width='5%' align='center'>(14)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>solve(y=0,{x});</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_35.gif" width="768" height="64" alt="{x = `+`(`*`(`/`(1, 2), `*`(`^`(`+`(`-`(4), `*`(`*`(4, `*`(I)), `*`(`^`(3, `/`(1, 2))))), `/`(1, 3)))), `/`(`*`(2), `*`(`^`(`+`(`-`(4), `*`(`*`(4, `*`(I)), `*`(`^`(3, `/`(1, 2))))), `/`(1, 3)))))}, {x..." align="center" border="0"><br><img src="images02/lab_sols02_36.gif" width="768" height="64" alt="{x = `+`(`*`(`/`(1, 2), `*`(`^`(`+`(`-`(4), `*`(`*`(4, `*`(I)), `*`(`^`(3, `/`(1, 2))))), `/`(1, 3)))), `/`(`*`(2), `*`(`^`(`+`(`-`(4), `*`(`*`(4, `*`(I)), `*`(`^`(3, `/`(1, 2))))), `/`(1, 3)))))}, {x..." align="center" border="0"><br><img src="images02/lab_sols02_37.gif" width="768" height="64" alt="{x = `+`(`*`(`/`(1, 2), `*`(`^`(`+`(`-`(4), `*`(`*`(4, `*`(I)), `*`(`^`(3, `/`(1, 2))))), `/`(1, 3)))), `/`(`*`(2), `*`(`^`(`+`(`-`(4), `*`(`*`(4, `*`(I)), `*`(`^`(3, `/`(1, 2))))), `/`(1, 3)))))}, {x..." align="center" border="0"></td>
+<td width='5%' align='center'>(15)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>sols := fsolve(y=0,{x});</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_38.gif" width="464" height="18" alt="Typesetting:-mprintslash([sols := {x = -1.879385242}, {x = .3472963553}, {x = 1.532088886}], [{x = -1.879385242}, {x = .3472963553}, {x = 1.532088886}])" align="center" border="0"></td>
+<td width='5%' align='center'>(16)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>plot(y,x=-2..2);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images02/lab_sols02_39.gif" width="500" height="500" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font><font color="#000000" size="3" face="Arial">The only negative root is</font><font color="#000000" size="3" face="Times New Roman"> <img src="images02/lab_sols02_40.gif" width="86" height="18" alt="x = -1.879; "_noterminate" align="center" border="0"> , </font><font color="#000000" size="3" face="Arial">which is</font><font color="#000000" size="3" face="Times New Roman"> </font><font color="#ff0000" size="3" face="monospace"><strong> sols[1]</strong></font><font color="#000000" size="3" face="Times New Roman">. &nbsp;</font><font color="#000000" size="3" face="Arial">Maple notation for the gradient <img src="images02/lab_sols02_41.gif" width="38" height="39" alt="`/`(`*`(dy), `*`(dx)); "_noterminate" align="center" border="0"></font><font color="#000000" size="3" face="Times New Roman"> </font><font color="#000000" size="3" face="Arial">is</font><font color="#000000" size="3" face="Times New Roman"> </font><font color="#ff0000" size="3" face="monospace"><strong> diff(y,x)</strong></font><font color="#000000" size="3" face="Times New Roman">. &nbsp;</font><font color="#000000" size="3" face="Arial">We can thus find the gradient at the negative root as follows:</font>&nbsp;</p>
+<p align="left"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#ff00ff" size="3" face="Courier New"><u><a href="http://www.maplesoft.com/support/help/errors/view.aspx?path=Error,%20missing%20operator%20or%20%60%3B%60"></u></font><font color="#ff00ff" size="3" face="Courier New"><u>Error, missing operator or `;`</u></font></a></td>
+<td width='5%' align='center'></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>subs(sols[1],diff(y,x));</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_42.gif" width="87" height="18" alt="7.59626666" align="center" border="0"></td>
+<td width='5%' align='center'>(17)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial">_________________________________________________________________________________</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>Exercise 1.4</strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>g := (x) -&gt; (b^2 - c^2 + (1 + c^2)*x)/(1-c^2 + c^2*x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_43.gif" width="220" height="44" alt="Typesetting:-mprintslash([g := proc (x) options operator, arrow; `/`(`*`(`+`(`*`(`^`(b, 2)), `-`(`*`(`^`(c, 2))), `*`(`+`(`*`(`^`(c, 2)), 1), `*`(x)))), `*`(`+`(1, `-`(`*`(`^`(c, 2))), `*`(`^`(c, 2), ..." align="center" border="0"></td>
+<td width='5%' align='center'>(18)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>(a)</strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>sols := solve(g(x)=x,{x});</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_44.gif" width="255" height="39" alt="Typesetting:-mprintslash([sols := {x = `/`(`*`(`+`(b, c)), `*`(c))}, {x = `+`(`-`(`/`(`*`(`+`(b, `-`(c))), `*`(c))))}], [{x = `/`(`*`(`+`(b, c)), `*`(c))}, {x = `+`(`-`(`/`(`*`(`+`(b, `-`(c))), `*`(c)..." align="center" border="0"></td>
+<td width='5%' align='center'>(19)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>(b)</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial">The above solutions involve division by <img src="images02/lab_sols02_45.gif" width="20" height="18" alt="c; "_noterminate" align="center" border="0">, so they do not make sense when <img src="images02/lab_sols02_46.gif" width="43" height="18" alt="c = 0; "_noterminate" align="center" border="0">. &nbsp;We must therefore check separately what happens when <img src="images02/lab_sols02_47.gif" width="43" height="18" alt="c = 0; "_noterminate" align="center" border="0">. &nbsp;In that case, <img src="images02/lab_sols02_48.gif" width="43" height="18" alt="g(x); "_noterminate" align="center" border="0"> simplifies as follows:</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>subs(c=0,g(x));</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_49.gif" width="53" height="21" alt="`+`(`*`(`^`(b, 2)), x)" align="center" border="0"></td>
+<td width='5%' align='center'>(20)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial">The equation <img src="images02/lab_sols02_50.gif" width="65" height="18" alt="g(x) = x; "_noterminate" align="center" border="0"> thus becomes <img src="images02/lab_sols02_51.gif" width="75" height="21" alt="`+`(`*`(`^`(b, 2)), x) = x; "_noterminate" align="center" border="0">. &nbsp;This is always true if <img src="images02/lab_sols02_52.gif" width="44" height="18" alt="b = 0; "_noterminate" align="center" border="0">, and never true if <img src="images02/lab_sols02_53.gif" width="52" height="18" alt="`<>`(b, 0); "_noterminate" align="center" border="0">.
+<br></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"></font><font color="#000000" size="3" face="Arial"><strong>(c)</strong></font><font color="#000000" size="3" face="Arial"> Now return to the case <img src="images02/lab_sols02_54.gif" width="51" height="18" alt="`<>`(c, 0); "_noterminate" align="center" border="0">. &nbsp;The two solutions can then be written as <img src="images02/lab_sols02_55.gif" width="82" height="39" alt="x = `+`(1, `-`(`/`(`*`(b), `*`(c)))); "_noterminate" align="center" border="0"> and <img src="images02/lab_sols02_56.gif" width="82" height="39" alt="x = `+`(1, `/`(`*`(b), `*`(c))); "_noterminate" align="center" border="0">. &nbsp;These are the same (and both equal to <img src="images02/lab_sols02_57.gif" width="21" height="18" alt="1; "_noterminate" align="center" border="0">) if <img src="images02/lab_sols02_58.gif" width="44" height="18" alt="b = 0; "_noterminate" align="center" border="0">, but are different otherwise. &nbsp;
+<br>
+<br></font><font color="#000000" size="3" face="Arial"><strong>(d)</strong></font><font color="#000000" size="3" face="Arial"> Our conclusion is as follows:</font>&nbsp;</p>
+<p align="left"><ul><li><font color="#000000" size="3" face="Arial">If <img src="images02/lab_sols02_59.gif" width="44" height="18" alt="b = 0; "_noterminate" align="center" border="0"><img src="images02/lab_sols02_60.gif" width="35" height="18" alt="" align="center" border="0"> then <img src="images02/lab_sols02_61.gif" width="65" height="18" alt="g(x) = x; "_noterminate" align="center" border="0"> for all <img src="images02/lab_sols02_62.gif" width="20" height="18" alt="x; "_noterminate" align="center" border="0">.</font></li></ul>&nbsp;</p>
+<p align="left"><ul><li><font color="#000000" size="3" face="Arial">If <img src="images02/lab_sols02_63.gif" width="44" height="18" alt="b = 0; "_noterminate" align="center" border="0"><img src="images02/lab_sols02_64.gif" width="43" height="18" alt="" align="center" border="0"> then the only solution to <img src="images02/lab_sols02_65.gif" width="65" height="18" alt="g(x) = x; "_noterminate" align="center" border="0"> is <img src="images02/lab_sols02_66.gif" width="43" height="18" alt="x = 1; "_noterminate" align="center" border="0">.</font></li></ul>&nbsp;</p>
+<p align="left"><ul><li><font color="#000000" size="3" face="Arial">If <img src="images02/lab_sols02_67.gif" width="52" height="18" alt="`<>`(b, 0); "_noterminate" align="center" border="0"><img src="images02/lab_sols02_68.gif" width="35" height="18" alt="" align="center" border="0"> then there are no solutions.</font></li></ul>&nbsp;</p>
+<p align="left"><ul><li><font color="#000000" size="3" face="Arial">If <img src="images02/lab_sols02_69.gif" width="52" height="18" alt="`<>`(b, 0); "_noterminate" align="center" border="0"><img src="images02/lab_sols02_70.gif" width="43" height="18" alt="" align="center" border="0"> then there are precisely two different solutions, namely <img src="images02/lab_sols02_71.gif" width="60" height="39" alt="`+`(1, `/`(`*`(b), `*`(c))); "_noterminate" align="center" border="0"> and <img src="images02/lab_sols02_72.gif" width="60" height="39" alt="`+`(1, `-`(`/`(`*`(b), `*`(c)))); "_noterminate" align="center" border="0">.</font></li></ul>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial">_________________________________________________________________________________</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>Exercise 2.1</strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>f := (x) -&gt; sin(Pi*x+exp(-x));</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_73.gif" width="168" height="21" alt="Typesetting:-mprintslash([f := proc (x) options operator, arrow; sin(`+`(`*`(Pi, `*`(x)), exp(`+`(`-`(x))))) end proc], [proc (x) options operator, arrow; sin(`+`(`*`(Pi, `*`(x)), exp(`+`(`-`(x))))) e..." align="center" border="0"></td>
+<td width='5%' align='center'>(21)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>solve(f(x)=0,{x});</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_74.gif" width="372" height="42" alt="{x = LambertW(`+`(`-`(`/`(1, `*`(Pi)))))}, {x = LambertW(-1, `+`(`-`(`/`(1, `*`(Pi)))))}" align="center" border="0"></td>
+<td width='5%' align='center'>(22)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>(a)</strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>plot(f(x),x=0..10);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images02/lab_sols02_75.gif" width="500" height="500" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial">The graph looks rather like a sine wave, with roots at <img src="images02/lab_sols02_76.gif" width="43" height="18" alt="x = 1; "_noterminate" align="center" border="0">,2,3,4 and so on. &nbsp;This makes sense, because as soon as <img src="images02/lab_sols02_77.gif" width="20" height="18" alt="x; "_noterminate" align="center" border="0"> becomes reasonably large, the term <img src="images02/lab_sols02_78.gif" width="32" height="21" alt="exp(`+`(`-`(x))); "_noterminate" align="center" border="0"> becomes very small, so <img src="images02/lab_sols02_79.gif" width="44" height="18" alt="f(x); "_noterminate" align="center" border="0"> is close to <img src="images02/lab_sols02_80.gif" width="70" height="18" alt="sin(`*`(Pi, `*`(x))); "_noterminate" align="center" border="0">. &nbsp;The positive roots of <img src="images02/lab_sols02_81.gif" width="70" height="18" alt="sin(`*`(Pi, `*`(x))); "_noterminate" align="center" border="0"> are exactly <img src="images02/lab_sols02_82.gif" width="43" height="18" alt="x = 1; "_noterminate" align="center" border="0">,2,3,4 and so on, so we expect the roots of <img src="images02/lab_sols02_83.gif" width="44" height="18" alt="f(x); "_noterminate" align="center" border="0"> to be approximately the same.
+<br>
+<br></font><font color="#000000" size="3" face="Arial"><strong>(b)</strong></font><font color="#000000" size="3" face="Arial"> We now find some roots more precisely:</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>fsolve(f(x)=0,x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_84.gif" width="118" height="14" alt="-.5538270366" align="center" border="0"></td>
+<td width='5%' align='center'>(23)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>fsolve(f(x)=0,x=2);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_85.gif" width="95" height="18" alt="1.954935731" align="center" border="0"></td>
+<td width='5%' align='center'>(24)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>seq(fsolve(f(x)=0,x=n),n=1..10);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_86.gif" width="768" height="15" alt=".8661259484, 1.954935731, 2.983894990, 3.994135661, 4.997850630, 5.999210365, 6.999709655, 7.999893208, 8.999960716, 9.999985549" align="center" border="0"></td>
+<td width='5%' align='center'>(25)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>(c)</strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>r := (n) -&gt; n-exp(-n)/Pi-exp(-2*n)/Pi^2;</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_87.gif" width="191" height="47" alt="Typesetting:-mprintslash([r := proc (n) options operator, arrow; `+`(n, `-`(`/`(`*`(exp(`+`(`-`(n)))), `*`(Pi))), `-`(`/`(`*`(exp(`+`(`-`(`*`(2, `*`(n)))))), `*`(`^`(Pi, 2))))) end proc], [proc (n) op..." align="center" border="0"></td>
+<td width='5%' align='center'>(26)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>seq(evalf(r(n)),n=1..10);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_88.gif" width="768" height="15" alt=".8691880059, 1.955065679, 2.983901134, 3.994135962, 4.997850645, 5.999210366, 6.999709655, 7.999893208, 8.999960715, 9.999985549" align="center" border="0"></td>
+<td width='5%' align='center'>(27)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial">This is very close to our answer in (b). &nbsp;We can calculate the differences as follows:</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>seq(fsolve(f(x)=0,x=n)-evalf(r(n)),n=1..10);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_89.gif" width="723" height="18" alt="-0.30620575e-2, -0.129948e-3, -0.6144e-5, -0.301e-6, -0.15e-7, -0.1e-8, 0., 0., 0.1e-8, 0." align="center" border="0"></td>
+<td width='5%' align='center'>(28)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial">_________________________________________________________________________________</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>Exercise 3.1</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>(a)</strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>plot(tan(Pi*x)^2-3,x=-3..3,-3..3,numpoints=200);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images02/lab_sols02_90.gif" width="500" height="500" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>(b)</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial">The roots are at <img src="images02/lab_sols02_91.gif" width="47" height="39" alt="-`/`(8, 3); "_noterminate" align="center" border="0">, &nbsp;<img src="images02/lab_sols02_92.gif" width="47" height="39" alt="-`/`(7, 3); "_noterminate" align="center" border="0">, &nbsp;<img src="images02/lab_sols02_93.gif" width="47" height="39" alt="-`/`(5, 3); "_noterminate" align="center" border="0">, &nbsp;<img src="images02/lab_sols02_94.gif" width="47" height="39" alt="-`/`(4, 3); "_noterminate" align="center" border="0">, &nbsp;<img src="images02/lab_sols02_95.gif" width="47" height="39" alt="-`/`(2, 3); "_noterminate" align="center" border="0">, &nbsp;<img src="images02/lab_sols02_96.gif" width="47" height="39" alt="-`/`(1, 3); "_noterminate" align="center" border="0">, &nbsp;<img src="images02/lab_sols02_97.gif" width="31" height="39" alt="`/`(1, 3); "_noterminate" align="center" border="0">, &nbsp;<img src="images02/lab_sols02_98.gif" width="31" height="39" alt="`/`(2, 3); "_noterminate" align="center" border="0">, &nbsp;<img src="images02/lab_sols02_99.gif" width="31" height="39" alt="`/`(4, 3); "_noterminate" align="center" border="0">, &nbsp;<img src="images02/lab_sols02_100.gif" width="31" height="39" alt="`/`(5, 3); "_noterminate" align="center" border="0">, &nbsp;<img src="images02/lab_sols02_101.gif" width="31" height="39" alt="`/`(7, 3); "_noterminate" align="center" border="0">, &nbsp;<img src="images02/lab_sols02_102.gif" width="31" height="39" alt="`/`(8, 3); "_noterminate" align="center" border="0"> and so on. &nbsp;In other words, for every integer <img src="images02/lab_sols02_103.gif" width="21" height="18" alt="n; "_noterminate" align="center" border="0">, there is a root at <img src="images02/lab_sols02_104.gif" width="60" height="39" alt="`+`(n, `-`(`/`(1, 3))); "_noterminate" align="center" border="0">, and another one at <img src="images02/lab_sols02_105.gif" width="60" height="39" alt="`+`(n, `/`(1, 3)); "_noterminate" align="center" border="0">.
+<br></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>(c)</strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>solve(tan(Pi*x)^2=3,{x});</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_106.gif" width="151" height="39" alt="{x = `/`(1, 3)}, {x = -`/`(1, 3)}" align="center" border="0"></td>
+<td width='5%' align='center'>(29)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>(d)</strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>_EnvAllSolutions := true;</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_107.gif" width="172" height="18" alt="Typesetting:-mprintslash([_EnvAllSolutions := true], [true])" align="center" border="0"></td>
+<td width='5%' align='center'>(30)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>solve(tan(Pi*x)^2=3,{x});</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_108.gif" width="257" height="39" alt="{x = `+`(`/`(1, 3), _Z1)}, {x = `+`(`-`(`/`(1, 3)), _Z2)}" align="center" border="0"></td>
+<td width='5%' align='center'>(31)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial">_________________________________________________________________________________</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>Exercise 4.1</strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>restart;</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>eqns := {
+<br> x/2 + y/3 + z/4 = 1,
+<br> x/3 + y/4 + z/5 = 2,
+<br> x/4 + y/5 + z/6 = 3
+<br>};</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_109.gif" width="458" height="39" alt="Typesetting:-mprintslash([eqns := {`+`(`*`(`/`(1, 2), `*`(x)), `*`(`/`(1, 3), `*`(y)), `*`(`/`(1, 4), `*`(z))) = 1, `+`(`*`(`/`(1, 3), `*`(x)), `*`(`/`(1, 4), `*`(y)), `*`(`/`(1, 5), `*`(z))) = 2, `+`..." align="center" border="0"></td>
+<td width='5%' align='center'>(32)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>sol := solve(eqns,{x,y,z});</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_110.gif" width="240" height="18" alt="Typesetting:-mprintslash([sol := {x = 132, y = -600, z = 540}], [{x = 132, y = -600, z = 540}])" align="center" border="0"></td>
+<td width='5%' align='center'>(33)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>sol := solve({x/2+y/3+z/4=1,x/3+y/4+z/5=2,x/4+y/5+z/6=3},{x,y,z});</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_111.gif" width="240" height="18" alt="Typesetting:-mprintslash([sol := {x = 132, y = -600, z = 540}], [{x = 132, y = -600, z = 540}])" align="center" border="0"></td>
+<td width='5%' align='center'>(34)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>subs(sol,x^2+y^2+z^2);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_112.gif" width="60" height="18" alt="669024" align="center" border="0"></td>
+<td width='5%' align='center'>(35)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial">_________________________________________________________________________________</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>Exercise 4.2</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>(a)</strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>solve({p+q+r=0,p+2*q+3*r=1});</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_113.gif" width="216" height="18" alt="{p = `+`(`-`(1), r), q = `+`(1, `-`(`*`(2, `*`(r)))), r = r}" align="center" border="0"></td>
+<td width='5%' align='center'>(36)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial">Note the equation <img src="images02/lab_sols02_114.gif" width="46" height="18" alt="p = p; "_noterminate" align="center" border="0"> in the solution, indicating that <img src="images02/lab_sols02_115.gif" width="22" height="18" alt="p; "_noterminate" align="center" border="0"> can take any value. &nbsp;This means that there are infinitely many different solutions.</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>(b)</strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>solve({u+v=1001,u+2*v=1002,u+3*v=1006});</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>[solve({u+v=1001,u+2*v=1002,u+3*v=1006})];</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_116.gif" width="30" height="18" alt="[]" align="center" border="0"></td>
+<td width='5%' align='center'>(37)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial">Maple gives an empty response, indicating that there are no solutions. &nbsp;This is easy to see directly: if we subtract the first two equations we get <img src="images02/lab_sols02_117.gif" width="43" height="18" alt="v = 1; "_noterminate" align="center" border="0">, whereas subtracting the second and third equations gives <img src="images02/lab_sols02_118.gif" width="43" height="18" alt="v = 4; "_noterminate" align="center" border="0">, showing that the equations are not consistent.</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>(c)</strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>solve({
+<br> &nbsp;x + &nbsp;&nbsp;y + &nbsp;&nbsp;z = 2,
+<br> &nbsp;x + 2*y + 3*z = 2,
+<br> &nbsp;x + 4*y + 9*z = 2
+<br> },
+<br> {x,y,z}
+<br>);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images02/lab_sols02_119.gif" width="134" height="18" alt="{x = 2, y = 0, z = 0}" align="center" border="0"></td>
+<td width='5%' align='center'>(38)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial">This has a unique, fully-determined solution.</font>&nbsp;</p>
+</body>
+</html>

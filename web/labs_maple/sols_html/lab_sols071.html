@@ -1,0 +1,883 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252">
+<title>lab_sols071.html</title>
+<!-- Created by Maple 2026.1, Windows 11 -->
+</head>
+<a name="MapleAutoBookmark1" />
+
+<body bgcolor="FFFFFF">
+<p align="center"><font color="#000000" size="5" face="Arial"><strong><u>Integration 1</u></strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">_________________________________________________________________________________</font>&nbsp;</p>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark2" />
+<p align="left"><font color="#000000" size="5" face="Arial"><strong>The </strong></font><font color="#ff0000" size="5" face="monospace"><strong>ratint</strong></font><font color="#000000" size="5" face="Arial"><strong> function</strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>myarctan := 
+<br> proc(y,x) 
+<br> &nbsp;`if`(nargs = 1, arctan(y),evalf(Pi/2)-arctan(expand(x/y)));
+<br> end:
+<br>myarctanh := (y) -&gt; myln(1+y)/2 - myln(1-y)/2:
+<br>myln := 
+<br> proc(u)
+<br> &nbsp;local c,d,v;
+<br> &nbsp;d := degree(u,x);
+<br> &nbsp;c := coeff(u,x,d);
+<br> &nbsp;v := expand(x^d + (u-c*x^d)/c);
+<br> &nbsp;if d = 1 then v := abs(v); fi;
+<br> &nbsp;ln(v);
+<br> end:</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>ratint := 
+<br> proc(f,x)
+<br> &nbsp;local g;
+<br> &nbsp;g := int(f,x);
+<br> &nbsp;if has(g,{RootOf,int}) then 
+<br> &nbsp;&nbsp;&nbsp;g := int(convert(evalf(f),parfrac,x),x);
+<br> &nbsp;fi;
+<br> &nbsp;g := eval(
+<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subs(ln=myln,arctan = myarctan,arctanh=myarctanh,
+<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;signum=1,abs=(x-&gt;x),
+<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g));
+<br> &nbsp;g := expand(g);
+<br> &nbsp;if (type(g,`+`)) then 
+<br> &nbsp;&nbsp;g := remove((a)-&gt;type(a,constant),g);
+<br> &nbsp;fi;
+<br> &nbsp;g;
+<br> end:</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+</dl>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark3" />
+<p align="left"><font color="#000000" size="5" face="Arial"><strong>Various rational functions</strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>g[1] := (x) -&gt; x^2 + x + 1 + 1/x + 1/x^2;</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>g[2] := (x) -&gt; 1/(x-1) + 1/(x^2-1) + 1/(x^3-1);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>g[3] := (x) -&gt; 1/(x-1)^2 + 1/(x-2)^3 + 1/(x-3)^4;</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>g[4] := (x) -&gt; 1/(x+1) + 1/(x^2+1) + 1/(x^3+1);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>g[5] := (x) -&gt; x/(x+1)*(x+2)/(x+3)*(x+4);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>g[6] := (x) -&gt; x/(x+1)^2*(x+2)/(x+3)^2*(x+4);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>g[7] := (x) -&gt; (x^3+4*x^2+x+2)/(x-1)^2/(x+1)^3;</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>g[8] := (x) -&gt; 1/(x^2+8*x+1);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>g[9] := (x) -&gt; (x^2+1)^(-5);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>g[10] := (x) -&gt; 1/(x^8+x^2+1);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_1.gif" width="226" height="42" alt="Typesetting:-mprintslash([g[1] := proc (x) options operator, arrow; `+`(`*`(`^`(x, 2)), x, 1, `/`(1, `*`(x)), `/`(1, `*`(`^`(x, 2)))) end proc], [proc (x) options operator, arrow; `+`(`*`(`^`(x, 2)), ..." align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_2.gif" width="265" height="42" alt="Typesetting:-mprintslash([g[2] := proc (x) options operator, arrow; `+`(`/`(1, `*`(`+`(x, `-`(1)))), `/`(1, `*`(`+`(`*`(`^`(x, 2)), `-`(1)))), `/`(1, `*`(`+`(`*`(`^`(x, 3)), `-`(1))))) end proc], [pro..." align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_3.gif" width="317" height="42" alt="Typesetting:-mprintslash([g[3] := proc (x) options operator, arrow; `+`(`/`(1, `*`(`^`(`+`(x, `-`(1)), 2))), `/`(1, `*`(`^`(`+`(x, `-`(2)), 3))), `/`(1, `*`(`^`(`+`(x, `-`(3)), 4)))) end proc], [proc ..." align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_4.gif" width="265" height="42" alt="Typesetting:-mprintslash([g[4] := proc (x) options operator, arrow; `+`(`/`(1, `*`(`+`(x, 1))), `/`(1, `*`(`+`(`*`(`^`(x, 2)), 1))), `/`(1, `*`(`+`(`*`(`^`(x, 3)), 1)))) end proc], [proc (x) options o..." align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_5.gif" width="208" height="39" alt="Typesetting:-mprintslash([g[5] := proc (x) options operator, arrow; `/`(`*`(x, `*`(`+`(x, 2), `*`(`+`(x, 4)))), `*`(`+`(x, 1), `*`(`+`(x, 3)))) end proc], [proc (x) options operator, arrow; `/`(`*`(x,..." align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_6.gif" width="208" height="42" alt="Typesetting:-mprintslash([g[6] := proc (x) options operator, arrow; `/`(`*`(x, `*`(`+`(x, 2), `*`(`+`(x, 4)))), `*`(`^`(`+`(x, 1), 2), `*`(`^`(`+`(x, 3), 2)))) end proc], [proc (x) options operator, a..." align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_7.gif" width="205" height="44" alt="Typesetting:-mprintslash([g[7] := proc (x) options operator, arrow; `/`(`*`(`+`(`*`(`^`(x, 3)), `*`(4, `*`(`^`(x, 2))), x, 2)), `*`(`^`(`+`(x, `-`(1)), 2), `*`(`^`(`+`(x, 1), 3)))) end proc], [proc (x..." align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_8.gif" width="169" height="42" alt="Typesetting:-mprintslash([g[8] := proc (x) options operator, arrow; `/`(1, `*`(`+`(`*`(`^`(x, 2)), `*`(8, `*`(x)), 1))) end proc], [proc (x) options operator, arrow; `/`(1, `*`(`+`(`*`(`^`(x, 2)), `*`..." align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_9.gif" width="151" height="44" alt="Typesetting:-mprintslash([g[9] := proc (x) options operator, arrow; `/`(1, `*`(`^`(`+`(`*`(`^`(x, 2)), 1), 5))) end proc], [proc (x) options operator, arrow; `/`(1, `*`(`^`(`+`(`*`(`^`(x, 2)), 1), 5))..." align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_10.gif" width="165" height="42" alt="Typesetting:-mprintslash([g[10] := proc (x) options operator, arrow; `/`(1, `*`(`+`(`*`(`^`(x, 8)), `*`(`^`(x, 2)), 1))) end proc], [proc (x) options operator, arrow; `/`(1, `*`(`+`(`*`(`^`(x, 8)), `*..." align="center" border="0"></td>
+<td width='5%' align='center'>(2.1)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"></td>
+</tr>
+</table>&nbsp;</p>
+</dl>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">______________________________________________________________________________</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>Exercise 1</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">When <img src="images07/lab_sols07_11.gif" width="20" height="18" alt="x; "_noterminate" align="center" border="0"> is large, <img src="images07/lab_sols07_12.gif" width="20" height="18" alt="y; "_noterminate" align="center" border="0"> is approximately <img src="images07/lab_sols07_13.gif" width="35" height="42" alt="`+`(`*`(`/`(1, 4), `*`(`^`(x, 4)))); "_noterminate" align="center" border="0">. &nbsp;Indeed, the formula for <img src="images07/lab_sols07_14.gif" width="20" height="18" alt="y; "_noterminate" align="center" border="0"> is as follows:</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>y := ratint(((x^3+1)/(x^2+1))^3,x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_15.gif" width="768" height="46" alt="Typesetting:-mprintslash([y := `+`(`*`(`/`(1, 4), `*`(`^`(x, 4))), `-`(`*`(`/`(3, 2), `*`(`^`(x, 2)))), `*`(3, `*`(x)), `/`(`*`(`/`(15, 4), `*`(`^`(x, 3))), `*`(`^`(`+`(`*`(`^`(x, 2)), 1), 2))), `/`(`..." align="center" border="0"></td>
+<td width='5%' align='center'>(1)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">The first term is <img src="images07/lab_sols07_16.gif" width="35" height="42" alt="`+`(`*`(`/`(1, 4), `*`(`^`(x, 4)))); "_noterminate" align="center" border="0">, and the other terms are much smaller, at least when <img src="images07/lab_sols07_17.gif" width="20" height="18" alt="x; "_noterminate" align="center" border="0"> is large. &nbsp;Indeed, when <img src="images07/lab_sols07_18.gif" width="20" height="18" alt="x; "_noterminate" align="center" border="0">
+<br>is large, all of the terms with <img src="images07/lab_sols07_19.gif" width="53" height="21" alt="`+`(`*`(`^`(x, 2)), 1); "_noterminate" align="center" border="0"> on the bottom will be very small. &nbsp;Also, you should recall from
+<br>the theory of trigonometric functions that <img src="images07/lab_sols07_20.gif" width="81" height="18" alt="abs(arctan(x)); "_noterminate" align="center" border="0"> is always at most <img src="images07/lab_sols07_21.gif" width="36" height="39" alt="`+`(`*`(`/`(1, 2), `*`(Pi))); "_noterminate" align="center" border="0">, so this will also be negligible
+<br>in comparison to <img src="images07/lab_sols07_22.gif" width="35" height="42" alt="`+`(`*`(`/`(1, 4), `*`(`^`(x, 4)))); "_noterminate" align="center" border="0"> for large <img src="images07/lab_sols07_23.gif" width="20" height="18" alt="x; "_noterminate" align="center" border="0">. &nbsp;The terms <img src="images07/lab_sols07_24.gif" width="31" height="18" alt="`+`(`*`(3, `*`(x))); "_noterminate" align="center" border="0"> and <img src="images07/lab_sols07_25.gif" width="47" height="42" alt="`+`(`*`(`/`(3, 2), `*`(`^`(x, 2)))); "_noterminate" align="center" border="0"> will get large as <img src="images07/lab_sols07_26.gif" width="20" height="18" alt="x; "_noterminate" align="center" border="0"> does, but much more 
+<br>slowly than <img src="images07/lab_sols07_27.gif" width="35" height="42" alt="`+`(`*`(`/`(1, 4), `*`(`^`(x, 4)))); "_noterminate" align="center" border="0"> does. &nbsp;For example, when <img src="images07/lab_sols07_28.gif" width="66" height="18" alt="x = 1000; "_noterminate" align="center" border="0">, the term <img src="images07/lab_sols07_29.gif" width="35" height="42" alt="`+`(`*`(`/`(1, 4), `*`(`^`(x, 4)))); "_noterminate" align="center" border="0"> is of the order of a trillion, whereas 
+<br><img src="images07/lab_sols07_30.gif" width="47" height="42" alt="`+`(`*`(`/`(3, 2), `*`(`^`(x, 2)))); "_noterminate" align="center" border="0"> is of the order of a million, and <img src="images07/lab_sols07_31.gif" width="31" height="18" alt="`+`(`*`(3, `*`(x))); "_noterminate" align="center" border="0"> is only <img src="images07/lab_sols07_32.gif" width="44" height="18" alt="3000; "_noterminate" align="center" border="0">. &nbsp;The behaviour of <img src="images07/lab_sols07_33.gif" width="83" height="21" alt="ln(`+`(`*`(`^`(x, 2)), 1)); "_noterminate" align="center" border="0"> is a little less obvious,
+<br>but in fact it grows much more slowly even than <img src="images07/lab_sols07_34.gif" width="20" height="18" alt="x; "_noterminate" align="center" border="0">, as you could check by plotting the graph.
+<br>
+<br>We can ask Maple to separate the terms as follows:</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>terms := [op(y)];</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_35.gif" width="758" height="47" alt="Typesetting:-mprintslash([terms := [`+`(`*`(`/`(1, 4), `*`(`^`(x, 4)))), `+`(`-`(`*`(`/`(3, 2), `*`(`^`(x, 2))))), `+`(`*`(3, `*`(x))), `+`(`/`(`*`(`/`(15, 4), `*`(`^`(x, 3))), `*`(`^`(`+`(`*`(`^`(x, ..." align="center" border="0"></td>
+<td width='5%' align='center'>(2)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">We can then check the relative size when <img src="images07/lab_sols07_36.gif" width="66" height="18" alt="x = 1000; "_noterminate" align="center" border="0">:</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>evalf(subs(x=1000,terms));</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_37.gif" width="768" height="16" alt="[0.2500000000e12, -1500000., 3000., 0.3749992500e-2, 0.4999990000e-6, 0.3249993500e-8, 0.9999980000e-12, 41.44653468, -8.241430717]" align="center" border="0"><br><img src="images07/lab_sols07_38.gif" width="768" height="16" alt="[0.2500000000e12, -1500000., 3000., 0.3749992500e-2, 0.4999990000e-6, 0.3249993500e-8, 0.9999980000e-12, 41.44653468, -8.241430717]" align="center" border="0"></td>
+<td width='5%' align='center'>(3)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">You can see that the first term is much bigger than the rest. &nbsp;We can also see this by plotting.
+<br>In the picture below, the red curve is <img src="images07/lab_sols07_39.gif" width="35" height="42" alt="`+`(`*`(`/`(1, 4), `*`(`^`(x, 4)))); "_noterminate" align="center" border="0">, and the other terms are plotted in various different colours.</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">By <img src="images07/lab_sols07_40.gif" width="43" height="18" alt="x = 5; "_noterminate" align="center" border="0">, the red curve is already much bigger than the others. &nbsp;If you change the range to </font><font color="#ff0000" size="3" face="monospace"><strong>1..100</strong></font><font color="#000000" size="3" face="Times New Roman">
+<br>(say) then only the red curve is visible because all other terms are squashed down onto the <img src="images07/lab_sols07_41.gif" width="20" height="18" alt="x; "_noterminate" align="center" border="0"> axis. </font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>plot(terms,x=1..5);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images07/lab_sols07_42.gif" width="500" height="500" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">We can also just plot <img src="images07/lab_sols07_43.gif" width="20" height="18" alt="y; "_noterminate" align="center" border="0"> and <img src="images07/lab_sols07_44.gif" width="35" height="42" alt="`+`(`*`(`/`(1, 4), `*`(`^`(x, 4)))); "_noterminate" align="center" border="0"> together. &nbsp;If we stop at <img src="images07/lab_sols07_45.gif" width="43" height="18" alt="x = 9; "_noterminate" align="center" border="0"> then you can still see the difference between
+<br>the two curves, but if we went much further than that then they would be indistinguishable.</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>plot([y,x^4/4],x=-9..9);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images07/lab_sols07_46.gif" width="500" height="500" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>unassign('y','terms');</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">_________________________________________________________________________________</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>Exercise 2</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">Here is the formula for <img src="images07/lab_sols07_47.gif" width="20" height="18" alt="y; "_noterminate" align="center" border="0">:</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>y := ratint((a*x^2+b)/(c*x^2+d),x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_48.gif" width="380" height="70" alt="Typesetting:-mprintslash([y := `+`(`/`(`*`(a, `*`(x)), `*`(c)), `-`(`/`(`*`(arctan(`/`(`*`(c, `*`(x)), `*`(`^`(`*`(d, `*`(c)), `/`(1, 2))))), `*`(a, `*`(d))), `*`(c, `*`(`^`(`*`(d, `*`(c)), `/`(1, 2))..." align="center" border="0"></td>
+<td width='5%' align='center'>(4)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">This is <img src="images07/lab_sols07_49.gif" width="64" height="39" alt="y = `/`(`*`(a, `*`(x)), `*`(c)); "_noterminate" align="center" border="0"> (which gives a line of slope <img src="images07/lab_sols07_50.gif" width="31" height="39" alt="`/`(`*`(a), `*`(c)); "_noterminate" align="center" border="0">) plus some other terms, which will be much smaller when <img src="images07/lab_sols07_51.gif" width="20" height="18" alt="x; "_noterminate" align="center" border="0"> is large. &nbsp;One way to see this is to look at &nbsp;<img src="images07/lab_sols07_52.gif" width="38" height="39" alt="`/`(`*`(dy), `*`(dx)); "_noterminate" align="center" border="0"> when <img src="images07/lab_sols07_53.gif" width="20" height="18" alt="x; "_noterminate" align="center" border="0"> is large, or in other words, the limit of <img src="images07/lab_sols07_54.gif" width="38" height="39" alt="`/`(`*`(dy), `*`(dx)); "_noterminate" align="center" border="0"> as <img src="images07/lab_sols07_55.gif" width="20" height="18" alt="x; "_noterminate" align="center" border="0"> tends to infinity. &nbsp;Of course <img src="images07/lab_sols07_56.gif" width="38" height="39" alt="`/`(`*`(dy), `*`(dx)); "_noterminate" align="center" border="0"> is just the function we first thought of, namely <img src="images07/lab_sols07_57.gif" width="75" height="44" alt="`/`(`*`(`+`(`*`(a, `*`(`^`(x, 2))), b)), `*`(`+`(`*`(c, `*`(`^`(x, 2))), d))); "_noterminate" align="center" border="0">. &nbsp;When <img src="images07/lab_sols07_58.gif" width="20" height="18" alt="x; "_noterminate" align="center" border="0"> is very large, <img src="images07/lab_sols07_59.gif" width="21" height="18" alt="b; "_noterminate" align="center" border="0"> and <img src="images07/lab_sols07_60.gif" width="21" height="18" alt="d; "_noterminate" align="center" border="0"> will be negligible compared with <img src="images07/lab_sols07_61.gif" width="36" height="21" alt="`*`(a, `*`(`^`(x, 2))); "_noterminate" align="center" border="0"> and <img src="images07/lab_sols07_62.gif" width="35" height="21" alt="`*`(c, `*`(`^`(x, 2))); "_noterminate" align="center" border="0">, so the function is approximately <img src="images07/lab_sols07_63.gif" width="81" height="44" alt="`/`(`*`(a), `*`(c)) = `/`(`*`(a), `*`(c)); "_noterminate" align="center" border="0">.</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>limit(diff(y,x),x=infinity);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_64.gif" width="29" height="39" alt="`/`(`*`(a), `*`(c))" align="center" border="0"></td>
+<td width='5%' align='center'>(5)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">We can see this graphically if we choose some numbers for <img src="images07/lab_sols07_65.gif" width="51" height="18" alt="a, b, c; "_noterminate" align="center" border="0"> and <img src="images07/lab_sols07_66.gif" width="21" height="18" alt="d; "_noterminate" align="center" border="0">.</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>plot(subs(a=7,b=-3,c=2,d=8,[y,a*x/c]),x=10..100);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images07/lab_sols07_67.gif" width="500" height="500" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>unassign('y');</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">_________________________________________________________________________________</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>Exercise 3</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font><font color="#000000" size="3" face="Times New Roman"><strong>(a)</strong></font><font color="#000000" size="3" face="Times New Roman"> It is true that the integral of a rational function can contain terms like <img src="images07/lab_sols07_68.gif" width="133" height="21" alt="`*`(a, `*`(ln(`+`(`*`(u, `*`(x)), `*`(`^`(x, 2)), v)))); "_noterminate" align="center" border="0">. &nbsp;For example:</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>y := (8*x+8)/(x^2+2*x+3);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_69.gif" width="135" height="42" alt="Typesetting:-mprintslash([y := `/`(`*`(`+`(`*`(8, `*`(x)), 8)), `*`(`+`(`*`(`^`(x, 2)), `*`(2, `*`(x)), 3)))], [`/`(`*`(`+`(`*`(8, `*`(x)), 8)), `*`(`+`(`*`(`^`(x, 2)), `*`(2, `*`(x)), 3)))])" align="center" border="0"></td>
+<td width='5%' align='center'>(6)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>ratint(y,x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_70.gif" width="134" height="21" alt="`+`(`*`(4, `*`(ln(`+`(`*`(`^`(x, 2)), `*`(2, `*`(x)), 3)))))" align="center" border="0"></td>
+<td width='5%' align='center'>(7)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">or more generally:</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>y := a*(2*x+u)/(x^2+u*x+v);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_71.gif" width="134" height="42" alt="Typesetting:-mprintslash([y := `/`(`*`(a, `*`(`+`(`*`(2, `*`(x)), u))), `*`(`+`(`*`(u, `*`(x)), `*`(`^`(x, 2)), v)))], [`/`(`*`(a, `*`(`+`(`*`(2, `*`(x)), u))), `*`(`+`(`*`(u, `*`(x)), `*`(`^`(x, 2)),..." align="center" border="0"></td>
+<td width='5%' align='center'>(8)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>ratint(y,x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_72.gif" width="133" height="21" alt="`*`(a, `*`(ln(`+`(`*`(u, `*`(x)), `*`(`^`(x, 2)), v))))" align="center" border="0"></td>
+<td width='5%' align='center'>(9)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font><font color="#000000" size="3" face="Times New Roman"><strong>(b)</strong></font><font color="#000000" size="3" face="Times New Roman"> It is </font><font color="#000000" size="3" face="Times New Roman"><em>not</em></font><font color="#000000" size="3" face="Times New Roman"> true that terms like <img src="images07/lab_sols07_73.gif" width="86" height="18" alt="`*`(x, `*`(ln(`+`(x, u)))); "_noterminate" align="center" border="0"> can occur in the integral of a rational function <img src="images07/lab_sols07_74.gif" width="43" height="18" alt="g(x); "_noterminate" align="center" border="0">. &nbsp;</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">If there were a term <img src="images07/lab_sols07_75.gif" width="86" height="18" alt="`*`(x, `*`(ln(`+`(x, u)))); "_noterminate" align="center" border="0"> in <img src="images07/lab_sols07_76.gif" width="68" height="31" alt="int(g(x), x); "_noterminate" align="center" border="0">, then there would have to be a term </font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"><img src="images07/lab_sols07_77.gif" width="129" height="38" alt="diff(`*`(x, `*`(ln(`+`(x, u)))), x); "_noterminate" align="center" border="0"> in <img src="images07/lab_sols07_78.gif" width="117" height="39" alt="diff(int(g(x), x), x); "_noterminate" align="center" border="0">. &nbsp;In other words, there would be a term </font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"><img src="images07/lab_sols07_79.gif" width="142" height="39" alt="`+`(ln(`+`(x, u)), `/`(`*`(x), `*`(`+`(x, u)))); "_noterminate" align="center" border="0"> in <img src="images07/lab_sols07_80.gif" width="43" height="18" alt="g(x); "_noterminate" align="center" border="0">, which is not allowed, as <img src="images07/lab_sols07_81.gif" width="43" height="18" alt="g(x); "_noterminate" align="center" border="0"> is supposed to be a rational function.</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font><font color="#000000" size="3" face="Times New Roman"><strong>(c) </strong></font><font color="#000000" size="3" face="Times New Roman">For essentially the same reason, there cannot be any terms like <img src="images07/lab_sols07_82.gif" width="92" height="21" alt="`*`(a, `*`(`^`(ln(`+`(x, u)), 2))); "_noterminate" align="center" border="0"> in the integral </font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">of a rational function, because <img src="images07/lab_sols07_83.gif" width="250" height="39" alt="diff(`*`(a, `*`(`^`(ln(`+`(x, u)), 2))), x) = `+`(`/`(`*`(2, `*`(a, `*`(ln(`+`(x, u))))), `*`(`+`(x, `-`(u))))); "_noterminate" align="center" border="0">, which is not allowed as</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">a term in a rational function.</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">_________________________________________________________________________________</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>Exercise 4</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">If <img src="images07/lab_sols07_84.gif" width="96" height="21" alt="`<`(`+`(`*`(`^`(b, 2)), `-`(`*`(4, `*`(c)))), 0); "_noterminate" align="center" border="0"> then the function <img src="images07/lab_sols07_85.gif" width="91" height="21" alt="`+`(`*`(b, `*`(x)), `*`(`^`(x, 2)), c); "_noterminate" align="center" border="0"> has no real roots, and the integral <img src="images07/lab_sols07_86.gif" width="126" height="42" alt="int(`/`(1, `*`(`+`(`*`(b, `*`(x)), `*`(`^`(x, 2)), c))), x); "_noterminate" align="center" border="0"> involves</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">the <img src="images07/lab_sols07_87.gif" width="69" height="18" alt="arctan(); "_noterminate" align="center" border="0"> function. &nbsp;&nbsp;Here is an example:</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>b := 2; c := 3; b^2-4*c;</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_88.gif" width="55" height="18" alt="Typesetting:-mprintslash([b := 2], [2])" align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_89.gif" width="53" height="18" alt="Typesetting:-mprintslash([c := 3], [3])" align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_90.gif" width="36" height="14" alt="-8" align="center" border="0"></td>
+<td width='5%' align='center'>(10)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>plot(x^2+b*x+c,x=-2..1,0..6);
+<br></td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images07/lab_sols07_91.gif" width="500" height="500" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>ratint(1/(x^2+b*x+c),x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_92.gif" width="209" height="65" alt="`+`(`*`(`/`(1, 2), `*`(`^`(2, `/`(1, 2)), `*`(arctan(`+`(`*`(`/`(1, 2), `*`(`^`(2, `/`(1, 2)), `*`(x))), `*`(`/`(1, 2), `*`(`^`(2, `/`(1, 2))))))))))" align="center" border="0"></td>
+<td width='5%' align='center'>(11)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">If <img src="images07/lab_sols07_93.gif" width="88" height="21" alt="`+`(`*`(`^`(b, 2)), `-`(`*`(4, `*`(c)))) = 0; "_noterminate" align="center" border="0"> then the function <img src="images07/lab_sols07_94.gif" width="91" height="21" alt="`+`(`*`(b, `*`(x)), `*`(`^`(x, 2)), c); "_noterminate" align="center" border="0"> has only one real root (where the graph </font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">touches the <img src="images07/lab_sols07_95.gif" width="20" height="18" alt="x; "_noterminate" align="center" border="0"> axis but does not cross it) and the integral involves neither <img src="images07/lab_sols07_96.gif" width="69" height="18" alt="arctan(); "_noterminate" align="center" border="0"> nor <img src="images07/lab_sols07_97.gif" width="43" height="18" alt="ln(); "_noterminate" align="center" border="0">; in fact, it just</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">has the form <img src="images07/lab_sols07_98.gif" width="74" height="39" alt="`+`(`-`(`/`(1, `*`(`+`(x, `-`(u)))))); "_noterminate" align="center" border="0">. &nbsp;Here is an example:</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>b := 4; c := 4; b^2-4*c;</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_99.gif" width="55" height="18" alt="Typesetting:-mprintslash([b := 4], [4])" align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_100.gif" width="53" height="18" alt="Typesetting:-mprintslash([c := 4], [4])" align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_101.gif" width="21" height="18" alt="0" align="center" border="0"></td>
+<td width='5%' align='center'>(12)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>plot(x^2+b*x+c,x=-4..1,0..6);
+<br></td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images07/lab_sols07_102.gif" width="500" height="500" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>ratint(1/(x^2+b*x+c),x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_103.gif" width="74" height="39" alt="`+`(`-`(`/`(1, `*`(`+`(x, 2)))))" align="center" border="0"></td>
+<td width='5%' align='center'>(13)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">If <img src="images07/lab_sols07_104.gif" width="96" height="21" alt="`<`(0, `+`(`*`(`^`(b, 2)), `-`(`*`(4, `*`(c))))); "_noterminate" align="center" border="0"> then the function <img src="images07/lab_sols07_105.gif" width="91" height="21" alt="`+`(`*`(b, `*`(x)), `*`(`^`(x, 2)), c); "_noterminate" align="center" border="0"> has two real roots, &nbsp;and the integral is a</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">sum of two terms involving <img src="images07/lab_sols07_106.gif" width="43" height="18" alt="ln(); "_noterminate" align="center" border="0">. &nbsp;Here is an example:</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>b := -5; c := 4; b^2-4*c;</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_107.gif" width="70" height="18" alt="Typesetting:-mprintslash([b := -5], [-5])" align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_108.gif" width="53" height="18" alt="Typesetting:-mprintslash([c := 4], [4])" align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_109.gif" width="21" height="18" alt="9" align="center" border="0"></td>
+<td width='5%' align='center'>(14)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>plot(x^2+b*x+c,x=-1..5);
+<br></td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images07/lab_sols07_110.gif" width="500" height="500" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>ratint(1/(x^2+b*x+c),x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_111.gif" width="211" height="39" alt="`+`(`-`(`*`(`/`(1, 3), `*`(ln(abs(`+`(x, `-`(1))))))), `*`(`/`(1, 3), `*`(ln(abs(`+`(x, `-`(4)))))))" align="center" border="0"></td>
+<td width='5%' align='center'>(15)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>unassign('b','c');</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">_________________________________________________________________________________</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>Exercise 5</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">Terms like <img src="images07/lab_sols07_112.gif" width="83" height="18" alt="ln(abs(`+`(x, `-`(u)))); "_noterminate" align="center" border="0"> in <img src="images07/lab_sols07_113.gif" width="68" height="31" alt="Int(g(x), x); "_noterminate" align="center" border="0"> are associated with places where <img src="images07/lab_sols07_114.gif" width="43" height="18" alt="g(x); "_noterminate" align="center" border="0"> blows up to infinity (which</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">are known as the </font><font color="#000000" size="3" face="Times New Roman"><em>poles </em></font><font color="#000000" size="3" face="Times New Roman">of <img src="images07/lab_sols07_115.gif" width="43" height="18" alt="g(x); "_noterminate" align="center" border="0">). &nbsp;More precisely, if there is a term <img src="images07/lab_sols07_116.gif" width="83" height="18" alt="ln(abs(`+`(x, `-`(u)))); "_noterminate" align="center" border="0"> in the integral, then</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"><img src="images07/lab_sols07_117.gif" width="43" height="18" alt="g(x); "_noterminate" align="center" border="0"> </font><font color="#000000" size="3" face="Times New Roman"><em>must </em></font><font color="#000000" size="3" face="Times New Roman">blow up at <img src="images07/lab_sols07_118.gif" width="43" height="18" alt="x = u; "_noterminate" align="center" border="0">. &nbsp;Conversely, if <img src="images07/lab_sols07_119.gif" width="43" height="18" alt="g(x); "_noterminate" align="center" border="0"> blows up at <img src="images07/lab_sols07_120.gif" width="43" height="18" alt="x = u; "_noterminate" align="center" border="0"> then there will </font><font color="#000000" size="3" face="Times New Roman"><em>usually</em></font><font color="#000000" size="3" face="Times New Roman"> be a term</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"><img src="images07/lab_sols07_121.gif" width="83" height="18" alt="ln(abs(`+`(x, `-`(u)))); "_noterminate" align="center" border="0"> in the integral, but not always; there may instead be terms of the form <img src="images07/lab_sols07_122.gif" width="78" height="21" alt="`^`(`+`(x, `-`(u)), `+`(`-`(n))); "_noterminate" align="center" border="0">. &nbsp;The</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">functions <img src="images07/lab_sols07_123.gif" width="48" height="22" alt="g[3](x); "_noterminate" align="center" border="0"> and <img src="images07/lab_sols07_124.gif" width="48" height="22" alt="g[7](x); "_noterminate" align="center" border="0"> are examples of this.</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"> &nbsp;</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">Here we consider <img src="images07/lab_sols07_125.gif" width="48" height="22" alt="g[2](x); "_noterminate" align="center" border="0">; there are poles at <img src="images07/lab_sols07_126.gif" width="58" height="18" alt="x = -1; "_noterminate" align="center" border="0"> and <img src="images07/lab_sols07_127.gif" width="43" height="18" alt="x = 1; "_noterminate" align="center" border="0">, and corresponding terms <img src="images07/lab_sols07_128.gif" width="83" height="18" alt="ln(abs(`+`(x, 1))); "_noterminate" align="center" border="0"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">and <img src="images07/lab_sols07_129.gif" width="83" height="18" alt="ln(abs(`+`(x, `-`(1)))); "_noterminate" align="center" border="0"> in the integral.</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>y := g[2](x); z := ratint(y,x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_130.gif" width="234" height="42" alt="Typesetting:-mprintslash([y := `+`(`/`(1, `*`(`+`(x, `-`(1)))), `/`(1, `*`(`+`(`*`(`^`(x, 2)), `-`(1)))), `/`(1, `*`(`+`(`*`(`^`(x, 3)), `-`(1)))))], [`+`(`/`(1, `*`(`+`(x, `-`(1)))), `/`(1, `*`(`+`(`..." align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_131.gif" width="606" height="65" alt="Typesetting:-mprintslash([z := `+`(`*`(`/`(11, 6), `*`(ln(abs(`+`(x, `-`(1)))))), `-`(`*`(`/`(1, 2), `*`(ln(abs(`+`(x, 1)))))), `-`(`*`(`/`(1, 6), `*`(ln(`+`(`*`(`^`(x, 2)), x, 1))))), `-`(`*`(`/`(1, ..." align="center" border="0"></td>
+<td width='5%' align='center'>(16)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>plot([y,z],x=-5..5,-10..10);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images07/lab_sols07_132.gif" width="500" height="500" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">Here we consider <img src="images07/lab_sols07_133.gif" width="48" height="22" alt="g[3](x); "_noterminate" align="center" border="0">. &nbsp;&nbsp;There are no <img src="images07/lab_sols07_134.gif" width="43" height="18" alt="ln(); "_noterminate" align="center" border="0"> terms in the integral, but nonetheless there are poles</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">at <img src="images07/lab_sols07_135.gif" width="43" height="18" alt="x = 1; "_noterminate" align="center" border="0">, <img src="images07/lab_sols07_136.gif" width="43" height="18" alt="x = 2; "_noterminate" align="center" border="0"> and <img src="images07/lab_sols07_137.gif" width="43" height="18" alt="x = 3; "_noterminate" align="center" border="0">.</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>y := g[3](x); z := ratint(y,x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_138.gif" width="286" height="42" alt="Typesetting:-mprintslash([y := `+`(`/`(1, `*`(`^`(`+`(x, `-`(1)), 2))), `/`(1, `*`(`^`(`+`(x, `-`(2)), 3))), `/`(1, `*`(`^`(`+`(x, `-`(3)), 4))))], [`+`(`/`(1, `*`(`^`(`+`(x, `-`(1)), 2))), `/`(1, `*`..." align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_139.gif" width="299" height="42" alt="Typesetting:-mprintslash([z := `+`(`-`(`/`(`*`(`/`(1, 3)), `*`(`^`(`+`(x, `-`(3)), 3)))), `-`(`/`(`*`(`/`(1, 2)), `*`(`^`(`+`(x, `-`(2)), 2)))), `-`(`/`(1, `*`(`+`(x, `-`(1))))))], [`+`(`-`(`/`(`*`(`/..." align="center" border="0"></td>
+<td width='5%' align='center'>(17)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>plot([y,z],x=0..5,-100..100,numpoints=400);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images07/lab_sols07_140.gif" width="500" height="500" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">Here we consider <img src="images07/lab_sols07_141.gif" width="48" height="22" alt="g[4](x); "_noterminate" align="center" border="0">. &nbsp;There is a pole at <img src="images07/lab_sols07_142.gif" width="58" height="18" alt="x = -1; "_noterminate" align="center" border="0">, and a corresponding term <img src="images07/lab_sols07_143.gif" width="83" height="18" alt="ln(abs(`+`(x, 1))); "_noterminate" align="center" border="0"> in the</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">integral.</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>y := g[4](x); z := ratint(y,x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_144.gif" width="234" height="42" alt="Typesetting:-mprintslash([y := `+`(`/`(1, `*`(`+`(x, 1))), `/`(1, `*`(`+`(`*`(`^`(x, 2)), 1))), `/`(1, `*`(`+`(`*`(`^`(x, 3)), 1))))], [`+`(`/`(1, `*`(`+`(x, 1))), `/`(1, `*`(`+`(`*`(`^`(x, 2)), 1))),..." align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_145.gif" width="577" height="65" alt="Typesetting:-mprintslash([z := `+`(`*`(`/`(4, 3), `*`(ln(abs(`+`(x, 1))))), arctan(x), `-`(`*`(`/`(1, 6), `*`(ln(`+`(`*`(`^`(x, 2)), `-`(x), 1))))), `*`(`/`(1, 3), `*`(`^`(3, `/`(1, 2)), `*`(arctan(`+..." align="center" border="0"></td>
+<td width='5%' align='center'>(18)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>plot([y,z],x=-5..5,-10..10);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images07/lab_sols07_146.gif" width="500" height="500" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">_________________________________________________________________________________</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Arial"><strong>Exercise 6</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">We only get terms like <img src="images07/lab_sols07_147.gif" width="58" height="39" alt="`/`(1, `*`(`+`(x, `-`(u)))); "_noterminate" align="center" border="0"> or <img src="images07/lab_sols07_148.gif" width="79" height="42" alt="`/`(1, `*`(`^`(`+`(x, `-`(u)), n))); "_noterminate" align="center" border="0"> in <img src="images07/lab_sols07_149.gif" width="68" height="31" alt="Int(g(x), x); "_noterminate" align="center" border="0"> if the denominator of <img src="images07/lab_sols07_150.gif" width="43" height="18" alt="g(x); "_noterminate" align="center" border="0"> has repeated roots.</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">A repeated root at <img src="images07/lab_sols07_151.gif" width="43" height="18" alt="x = u; "_noterminate" align="center" border="0"> gives a factor <img src="images07/lab_sols07_152.gif" width="69" height="21" alt="`^`(`+`(x, `-`(u)), n); "_noterminate" align="center" border="0"> in the denominator, with <img src="images07/lab_sols07_153.gif" width="52" height="18" alt="`<`(1, n); "_noterminate" align="center" border="0">. &nbsp;This gives a term <img src="images07/lab_sols07_154.gif" width="96" height="42" alt="`/`(1, `*`(`^`(`+`(x, `-`(u)), `+`(n, `-`(1))))); "_noterminate" align="center" border="0"> in the integral (and possibly also some terms like <img src="images07/lab_sols07_155.gif" width="78" height="42" alt="`/`(1, `*`(`^`(`+`(x, `-`(u)), k))); "_noterminate" align="center" border="0"> for smaller values of <img src="images07/lab_sols07_156.gif" width="20" height="18" alt="k; "_noterminate" align="center" border="0">).</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">Here we consider <img src="images07/lab_sols07_157.gif" width="48" height="22" alt="g[3](x); "_noterminate" align="center" border="0">:</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>y := g[3](x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_158.gif" width="286" height="42" alt="Typesetting:-mprintslash([y := `+`(`/`(1, `*`(`^`(`+`(x, `-`(1)), 2))), `/`(1, `*`(`^`(`+`(x, `-`(2)), 3))), `/`(1, `*`(`^`(`+`(x, `-`(3)), 4))))], [`+`(`/`(1, `*`(`^`(`+`(x, `-`(1)), 2))), `/`(1, `*`..." align="center" border="0"></td>
+<td width='5%' align='center'>(19)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">The denominator has repeated roots at <img src="images07/lab_sols07_159.gif" width="43" height="18" alt="x = 1; "_noterminate" align="center" border="0">, <img src="images07/lab_sols07_160.gif" width="43" height="18" alt="x = 2; "_noterminate" align="center" border="0"> and <img src="images07/lab_sols07_161.gif" width="43" height="18" alt="x = 3; "_noterminate" align="center" border="0">:</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>d := denom(factor(y));</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_162.gif" width="222" height="21" alt="Typesetting:-mprintslash([d := `*`(`^`(`+`(x, `-`(1)), 2), `*`(`^`(`+`(x, `-`(2)), 3), `*`(`^`(`+`(x, `-`(3)), 4))))], [`*`(`^`(`+`(x, `-`(1)), 2), `*`(`^`(`+`(x, `-`(2)), 3), `*`(`^`(`+`(x, `-`(3)), ..." align="center" border="0"></td>
+<td width='5%' align='center'>(20)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">These show up in the graph of <img src="images07/lab_sols07_163.gif" width="21" height="18" alt="d; "_noterminate" align="center" border="0"> as points where the graph touches the <img src="images07/lab_sols07_164.gif" width="20" height="18" alt="x; "_noterminate" align="center" border="0"> axis without crossing it,
+<br>or where it crosses but the tangent line at the crossing point is horizontal: </font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>plot(d,x=0..4,-0.3...0.3);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images07/lab_sols07_165.gif" width="500" height="500" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">The integral has terms of the form <img src="images07/lab_sols07_166.gif" width="79" height="42" alt="`/`(1, `*`(`^`(`+`(x, `-`(u)), n))); "_noterminate" align="center" border="0"> for <img src="images07/lab_sols07_167.gif" width="60" height="18" alt="u = 1, 2; "_noterminate" align="center" border="0"> and <img src="images07/lab_sols07_168.gif" width="21" height="18" alt="3; "_noterminate" align="center" border="0">.</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>ratint(y,x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_169.gif" width="272" height="42" alt="`+`(`-`(`/`(`*`(`/`(1, 3)), `*`(`^`(`+`(x, `-`(3)), 3)))), `-`(`/`(`*`(`/`(1, 2)), `*`(`^`(`+`(x, `-`(2)), 2)))), `-`(`/`(1, `*`(`+`(x, `-`(1))))))" align="center" border="0"></td>
+<td width='5%' align='center'>(21)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">Here we consider <img src="images07/lab_sols07_170.gif" width="48" height="22" alt="g[4](x); "_noterminate" align="center" border="0">:</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>y := g[4](x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_171.gif" width="234" height="42" alt="Typesetting:-mprintslash([y := `+`(`/`(1, `*`(`+`(x, 1))), `/`(1, `*`(`+`(`*`(`^`(x, 2)), 1))), `/`(1, `*`(`+`(`*`(`^`(x, 3)), 1))))], [`+`(`/`(1, `*`(`+`(x, 1))), `/`(1, `*`(`+`(`*`(`^`(x, 2)), 1))),..." align="center" border="0"></td>
+<td width='5%' align='center'>(22)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">The denominator has a root at <img src="images07/lab_sols07_172.gif" width="58" height="18" alt="x = -1; "_noterminate" align="center" border="0">, which is not repeated:</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>d := denom(factor(y));</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_173.gif" width="250" height="21" alt="Typesetting:-mprintslash([d := `*`(`+`(`*`(`^`(x, 2)), 1), `*`(`+`(x, 1), `*`(`+`(`*`(`^`(x, 2)), `-`(x), 1))))], [`*`(`+`(`*`(`^`(x, 2)), 1), `*`(`+`(x, 1), `*`(`+`(`*`(`^`(x, 2)), `-`(x), 1))))])" align="center" border="0"></td>
+<td width='5%' align='center'>(23)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">This is visible in the graph of <img src="images07/lab_sols07_174.gif" width="21" height="18" alt="d; "_noterminate" align="center" border="0">. &nbsp;Note that where the graph meets the <img src="images07/lab_sols07_175.gif" width="20" height="18" alt="x; "_noterminate" align="center" border="0"> axis, the tangent line is not</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">horizontal, corresponding to the fact that the root is not repeated.</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>plot(d,x=-2..2,-10..10);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images07/lab_sols07_176.gif" width="500" height="500" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">The integral has no terms of the form <img src="images07/lab_sols07_177.gif" width="79" height="42" alt="`/`(1, `*`(`^`(`+`(x, `-`(u)), n))); "_noterminate" align="center" border="0">.</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>ratint(y,x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_178.gif" width="546" height="65" alt="`+`(`*`(`/`(4, 3), `*`(ln(abs(`+`(x, 1))))), arctan(x), `-`(`*`(`/`(1, 6), `*`(ln(`+`(`*`(`^`(x, 2)), `-`(x), 1))))), `*`(`/`(1, 3), `*`(`^`(3, `/`(1, 2)), `*`(arctan(`+`(`*`(`/`(2, 3), `*`(`^`(3, `/`..." align="center" border="0"></td>
+<td width='5%' align='center'>(24)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">Here we consider <img src="images07/lab_sols07_179.gif" width="48" height="22" alt="g[6](x); "_noterminate" align="center" border="0">:</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>y := g[6](x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_180.gif" width="172" height="42" alt="Typesetting:-mprintslash([y := `/`(`*`(x, `*`(`+`(x, 2), `*`(`+`(x, 4)))), `*`(`^`(`+`(x, 1), 2), `*`(`^`(`+`(x, 3), 2))))], [`/`(`*`(x, `*`(`+`(x, 2), `*`(`+`(x, 4)))), `*`(`^`(`+`(x, 1), 2), `*`(`^`..." align="center" border="0"></td>
+<td width='5%' align='center'>(25)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">The denominator has repeated roots at <img src="images07/lab_sols07_181.gif" width="58" height="18" alt="x = -3; "_noterminate" align="center" border="0"> and <img src="images07/lab_sols07_182.gif" width="58" height="18" alt="x = -1; "_noterminate" align="center" border="0">:</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>d := denom(factor(y));</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_183.gif" width="162" height="21" alt="Typesetting:-mprintslash([d := `*`(`^`(`+`(x, 1), 2), `*`(`^`(`+`(x, 3), 2)))], [`*`(`^`(`+`(x, 1), 2), `*`(`^`(`+`(x, 3), 2)))])" align="center" border="0"></td>
+<td width='5%' align='center'>(26)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">These visible in the graph of <img src="images07/lab_sols07_184.gif" width="21" height="18" alt="d; "_noterminate" align="center" border="0">, as points where the curve meets the <img src="images07/lab_sols07_185.gif" width="20" height="18" alt="x; "_noterminate" align="center" border="0"> axis without crossing it.</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">Note that the tangent line is horizontal at these points.</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>plot(d,x=-4..2,-10..10);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images07/lab_sols07_186.gif" width="500" height="500" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">The integral has terms of the form <img src="images07/lab_sols07_187.gif" width="58" height="39" alt="`/`(1, `*`(`+`(x, `-`(u)))); "_noterminate" align="center" border="0"> for <img src="images07/lab_sols07_188.gif" width="58" height="18" alt="x = -3; "_noterminate" align="center" border="0"> and <img src="images07/lab_sols07_189.gif" width="58" height="18" alt="x = -1; "_noterminate" align="center" border="0">.</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>ratint(y,x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_190.gif" width="398" height="39" alt="`+`(`-`(`/`(`*`(`/`(3, 4)), `*`(`+`(x, 3)))), `*`(`/`(1, 2), `*`(ln(abs(`+`(x, 3))))), `/`(`*`(`/`(3, 4)), `*`(`+`(x, 1))), `*`(`/`(1, 2), `*`(ln(abs(`+`(x, 1))))))" align="center" border="0"></td>
+<td width='5%' align='center'>(27)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">We now integrate some random rational functions, and observe that we do not get any terms like</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"><img src="images07/lab_sols07_191.gif" width="79" height="42" alt="`/`(1, `*`(`^`(`+`(x, `-`(u)), n))); "_noterminate" align="center" border="0">. &nbsp;The reason is simply that the denominator is a random polynomial, which will almost</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">never have repeated roots. &nbsp;The roots of a random polynomial are randomly distributed, so it </font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">would be a big coincidence for two roots to be in the same place, and this does not often happen.</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>r := randpoly(x)/randpoly(x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_192.gif" width="333" height="44" alt="Typesetting:-mprintslash([r := `/`(`*`(`+`(`-`(`*`(7, `*`(`^`(x, 5)))), `*`(22, `*`(`^`(x, 4))), `-`(`*`(55, `*`(`^`(x, 3)))), `-`(`*`(94, `*`(`^`(x, 2)))), `*`(87, `*`(x)), `-`(56))), `*`(`+`(`-`(`*`..." align="center" border="0"></td>
+<td width='5%' align='center'>(28)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>ratint(r,x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_193.gif" width="768" height="16" alt="`+`(`-`(`*`(.1781997919, `*`(x))), `-`(`*`(.1572050640, `*`(ln(`+`(`*`(`^`(x, 2)), .6287014875, `*`(.6984629175, `*`(x))))))), `*`(.9550059466, `*`(arctan(`+`(`*`(1.404778618, `*`(x)), .4905928858))))..." align="center" border="0"><br><img src="images07/lab_sols07_194.gif" width="768" height="16" alt="`+`(`-`(`*`(.1781997919, `*`(x))), `-`(`*`(.1572050640, `*`(ln(`+`(`*`(`^`(x, 2)), .6287014875, `*`(.6984629175, `*`(x))))))), `*`(.9550059466, `*`(arctan(`+`(`*`(1.404778618, `*`(x)), .4905928858))))..." align="center" border="0"></td>
+<td width='5%' align='center'>(29)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>r := randpoly(x)/randpoly(x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_195.gif" width="341" height="44" alt="Typesetting:-mprintslash([r := `/`(`*`(`+`(`-`(`*`(10, `*`(`^`(x, 5)))), `*`(62, `*`(`^`(x, 4))), `-`(`*`(82, `*`(`^`(x, 3)))), `*`(80, `*`(`^`(x, 2))), `-`(`*`(44, `*`(x))), 71)), `*`(`+`(`-`(`*`(17,..." align="center" border="0"></td>
+<td width='5%' align='center'>(30)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>ratint(r,x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_196.gif" width="768" height="16" alt="`+`(`*`(.5882352941, `*`(x)), `*`(.1061874592, `*`(ln(`+`(`*`(`^`(x, 2)), .8275212923, `-`(`*`(.3675458439, `*`(x))))))), `*`(.5261842533, `*`(arctan(`+`(`*`(1.122427911, `*`(x)), `-`(.2062718568)))))..." align="center" border="0"><br><img src="images07/lab_sols07_197.gif" width="768" height="14" alt="`+`(`*`(.5882352941, `*`(x)), `*`(.1061874592, `*`(ln(`+`(`*`(`^`(x, 2)), .8275212923, `-`(`*`(.3675458439, `*`(x))))))), `*`(.5261842533, `*`(arctan(`+`(`*`(1.122427911, `*`(x)), `-`(.2062718568)))))..." align="center" border="0"></td>
+<td width='5%' align='center'>(31)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>r := randpoly(x)/randpoly(x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_198.gif" width="333" height="44" alt="Typesetting:-mprintslash([r := `/`(`*`(`+`(`-`(`*`(50, `*`(`^`(x, 5)))), `*`(23, `*`(`^`(x, 4))), `*`(75, `*`(`^`(x, 3))), `-`(`*`(92, `*`(`^`(x, 2)))), `*`(6, `*`(x)), 74)), `*`(`+`(`*`(72, `*`(`^`(x..." align="center" border="0"></td>
+<td width='5%' align='center'>(32)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="monospace"><strong>ratint(r,x);</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images07/lab_sols07_199.gif" width="768" height="16" alt="`+`(`-`(`*`(.6944444444, `*`(x))), `-`(`*`(0.9138551763e-2, `*`(ln(`+`(`*`(`^`(x, 2)), 1.143500883, `-`(`*`(1.314095787, `*`(x)))))))), `-`(`*`(0.3032363307e-1, `*`(arctan(`+`(`*`(1.185289343, `*`(x))..." align="center" border="0"><br><img src="images07/lab_sols07_200.gif" width="768" height="16" alt="`+`(`-`(`*`(.6944444444, `*`(x))), `-`(`*`(0.9138551763e-2, `*`(ln(`+`(`*`(`^`(x, 2)), 1.143500883, `-`(`*`(1.314095787, `*`(x)))))))), `-`(`*`(0.3032363307e-1, `*`(arctan(`+`(`*`(1.185289343, `*`(x))..." align="center" border="0"><br><img src="images07/lab_sols07_201.gif" width="768" height="14" alt="`+`(`-`(`*`(.6944444444, `*`(x))), `-`(`*`(0.9138551763e-2, `*`(ln(`+`(`*`(`^`(x, 2)), 1.143500883, `-`(`*`(1.314095787, `*`(x)))))))), `-`(`*`(0.3032363307e-1, `*`(arctan(`+`(`*`(1.185289343, `*`(x))..." align="center" border="0"></td>
+<td width='5%' align='center'>(33)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="monospace"><strong>&gt; </strong></font></td>
+<td valign="top"></td>
+</tr>
+</table>&nbsp;</p>
+</body>
+</html>
