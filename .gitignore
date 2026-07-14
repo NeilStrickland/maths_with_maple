@@ -6,8 +6,10 @@
 *.out
 *.snm
 *.toc
+.doit.db
 old
 labs_maple/sols_html/
 labs_maple/sols_pdf/
 labs_maxima/sols_html/
 labs_python/sols_html/
+__pycache__/
