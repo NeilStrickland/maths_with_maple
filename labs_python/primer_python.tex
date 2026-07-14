@@ -63,35 +63,31 @@ as the top line of each of your notebooks.
   $m_2$, for example.
 %
  \item\label{variables} Most variables will have single-letter
-  names, such as $x$ or $A$. 
-%
-  \item\label{case} Note that case is significant: Python regards
-  $A$ as different from $a$, and $x$ as different from $X$. 
-%
-  \item\label{longvars} It is perfectly permissible to use long
+  names, such as $x$ or $A$.   Note that case is significant:
+  Python regards $A$ as different from $a$, and $x$ as different
+  from $X$.  It is perfectly permissible to use long
   names for variables, such as \pcode~eqns~ or \pcode~sols~ or
-  \pcode~SpeedOfLight~. 
-%
-  \item\label{reserved} However, you may not use words that
+  \pcode~SpeedOfLight~.  However, you may not use words that
   already have a special meaning in Python.  In particular,
   you cannot call a variable \pcode~lambda~. 
 %
   \item\label{greek} If you enter \pcode+mu = sp.symbols('mu')+ then in some
   (but not all) contexts, \pcode+mu+ will be displayed as $\mu$.
-%  Alternatively, there are various ways to set things up so that you
-%  can just type the symbol \pcode+μ+ (or cut and paste it from
-%  somewhere).  Then you can enter \pcode+μ = sp.symbols('μ')+ and 
-%  \pcode+μ+ will always be displayed as $\mu$.
+   Alternatively, there are various ways to set things up so that you
+   can enter Greek letters directly (one option is 
+   \href{Wincompose}{https://wincompose.info/}).  Then you can just 
+   use Greek letters like normal English letters.
 \end{secenum}
 
 \section{Generalities}
 
 \begin{secenum}
- \item\label{help} If you know the name of a function that you want
- to use (for example, \pcode+sp.solve+) you can enter
- \pcode+help(sp.solve)+ to get some documentation.  You can also get
- a shorter version of that documentation by just typing
- \pcode+sp.solve+ in a code cell and hovering over it with your mouse.
+\item\label{help} The \pcode+help()+ command will give you details about any
+ Python or SymPy object that you are interested in.  Alternatively, in
+ VS Code you can just enter a name and hover over it with your mouse
+ and some information will appear.  However, the output from \pcode+help()+
+ is sometimes very long and overwhelming.  It may be better to ask an
+ AI a more specific question about what you are hoping to do.
 %
  \item\label{problems} See Section~\ref{sec-problems}
  for advice on some common problems. 
@@ -112,8 +108,6 @@ as the top line of each of your notebooks.
  and \pcode~__~ to refer to the one before that, and so on. 
  However, this mechanism cannot be used to refer to things that were
  calculated but not displayed.
-%
- \item\label{lasteval}
  If you move around a worksheet inserting things in
  different places, you should remember that \pcode~_~ refers
  to the \textbf{most recent} result, which may not be the
@@ -124,17 +118,30 @@ as the top line of each of your notebooks.
  It is important to understand the difference between
  \pcode~=~ and \pcode~==~ and \pcode+sp.Eq()+.  
  \begin{itemize}
-  \item If we enter $x=3$, this defines $x$ to be equal to $3$, so
+  \item If we enter \pcode~x=3~, this defines $x$ to be equal to $3$, so
    Python will replace $x$ by $3$ whenever it sees an $x$.
-  \item If we instead enter $x==3$, we are checking whether $x$ is
+  \item If we instead enter \pcode~x==3~, we are checking whether $x$ is
    currently straightforwardly equal to $3$.  If $x$ is an abstract
-   symbol which has not been assigned a numerical value then $x==3$
-   will just be false, even if $x$ could be equal to $3$ in some
+   symbol which has not been assigned a numerical value then \pcode~x==3~
+   will just be \pcode~False~, even if $x$ could be equal to $3$ in some
    contexts.  
-  \item We can instead enter \pcode+sp.Eq(x=3)+ to represent $x=3$
-   as an abstract equation which might be true or false in different
-   circumstances.  This is the right thing to do if we are setting up
-   some equations that we later want to solve.
+  \item Assuming that \pcode~a~ and \pcode~b~ have been declared to be
+   abstract symbols, the expression\\ \pcode~sp.Eq(2 * a, b + 1)~
+   represents the hypothetical question ``Is $2 a$ equal to $b + 1$?'',
+   which might be true or false depending on the values of $a$ and
+   $b$.  Entering this question does not assign any values to
+   \pcode~a~ or \pcode~b~, and does not return a \pcode~True~ or
+   \pcode~False~ answer.  It simply represents the question in a
+   symbolic form.  By contrast, the expression \pcode~2 * a == b + 1~
+   gives \pcode~False~, because the expression \pcode~2 * a~ is not
+   visibly the same as \pcode~b + 1~.  In fact, even
+   \pcode~(a + 1) * (a - 1) == a ** 2 - 1~ will return \pcode~False~,
+   because the two sides of the equation are not visibly the same,
+   even though they become the same after expanding out the left hand
+   side.  (The right way to test whether $A$ and $B$ are
+   mathematically equivalent is to enter \pcode~sp.simplify(A-B)~ and
+   see whether you get zero.)  The main use for \pcode~sp.Eq()~ is to
+   introduce equations which you later intend to solve.
  \end{itemize}
 %
  \item\label{funcdef}
@@ -179,6 +186,13 @@ as the top line of each of your notebooks.
  accuracy that can no longer be achieved.  One way to fix this is to
  enter \pcode+sp.N(1,100)/7+, which requests high accuracy before
  attempting to divide by $7$.
+\item\label{exactrational} In some contexts, SymPy will convert
+ fractions to approximate decimals without being asked, which is not
+ what we want when doing symbolic mathematics.  To prevent $2/3$ from
+ being converted to $0.66666666667$, we need to enter it as
+ \pcode~sp.Rational(2, 3)~ instead of \pcode~2/3~.  Sometimes this is not
+ necessary, but the rules for whether it is necessary are complicated,
+ so it is best to err on the safe side.
 \end{secenum}
 
 
@@ -194,10 +208,11 @@ as the top line of each of your notebooks.
  name for a single variable; if you want $x$ times $y$, you
  must enter \pcode~x*y~. 
 %
- \item\label{timesbrackets}
- Just as in standard mathematical notation, bracketing is
- important.  To multiply $x+2$ by $x-2$, you must enter
- \pcode~(x+2)*(x-2)~, not \pcode~x+2*x-2~.  
+\item\label{timesbrackets} Brackets need to be used for algebraic
+ grouping, just as in ordinary mathematical writing.  For the product
+ of $x + 2$ and $x - 2$ we need to enter \pcode~(x + 2) * (x - 3)~,
+ not \pcode~x + 2 * x - 2~.  Brackets used for algebraic grouping
+ should always be round brackets, not square or curly ones.
 %
  \item\label{powers} Enter powers using \pcode~**~,
  for example \pcode~x ** 6~ for $x^6$.  The notation \pcode+x^6+ does
@@ -205,21 +220,16 @@ as the top line of each of your notebooks.
  it is almost never what you want; this can unfortunately lead to some
  confusing error messages.
 %
- \item\label{powerbrackets}
- Just as in standard mathematical notation, bracketing is
- important.  To raise $x+2$ to the power $n+5$, you must
- enter \pcode~(x+2)**(n+5)~, not \pcode~x+2**n+5~.  To get the
- cube root of $x$, enter \pcode~x**(1/3)~, not
- \pcode~x**1/3~.  
+\item\label{powerbrackets} Bracketing is also important when raising
+ things to powers.  To raise $x + 2$ to the power $n+5$, we need to
+ enter \pcode~(x + 2) ** (n + 5)~, not \pcode~x + 2 ** n + 5~.  The
+ cube root of $x$ is $x^{1/3}$.  For this to work properly in SymPy,
+ it is important to enter $1/3$ as \pcode~sp.Rational(1,3)~ (which
+ gives $1/3$ exactly) and not $1/3$ (which gives 0.33333).
 %
- \item\label{sqrt} The square root of $x$ can be entered as
- \pcode~sp.sqrt(x)~.  Similarly, $\sqrt{b^2-4ac}$ is
- \pcode~sp.sqrt(b**2-4*a*c)~.  For more general roots you might be
- tempted to enter something like \pcode~(x+y)**(1/3)~ for the cube
- root of $x+y$.  However, it is actually necessary to enter 
- \pcode~(x+y)**sp.Rational(1,3)~ instead, to ensure that we use the
- exact fraction $1/3$ instead of converting it to an approximate
- decimal, which is what Python would do by default.
+\item\label{sqrt} The (nonnegative) square root of $x$ can be entered
+ as \pcode~sp.sqrt(x)~ or \pcode~x ** sp.Rational(1,2)~.  If you enter
+ \pcode~x ** (1/2)~ you will only get an approximate answer.
 \end{secenum}
 
 \section{Algebraic manipulation}
@@ -252,19 +262,16 @@ simplify or otherwise manipulate.
   \pcode~sp.trigsimp(A)~ or \pcode~sp.expand_trig(A)~. 
 %
  \item\label{symbolic} Note that rules like $(a^4)^{1/4}=a$ are
-  \textbf{not valid} when $a$ is negative.  The function
+  \emph{not valid} when $a$ is negative.  The function
   \pcode~sp.simplify()~ will not simplify expressions like this by
-  default.  However, if you declare $x$ to be positive using
-  \pcode~x = sp.symbols('x', positive=True)~ (instead of just 
-  \pcode~x = sp.symbols('x')~) then sympy will apply rules that are
-  only valid for positive $x$.  For example,
-  \pcode+(x ** 4) ** sp.Rational(1,4)+ will simplify to $x$.  (However, 
-  \pcode+(x ** 4) ** (1/4)+ will only simplify to $x^{1.0}$, which will 
-  not simplify to $x$, because the exponent is only approximately equal 
-  to one and not exactly equal.)  There are also more complex ways to
-  specify that $x$ is an integer or lies in a certain range or has
-  other useful properties that could be used when simplifying; see the
-  sympy documentation about assumptions.
+  default.  However, if you declare $a$ to be positive using
+  \pcode~a = sp.symbols('a', positive=True)~ (instead of just
+  \pcode~a = sp.symbols('a')~) then SymPy will apply rules that are
+  only valid for positive $a$.  For example,
+  \pcode~(a ** 4) ** sp.Rational(1,4)~ will simplify to $a$.  There
+  are also more complex ways to specify that $a$ is an integer or lies
+  in a certain range or has other useful properties that could be used
+  when simplifying; see the SymPy documentation about assumptions.
 %
  \item\label{testequal} If you suspect that $A$ is equal to some other expression (say
   $B$) and want to check this, the best way is to enter
@@ -293,7 +300,8 @@ simplify or otherwise manipulate.
  \item\label{pi} The constant $\pi\simeq 3.1415926536$ should be entered as
   \pcode~sp.pi~.  If you just enter \pcode~pi~ then that will just 
   be treated as the name of a variable with no special value or
-  properties. 
+  properties.  Thus, if you have not introduced \pcode~pi~ in any way
+  then you will get an error. 
 %
  \item\label{exp} The constant $e\simeq 2.718281828$ must be entered as 
   \pcode~sp.E~ (with a capital E) or \pcode~sp.exp(1)~.  
@@ -302,7 +310,9 @@ simplify or otherwise manipulate.
   entered as \pcode~sp.I~.
 %
  \item\label{infinity} In many contexts $\infty$ can be entered as
- \pcode~sp.oo~. 
+ \pcode~sp.oo~.  For example, we can enter \\
+ \pcode~sp.limit((1 + 2*x)/(3 + 4*x), x, sp.oo)~ to find the 
+ limit of $(1+2x)/(3+4x)$ as $x\to\infty$.
 \end{secenum}
 
 \section{Solving}
@@ -310,7 +320,9 @@ simplify or otherwise manipulate.
 \begin{secenum}
 %
  \item\label{solve} To solve the equation $x^2+6=5x$ (for example), enter
-  \pcode~sp.solve(sp.Eq(x**2+6,5*x))~.  If you want to solve for an
+  \pcode~sp.solve(sp.Eq(x**2+6,5*x))~.  The answer is $[2,3]$,
+  indicating that the solutions are $x=2$ and $x=3$.   
+  If you want to solve for an
   expression being equal to zero then you do not need \pcode~sp.Eq()~,
   you can just enter \pcode~sp.solve(x**2+6-5*x)~ for example.  
   Similarly, if you have already defined a function $g$, you can enter
@@ -319,30 +331,31 @@ simplify or otherwise manipulate.
   \pcode~sp.Eq(a, b)~.  
 %
   \item\label{roots}
-   The above syntax gives the answer in the form
+   The syntax discussed above gives the solution to $x^2+6-5x=0$ in the form
    \pcode+[2,3]+.  If you prefer to have the answer in
    the form \pcode+[{x:2},{x:3}]+ (which can be more convenient if you
    want to substitute the result into some other expression), you
    should instead enter \pcode~sp.solve({x**2-5*x+6},dict=True)~.
 %
   \item\label{realroots}
-   The above syntax will give usually complex roots as well as real roots.  
+   The approach discussed above will give complex roots as well as real roots.  
    For example, if we declare \pcode+x = sp.symbols('x')+ and then enter 
    \pcode~sp.solve(x**3+x,x)~ we get $[0,-i,i]$.  If we only want real 
-   roots we can either use \pcode~sp.realroots(x**3+x,x)~ or we can
+   roots we can either use \pcode~sp.real_roots(x**3+x,x)~ or we can
    declare $x$ using \pcode+x = sp.symbols('x',real=True)+ and then
-   just use \pcode+sp.solve()+.
+   just use \pcode+sp.solve()+; this will give $x=0$ as the only real root.
 %
  \item\label{multisolve} To solve several equations in several variables, put the
   equations in one set of square brackets, and the variables in another
   set.  For example, to solve $2x+3y=5$ and $3x+4y=7$ for $x$ and $y$,
   enter 
 \begin{pcodeblock}
- sp.solve([2*x+3*y-5,3*x+4*y-7],[x,y],dict=True)
+ sp.solve([2*x+3*y-5,3*x+4*y-7],[x,y])
 \end{pcodeblock}
 %
  \item\label{nosols} If there are no solutions, \pcode~sp.solve()~ will
- return the empty list \pcode~[]~. 
+ return the empty list \pcode~[]~.    For example, this happens if we
+ try to solve the simultaneous equations $x+y=1$ and $2x+2y=10$. 
 %
  \item\label{allsolutions} If the problem involves trigonometric
   functions, then there will typically be infinitely many
@@ -405,7 +418,8 @@ simplify or otherwise manipulate.
   instead of \pcode~sin 2x~. 
 %
  \item\label{abs} The absolute value of $x$, traditionally written as
-  $|x|$, must be entered as \pcode~sp.abs(x)~. 
+  $|x|$, must be entered as \pcode~abs(x)~.  (This is an exception to
+  the usual pattern: \pcode+sp.abs(x)+ will not work.)
 %
  \item\label{log} Both \pcode~sp.ln(x)~ and \pcode~sp.log(x)~ refer to the natural
   logarithm (to base $e$) of $x$. 
@@ -420,6 +434,9 @@ simplify or otherwise manipulate.
  \item\label{hyp} The hyperbolic function $\sinh(x)=(e^x-e^{-x})/2$ can be
   entered as \pcode~sp.sinh(x)~, and similarly for the functions
   $\cosh(x)=(e^x+e^{-x})/2$ and $\tanh(x)=\sinh(x)/\cosh(x)$.
+  If we have an expression $A$ which involves hyperbolic functions, we
+  can rewrite it in terms of exponentials using
+  \pcode~A.rewrite(sp.exp)~. 
 %
  \item\label{sinsquared} The traditional notation $\sin^2(x)$
   refers to the square of $\sin(x)$, which could also be
@@ -432,7 +449,7 @@ simplify or otherwise manipulate.
  \item\label{cosec} In traditional notation $1/\sin(x)$ is sometimes written as
   $\text{csc}(x)$ or $\text{cosec}(x)$.  In Python \pcode~sp.csc(x)~ will
   work, but \pcode~sp.cosec(x)~ will not.  Of course, you can also just
-  enter \pcode~1/sp.sin(x)~. 
+  enter \pcode~1/sp.sin(x)~.  Similarly $1/\cos(x)$ is \pcode~sp.sec(x)~.
 %
  \item\label{arctan} In traditional notation $\tan^{-1}(x)$ or $\arctan(x)$
   or $\text{atan}(x)$ refers to the angle $\theta$ such that
@@ -457,9 +474,9 @@ simplify or otherwise manipulate.
   \textbf{does not} work to enter \pcode~f(x)=x^2;~ instead.
 %
  \item\label{seriesdef}
-  Similarly, to define the sequence $a(n)=(-1)^n/n$, enter
-  \pcode~a = lambda n: (-1)**n/n~, not \\
-  \pcode~a(n)=(-1)**n/n~. 
+  Similarly, to define the sequence $a(n)=(-1)^n/(x+n)$, enter
+  \pcode~a = lambda n: (-1)**n/(x+n)~, not \\
+  \pcode~a(n)=(-1)**n/(x+n)~. 
 %
  \item\label{badderiv} It \textbf{does not} work to use notation like
    \pcode~f'(x)~ for the derivative of $f(x)$; see
@@ -504,59 +521,74 @@ at \url{https://plotly.com/python/}.
   $[x_0,x_1,x_2,\dotsc,x_{200}]=[-2,-1.98,-1.96,\dotsc,2]$ consisting
   of $201$ equally spaced points between $-2$ and $2$ (inclusive).
   The second line sets $y$ to be the array
-  $[y_0,\dotsc,y_{200}]=[x_0^3-x_0,\dotsc,x_{200}^3-x_{200}]$.  The
-  third line creates an object called \pcode+fig+ representing a blank
-  picture, to which we can add curves, shapes text and so on.  In this
+  $[y_0,\dotsc,y_{200}]=[x_0^3-x_0,\dotsc,x_{200}^3-x_{200}]$ of
+  corresponding $y$ values.  The
+  third line \pcode~fig = go.Figure()~ creates an object called
+  \pcode+fig+ representing a blank 
+  picture, to which we can add curves, shapes, text and so on.  In this
   case we just add a single curve passing through the points with
   coordinates $(x_i,y_i)$; this is done by the line
   \pcode+fig.add_trace(go.Scatter(x=x, y=y))+.  Finally, the line
-  \pcode+fig.show()+ to show the picture that we have constructed.
+  \pcode+fig.show()+ shows the picture that we have constructed.
   This is not always necessary, if the last line in a cell is related
   to plotting then Python will often decide for itself that the
   resulting plot should be shown, but it does not hurt to make it
-  explicit.
+  explicit.  The graph has various interactive features which you can
+  discover by hovering and clicking with your mouse. 
 % 
- \item\label{legend} To label the curve in the above example, we could
-  change the relevant line to 
-  \begin{pcodeblock}
-   fig.add_trace(go.Scatter(x=x, y=y, name='y=x^3-x', showlegend=True))
-  \end{pcodeblock}
-  This will display the label as \pcode+y=x^3-x+.  If we prefer to have 
-  nicely formatted mathematics like $y=x^3-x$ then we can change the
-  above to say \pcode+name=r'$y=x^3-x$'+.  However, this will only work
-  correctly if we have done \pcode+from header import *+ as explained
-  in Section~\ref{sec-start}.
-% 
- \item\label{linestyle} Various features of the plotted curve can be changed
-  by adding extra arguments inside \pcode+go.Scatter()+.  For example, 
-  if we enter
-  \begin{pcodeblock}
-   fig.add_trace(go.Scatter(x=x, y=y, line_color='red', line_dash='dot', line_width=5))
-  \end{pcodeblock}
-  then the curve will be shown as a thick red dotted line.  Colours
-  can be entered as names like \pcode~orange~
- or as hex codes (like
-  \pcode+#40e0d0+ for turquoise; an internet search will find other
-  examples).  Note that American spelling (color not colour) is
-  required. 
+ \item\label{legend}
+Here is a version with some additional features.  We have added
+options to make the curve into a thick orange dotted line.  The option
+\pcode~name=r'$y = x^3-x$'~ specifies the name of the curve, but this is not
+displayed by default.  The option \pcode~showlegend=True~ specifies that
+there should be a box showing the names of all named elements in the
+plot.  In this case we have a single named curve, and the legend is
+shown at the top right. 
+
+Note that the name is written in LaTeX, and we have written
+\pcode~name=r'...'~ instead of just \pcode~name='...'~.  The \pcode~r~
+prefix prevents special treatment of the backslash character, and is
+generally needed when entering strings containing LaTeX.  In this case
+we have no backslashes so the \pcode~r~ is not required, but it is safest to
+use it consistently. 
+
+Note also that the colour must be referred to using the US spelling
+(\pcode~line_color~ rather than \pcode~line_colour~).  We have specified the
+colour as \pcode~orange~, and many other normal colour names will also work.
+However, for more precise control one can use hex codes, such as
+\pcode~#40e0d0~ for a certain shade of turquoise.  Sites such as
+\href{htmlcolorcodes.com}{https://htmlcolorcodes.com} will help you to find
+appropriate hex codes. 
+\begin{pcodeblock}
+    x = np.linspace(-2, 2, 201)
+    y = x**3 - x
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=x, y=y, name=r'$y = x^3-x$',
+                  showlegend=True, line_color='orange',
+                  line_dash='dot', line_width=5))
+    fig.show()
+\end{pcodeblock}
 %
  \item\label{layout} Various features of the overall picture can be changed 
-  using \pcode+fig.update_layout()+ (before \pcode+fig.show()+).  For
-  example, we can insert
+  using \pcode+fig.update_layout()+ (before \pcode+fig.show()+).  
+  For example, the code below specifies that the plot should be
+  $800\times 400$ pixels, with the $x$ axis running from $x=-3$ to
+  $x=3$ and the $y$-axis from $y=0$ to $y=10$. 
   \begin{pcodeblock}
-   fig.update_layout(height=400, width=800, xaxis_range=[-3,3], yaxis_range=[0,10])
+    x = np.linspace(-2, 2, 201)
+    y = x**3 - x
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=x, y=y, mode='lines', name=r'$y = x^3-x$', showlegend=True))
+    fig.update_layout(height=400, width=800, xaxis_range=[-3,3], yaxis_range=[0,10])
+    fig.show()
   \end{pcodeblock}
-  to ensure that the plot is $800\times 400$ pixels and shows $x$
-  values from $-3$ to $3$ and $y$ values from $0$ to $10$.
 %
  \item\label{scaling} To make the vertical scale the same as the horizontal
   scale, add the options\\
   \pcode~yaxis_scaleanchor="x",yaxis_scaleratio=1~ 
-  in \pcode+fig.update_layout()+.  Alternatively, call
-  \pcode+equal_aspect(fig)+ before \pcode+fig.show()+.
-  (This is not a standard part of plotly and
-  relies on having called \pcode+from header import *+ at the top of
-  the notebook.)
+  in \pcode+fig.update_layout()+.  Alternatively, provided you have done
+  \pcode~from header import *~ as suggested at the top of this file,
+  you can enter \pcode~equal_aspect(fig)~ to make the scales equal. 
 %
  \item\label{twoplots} To plot more than one graph in the same picture, we
   can just call \pcode+fig.add_trace()+ several times.  For example, we
@@ -571,25 +603,26 @@ at \url{https://plotly.com/python/}.
    fig.show()
   \end{pcodeblock}
   If we do not specify the colours, they will be chosen automatically
-  so that the two curves have different colours.  Similarly,
-  to plot $\cos(t)$ and $\sin(t)$ 
-  together from $t=-3\pi$ to $t=3\pi$, enter
-  \begin{pcodeblock}
-   t = np.linspace(-3*np.pi, 3*np.pi, 201)
-   fig = go.Figure()
-   fig.add_trace(go.Scatter(x=t, y=np.cos(t)))
-   fig.add_trace(go.Scatter(x=t, y=np.sin(t)))
-   fig.show()
-  \end{pcodeblock}
+  so that the two curves have different colours.  
 %
- \item\label{piticks} In the above example, there are tick marks on the
-  $x$-axis at $x=-8,\;x=-7,\;\dotsc,x=8$.  It would be more natural to
-  have the tick marks at $x=-3\pi,\;x=-2\pi,\;\dotsc,x=3\pi$.  We can
-  achieve this by calling \pcode+use_pi_ticks(fig,-3,3)+ before
-  \pcode+fig.show()+.  (This is not a standard part of plotly and
-  relies on having called \pcode+from header import *+ at the top of
-  the notebook.)  For ticks with a spacing of $\pi/2$ instead of $\pi$,
-  we can call \pcode+us_pi_ticks(fig,-3,3,2)+.
+ \item\label{piticks} Similarly, we can plot $\cos(t)$ and $\sin(t)$
+  together from $t=-3\pi$ to $t=3\pi$ as shown below.  We have 
+  called \pcode~use_pi_ticks(fig,-3,3,2)~ to put tick marks on the
+  horizontal axis at positions from $-3\pi$ to $3\pi$ with steps of
+  $\pi/2$.  If we did not do that, we would instead get tick marks at
+  positions $-8,-6,-4,\dotsc,8$, which is not very helpful when
+  plotting functions that are periodic with period $2\pi$.
+
+  The function \pcode~use_pi_ticks()~ will only work if you have done
+  \pcode~from header import *~ as suggested at the top of this file.
+
+  Note also that we have used he function \pcode~np.sin()~ (from the
+  \pcode~numpy~ library) rather than \pcode~sp.sin()~.  Because
+  \pcode~t~ is an array rather than a single number, it would not work
+  to use \pcode~sp.sin(t)~.  One could instead use
+  \pcode~[sp.sin(t0) for t0 in t]~, but that would not be efficient:
+  the \pcode~numpy~ library is highly optimised for numerical
+  calculation, and \pcode~sympy~ is not.
  \item\label{hideaxes} To make the $x$ and $y$ axes invisible (together with
   the associated tick marks and labels) add the options
   \pcode+xaxis_visible=False, yaxis_visible=False+ in
@@ -674,20 +707,25 @@ at \url{https://plotly.com/python/}.
    fig.update_layout(height=600, width=600, xaxis_range=[-2,2], yaxis_range=[-2,2])
   \end{pcodeblock}
 %
- \item\label{saveplot} We might want to produce a basic picture, and then
-  later generate some further plots which combine the basic one with
-  some extra elements.  For this we can make the basic picture by
-  calling \pcode+basic_fig=go.Figure()+ and then
-  \pcode+basic_fig.add_trace(...)+.  Then we can call 
-  \pcode+new_fig=go.Figure(basic_fig)+ to make a new figure which is a
-  copy of the basic one, and \pcode+new_fig.add_trace(...)+ to add
-  extra elements to the new figure, and \pcode+new_fig.show()+ to
-  display the result.
-%
- \item\label{display}
-  Alternatively, if we have already created figures \pcode+fig0+ and
-  \pcode+fig1+, we can make a new figure that combines them by
-  entering \pcode+fig = go.Figure(data = fig0.data + fig1.data)+.
+ \item\label{saveplot} 
+  Here is an example where we create two separate pictures called
+  \pcode~fig1~ and \pcode~fig2~ (which are not displayed), and then combine them
+  to make a picture called \pcode~fig~, which is displayed. 
+  \begin{pcodeblock}
+    x = np.linspace(-1,1,100)
+    y = x * (x ** 2 - 1)
+    z = 1 - x**4
+    fig1 = go.Figure()
+    fig1.add_trace(go.Scatter(x=x, y=y, mode='markers', 
+                              name=r'$y = x(x^2-1)$', 
+                              showlegend=True))
+    fig2 = go.Figure()
+    fig2.add_trace(go.Scatter(x=x, y=z, mode='lines', 
+                              name=r'$y = 1 - x^4$', 
+                              showlegend=True))
+    fig = go.Figure(data = fig1.data + fig2.data)
+    fig.show()
+  \end{pcodeblock}
 %
  \item\label{listplot}
   By default, \pcode+go.Scatter(x=u, y=v)+ will produce a connected
@@ -733,18 +771,29 @@ at \url{https://plotly.com/python/}.
  sp.idiff(x+y+x^2*y^2-1,y,x)
 \end{pcodeblock}
 %
- \item\label{inertdiff} Sometimes we just want to mention the derivative
-  without actually working it out.  We can do this by
-  adding the option \pcode+evaluate=False+.  For example, 
-  entering \\ \pcode+u = sp.diff(x**2, x, evaluate=False)+ gives an
-  object $u$ which is displayed as $\frac{d}{dx}x^2$.  If you then
-  enter \pcode+u.doit()+ then sympy will evaluate the derivative and
-  return $2x$.  Similarly, \pcode~v = sp.diff(t**10,t,2)~ prints as
-  $\frac{d^2}{dt^2}t^{10}$, whereas \pcode+v.doit()+ or
+\item\label{inertdiff} Sometimes we just want to mention the
+  derivative without actually working it out.  We can do this by
+  writing \pcode~sp.Derivative()~ instead of \pcode~sp.diff()~.  For example,
+  entering \\
+  \pcode~u = sp.Derivative(x**2, x)~ gives an object $u$ which is
+  displayed as $\frac{d}{dx}x^2$.  If you then enter \pcode~u.doit()~ then
+  SymPy will evaluate the derivative and return $2x$.  Below we display
+  the unevaluated and evaluated derivatives separately, then we
+  illustrate how to make a LaTeX string which displays the equation
+  relating them, namely $\frac{d}{dx}x^2 = 2x$.
+  \begin{pcodeblock}
+    x = sp.symbols('x')
+    u = sp.Derivative(x**2,x)
+    display(u)
+    display(u.doit())
+    display(Latex('$' + sp.latex(u) + ' = ' + sp.latex(u.doit()) + '$'))   
+  \end{pcodeblock}
+  Similarly, \pcode~v = sp.Derivative(t**10,t,2)~ prints as
+  $\frac{d^2}{dt^2}t^{10}$, whereas \pcode+v.doit()+ or \\
   \pcode~sp.diff(t**10,t,2)~  gives $90 t^8$. 
 %
  \item\label{taylor} To find the Taylor series of a function $f(x)$ near a
-  point $x=a$ to order $n$, enter
+  point $x=a$ to order $n$, enter \\
   \pcode~sp.series(f(x),x,a,n)~.  Note that ``order $n$'' means
   that the highest term allowed is a multiple of $x^{n-1}$,
   and all terms $x^n$ and higher are discarded.  For
@@ -799,45 +848,76 @@ at \url{https://plotly.com/python/}.
 
 \begin{secenum}
 %
- \item\label{seq} To generate a finite sequence of terms, we can use
- standard Python list comprehension.  For example, the sequence
- $1/2,1/4,1/6,1/8,1/10$ is the sequence of terms $1/(2k)$ for
- $k=1,2,3,4,5$; it can be generated by the command 
+\item\label{seq} We might want to talk about the sequence
+ $[1/2, 1/4, 1/6, 1/8, 1/10]$, which is the sequence of terms $1/(2k)$
+ for $k$ from $1$ to $5$ inclusive.  There are two ways to do this.
+ The first is to use an ordinary Python list comprehension, as shown
+ below.  For this we need to use the standard Python convention for
+ ranges: the endpoint of the range is never included, so the list
+ $1,\dotsc,5$ is \pcode~range(1,6)~ not \pcode~range(1,5)~.
+
+ Although the cell below mentions a variable \pcode~k~, this is actually a
+ new temporary variable that only has meaning within the list
+ comprehension.  It does not matter whether we already had a variable
+ called \pcode~k~, that would not affect anything.  
  \begin{pcodeblock}
-  list(sp.Rational(1,2*k) for k in range(1,6))
+    [sp.Rational(1, 2*k) for k in range(1,6)]
  \end{pcodeblock}
- Remember here that \pcode+range(1,6)+ refers to the range from $1$ to
- $6$ including $1$ but not including $6$, so it gives $1,2,3,4,5$ as
- required. 
-%
- \item\label{sum} For a finite list $u$ as above, we can just enter
- \pcode+sum(u)+ to get the sum of all the entries in the list.  For
- example, \pcode+u=list(10**k for k in range(5))+ gives
- $u=[1,10,100,1000,10000]$ and then \pcode+sum(u)+ gives $11111$.
- Moreover, \pcode+sum(10**k for k in range(5))+ will also work for
- this; it is not necessary to make a list as an intermediate step.
-%
- \item\label{symbolicsum} However, we might want to get a general formula
- for a sum like $\sum_{k=0}^n3^{-k}$ in terms of $n$, and this cannot 
- be done by the above method.  Instead, we need to declare $n$ and $k$
- to be integer symbols and use \pcode+sp.Sum()+, like this:
+
+ The second approach is to use \pcode~sp.sequence()~.  This is different in
+ various ways:
+ \begin{itemize}
+  \item Here the variable \pcode~k~ needs to be a SymPy symbol with no
+   assigned value.  
+  \item The range of the variable (which includes \pcode~k = 5~ but
+   not \pcode~k = 6~) is now written as `(k, 1, 5)`, matching
+   traditional mathematical notation but not the usual Python
+   convention for ranges. 
+  \item In this example the upper limit for \pcode~k~ is the explicit
+   integer $5$, but we could also do something like 
+   \pcode~sp.sequence(1/(2 * k), (k, 1, n))~ where \pcode~n~ is a
+   SymPy symbol with no assigned value.  This would not be possible
+   with an ordinary list comprehension. 
+ \end{itemize}
+
+ We can convert a SymPy sequence to an ordinary list using the
+ \pcode~list()~ function. 
  \begin{pcodeblock}
-  k, n = sp.symbols('k n', integer=True)
-  u0 = sp.Sum(3**(-k),(k,0,n)).doit()
+    k = sp.symbols('k')
+    u = sp.sequence(1/(2 * k), (k, 1, 5))
+    display(u)
+    display(list(u))
  \end{pcodeblock}
- Note that the naming and behaviour is a bit inconsistent with the
- naming and behaviour for integrals.  The function \pcode+sp.Sum()+
- always returns an unevaluated sum which is displayed as something
- like $\sum_{k=0}^n3^{-k}$; it is always necessary to use
- \pcode+.doit()+ to find the actual value of the sum.  Also, the range
- \pcode+(k,0,n)+ means that $k$ runs from $0$ to $n$ inclusive, which
- is consistent with tradional mathematical notation, but not with the
- usual Python convention for ranges.
+%
+ \item\label{sum} 
+  For an ordinary Python list, we can use `sum()` to find the sum of the
+  terms.
+  \begin{pcodeblock}
+    u = list(10 ** k for k in range(5))
+    display(u)
+    display(sum(u))
+    display(sum(10 ** k for k in range(5)))   
+  \end{pcodeblock}
+%
+ \item\label{symbolicsum} 
+  For a SymPy sequence in which the upper and/or lower limits are
+  symbols, we need to use `sp.Sum()` instead of `sum()`.  For example,
+  we can get the geometric progression formula for $\sum_{k=0}^n 3^{-k}$
+  as follows: 
+  \begin{pcodeblock}
+   k, n = sp.symbols('k n', integer=True)
+   sp.Sum(3**(-k),(k,0,n)).doit()
+  \end{pcodeblock}
+  Note that the naming and behaviour is a bit inconsistent with the
+  naming and behaviour for integrals.  The function \pcode+sp.Sum()+
+  always returns an unevaluated sum which is displayed as something
+  like $\sum_{k=0}^n3^{-k}$; it is always necessary to use
+  \pcode+.doit()+ to find the actual value of the sum.
 %
  \item\label{infinitesum} We can also handle some infinite sums.  For
- example, it is a well-known result that
- $\sum_{k=1}^\infty k^{-2}=\pi^2/6$, and we can do this in sympy by
- entering \pcode+sp.Sum(k**(-2),(k,1,sp.oo)).doit()+.
+  example, it is a well-known result that
+  $\sum_{k=1}^\infty k^{-2}=\pi^2/6$, and we can do this in sympy by
+  entering \pcode+sp.Sum(k**(-2),(k,1,sp.oo)).doit()+.
 \end{secenum}
 
 \section{Some common problems}\label{sec-problems}
@@ -888,11 +968,14 @@ at \url{https://plotly.com/python/}.
  \item\label{shape} Always use round brackets (not square or curly
          ones) for algebraic grouping.  Square brackets are
          used for lists or for subscripts (e.g. $x_5$ is
-         \pcode~x[5]~).  Curly brackets are used for sets. 
+         \pcode~x[5]~).  Curly brackets are used for sets or Python
+         dictionaries. Using the wrong kind of brackets will usually
+         generate an error. 
 %
  \item\label{removedefs} Remember to remove definitions when you
   have finished with  them, by using \pcode+del+ or clicking the
-  \pcode~Restart;~ button.  If you enter an expression like $(x+y)^5$
+  \pcode~Restart~ button (but remember that you need to re-execute 
+  your \pcode+import+ cells after restarting).  If you enter an expression like $(x+y)^5$
   and SymPy converts it to something completely unrelated like
   $(\sin(\theta)+e^{-u})^5$, the most likely reason is that
   you previously defined \pcode~x=sp.sin(theta);~ and
@@ -908,12 +991,12 @@ at \url{https://plotly.com/python/}.
   \pcode+name 'e' is not defined+.  However, if you happen to have
   defined $e$, you might get some other behaviour.
 %
- \item\label{badpiagain} Remember that the constant
-  $\pi=3.14159\dots$ must be 
-  entered as \pcode~sp.pi~, not \pcode~pi~.  If sympy is doing
-  funny things like refusing to simplify $\sin(\pi)$ to $0$,
-  it may be that you entered \pcode~pi~ instead of \pcode~sp.pi~
-  by mistake.  You can cure this by entering \pcode~pi=sp.pi~.
+ \item\label{badpiagain} Remember that the constant $\pi=3.14159\dots$
+  must be entered as \pcode~sp.pi~, not \pcode~pi~.  If you try to use
+  \pcode~pi~ instead of \pcode~sp.pi~ then you will usually get an
+  error \pcode~name 'pi' is not defined~.  If you want to be able to
+  use \pcode~pi~ with no prefix, you can enter
+  \pcode~from sympy import pi~ at the top of your notebook.
 \end{secenum}
 
 \end{document}

@@ -11,6 +11,7 @@
 \input{macros}
 
 \externaldocument[primer-]{primer_python}
+\renewcommand{\chaptername}{Week}
 
 \begin{document}
 
@@ -32,6 +33,9 @@ course, then you should include the line
  from header import *
 \end{pcodeblock}
 as the top line of each of your notebooks.
+
+Numbers in square brackets refer to the SymPy syntax primer
+which you can find on the course home page.
 
 \section{Python as a calculator}
 
@@ -135,7 +139,7 @@ $x$ to $k$ significant figures.
  which is inconvenient.  It is better to do the following, to print
  the result on multiple lines with $100$ digits per line:
  \begin{pcodeblock}
-  s = str(mpmath.exp(1))
+  s = str(sp.N(exp(1),4997))
   m = 100
   for i in range(0, len(s), m):
       print(s[i:i+m])
