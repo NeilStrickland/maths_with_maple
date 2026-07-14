@@ -1,0 +1,3288 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>lab_sols11</title>
+    <meta name="generator" content="wxMaxima"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="text/x-mathjax-config">  MathJax.Hub.Config({
+    displayAlign: "left",
+    context: "MathJax",
+    TeX: {TagSide: "left"}
+  })
+</script>
+    <script id="MathJax-script" type="application/javascript" async="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">  // A comment that hinders wxWidgets from optimizing this tag too much.
+</script>
+    <link rel="stylesheet" type="text/css" href="lab_sols11_htmlimg/lab_sols11.css"/>
+  </head>
+  <body>
+    <!-- ****************************************************** -->
+    <!-- *        Created with wxMaxima version 23.05.1       * -->
+    <!-- ****************************************************** -->
+    <noscript>
+      <div class="error message">
+        <p>Please enable JavaScript in order to get a 2d display of the equations embedded in this web page.</p>
+      </div>
+    </noscript>
+    <p hidden="hidden">\(      \DeclareMathOperator{\abs}{abs}
+      \newcommand{\ensuremath}[1]{\mbox{$#1$}}
+\)</p>
+    <!-- Title cell -->
+    <div class="title">
+      <p>Lab sheet 11
+</p>
+    </div>
+    <!-- Section cell -->
+    <div class="section">
+      <p>  1 Miscellaneous problems
+</p>
+    </div>
+    <!-- Text cell -->
+    <div class="comment">Exercise 1.1
+</div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">r0</span>
+            <span class="code_operator">:</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">.</span>
+            <span class="code_number">0945</span>
+            <span class="code_endofline">$</span>
+            <span class="code_variable">x0</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">.</span>
+            <span class="code_number">1225</span>
+            <span class="code_endofline">$</span>
+            <span class="code_variable">y0</span>
+            <span class="code_operator">:</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">.</span>
+            <span class="code_number">7449</span>
+            <span class="code_endofline">$</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">wxdraw2d</span>
+            <span class="code_operator">(</span>
+            <span class="code_endofline">
+              <br/>
+            </span>   
+            <span class="code_variable">proportional_axes</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">xy</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">nticks</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">200</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_variable">axis_top</span>
+            <span class="code_operator">=</span>
+            <span class="code_function">false</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">axis_bottom</span>
+            <span class="code_operator">=</span>
+            <span class="code_function">false</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">axis_left</span>
+            <span class="code_operator">=</span>
+            <span class="code_function">false</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">axis_right</span>
+            <span class="code_operator">=</span>
+            <span class="code_function">false</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">xtics</span>
+            <span class="code_operator">=</span>
+            <span class="code_function">false</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">ytics</span>
+            <span class="code_operator">=</span>
+            <span class="code_function">false</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>   
+            <span class="code_function">parametric</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">cos</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">−</span>
+            <span class="code_function">cos</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">4</span>
+            <span class="code_endofline">,</span>
+            <span class="code_function">sin</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">−</span>
+            <span class="code_function">sin</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">4</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">t</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">%pi</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>   
+            <span class="code_function">parametric</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">+</span>
+            <span class="code_function">cos</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">4</span>
+            <span class="code_endofline">,</span>
+            <span class="code_function">sin</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">4</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">t</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">%pi</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>   
+            <span class="code_function">parametric</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x0</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">r0</span>
+            <span class="code_operator">·</span>
+            <span class="code_function">cos</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">r0</span>
+            <span class="code_operator">·</span>
+            <span class="code_function">sin</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">y0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">t</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">%pi</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>   
+            <span class="code_function">parametric</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x0</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">r0</span>
+            <span class="code_operator">·</span>
+            <span class="code_function">cos</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">r0</span>
+            <span class="code_operator">·</span>
+            <span class="code_function">sin</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">y0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">t</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">%pi</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\]
+</p>
+    <img src="lab_sols11_htmlimg/lab_sols11_1.png" width="598" style="max-width:90%;" loading="lazy" alt=" (Graphics) "/>
+    <br/>
+    <p>\[\operatorname{	}\]
+</p>
+    <!-- Text cell -->
+    <div class="comment">Exercise 1.2
+</div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">apply</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">wxdraw2d</span>
+            <span class="code_endofline">,</span>
+            <span class="code_function">append</span>
+            <span class="code_operator">(</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_operator">[</span>
+            <span class="code_variable">proportional_axes</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">xy</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">color</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">red</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_function">makelist</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">implicit</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">abs</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_variable">n</span>
+            <span class="code_operator">+</span>
+            <span class="code_function">abs</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_variable">n</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">n</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">n</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">x</span>
+            <span class="code_endofline">,</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">3</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">3</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">y</span>
+            <span class="code_endofline">,</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">3</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">n</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">1</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">9</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\]\[rat: replaced 1.732050807568877 by 37220045/21489003 = 1.732050807568876
+\]\[rat: replaced 2.23606797749979 by 16692641/7465176 = 2.236067977499794
+\]\[rat: replaced 2.645751311064591 by 38063342/14386591 = 2.645751311064588\]
+</p>
+    <p>\[\operatorname{	}\]
+</p>
+    <img src="lab_sols11_htmlimg/lab_sols11_5.png" width="598" style="max-width:90%;" loading="lazy" alt=" (Graphics) "/>
+    <br/>
+    <p>\[\operatorname{	}\]
+</p>
+    <!-- Text cell -->
+    <div class="comment">Exercise 1.3
+</div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">wxdraw2d</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">points</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">makelist</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">n</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">50</span>
+            <span class="code_operator">^</span>
+            <span class="code_variable">n</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">n</span>
+            <span class="code_operator">!</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">n</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">1</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">100</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\]
+</p>
+    <img src="lab_sols11_htmlimg/lab_sols11_8.png" width="598" style="max-width:90%;" loading="lazy" alt=" (Graphics) "/>
+    <br/>
+    <p>\[\operatorname{	}\]
+</p>
+    <!-- Text cell -->
+    <div class="comment">Exercise 1.4
+</div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">N</span>
+            <span class="code_operator">:</span>
+            <span class="code_number">10</span>
+            <span class="code_endofline">$</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_function">f</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">=</span>
+            <span class="code_function">realpart</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">bfzeta</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">%i</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">N</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_function">g</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">=</span>
+            <span class="code_function">imagpart</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">bfzeta</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">%i</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">N</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\operatorname{f}(t):=\operatorname{realpart}\left( \operatorname{bfzeta}\left( \frac{1}{2}+\% i t,N\right) \right) \]
+</p>
+    <p>\[\operatorname{	}\operatorname{g}(t):=\operatorname{imagpart}\left( \operatorname{bfzeta}\left( \frac{1}{2}+\% i t,N\right) \right) \]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">f</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">7</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}1.0214342314395b0\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">wxplot2d</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">[</span>
+            <span class="code_function">f</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_function">g</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">,</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">t</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">50</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">,</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">legend</span>
+            <span class="code_endofline">,</span>
+            <span class="code_string">"Re"</span>
+            <span class="code_endofline">,</span>
+            <span class="code_string">"Im"</span>
+            <span class="code_operator">]</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\]
+</p>
+    <img src="lab_sols11_htmlimg/lab_sols11_14.png" width="598" style="max-width:90%;" loading="lazy" alt=" (Graphics) "/>
+    <br/>
+    <p>\[\operatorname{	}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">wxdraw2d</span>
+            <span class="code_operator">(</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">proportional_axes</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">xy</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">nticks</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">500</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_function">parametric</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">f</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_function">g</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">t</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">50</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\]
+</p>
+    <img src="lab_sols11_htmlimg/lab_sols11_17.png" width="598" style="max-width:90%;" loading="lazy" alt=" (Graphics) "/>
+    <br/>
+    <p>\[\operatorname{	}\]
+</p>
+    <!-- Text cell -->
+    <div class="comment">Exercise 1.5
+</div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">y</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">exp</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{(y)	}{{\% e}^{-\frac{1}{x}}}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">dy</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">makelist</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">factor</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">diff</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">y</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">x</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">n</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">n</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">5</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{(dy)	}[{{\% e}^{-\frac{1}{x}}},\frac{{{\% e}^{-\frac{1}{x}}}}{{{x}^{2}}},-\frac{\left( 2 x-1\right)  {{\% e}^{-\frac{1}{x}}}}{{{x}^{4}}},\frac{\left( 6 {{x}^{2}}-6 x+1\right)  {{\% e}^{-\frac{1}{x}}}}{{{x}^{6}}},-\frac{\left( 24 {{x}^{3}}-36 {{x}^{2}}+12 x-1\right)  {{\% e}^{-\frac{1}{x}}}}{{{x}^{8}}},\frac{\left( 120 {{x}^{4}}-240 {{x}^{3}}+120 {{x}^{2}}-20 x+1\right)  {{\% e}^{-\frac{1}{x}}}}{{{x}^{10}}}]\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">wxplot2d</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">dy</span>
+            <span class="code_endofline">,</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">x</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">.</span>
+            <span class="code_number">00001</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">,</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">legend</span>
+            <span class="code_endofline">,</span>
+            <span class="code_function">false</span>
+            <span class="code_operator">]</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\]
+</p>
+    <img src="lab_sols11_htmlimg/lab_sols11_22.png" width="598" style="max-width:90%;" loading="lazy" alt=" (Graphics) "/>
+    <br/>
+    <p>\[\operatorname{	}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">kill</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">y</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">dy</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">$</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <!-- Text cell -->
+    <div class="comment">Exercise 1.6
+</div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">expand</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">z</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">z</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">z</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">z</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">z</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}{{z}^{3}}+{{y}^{3}}+{{x}^{3}}\]
+</p>
+    <!-- Text cell -->
+    <div class="comment">Exercise 1.7
+</div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">expand</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}{{x}^{3}}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">expand</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">6</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}{{x}^{4}}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">expand</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">5</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">5</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">10</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">10</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">5</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}{{x}^{5}}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">p</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">n</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">=</span>
+            <span class="code_function">sum</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">binomial</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">n</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">i</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_variable">i</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">n</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">i</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">i</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">n</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\operatorname{p}(n):=\sum_{i=0}^{n}{\left. \begin{pmatrix}n\\
+i\end{pmatrix} {{\left( -1\right) }^{i}} {{\left( x+1\right) }^{n-i}}\right.}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">p</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">10</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}{{\left( x+1\right) }^{10}}-10 {{\left( x+1\right) }^{9}}+45 {{\left( x+1\right) }^{8}}-120 {{\left( x+1\right) }^{7}}+210 {{\left( x+1\right) }^{6}}-252 {{\left( x+1\right) }^{5}}+210 {{\left( x+1\right) }^{4}}-120 {{\left( x+1\right) }^{3}}+45 {{\left( x+1\right) }^{2}}-10 \left( x+1\right) +1\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">expand</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">p</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">10</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}{{x}^{10}}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">kill</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">p</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">$</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <!-- Text cell -->
+    <div class="comment">Exercise 1.8
+</div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">assume</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">u</span>
+            <span class="code_endofline">&gt;</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">v</span>
+            <span class="code_endofline">&gt;</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">w</span>
+            <span class="code_endofline">&gt;</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">x</span>
+            <span class="code_endofline">&gt;</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">y</span>
+            <span class="code_endofline">&gt;</span>
+            <span class="code_number">0</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}[u&gt;  0,v&gt;  0,w&gt;  0,x&gt;  0,y&gt;  0]\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">A</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">u</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">v</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">B</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">u</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">v</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">u</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">u</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">C</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">u</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">v</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">v</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">u</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">u</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">v</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">D</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">u</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">v</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">v</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">u</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">u</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">v</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">E</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">u</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">u</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">v</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">u</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">v</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">u</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">v</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{(A)	}\frac{\frac{1}{v}+\frac{1}{u}}{\frac{1}{y}+\frac{1}{x}}\]
+</p>
+    <p>\[\operatorname{(B)	}\frac{\frac{u x}{v}+x}{\frac{u x}{y}+u}\]
+</p>
+    <p>\[\operatorname{(C)	}\frac{\left( \frac{u}{v}-\frac{v}{u}\right) \, \left( x-y\right) }{\left( u-v\right) \, \left( \frac{x}{y}-\frac{y}{x}\right) }\]
+</p>
+    <p>\[\operatorname{(D)	}\frac{\left( \frac{u}{v}-\frac{v}{u}\right) \, \left( {{y}^{2}}+{{x}^{2}}\right) }{\left( {{v}^{2}}+{{u}^{2}}\right) \, \left( \frac{x}{y}-\frac{y}{x}\right) }\]
+</p>
+    <p>\[\operatorname{(E)	}\frac{{{u}^{2}} v x y+{{u}^{3}} x y}{{{u}^{3}} v y+{{u}^{3}} v x}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">factor</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">A</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">B</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+            <span class="code_function">factor</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">A</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">C</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+            <span class="code_function">factor</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">A</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">E</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}0\]
+</p>
+    <p>\[\operatorname{	}0\]
+</p>
+    <p>\[\operatorname{	}0\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">factor</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">A</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">D</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{\left( {{v}^{2}}+{{u}^{2}}\right) \, \left( y-x\right) }{\left( v-u\right) \, \left( {{y}^{2}}+{{x}^{2}}\right) }\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">kill</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">A</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">B</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">C</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">D</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">E</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">$</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <!-- Text cell -->
+    <div class="comment">Exercise 1.9
+</div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">X</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_function">cos</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">a</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_function">cos</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">b</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">Y</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_function">cos</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">a</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_function">sin</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">b</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">Z</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">sin</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">a</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">U</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">X</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">Y</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">Z</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">5</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">4</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">V</span>
+            <span class="code_operator">:</span>
+            <span class="code_variable">X</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">X</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">Y</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{(X)	}\left( \cos{(a)}+2\right)  \cos{(b)}\]
+</p>
+    <p>\[\operatorname{(Y)	}\left( \cos{(a)}+2\right)  \sin{(b)}\]
+</p>
+    <p>\[\operatorname{(Z)	}\sin{(a)}\]
+</p>
+    <p>\[\operatorname{(U)	}\frac{{{\left( \cos{(a)}+2\right) }^{2}} {{\sin{(b)}}^{2}}+{{\left( \cos{(a)}+2\right) }^{2}} {{\cos{(b)}}^{2}}+{{\sin{(a)}}^{2}}-5}{4}\]
+</p>
+    <p>\[\operatorname{(V)	}\frac{\left( \cos{(a)}+2\right)  \cos{(b)}}{{{\left( \cos{(a)}+2\right) }^{2}} {{\sin{(b)}}^{2}}+{{\left( \cos{(a)}+2\right) }^{2}} {{\cos{(b)}}^{2}}}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">trigsimp</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">U</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\cos{(a)}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">trigsimp</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">V</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{\cos{(b)}}{\cos{(a)}+2}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">kill</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">X</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">Y</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">Z</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">U</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">V</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">$</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <!-- Text cell -->
+    <div class="comment">Exercise 1.10
+</div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">x</span>
+            <span class="code_operator">:</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">u</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">u</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">v</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">:</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">v</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">u</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">v</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">z</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">u</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">v</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">u</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">v</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">r</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">sqrt</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">z</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">w</span>
+            <span class="code_operator">:</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">z</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{(x)	}\frac{2 u}{{{v}^{2}}+{{u}^{2}}+1}\]
+</p>
+    <p>\[\operatorname{(y)	}\frac{2 v}{{{v}^{2}}+{{u}^{2}}+1}\]
+</p>
+    <p>\[\operatorname{(z)	}\frac{{{v}^{2}}+{{u}^{2}}-1}{{{v}^{2}}+{{u}^{2}}+1}\]
+</p>
+    <p>\[\operatorname{(r)	}\sqrt{\frac{{{\left( {{v}^{2}}+{{u}^{2}}-1\right) }^{2}}}{{{\left( {{v}^{2}}+{{u}^{2}}+1\right) }^{2}}}+\frac{4 {{v}^{2}}}{{{\left( {{v}^{2}}+{{u}^{2}}+1\right) }^{2}}}+\frac{4 {{u}^{2}}}{{{\left( {{v}^{2}}+{{u}^{2}}+1\right) }^{2}}}}\]
+</p>
+    <p>\[\operatorname{(w)	}\frac{2 u}{\left( {{v}^{2}}+{{u}^{2}}+1\right) \, \left( 1-\frac{{{v}^{2}}+{{u}^{2}}-1}{{{v}^{2}}+{{u}^{2}}+1}\right) }\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">factor</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">r</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}1\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">factor</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">w</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}u\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">kill</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">y</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">z</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">r</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">w</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">$</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <!-- Text cell -->
+    <div class="comment">Exercise 1.11
+</div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">assume</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">a</span>
+            <span class="code_endofline">&gt;</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">b</span>
+            <span class="code_endofline">&gt;</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">c</span>
+            <span class="code_endofline">&gt;</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">x</span>
+            <span class="code_endofline">&gt;</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">y</span>
+            <span class="code_endofline">&gt;</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">z</span>
+            <span class="code_endofline">&gt;</span>
+            <span class="code_number">0</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}[\ensuremath{\mathrm{redundant}},\ensuremath{\mathrm{redundant}},\ensuremath{\mathrm{redundant}},\ensuremath{\mathrm{redundant}},\ensuremath{\mathrm{redundant}},\ensuremath{\mathrm{redundant}}]\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">expand</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">a</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">b</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">b</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">c</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">c</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">a</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">a</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">b</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">c</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}{{x}^{\frac{1}{c}+\frac{1}{b}+\frac{1}{a}}}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">factor</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">z</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">z</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{1}{{{z}^{2}}}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">expand</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">6</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">6</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">9</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}{{x}^{6}}+2 {{x}^{3}}+1\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">factor</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">9</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">−</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}0\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">factor</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">subst</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">z</span>
+            <span class="code_operator">=</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">p</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">q</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">p</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">q</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">p</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">q</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">y</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">r</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">z</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">p</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">q</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">r</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">z</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}0\]
+</p>
+    <!-- Section cell -->
+    <div class="section">
+      <p>  2 Solitons
+</p>
+    </div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">q</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">sqrt</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+            <span class="code_variable">p</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">log</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">q</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+            <span class="code_variable">r</span>
+            <span class="code_operator">:</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_endofline">;</span>
+            <span class="code_variable">s</span>
+            <span class="code_operator">:</span>
+            <span class="code_variable">q</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">8</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">T</span>
+            <span class="code_operator">:</span>
+            <span class="code_number">32</span>
+            <span class="code_operator">·</span>
+            <span class="code_function">cosh</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">r</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">p</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">16</span>
+            <span class="code_operator">·</span>
+            <span class="code_function">cosh</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">s</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">p</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">16</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">B</span>
+            <span class="code_operator">:</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">q</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_function">cosh</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">r</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_function">cosh</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">s</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">+</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">q</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">8</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_function">exp</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">r</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">s</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">phi</span>
+            <span class="code_operator">[</span>
+            <span class="code_number">0</span>
+            <span class="code_operator">]</span>
+            <span class="code_operator">:</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">/</span>
+            <span class="code_function">cosh</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">r</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">phi</span>
+            <span class="code_operator">[</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">]</span>
+            <span class="code_operator">:</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">/</span>
+            <span class="code_function">cosh</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">s</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">phi</span>
+            <span class="code_operator">[</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">]</span>
+            <span class="code_operator">:</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">/</span>
+            <span class="code_function">cosh</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">r</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">p</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">phi</span>
+            <span class="code_operator">[</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">]</span>
+            <span class="code_operator">:</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">/</span>
+            <span class="code_function">cosh</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">s</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">p</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">phi</span>
+            <span class="code_operator">[</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">]</span>
+            <span class="code_operator">:</span>
+            <span class="code_variable">T</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">B</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{(q)	}\sqrt{2}\]
+</p>
+    <p>\[\operatorname{(p)	}\log{\left( {{2}^{\frac{3}{2}}}+3\right) }\]
+</p>
+    <p>\[\operatorname{(r)	}x-4 t\]
+</p>
+    <p>\[\operatorname{(s)	}\sqrt{2} \left( x-8 t\right) \]
+</p>
+    <p>\[\operatorname{(T)	}32 \cosh{\left( 2 \left( x-4 t\right) -\log{\left( {{2}^{\frac{3}{2}}}+3\right) }\right) }+16 \cosh{\left( {{2}^{\frac{3}{2}}} \left( x-8 t\right) -\log{\left( {{2}^{\frac{3}{2}}}+3\right) }\right) }+16\]
+</p>
+    <p>\[\operatorname{(B)	}4 \left( \sqrt{2}+1\right)  \cosh{\left( \sqrt{2} \left( x-8 t\right) \right) } \cosh{\left( x-4 t\right) }+\left( {{2}^{\frac{5}{2}}}-8\right)  {{\% e}^{\sqrt{2} \left( x-8 t\right) +x-4 t}}\]
+</p>
+    <p>\[\operatorname{	}\frac{2}{{{\cosh{\left( x-4 t\right) }}^{2}}}\]
+</p>
+    <p>\[\operatorname{	}\frac{4}{{{\cosh{\left( \sqrt{2} \left( x-8 t\right) \right) }}^{2}}}\]
+</p>
+    <p>\[\operatorname{	}\frac{2}{{{\cosh{\left( x-4 t-\log{\left( {{2}^{\frac{3}{2}}}+3\right) }\right) }}^{2}}}\]
+</p>
+    <p>\[\operatorname{	}\frac{4}{{{\cosh{\left( \sqrt{2} \left( x-8 t\right) -\log{\left( {{2}^{\frac{3}{2}}}+3\right) }\right) }}^{2}}}\]
+</p>
+    <p>\[\operatorname{	}\frac{32 \cosh{\left( 2 \left( x-4 t\right) -\log{\left( {{2}^{\frac{3}{2}}}+3\right) }\right) }+16 \cosh{\left( {{2}^{\frac{3}{2}}} \left( x-8 t\right) -\log{\left( {{2}^{\frac{3}{2}}}+3\right) }\right) }+16}{{{\left( 4 \left( \sqrt{2}+1\right)  \cosh{\left( \sqrt{2} \left( x-8 t\right) \right) } \cosh{\left( x-4 t\right) }+\left( {{2}^{\frac{5}{2}}}-8\right)  {{\% e}^{\sqrt{2} \left( x-8 t\right) +x-4 t}}\right) }^{2}}}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">makelist</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">factor</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">exponentialize</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">diff</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">phi</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">k</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">+</span>
+            <span class="code_function">diff</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">phi</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">k</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">x</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">6</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">phi</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">k</span>
+            <span class="code_operator">]</span>
+            <span class="code_operator">·</span>
+            <span class="code_function">diff</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">phi</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">k</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">k</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}[0,0,0,0]\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">err</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">diff</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">phi</span>
+            <span class="code_operator">[</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">+</span>
+            <span class="code_function">diff</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">phi</span>
+            <span class="code_operator">[</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">x</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">6</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">phi</span>
+            <span class="code_operator">[</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">]</span>
+            <span class="code_operator">·</span>
+            <span class="code_function">diff</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">phi</span>
+            <span class="code_operator">[</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">$</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">err</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">exponentialize</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">err</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">$</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">err</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">num</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">factor</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">err</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">$</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">err</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">args</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">args</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">err</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">[</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">]</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">[</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">$</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">subst</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">1</span>
+            <span class="code_endofline">.</span>
+            <span class="code_number">2</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">=</span>
+            <span class="code_operator">−</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">.</span>
+            <span class="code_number">7</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">err</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">numer</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}1.636375041036662 {{10}^{-22}}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">length</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">args</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">err</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}72\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">subst</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">[</span>
+            <span class="code_endofline">
+              <br/>
+            </span>        
+            <span class="code_variable">%e</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">7</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">5</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">9</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">8</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">E1</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>        
+            <span class="code_variable">%e</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">7</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">5</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">9</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">16</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">E2</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>        
+            <span class="code_variable">%e</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">7</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">11</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">8</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">E3</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>        
+            <span class="code_variable">%e</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">7</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">11</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">16</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">E4</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>        
+            <span class="code_variable">%e</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">7</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">6</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">11</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">9</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">E5</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>        
+            <span class="code_variable">%e</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">7</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">6</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">·</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">9</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">E6</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>        
+            <span class="code_variable">%e</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">7</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">11</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">9</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">8</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">E7</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>        
+            <span class="code_variable">%e</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">7</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">·</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">9</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">8</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">E8</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>        
+            <span class="code_variable">%e</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">7</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">11</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">9</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">16</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">E9</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>        
+            <span class="code_variable">%e</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">7</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">·</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">9</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">16</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">E10</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>        
+            <span class="code_variable">%e</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">7</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">11</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">9</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">24</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">E11</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>        
+            <span class="code_variable">%e</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">7</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">·</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">9</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">24</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">E12</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>        
+            <span class="code_variable">%e</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">·</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">5</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">9</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">8</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">E13</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>        
+            <span class="code_variable">%e</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">·</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">5</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">9</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">16</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">E14</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>        
+            <span class="code_variable">%e</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">5</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">·</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">x</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">^</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">11</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">8</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">t</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">E15</span>
+            <span class="code_endofline">
+              <br/>
+            </span>   
+            <span class="code_operator">]</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">err</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}3 {{2}^{\frac{3}{2}}} {{\% e}^{{{2}^{\frac{5}{2}}} x+3 {{2}^{\frac{3}{2}}} x+2 x+{{2}^{\frac{11}{2}}} t+16 t}}+10 {{\% e}^{{{2}^{\frac{5}{2}}} x+3 {{2}^{\frac{3}{2}}} x+2 x+{{2}^{\frac{11}{2}}} t+16 t}}+7 {{2}^{\frac{3}{2}}} {{\% e}^{{{2}^{\frac{5}{2}}} x+{{2}^{\frac{3}{2}}} x+6 x+{{2}^{\frac{13}{2}}} t}}-7 \sqrt{2} {{\% e}^{{{2}^{\frac{5}{2}}} x+{{2}^{\frac{3}{2}}} x+6 x+{{2}^{\frac{13}{2}}} t}}+10 {{\% e}^{{{2}^{\frac{5}{2}}} x+{{2}^{\frac{3}{2}}} x+6 x+{{2}^{\frac{13}{2}}} t}}+3 {{2}^{\frac{13}{2}}} {{\% e}^{{{2}^{\frac{5}{2}}} x+{{2}^{\frac{3}{2}}} x+4 x+{{2}^{\frac{13}{2}}} t+8 t}}-127 \sqrt{2} {{\% e}^{{{2}^{\frac{5}{2}}} x+{{2}^{\frac{3}{2}}} x+4 x+{{2}^{\frac{13}{2}}} t+8 t}}+92 {{\% e}^{{{2}^{\frac{5}{2}}} x+{{2}^{\frac{3}{2}}} x+4 x+{{2}^{\frac{13}{2}}} t+8 t}}+35 {{2}^{\frac{11}{2}}} {{\% e}^{{{2}^{\frac{5}{2}}} x+{{2}^{\frac{3}{2}}} x+2 x+{{2}^{\frac{13}{2}}} t+16 t}}-939 \sqrt{2} {{\% e}^{{{2}^{\frac{5}{2}}} x+{{2}^{\frac{3}{2}}} x+2 x+{{2}^{\frac{13}{2}}} t+16 t}}+256 {{\% e}^{{{2}^{\frac{5}{2}}} x+{{2}^{\frac{3}{2}}} x+2 x+{{2}^{\frac{13}{2}}} t+16 t}}+2617 {{2}^{\frac{3}{2}}} {{\% e}^{{{2}^{\frac{5}{2}}} x+{{2}^{\frac{3}{2}}} x+{{2}^{\frac{13}{2}}} t+24 t}}-4995 \sqrt{2} {{\% e}^{{{2}^{\frac{5}{2}}} x+{{2}^{\frac{3}{2}}} x+{{2}^{\frac{13}{2}}} t+24 t}}+338 {{\% e}^{{{2}^{\frac{5}{2}}} x+{{2}^{\frac{3}{2}}} x+{{2}^{\frac{13}{2}}} t+24 t}}+111 {{2}^{\frac{3}{2}}} {{\% e}^{{{2}^{\frac{5}{2}}} x+4 x+{{2}^{\frac{13}{2}}} t+{{2}^{\frac{9}{2}}} t+8 t}}+314 {{\% e}^{{{2}^{\frac{5}{2}}} x+4 x+{{2}^{\frac{13}{2}}} t+{{2}^{\frac{9}{2}}} t+8 t}}-111 {{2}^{\frac{3}{2}}} {{\% e}^{{{2}^{\frac{5}{2}}} x+4 x+{{2}^{\frac{11}{2}}} t+3 {{2}^{\frac{9}{2}}} t+8 t}}-314 {{\% e}^{{{2}^{\frac{5}{2}}} x+4 x+{{2}^{\frac{11}{2}}} t+3 {{2}^{\frac{9}{2}}} t+8 t}}+1801 {{2}^{\frac{3}{2}}} {{\% e}^{{{2}^{\frac{5}{2}}} x+2 x+{{2}^{\frac{13}{2}}} t+{{2}^{\frac{9}{2}}} t+16 t}}+5094 {{\% e}^{{{2}^{\frac{5}{2}}} x+2 x+{{2}^{\frac{13}{2}}} t+{{2}^{\frac{9}{2}}} t+16 t}}-1801 {{2}^{\frac{3}{2}}} {{\% e}^{{{2}^{\frac{5}{2}}} x+2 x+{{2}^{\frac{11}{2}}} t+3 {{2}^{\frac{9}{2}}} t+16 t}}-5094 {{\% e}^{{{2}^{\frac{5}{2}}} x+2 x+{{2}^{\frac{11}{2}}} t+3 {{2}^{\frac{9}{2}}} t+16 t}}-7 \sqrt{2} {{\% e}^{3 {{2}^{\frac{3}{2}}} x+6 x+{{2}^{\frac{13}{2}}} t}}-10 {{\% e}^{3 {{2}^{\frac{3}{2}}} x+6 x+{{2}^{\frac{13}{2}}} t}}-65 \sqrt{2} {{\% e}^{3 {{2}^{\frac{3}{2}}} x+4 x+{{2}^{\frac{13}{2}}} t+8 t}}-92 {{\% e}^{3 {{2}^{\frac{3}{2}}} x+4 x+{{2}^{\frac{13}{2}}} t+8 t}}-181 \sqrt{2} {{\% e}^{3 {{2}^{\frac{3}{2}}} x+2 x+{{2}^{\frac{13}{2}}} t+16 t}}-256 {{\% e}^{3 {{2}^{\frac{3}{2}}} x+2 x+{{2}^{\frac{13}{2}}} t+16 t}}-239 \sqrt{2} {{\% e}^{3 {{2}^{\frac{3}{2}}} x+{{2}^{\frac{13}{2}}} t+24 t}}-338 {{\% e}^{3 {{2}^{\frac{3}{2}}} x+{{2}^{\frac{13}{2}}} t+24 t}}+985 {{2}^{\frac{3}{2}}} {{\% e}^{{{2}^{\frac{3}{2}}} x+4 x+{{2}^{\frac{13}{2}}} t+{{2}^{\frac{11}{2}}} t+8 t}}+2786 {{\% e}^{{{2}^{\frac{3}{2}}} x+4 x+{{2}^{\frac{13}{2}}} t+{{2}^{\frac{11}{2}}} t+8 t}}-985 {{2}^{\frac{3}{2}}} {{\% e}^{{{2}^{\frac{3}{2}}} x+4 x+3 {{2}^{\frac{11}{2}}} t+8 t}}-2786 {{\% e}^{{{2}^{\frac{3}{2}}} x+4 x+3 {{2}^{\frac{11}{2}}} t+8 t}}-985 {{2}^{\frac{3}{2}}} {{\% e}^{{{2}^{\frac{3}{2}}} x+2 x+{{2}^{\frac{13}{2}}} t+{{2}^{\frac{11}{2}}} t+16 t}}-2786 {{\% e}^{{{2}^{\frac{3}{2}}} x+2 x+{{2}^{\frac{13}{2}}} t+{{2}^{\frac{11}{2}}} t+16 t}}+985 {{2}^{\frac{3}{2}}} {{\% e}^{{{2}^{\frac{3}{2}}} x+2 x+3 {{2}^{\frac{11}{2}}} t+16 t}}+2786 {{\% e}^{{{2}^{\frac{3}{2}}} x+2 x+3 {{2}^{\frac{11}{2}}} t+16 t}}-3 {{2}^{\frac{13}{2}}} \ensuremath{\mathrm{E9}}+127 \sqrt{2} \ensuremath{\mathrm{E9}}-92 \ensuremath{\mathrm{E9}}+5 \sqrt{2} \ensuremath{\mathrm{E8}}+8 \ensuremath{\mathrm{E8}}-{{2}^{\frac{11}{2}}} \ensuremath{\mathrm{E7}}+27 \sqrt{2} \ensuremath{\mathrm{E7}}-8 \ensuremath{\mathrm{E7}}-\sqrt{2} \ensuremath{\mathrm{E6}}+2 \ensuremath{\mathrm{E6}}-{{2}^{\frac{3}{2}}} \ensuremath{\mathrm{E5}}+3 \sqrt{2} \ensuremath{\mathrm{E5}}-2 \ensuremath{\mathrm{E5}}-3 {{2}^{\frac{3}{2}}} \ensuremath{\mathrm{E4}}-10 \ensuremath{\mathrm{E4}}-{{2}^{\frac{3}{2}}} \ensuremath{\mathrm{E3}}-6 \ensuremath{\mathrm{E3}}-{{2}^{\frac{3}{2}}} \ensuremath{\mathrm{E2}}-2 \ensuremath{\mathrm{E2}}+{{2}^{\frac{3}{2}}} \ensuremath{\mathrm{E15}}+6 \ensuremath{\mathrm{E15}}+{{2}^{\frac{3}{2}}} \ensuremath{\mathrm{E14}}+2 \ensuremath{\mathrm{E14}}-5 {{2}^{\frac{3}{2}}} \ensuremath{\mathrm{E13}}+14 \ensuremath{\mathrm{E13}}+239 \sqrt{2} \ensuremath{\mathrm{E12}}+338 \ensuremath{\mathrm{E12}}-251 {{2}^{\frac{3}{2}}} \ensuremath{\mathrm{E11}}+263 \sqrt{2} \ensuremath{\mathrm{E11}}-338 \ensuremath{\mathrm{E11}}+65 \sqrt{2} \ensuremath{\mathrm{E10}}+92 \ensuremath{\mathrm{E10}}+5 {{2}^{\frac{3}{2}}} \ensuremath{\mathrm{E1}}-14 \ensuremath{\mathrm{E1}}\]
+</p>
+    <hr/>
+    <p>
+      <small> Created with 
+        <a href="https://wxMaxima-developers.github.io/wxmaxima/">wxMaxima</a>.</small>
+    </p>
+    <small> The source of this Maxima session can be downloaded 
+      <a href="lab_sols11_htmlimg/lab_sols11.wxmx">here</a>.</small>
+  </body>
+</html>
