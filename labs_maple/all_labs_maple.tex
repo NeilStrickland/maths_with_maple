@@ -2,6 +2,7 @@
 %\usepackage{a4wide}
 \usepackage{verbatim}
 \usepackage{hyperref}
+\usepackage{xr}
 
 \setlength{\topmargin}{-1cm}
 \setlength{\oddsidemargin}{-1cm}
@@ -11,7 +12,7 @@
 
 \input{macros}
 
-\numberwithin{example}{section}
+\externaldocument[primer-]{primer_maple}
 
 \begin{document}
 
@@ -21,7 +22,7 @@
 
 In working through this sheet, and the lab sheets in subsequent weeks,
 you will need to consult the ``Maple reference'' notes.  If you see
-something in the lab sheet like \note{8.6}, that means that item 8.6
+something in the lab sheet like [8.6], that means that item 8.6
 in the Maple notes is relevant.
 
 \section{Maple as a calculator}
@@ -32,7 +33,7 @@ in the Maple notes is relevant.
   2+2;
 \end{verbatim}
  (As with almost all Maple commands, we need a semicolon at
- the end \note{\NOTEsemi}.  If Maple says ``Warning,
+ the end [\ref{primer-semi}].  If Maple says ``Warning,
  premature end of input'', you probably left out the
  semicolon.)  Then press the ENTER key.  Maple will respond
  with
@@ -45,7 +46,7 @@ in the Maple notes is relevant.
   (3 + 7 + 10) * (1000 - 8) /(900 + 90 + 2) - 17;
 \end{verbatim}
  Note that we use \verb~*~ for
- multiplication\note{\NOTEstar}; it is a very common error to 
+ multiplication[\ref{primer-star}]; it is a very common error to 
  leave this out.  If you ever see a message saying
  \begin{quotation}
   Error, missing operator or `;` 
@@ -85,7 +86,7 @@ answer.  If you want a numerical answer, you can use the function
 (A slightly more efficient approach here is to enter
 \verb~1+1/2+1/3+1/4;~, and then \verb~evalf(%);~.  The
 \verb~%~ symbol refers to the last thing that Maple worked
-out \note{\NOTEpercent}.) 
+out [\ref{primer-percent}].) 
 
 \begin{exercise}\label{ex-cfrac-pi}
  Calculate the following as exact fractions, then as numerical
@@ -109,14 +110,10 @@ out \note{\NOTEpercent}.)
 \begin{exercise}\label{ex-e-digits}
  Maple's notation for the constant $e\simeq 2.718281828$ (the base of
  natural logarithms) is \verb~exp(1)~  (see
- \note{\NOTEexp}).  Read \note{\NOTEevalfdigits,\NOTEdigits} to find out
- how to calculate $4997$ digits of $e$.  (You should notice
+ [\ref{primer-exp}]).  Read [\ref{primer-evalfdigits},\ref{primer-digits}] 
+ to find out how to calculate $4997$ digits of $e$.  (You should notice
  that the last $5$ digits are all the same; this is the first time
  that this happens.) 
- \footnote{You may think that calculating thousands of digits of $e$
- is a useless activity, but it could get you a job at Google: see
- \verb~http://tinyurl.com/ygat93~
- }
 \end{exercise}
 
 \begin{exercise}\label{ex-near-int}
@@ -125,11 +122,11 @@ out \note{\NOTEpercent}.)
  mathematics).  Let us check this. 
  \begin{itemize}
   \item[(a)] Tell Maple to do all calculations to $40$
-   digits (see \note{\NOTEdigits}).
+   digits (see [\ref{primer-digits}]).
   \item[(b)] Enter \verb~x:=exp(Pi*sqrt(163));~.  Maple will
    display this in traditional notation, but will not evaluate it
    numerically.  For the syntax used here, see
-   \note{\NOTEcolonequals,\NOTEexp,\NOTEpi,\NOTEsqrt}. 
+   [\ref{primer-colonequals},\ref{primer-exp},\ref{primer-pi},\ref{primer-sqrt}]. 
   \item[(c)] Enter \verb~y:=evalf(x);~.  Maple will print this in
    scientific notation, which is not too helpful for our present
    purposes.  To display it in a more useful way, enter
@@ -179,11 +176,11 @@ out \note{\NOTEpercent}.)
 
 \begin{exercise}\label{ex-sin-taylor}
  Ask Maple to plot the graph of $y=\sin(x)$ from $x=-4$ to
- $x=4$ (see \note{\NOTEbasicplot} for the syntax).  Now plot
+ $x=4$ (see [\ref{primer-basicplot}] for the syntax).  Now plot
  the function
  \[ y = x-x^3/6+x^5/120-x^7/5040 \]
  from $x=-4$ to $x=4$.  What do you notice?  Plot the two curves
- together, as explained in \note{\NOTEtwoplots}.
+ together, as explained in [\ref{primer-twoplots}].
 \end{exercise}
 
 \section{Solving}
@@ -206,7 +203,7 @@ out \note{\NOTEpercent}.)
 \section{Calculus}
 
 \begin{exercise}
- Read \note{\NOTEdiff,\NOTEdiffvar}.  Then ask Maple to
+ Read [\ref{primer-diff},\ref{primer-diffvar}].  Then ask Maple to
  differentiate the function $\ln(\ln(\ln(x)))$ with respect
  to $x$.  Now differentiate the functions $(3x+4)/(2x+3)$
  and $(1+x^2+x^4/2)e^{-x^2}$, and simplify your answers.
@@ -214,7 +211,7 @@ out \note{\NOTEpercent}.)
 
 \begin{exercise}
  Ask Maple to evaluate the integral
- $\int_0^1\sqrt{1-x^2}\,dx$, as explained in \note{\NOTEdefint}
+ $\int_0^1\sqrt{1-x^2}\,dx$, as explained in [\ref{primer-defint}]
 \end{exercise}
 
 \chapter{Solving equations} 
@@ -238,9 +235,9 @@ reference'' notes, which were distributed in the first lecture.
 \end{verbatim}
  to define the function
  \[ f(x) = 2x^4-2222x^3+224220x^2-2222000x+2000000. \]
- (See \note{\NOTEarrow -- \NOTEshowfuncdef} for more about
+ (See [\ref{primer-arrow} -- \ref{primer-showfuncdef}] for more about
  the syntax used here for defining functions.) Then solve 
- $f(x)=0$ (as explained in \note{\NOTEsolve})
+ $f(x)=0$ (as explained in [\ref{primer-solve}])
  to find the roots.  Use the answer to factorize $f(x)$, and then
  enter \verb~factor(f(x));~ to check your answer.
 \end{exercise}
@@ -256,10 +253,10 @@ reference'' notes, which were distributed in the first lecture.
   solutions.  You should see that they all involve the same four
   terms, but with different plus and minus signs.  Examine the pattern
   of signs carefully.  Can you rephrase Maple's answer more neatly?
-  Next, read \note{\NOTEsubs -- \NOTEsolvesubs}.  Use the
+  Next, read [\ref{primer-subs} -- \ref{primer-solvesubs}].  Use the
   \verb~subs()~ command to find the value of $z$ at the four points
   where $y$ is zero.  You can do this as four separate steps, or
-  (better) you can read \note{\NOTEseq} and use the \verb~seq()~
+  (better) you can read [\ref{primer-seq}] and use the \verb~seq()~
   command to do it in one go.  (There are some interesting phenomena
   going on in this calculation, that will eventually be explained in
   the level 4 course on Galois Theory.)
@@ -278,13 +275,13 @@ reference'' notes, which were distributed in the first lecture.
 
  In a case like this, it is more useful to find numerical
  approximations to the roots instead of a massive exact
- formula.  Read \note{\NOTEfsolve}, and ask Maple to find an
+ formula.  Read [\ref{primer-fsolve}], and ask Maple to find an
  approximate solution to the equation $y=0$, where $y=x^3-3x+1$.
  It is also helpful to plot the graph (say for $-2\leq x\leq 2$) and
- see where the roots lie: read \note{\NOTEbasicplot} for help with
+ see where the roots lie: read [\ref{primer-basicplot}] for help with
  this.  From either of these approaches, we see that there is
- precisely one negative root for this equation.  Use \note{\NOTEdiff}
- and \note{\NOTEsubs} to find the value of $dy/dx$ at this negative
+ precisely one negative root for this equation.  Use [\ref{primer-diff}]
+ and [\ref{primer-subs}] to find the value of $dy/dx$ at this negative
  root. 
 \end{exercise}
 
@@ -295,7 +292,7 @@ reference'' notes, which were distributed in the first lecture.
  where $g(x)=x$.  
  \begin{itemize}
   \item[(a)] Ask Maple to solve the equation $g(x)=x$ for
-   $x$.  (Remember to use the syntax in \note{\NOTEarrow}
+   $x$.  (Remember to use the syntax in [\ref{primer-arrow}]
    when entering the definition of $g$.)  You should get two
    solutions. 
   \item[(b)] For some special value(s) of $b$ and/or $c$, Maple's
@@ -338,7 +335,7 @@ reference'' notes, which were distributed in the first lecture.
   seq(fsolve(f(x)=0,x=n),n=1..10);
 \end{verbatim}
   \item[(c)] Now define $r(n)=n-e^{-n}/\pi-e^{-2n}/\pi^2$
-   (using syntax as in \note{\NOTEseriesdef}).  In~(a)
+   (using syntax as in [\ref{primer-seriesdef}]).  In~(a)
    and~(b) we saw that for every integer $n$, there is a root that is
    close to $x=n$.  I claim that this root is even closer to
    $x=r(n)$.  To see this, enter the definition of $r$ and then 
@@ -359,9 +356,9 @@ reference'' notes, which were distributed in the first lecture.
    values of $x$.  (Because $\tan(\pi x)$ blows up to
    infinity for certain values of $x$, it is necessary to cut
    down the vertical range to get a meaningful picture
-   \note{\NOTEvertrange}, and it is also useful to ask Maple
+   [\ref{primer-vertrange}], and it is also useful to ask Maple
    to calculate extra points to make the graph more accurate
-   \note{\NOTEnumpoints}.  You should see that there are many
+   [\ref{primer-numpoints}].  You should see that there are many
    roots in the picture, repeating in a regular way, so there
    are actually infinitely many roots if we allow $x$ to run
    from $-\infty$ to $+\infty$.
@@ -431,7 +428,7 @@ reference'' notes, which were distributed in the first lecture.
       $x + 4y + 9z = 2$
  \end{itemize}
  When you have found the solutions by hand, find them again
- using Maple \note{\NOTEsolve,\NOTEmultisolve}.  Note that
+ using Maple [\ref{primer-solve},\ref{primer-multisolve}].  Note that
  Maple returns an equation like $w=w$ to indicate that $w$
  may take any value.  Note also that when there are no
  solutions, Maple prints nothing at all, which can be
@@ -455,7 +452,7 @@ reference'' notes, which were distributed in the first lecture.
 There are some hints at the end.
 
 \begin{exercise}\label{ex-plot-misc}
- Plot each of the following functions \note{\NOTEbasicplot}
+ Plot each of the following functions [\ref{primer-basicplot}]
  for a suitable range of values of $x$.  Experiment to find
  a range that displays the interesting features.  Write two
  or three lines (for each function) describing those
@@ -472,10 +469,10 @@ There are some hints at the end.
  Consider the function 
  \[ f(x) = (x^3-x)(x^2-4/9)(x^2-1/9). \] Enter this
  definition, using the syntax explained in
- \note{\NOTEarrow}.  Plot the graph for various ranges of
+ [\ref{primer-arrow}].  Plot the graph for various ranges of
  $x$, and describe the main features that you see.  Compare
  $f(x)$ with the functions $x$, $x^2$, $x^3$ and so on, by
- plotting them together \note{\NOTEtwoplots}.  Which of
+ plotting them together [\ref{primer-twoplots}].  Which of
  these matches $f(x)$ most closely for large $x$?  Can you
  explain why?  
 \end{exercise}
@@ -487,15 +484,15 @@ There are some hints at the end.
   \item[(a)]
    Plot the graph for various ranges of $x$, and describe the main
    features that you see.  You may find it helps to restrict the
-   vertical range \note{\NOTEvertrange} as well as the horizontal one.
+   vertical range [\ref{primer-vertrange}] as well as the horizontal one.
   \item[(b)] What is the value of $x$ where $g(x)$ is discontinuous? 
    You can either work this out from the formula, or read this off
    from the graph, or use the Maple command \verb~discont(g(x),x)~. 
    You can also replot the graph, skipping over the
-   discontinuity, as explained in \note{\NOTEdiscont}.
+   discontinuity, as explained in [\ref{primer-discont}].
   \item[(c)] 
    Plot the line $y=5$ along with the function $g(x)$  
-   \footnote{You should use the syntax in \note{\NOTEtwoplots}.  You
+   \footnote{You should use the syntax in [\ref{primer-twoplots}].  You
    should also remember that the command to plot $y=5$ is
    \verb~plot(5,...)~, not \verb~plot(y=5,...)~.}. 
    You should see that the line crosses the graph.  If you change the
@@ -514,7 +511,7 @@ There are some hints at the end.
 \begin{exercise}\label{ex-lhopital}
  Consider the function
  \[ f(x) = \frac{1 - e^x + e^{2x} - e^{3x}}{\sin(x)}. \]
- (Remember \note{\NOTEarrow} when entering this in Maple.)
+ (Remember [\ref{primer-arrow}] when entering this in Maple.)
  What is $f(0)$?  The formula above gives $f(0)=(1-1+1-1)/0=0/0$,
  which is meaningless.  However, if we plot the graph of $f(x)$ (for
  $x$ from $-1$ to $1$, say) we see that there is a perfectly definite
@@ -539,18 +536,18 @@ There are some hints at the end.
    strange wiggles in the graph, which are in fact not really there;
    they appear because Maple has not calculated enough points to draw
    an accurate picture.  To fix this, we use the \verb~numpoints~
-   option (as in \note{\NOTEnumpoints}):
+   option (as in [\ref{primer-numpoints}]):
 \begin{verbatim}
   plot(BesselJ(2,x),x=10..300,numpoints=200);
   pic := %:
 \end{verbatim}
    (The second line here saves the picture, so we do not have to
-   recalculate it later \note{\NOTEsaveplot}.) 
+   recalculate it later [\ref{primer-saveplot}].) 
 
    You should see an oscillation dying slowly away.  This leads us to
    ask how large the oscillations are, and what is their frequency. 
   \item[(d)] For the size of the oscillations, try plotting $0.15x^{-1}$
-   alongside $J_2(x)$, as in \note{\NOTEdisplay}:
+   alongside $J_2(x)$, as in [\ref{primer-display}]:
 \begin{verbatim}
   plots[display](pic,plot(0.15*x^(-1),x=10..300,color=blue));
 \end{verbatim}
@@ -578,7 +575,7 @@ There are some hints at the end.
             (x+1-\sin(a/4))(x+1-\cos(a/4))}
           {1+{x}^{4}}. 
  \]
- (Remember \note{\NOTEarrow,\NOTEmultifunc} when entering
+ (Remember [\ref{primer-arrow},\ref{primer-multifunc}] when entering
  this in Maple.)  The object of this exercise is to describe
  the properties of $g$.  
  \begin{itemize}
@@ -592,11 +589,11 @@ There are some hints at the end.
    but just touches it somewhere near $x=-0.3$, and again near
    $x=1.7$.  To investigate further, we zoom in.  We plot only from
    $x=-0.4$ to $x=-0.2$, to focus on the region of interest.  We also
-   restrict the vertical range \note{\NOTEvertrange} to be
+   restrict the vertical range [\ref{primer-vertrange}] to be
    from $-0.01$ to $0$, so only the part of the curve below
    the axis will be shown.  Finally, we specify
    \verb~numpoints=1000~ to make sure that Maple plots the
-   graph very accurately \note{\NOTEnumpoints}.  
+   graph very accurately [\ref{primer-numpoints}].  
 
 %   The command is as follows:  
 %\begin{verbatim}
@@ -706,7 +703,7 @@ as functions of another variable, say $t$.
  \begin{itemize}
   \item[(a)]
    Plot the curve given by $x=\cos(10t)/(1+t^2)$ and $y=\sin(10t)/(1+t^2)$,
-   as in \note{\NOTEparametric,\NOTEparametricbrackets}.
+   as in [\ref{primer-parametric},\ref{primer-parametricbrackets}].
   \item[(b)]
    Plot the curve $(x,y)=(\sin(3t),\sin(2t))$ for $t$ from $0$ to
    $2\pi$ (this is called a Lissajous figure).  Replace the $2$ and
@@ -720,13 +717,13 @@ as functions of another variable, say $t$.
    on the button marked ``1:1'' on the toolbar.  You can click the
    button repeatedly to switch between the distorted and undistorted
    pictures.  Alternatively, use the option \verb~scaling=constrained~
-   when you first draw the graph \note{\NOTEscaling}, like this:
+   when you first draw the graph [\ref{primer-scaling}], like this:
 \begin{verbatim}
   plot([t-sin(t),1-cos(t),t=0..8*Pi],scaling=constrained);
 \end{verbatim}
   \item[(d)] Plot the curve
    $(x,y)=(2t/(1+t^2),(1-t^2)/(1+t^2))$, again using
-   \note{\NOTEparametric}.  What do you see?  Can you
+   [\ref{primer-parametric}].  What do you see?  Can you
    explain it?
  \end{itemize}
 \end{exercise}
@@ -740,7 +737,7 @@ as functions of another variable, say $t$.
   y := 8*t^3-8*t;
 \end{verbatim}
  (You must remember to remove these definitions by restarting Maple
- \note{\NOTErestart} before you go on to the next exercise.) 
+ [\ref{primer-restart}] before you go on to the next exercise.) 
  \begin{itemize}
   \item[(a)] Plot the curve from $t=-1.5$ to $t=1.5$:
    \verb~plot([x,y,t=-1.5..1.5]);~  
@@ -752,10 +749,10 @@ as functions of another variable, say $t$.
   \item[(d)] Now plot the function $(X-3)\sqrt{X+1}$ for $X$ from $-1$
    to $8$.  (Maple will not let us use $x$ here because
    $x$ has been defined in terms of $t$ and so is no longer a free
-   variable \note{\NOTEbadplotvar}.  We could use almost any
+   variable [\ref{primer-badplotvar}].  We could use almost any
    other letter, but $X$ seems a  natural choice.)  To
    compare this precisely with~(a), combine the two pictures
-   like this \note{\NOTEdisplay,\NOTEparametricrange}: 
+   like this [\ref{primer-display},\ref{primer-parametricrange}]: 
 \begin{verbatim}
   display(
     plot((X-3)*sqrt(X+1),X=-1..8,color=blue),
@@ -789,14 +786,14 @@ as functions of another variable, say $t$.
 Often we want to plot a curve given by an equation like
 $x^2+y^2=100$, where $y$ is not explicitly a function of
 $x$.  Here we might let $x$ and $y$ run from $-11$ to $11$.
-Read \note{\NOTEimplicitplot} and ask Maple to plot the
+Read [\ref{primer-implicitplot}] and ask Maple to plot the
 graph. 
 
 \begin{exercise}
  Plot the curve $y^2=x^3-x$, for a range of values of $x$
  and $y$ that shows the interesting features.  The
  \verb~implicitplot~ command will give you a rather jagged
- picture; you can improve it as in \note{\NOTEgrid}.
+ picture; you can improve it as in [\ref{primer-grid}].
 
  Now plot $y^2=x^3-x+a$ for various values of $a$ between
  $0$ and $1$.  You should see that at a certain value of
@@ -818,12 +815,12 @@ graph.
 \section{Plotting lists of points}
 
 \begin{exercise}\label{ex-listplot}
- Read \note{\NOTElistplot\dots\NOTElistplotgen}.  Ask Maple
+ Read [\ref{primer-listplot} --- \ref{primer-listplotgen}].  Ask Maple
  to draw the seven points at $x=1,\dotsc,7$ with $y$-values
  $10$, $40$, $20$, $30$, $50$, $10$ and $20$.  Do this with
- a line joining the specified points \note{\NOTElistplot}
+ a line joining the specified points [\ref{primer-listplot}]
  and then with just the points themselves
- \note{\NOTElistplotstyle}.  Try changing the list of
+ [\ref{primer-listplotstyle}].  Try changing the list of
  $y$-values in various ways and redrawing the graph.
 \end{exercise}
 
@@ -832,7 +829,7 @@ graph.
   \item[(a)] Enter \verb~ithprime(1);~, \verb~ithprime(2);~ and so on
    to list the first few prime numbers. 
   \item[(b)] Enter \verb~seq(ithprime(i),i=1..100);~ to list the first
-   hundred primes in one go \note{\NOTEseq}. 
+   hundred primes in one go [\ref{primer-seq}]. 
   \item[(c)] To plot this list, enter 
 \begin{verbatim}
   listplot([seq(ithprime(i),i=1..100)],style=POINT);
@@ -885,7 +882,7 @@ graph.
    $20$; this gives a more useful picture.  Save the graph by entering
    \verb~pic1:=%:~.  
   \item[(e)] Define $f(x)=\sqrt{2\pi} x^{x+1/2} e^{-x}$
-   (using \note{\NOTEarrow}).  It is an
+   (using [\ref{primer-arrow}]).  It is an
    interesting and useful fact that $f(n)$ is a good approximation to
    $n!$, and so $\ln(f(n))$ is a good approximation to $\ln(n!)$.  To
    check this, plot $\ln(f(x))$ for $x$ from $1$ to $20$ (using the
@@ -923,7 +920,7 @@ graph.
 \end{verbatim}
  Now use the \verb~listplot~ command to plot the values $f(i,2.9)$
  for $i$ from $1$ to $500$.  Just plot the points, not the lines
- joining them \note{\NOTElistplotstyle}.  You should see that the
+ joining them [\ref{primer-listplotstyle}].  You should see that the
  points bounce around a bit when $i$ is small, but they settle down so
  that $f(i,2.9)$ is close to $0.655$ when $i$ is large.  Now change
  the parameter $c$ from $2.9$ to $3.1$.  How does the pattern change?
@@ -957,9 +954,9 @@ graph.
    $q'(x)>0$? 
   \item[(c)] Enter \verb~Q:=(x,h)->(q(x+h)-q(x))/h;~, so that $q'(x)$
    is the limit of $Q(x,h)$ as $h$ tends to zero
-   \note{\NOTEmultifunc}.  Put \verb~e:=exp(1);~ for
-   convenience \note{\NOTEexp}.  Tell Maple to do all numerical
-   calculations to 30 digits \note{\NOTEdigits}. 
+   [\ref{primer-multifunc}].  Put \verb~e:=exp(1);~ for
+   convenience [\ref{primer-exp}].  Tell Maple to do all numerical
+   calculations to 30 digits [\ref{primer-digits}]. 
   \item[(d)] Enter \verb~Q(e^2,0.1)~ to get an approximate value for
    $q'(e^2)$.  Replace $0.1$ by a smaller number to get a better
    approximation.  What do you think is the exact value of $q'(e^2)$? 
@@ -982,13 +979,13 @@ graph.
  \begin{itemize}
   \item[(a)] How can you find the roots of $f'(x)$ by looking at the
    graph of $f(x)$? 
-  \item[(b)] Define $f(x)=x^3-x$ using \note{\NOTEarrow}. 
+  \item[(b)] Define $f(x)=x^3-x$ using [\ref{primer-arrow}]. 
    Plot the graph.  You should see that Rolle's principle is
    correct in this case.  We will now analyse this more precisely using
    Maple (although it would be easy to do it by hand). 
    \begin{itemize}
-    \item Ask Maple \note{\NOTEroots} to find the roots of $f(x)$. 
-    \item Ask Maple \note{\NOTEdiff,\NOTEleibniz} to find
+    \item Ask Maple [\ref{primer-roots}] to find the roots of $f(x)$. 
+    \item Ask Maple [\ref{primer-diff},\ref{primer-leibniz}] to find
      $f'(x)$.  (Note that \verb~f'(x)~ is \textbf{not} valid
      Maple syntax.) 
     \item Ask Maple to find the roots of $f'(x)$. 
@@ -1085,15 +1082,15 @@ graph.
 \begin{exercise}\label{ex-fermat-spiral}
  Put $u=x\sin(x^2+y^2)-y\cos(x^2+y^2)$.  Plot the curve
  where $u=0$, using the \verb+implicitplot+ command
- \note{\NOTEimplicitplot} .  Remember that you need
+ [\ref{primer-implicitplot}] .  Remember that you need
  \verb~with(plots):~ to make this work
- \note{\NOTEwithplots}.  A reasonable range is to let $x$
+ [\ref{primer-withplots}].  A reasonable range is to let $x$
  and $y$ run from $-5$ to $5$, and you should ask Maple to
- plot extra points \note{\NOTEgrid} to get a decent picture.
+ plot extra points [\ref{primer-grid}] to get a decent picture.
  The curve is called a \emph{Fermat spiral}.
 
  Now find the slope of the curve using the
- \verb+implicitdiff+ command \note{\NOTEimplicitdiff}, and
+ \verb+implicitdiff+ command [\ref{primer-implicitdiff}], and
  call the answer \verb+slope1+.  Maple will give the answer
  in a form involving $\sin(x^2+y^2)$ and $\cos(x^2+y^2)$.
  Can you use the relation $u=0$ to rewrite \verb+slope1+ in
@@ -1106,7 +1103,7 @@ graph.
 \begin{verbatim}
   xt := t*cos(t^2);  yt := t*sin(t^2);
 \end{verbatim}
- Use the \verb~subs~ command \note{\NOTEsubs} to substitute
+ Use the \verb~subs~ command [\ref{primer-subs}] to substitute
  \verb~xt~ for \verb~x~ and \verb~yt~ for \verb~y~ in $u$,
  and simplify the result.  You should get zero, indicating
  that the point $(t\cos(t^2),t\sin(t^2))$ really does lie on
@@ -1137,12 +1134,12 @@ graph.
 
 \begin{exercise}\label{ex-Psi}
  Enter the following definition into Maple
- \note{\NOTEseriesdef,\NOTEmultidiff}:
+ [\ref{primer-seriesdef},\ref{primer-multidiff}]:
  \[ r(n) =
     \frac{d^n}{dx^n}\left(\frac{x^n\ln(x)}{n!}\right). 
  \]
  Find $r(n)$ for a reasonable range of numbers $n$, using
- the \verb~seq(...)~ command \note{\NOTEseq}.  Then
+ the \verb~seq(...)~ command [\ref{primer-seq}].  Then
  experiment to find a formula for $r(n)-r(n-1)$.  Finally,
  deduce a formula for $r(n)$, of the form
  \[ r(n) = \text{something} +
@@ -1161,7 +1158,7 @@ graph.
 
 \begin{exercise}\label{ex-hermite}
  Put $p(n)=e^{x^2}\frac{d^n}{dx^n}(e^{-x^2})$.  Enter this
- definition in Maple \note{\NOTEseriesdef,\NOTEmultidiff}, and then
+ definition in Maple [\ref{primer-seriesdef},\ref{primer-multidiff}], and then
  calculate $p(n)$ for $n$ from  $1$ to $10$.  (It is best to
  define $p(n)$ to be \verb~sort(expand(exp(x^2) * ...))~, to
  get the  answer in a convenient form.  To print
@@ -1549,23 +1546,23 @@ these questions.
  is $1/k!$ times the value of $d^ky/dx^k$ at $x=0$.  You
  should start by entering the definition of $y$.
  \begin{itemize}
-  \item[(a)] Find \note{\NOTEmultidiff} and simplify
+  \item[(a)] Find [\ref{primer-multidiff}] and simplify
    $d^5y/dx^5$.  Then put $x=0$ using the \verb~subs~
-   command \note{\NOTEsubs}, and divide by $5!$ to get $a_5$.
+   command [\ref{primer-subs}], and divide by $5!$ to get $a_5$.
   \item[(b)] Find $a_1$, $a_2$, $a_3$ and $a_4$ in the
    same way.
   \item[(c)] To do this more efficiently, enter 
 \begin{verbatim}
  a := (n) -> subs(x=0,diff(y,x$n))/n!;
 \end{verbatim}
-   then use the \verb~seq~ command \note{\NOTEseq} to
+   then use the \verb~seq~ command [\ref{primer-seq}] to
    calculate $a(1),\dotsc,a(5)$ in one go.  (This syntax does not
    work properly when $n=0$, but it is easy to see that
    $a_0=0$ anyway.)
   \item[(d)] Now enter \verb~add(a(k)*x^k,k=1..12);~ to get
    the $13$'th order Taylor series for $y$ at $x=0$.  Then do the
    same thing more easily using the \verb~series~ command
-   \note{\NOTEtaylor}. 
+   [\ref{primer-taylor}]. 
   \item[(e)] Guess the complete Taylor series for $y$ at $x=0$.
  \end{itemize}
 \end{exercise}
@@ -1574,12 +1571,12 @@ these questions.
  \begin{itemize}
   \item[(a)] Find the $12$th order Taylor series for
    $\sin(x)$ at $x=0$, using the \verb~series~ command
-   \note{\NOTEtaylor}.  Convert the answer to an ordinary
-   polynomial as in \note{\NOTEtaylorconv}. Call the result $s$. 
+   [\ref{primer-taylor}].  Convert the answer to an ordinary
+   polynomial as in [\ref{primer-taylorconv}]. Call the result $s$. 
   \item[(b)] Plot $s$ and $\sin(x)$ together
-   \note{\NOTEtwoplots} for $x$ from
+   [\ref{primer-twoplots}] for $x$ from
    $-8$ to $8$, with the vertical range also restricted
-   \note{\NOTEvertrange}  from $-10$ to $10$.  You should see that
+   [\ref{primer-vertrange}]  from $-10$ to $10$.  You should see that
    the two graphs are very close together for $x$ between
    $-5$ and $5$, but that they diverge very rapidly outside
    that range. 

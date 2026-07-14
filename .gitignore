@@ -7,4 +7,7 @@
 *.snm
 *.toc
 old
-labs/all_labs.pdf
+labs_maple/sols_html/
+labs_maple/sols_pdf/
+labs_maxima/sols_html/
+labs_python/sols_html/

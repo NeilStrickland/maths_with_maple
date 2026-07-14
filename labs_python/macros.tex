@@ -98,5 +98,7 @@
 \newcommand{\exc}[1]{\input{problems/#1}}
 \newcommand{\exlabel}{\label}
 
-%\input{notekeys}
-%\newcommand{\note}[1]{\textbf{[#1]}}
+\definecolor{darkred}{rgb}{0.6,0,0}
+\DefineVerbatimEnvironment{pcodeblock}{Verbatim}{formatcom=\color{darkred}}
+\newverbcommand{\pcode}{\color{darkred}}{}
+
