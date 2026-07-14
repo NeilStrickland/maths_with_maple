@@ -92,12 +92,18 @@ def make_all_labs_python():
                    cwd = labs_python_dir).check_returncode()
     shutil.copy2(labs_python_dir / 'all_labs_python.pdf', web_labs_python_dir)
 
-def make_primer_python():
+def make_primer_python_pdf():
     """Make the Python primer"""
     subprocess.run(['pdflatex',
                     'primer_python.tex'],
                    cwd = labs_python_dir).check_returncode()
     shutil.copy2(labs_python_dir / 'primer_python.pdf', web_labs_python_dir)
+
+def make_primer_python_html():
+    """Make the HTML version of the Python primer"""
+    convert_ipynb('primer_python', labs_python_dir, labs_python_dir)
+    shutil.copy2(labs_python_dir / 'primer_python.html', web_labs_python_dir)
+    shutil.copy2(labs_python_dir / 'primer_python.ipynb', web_labs_python_dir)
 
 def make_python_sols_web(nn):
     """Make the HTML solutions for a Python lab, and copy to the web directory"""
@@ -168,12 +174,20 @@ def task_all_labs_maple():
         'file_dep' : [labs_maple_dir / 'all_labs_maple.tex']
     }
 
-def task_primer_python():
+def task_primer_python_pdf():
     """Python primer file"""
     return {
-        'actions'  : [make_primer_python],
+        'actions'  : [make_primer_python_pdf],
         'targets'  : [labs_python_dir / 'primer_python.pdf'],
         'file_dep' : [labs_python_dir / 'primer_python.tex']
+    }
+
+def task_primer_python_html():
+    """Python primer file"""
+    return {
+        'actions'  : [make_primer_python_html],
+        'targets'  : [labs_python_dir / 'primer_python.html'],
+        'file_dep' : [labs_python_dir / 'primer_python.ipynb']
     }
 
 def task_all_labs_python():
